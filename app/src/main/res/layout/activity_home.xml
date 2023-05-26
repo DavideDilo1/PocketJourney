@@ -8,22 +8,20 @@
 
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@+id/home_screen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/paris_background" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView3"
         android:name="com.example.pocketjourney.UpBarFragment"
-        android:layout_width="51dp"
-        android:layout_height="40dp"
+        android:layout_width="96dp"
+        android:layout_height="42dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -56,27 +54,51 @@
         android:textColor="#DA252525"
         android:textSize="18sp"
         android:textStyle="italic"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/searchButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.226"
+        app:layout_constraintVertical_bias="0.634"
         tools:text="Dove vorresti andare?" />
 
     <ImageButton
         android:id="@+id/hotelButton"
-        android:layout_width="65dp"
+        android:layout_width="60dp"
         android:layout_height="60dp"
+        android:layout_marginTop="244dp"
+        android:background="@drawable/round_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/locationButton"
+        app:layout_constraintTop_toBottomOf="@+id/searchText"
         app:srcCompat="@drawable/bed_png"
-        tools:layout_editor_absoluteX="252dp"
-        tools:layout_editor_absoluteY="378dp" />
+        tools:srcCompat="@drawable/bed_png" />
+
+    <ImageButton
+        android:id="@+id/locationButton"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="136dp"
+        android:background="@drawable/round_button"
+        app:layout_constraintEnd_toStartOf="@+id/hotelButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/foodButton"
+        app:layout_constraintTop_toBottomOf="@+id/searchButton"
+        app:srcCompat="@drawable/location_png"
+        tools:srcCompat="@drawable/location_png" />
 
     <ImageButton
         android:id="@+id/foodButton"
-        android:layout_width="65dp"
+        android:layout_width="60dp"
         android:layout_height="60dp"
-        app:srcCompat="@drawable/pocketjourneylogo"
-        tools:layout_editor_absoluteX="93dp"
-        tools:layout_editor_absoluteY="378dp" />
+        android:layout_marginTop="244dp"
+        android:background="@drawable/round_button"
+        app:layout_constraintEnd_toStartOf="@+id/locationButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchText"
+        app:srcCompat="@drawable/food_png"
+        tools:srcCompat="@drawable/food_png" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
