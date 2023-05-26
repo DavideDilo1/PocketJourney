@@ -13,8 +13,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnLogin.setOnClickListener{
-            //Toast.makeText(this,"Email:"+ binding.etEmailLogin.toString(),Toast.LENGTH_SHORT)
-          //  Toast.makeText(this,"Password:"+ binding.etPasswordLogin.toString(),Toast.LENGTH_SHORT)
             binding.etEmailLogin.setText("suca")
         }
     }
