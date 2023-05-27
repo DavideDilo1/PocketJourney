@@ -33,5 +33,3 @@ class MainActivity : AppCompatActivity() {
         super.onConfigurationChanged(newConfig)
     }
 }
-
-//TODO: porcodio
