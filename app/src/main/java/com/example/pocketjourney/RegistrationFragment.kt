@@ -11,6 +11,7 @@ import com.example.pocketjourney.databinding.FragmentRegistrationBinding
 
 class RegistrationFragment : Fragment() {
     private lateinit var binding: FragmentRegistrationBinding
+    private lateinit var dbManager: DBManager
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,13 +32,17 @@ class RegistrationFragment : Fragment() {
             val email=binding.etEmailRegistrazione.text.toString()
             val password=binding.etPasswordRegistrazione.text.toString()
             val confermaPassword=binding.etConfermaPasswordRegistrazione.text.toString()
+            val cellulare=binding.etNumeroCellulare.text.toString()
 
-            if(password==confermaPassword){
+            //chiamo la funzione VerificaDatiRegistrazione
+            if(VerificaDatiRegistrazione(Nome,Cognome,email,password,confermaPassword,cellulare)) {
+                //inserisco l'utente
+                dbManager= context?.let { it1 -> DBManager(it1) }!!
+                dbManager.insert_utente(Nome,Cognome,email,password,cellulare,"prova","prova","prova")
                 requireActivity().supportFragmentManager.popBackStack()
-                Toast.makeText(requireContext(), "Registrazione completata!", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(requireContext(), "Le pw non coincidono", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Registrazione avvenuta con successo!", Toast.LENGTH_SHORT).show()
             }
+
             }
 
         binding.btnTornaLogin.setOnClickListener {
@@ -55,6 +60,71 @@ class RegistrationFragment : Fragment() {
         btnLogin.visibility = View.VISIBLE
         btnCreaAccount.visibility = View.VISIBLE
     }
+
+    fun verificaNome(nome: String): Boolean {
+        val nomeRegex = Regex("^[A-Z][a-zA-Z]*$")
+        val isNomeValido = nome.matches(nomeRegex)
+        if (!isNomeValido) {
+            Toast.makeText(context, "Inserisci un nome che inizi per lettera maiuscola e non contegna numeri.", Toast.LENGTH_SHORT).show()
+        }
+        return isNomeValido
+    }
+
+    fun verificaCognome(cognome: String): Boolean {
+        val cognomeRegex = Regex("^[A-Z][a-zA-Z ]*$")
+        val isCognomeValido = cognome.matches(cognomeRegex)
+        if (!isCognomeValido) {
+            Toast.makeText(context, "Inserisci un cognome valido che inizi per lettera maiuscola e non contegna numeri.", Toast.LENGTH_SHORT).show()
+        }
+        return isCognomeValido
+    }
+
+    fun verificaPassword(password: String): Boolean {
+        val passwordRegex = Regex("^(?=.*[A-Z])(?=.*[!@#\$%^&*()])(?=.{8,})")
+        val isPasswordValida = password.matches(passwordRegex)
+        if (!isPasswordValida) {
+            Toast.makeText(context, "La password deve essere lunga 8 caratteri,contenere almeno una lettera maiuscola e un carattere speciale(!@#).", Toast.LENGTH_SHORT).show()
+        }
+        return isPasswordValida
+    }
+
+    fun verificaNumeroTelefono(numeroTelefono: String): Boolean {
+        val telefonoRegex = Regex("^\\d{10}$")
+        val isNumeroTelefonoValido = numeroTelefono.matches(telefonoRegex)
+        if (!isNumeroTelefonoValido) {
+            Toast.makeText(context, "Inserisci un numero di telefono valido che abbia esattamente 10 numeri e non contenga spazi.", Toast.LENGTH_SHORT).show()
+        }
+        return isNumeroTelefonoValido
+    }
+
+    fun verificaEmail(email: String): Boolean {
+        val emailRegex = Regex("^[A-Za-z]+\\.[A-Za-z]+@[A-Za-z]+\\.[A-Za-z]+$")
+        val isEmailValida = email.matches(emailRegex)
+        if (!isEmailValida) {
+            Toast.makeText(context, "Inserisci un'email valida nel formato nome.cognome@provider.dominio", Toast.LENGTH_SHORT).show()
+        }
+        return isEmailValida
+    }
+
+    fun VerificaDatiRegistrazione(
+        nome: String,
+        cognome: String,
+        email: String,
+        password: String,
+        confermaPassword: String,
+        numeroTelefono: String,
+    ): Boolean {
+        return (verificaNome(nome)
+                && verificaCognome(cognome)
+                && verificaPassword(password)
+                && password == confermaPassword
+                && verificaNumeroTelefono(numeroTelefono)
+                && verificaEmail(email))
+    }
+
+
+
+
 }
 
 
