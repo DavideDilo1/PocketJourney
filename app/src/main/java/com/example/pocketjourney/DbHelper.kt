@@ -23,10 +23,10 @@ class DbHelper (context: Context): SQLiteOpenHelper (context,DB_NAME,null,DB_VER
         const val TABLE_NAME="Utenti"
 
         //colonne
-        const val _ID="_id"
+        const val _ID="id"
         const val NOME:String="Nome"
         const val COGNOME="Cognome"
-        const val EMAIL:String="e-mail"
+        const val EMAIL:String="email"
         const val PASSWORD:String="Password"
         const val NUMEROCELLULARE:String="Numero di telefono"
         const val REF_DATI_PAGAMENTO="Dati Pagamento"
@@ -40,7 +40,7 @@ class DbHelper (context: Context): SQLiteOpenHelper (context,DB_NAME,null,DB_VER
 
         //stringhe per creare la tabella
         private const val SQL_CREATE_UTENTE =
-            "CREATE TABLE ${TABLE_NAME} (" +
+            "CREATE TABLE ${TABLE_NAME} ( " +
                     "$_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "$NOME TEXT NOT NULL," +
                     "$COGNOME TEXT NOT NULL,"+
@@ -49,7 +49,7 @@ class DbHelper (context: Context): SQLiteOpenHelper (context,DB_NAME,null,DB_VER
                     "$NUMEROCELLULARE TEXT NOT NULL," +
                     "$REF_DATI_PAGAMENTO TEXT, " +
                     "$REF_RECENSISCE TEXT, " +
-                    "$REF_PRENOTA TEXT,);"
+                    "$REF_PRENOTA TEXT);"
 
         //stringhe per eliminare la tabella
         private const val SQL_DELETE_UTENTE =

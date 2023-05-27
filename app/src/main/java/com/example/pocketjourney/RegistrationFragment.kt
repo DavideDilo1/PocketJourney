@@ -11,7 +11,8 @@ import com.example.pocketjourney.databinding.FragmentRegistrationBinding
 
 class RegistrationFragment : Fragment() {
     private lateinit var binding: FragmentRegistrationBinding
-    private lateinit var dbManager: DBManager
+    private var dbManager: DBManager? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,10 +38,24 @@ class RegistrationFragment : Fragment() {
             //chiamo la funzione VerificaDatiRegistrazione
             if(VerificaDatiRegistrazione(Nome,Cognome,email,password,confermaPassword,cellulare)) {
                 //inserisco l'utente
-                dbManager= context?.let { it1 -> DBManager(it1) }!!
-                dbManager.insert_utente(Nome,Cognome,email,password,cellulare,"prova","prova","prova")
-                requireActivity().supportFragmentManager.popBackStack()
-                Toast.makeText(requireContext(), "Registrazione avvenuta con successo!", Toast.LENGTH_SHORT).show()
+                dbManager = context?.let { it1 -> DBManager(it1) }
+                if(dbManager!=null) {
+                    dbManager?.open()
+                    dbManager?.insert_utente(
+                        Nome,
+                        Cognome,
+                        email,
+                        password,
+                        cellulare,
+                        "prova",
+                        "prova",
+                        "prova"
+                    )
+                    requireActivity().supportFragmentManager.popBackStack()
+                    Toast.makeText(requireContext(), "Registrazione avvenuta con successo!", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(requireContext(), "Errore nell'ottenimento del contesto.", Toast.LENGTH_SHORT).show()
+                }
             }
 
             }
@@ -80,7 +95,7 @@ class RegistrationFragment : Fragment() {
     }
 
     fun verificaPassword(password: String): Boolean {
-        val passwordRegex = Regex("^(?=.*[A-Z])(?=.*[!@#\$%^&*()])(?=.{8,})")
+        val passwordRegex = Regex("^(?=.*[A-Z])(?=.*[!@#%^&*()])(.{8,})")
         val isPasswordValida = password.matches(passwordRegex)
         if (!isPasswordValida) {
             Toast.makeText(context, "La password deve essere lunga 8 caratteri,contenere almeno una lettera maiuscola e un carattere speciale(!@#).", Toast.LENGTH_SHORT).show()
