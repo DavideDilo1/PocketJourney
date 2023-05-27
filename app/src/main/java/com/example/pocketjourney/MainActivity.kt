@@ -1,5 +1,6 @@
 package com.example.pocketjourney
 
+import android.content.Intent
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,7 +16,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnLogin.setOnClickListener{
-            binding.etEmailLogin.setText("suca")
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+
         }
 
        binding.btnCreaAccount.setOnClickListener {
