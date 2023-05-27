@@ -26,7 +26,7 @@ class DbHelper (context: Context): SQLiteOpenHelper (context,DB_NAME,null,DB_VER
         const val _ID="id"
         const val NOME:String="Nome"
         const val COGNOME="Cognome"
-        const val EMAIL:String="email"
+        const val EMAIL:String="e mail"
         const val PASSWORD:String="Password"
         const val NUMEROCELLULARE:String="Numero di telefono"
         const val REF_DATI_PAGAMENTO="Dati Pagamento"

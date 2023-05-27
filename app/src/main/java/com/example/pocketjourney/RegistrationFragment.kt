@@ -121,6 +121,15 @@ class RegistrationFragment : Fragment() {
         return isEmailValida
     }
 
+    fun passwordUguali(password: String,confermaPassword: String): Boolean {
+        if (password!=confermaPassword) {
+            Toast.makeText(context, "Le due password non coincidono", Toast.LENGTH_SHORT).show()
+            return false
+        } else {
+            return true
+        }
+    }
+
     fun VerificaDatiRegistrazione(
         nome: String,
         cognome: String,
@@ -132,7 +141,7 @@ class RegistrationFragment : Fragment() {
         return (verificaNome(nome)
                 && verificaCognome(cognome)
                 && verificaPassword(password)
-                && password == confermaPassword
+                && passwordUguali(password,confermaPassword)
                 && verificaNumeroTelefono(numeroTelefono)
                 && verificaEmail(email))
     }
