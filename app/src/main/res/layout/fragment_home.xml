@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".HomeActivity">>
+        <EditText
+            android:id="@+id/searchText"
+            android:layout_width="259dp"
+            android:layout_height="50dp"
+            android:background="@drawable/text_rounded_home"
+            android:ems="10"
+            android:hint="Dove vorresti andare?"
+            android:padding="10dp"
+            android:textAlignment="viewStart"
+            android:textColor="#DA252525"
+            android:textSize="18sp"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toTopOf="@+id/searchButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.414"
+            tools:layout_editor_absoluteX="64dp"
+            tools:layout_editor_absoluteY="104dp"
+            tools:text="Dove vorresti andare?" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.705"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="294dp" />
+
+        <ImageButton
+            android:id="@+id/locationButton"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/round_button"
+            app:layout_constraintEnd_toStartOf="@+id/hotelButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/foodButton"
+            app:srcCompat="@drawable/location_png"
+            tools:layout_editor_absoluteY="374dp"
+            tools:srcCompat="@drawable/location_png" />
+
+        <Button
+            android:id="@+id/searchButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="cerca"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.323" />
+
+        <ImageButton
+            android:id="@+id/hotelButton"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="244dp"
+            android:background="@drawable/round_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/locationButton"
+            app:layout_constraintTop_toBottomOf="@+id/searchText"
+            app:layout_constraintVertical_bias="0.074"
+            app:srcCompat="@drawable/bed_png"
+            tools:srcCompat="@drawable/bed_png" />
+
+        <ImageButton
+            android:id="@+id/foodButton"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="244dp"
+            android:background="@drawable/round_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/locationButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/searchText"
+            app:layout_constraintVertical_bias="0.074"
+            app:srcCompat="@drawable/food_png"
+            tools:srcCompat="@drawable/food_png" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</FrameLayout>

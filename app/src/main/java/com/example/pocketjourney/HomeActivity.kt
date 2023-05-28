@@ -3,6 +3,7 @@ package com.example.pocketjourney
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
+import androidx.fragment.app.Fragment
 import com.example.pocketjourney.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
@@ -14,6 +15,7 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+ /*
 
         binding.foodButton.setOnClickListener{
                 //debug
@@ -42,7 +44,33 @@ class HomeActivity : AppCompatActivity() {
                 binding.searchText.setHint("Se non mi dici cosa cercare come posso trovarlo?")
             }
 
+        }*/
+
+        replaceFragment(HomeFragment())
+
+        binding.bottomNavigationView.setOnItemSelectedListener {
+            when(it.itemId){
+                R.id.home -> replaceFragment(HomeFragment())
+                R.id.preferiti -> replaceFragment(PreferitiFragment())
+                R.id.profile -> replaceFragment(ProfileFragment())
+                else ->{
+
+                }
+
+            }
+
+            true
         }
+
+    }
+
+
+    private fun replaceFragment(fragment : Fragment){
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+
+        fragmentTransaction.replace(R.id.frame_layout, fragment)
+        fragmentTransaction.commit()
 
 
     }

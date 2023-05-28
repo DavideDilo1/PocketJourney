@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,122 +8,30 @@
     tools:context=".HomeActivity">
 
 
-    <ImageView
-        android:id="@+id/home_screen"
+
+
+    <FrameLayout
+        android:id = "@+id/frame_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/paris_background" />
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView3"
-        android:name="com.example.pocketjourney.UpBarFragment"
-        android:layout_width="96dp"
-        android:layout_height="42dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout="@layout/fragment_up_bar" />
-
-    <Button
-        android:id="@+id/searchButton"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="cerca"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.314" />
+        app:menu = "@menu/bottom_nav_menu"
 
-    <EditText
-        android:id="@+id/searchText"
-        android:layout_width="259dp"
-        android:layout_height="50dp"
-        android:background="@drawable/text_rounded_home"
-        android:ems="10"
-        android:padding="10dp"
-        android:hint="Dove vorresti andare?"
-        android:textAlignment="viewStart"
-        android:textColor="#DA252525"
-        android:textSize="18sp"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toTopOf="@+id/searchButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.634"
-        tools:text="Dove vorresti andare?" />
 
-    <ImageButton
-        android:id="@+id/hotelButton"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="244dp"
-        android:background="@drawable/round_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/locationButton"
-        app:layout_constraintTop_toBottomOf="@+id/searchText"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/bed_png"
-        tools:srcCompat="@drawable/bed_png" />
-
-    <ImageButton
-        android:id="@+id/locationButton"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="136dp"
-        android:background="@drawable/round_button"
-        app:layout_constraintBottom_toBottomOf="@+id/home_screen"
-        app:layout_constraintEnd_toStartOf="@+id/hotelButton"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/foodButton"
-        app:layout_constraintTop_toBottomOf="@+id/searchButton"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/location_png"
-        tools:srcCompat="@drawable/location_png" />
-
-    <ImageButton
-        android:id="@+id/foodButton"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="244dp"
-        android:background="@drawable/round_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/locationButton"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchText"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/food_png"
-        tools:srcCompat="@drawable/food_png" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="85dp"
-        android:layout_marginBottom="32dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/hotelButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.728"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchButton"
-        app:layout_constraintVertical_bias="0.0" />
-
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
