@@ -26,17 +26,17 @@ class DbHelper (context: Context): SQLiteOpenHelper (context,DB_NAME,null,DB_VER
         const val _ID="id"
         const val NOME:String="Nome"
         const val COGNOME="Cognome"
-        const val EMAIL:String="e mail"
-        const val PASSWORD:String="Password"
-        const val NUMEROCELLULARE:String="Numero di telefono"
-        const val REF_DATI_PAGAMENTO="Dati Pagamento"
+        const val EMAIL:String="email"
+        const val PASSWORD:String="password"
+        const val NUMEROCELLULARE = "`NumeroDiTelefono`"
+        const val REF_DATI_PAGAMENTO="DatiPagamento"
         const val REF_RECENSISCE="Recensioni"
         const val REF_PRENOTA="Prenotazioni"
 
 
 
         //versione del db
-        const val DB_VERSION=1
+        const val DB_VERSION=2
 
         //stringhe per creare la tabella
         private const val SQL_CREATE_UTENTE =
