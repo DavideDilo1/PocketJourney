@@ -88,6 +88,16 @@
             android:layout_height="match_parent"
             android:id="@+id/fragmentContainerRegistration" ></FrameLayout>
 
+        <Button
+            android:id="@+id/testHomeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Home"
+            app:layout_constraintBottom_toTopOf="@+id/etEmailLogin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivMioLogo"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
