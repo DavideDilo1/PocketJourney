@@ -39,8 +39,6 @@
             android:text="Ristoranti"
             android:textColor="@color/white"
             app:icon="@drawable/baseline_dinner_dining_24"
-
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/hotelsButton"
             app:layout_constraintHorizontal_bias="0.5"
