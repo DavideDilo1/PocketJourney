@@ -16,6 +16,7 @@ class HomeActivity : AppCompatActivity() {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         supportActionBar?.hide()
 
+
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

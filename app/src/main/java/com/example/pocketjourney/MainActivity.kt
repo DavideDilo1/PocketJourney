@@ -27,6 +27,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        binding.testHomeButton.setOnClickListener {
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+        }
        binding.btnCreaAccount.setOnClickListener {
             val registrationFragment= RegistrationFragment()
             val fragmentManager = supportFragmentManager
