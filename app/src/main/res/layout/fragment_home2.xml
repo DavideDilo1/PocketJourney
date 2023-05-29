@@ -10,58 +10,21 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:background="@color/purple_200">
+        android:layout_height="match_parent">
 
-        <Button
-            style = "@style/Widget.MaterialComponents.Button.TextButton.Icon"
-            android:id="@+id/ristorantiButton"
+
+        <TextView
+            android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ristoranti"
-            android:textColor="@color/white"
-            app:icon="@drawable/baseline_dinner_dining_24"
-
-
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/hotelsButton"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
-
-        <Button
-            style = "@style/Widget.MaterialComponents.Button.TextButton.Icon"
-
-            android:id="@+id/attrazioniButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Attrazioni"
-            android:textColor="@color/white"
-            app:icon ="@drawable/baseline_local_activity_24"
+            android:layout_marginStart="188dp"
+            android:layout_marginTop="279dp"
+            android:layout_marginEnd="165dp"
+            android:layout_marginBottom="433dp"
+            android:text="TextView"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/hotelsButton"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
-
-        <Button
-            style = "@style/Widget.MaterialComponents.Button.TextButton.Icon"
-
-            android:id="@+id/hotelsButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hotel"
-            android:textColor="@color/white"
-            app:icon ="@drawable/baseline_hotel_24"
-
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/attrazioniButton"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/ristorantiButton"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
-
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

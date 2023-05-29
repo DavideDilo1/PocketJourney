@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegistrationFragment"
-    android:background="@color/miocolore">
+    android:background="@color/miocolore"
+    tools:context=".RegistrationFragment">
 
     <EditText
         android:id="@+id/etNome"
@@ -114,8 +114,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
-        android:layout_marginEnd="100dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="100dp"
         android:background="@drawable/button_background"
         android:text="Registrati"
         app:layout_constraintEnd_toEndOf="parent"
@@ -126,8 +126,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
-        android:layout_marginEnd="100dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="100dp"
         android:background="@drawable/button_background"
         android:text="Torna indietro"
         app:layout_constraintEnd_toEndOf="parent"

@@ -16,21 +16,6 @@ class homeFragment2 : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = FragmentHome2Binding.inflate(inflater)
-
-        //I bottoni serviranno da filtro o da altro?
-
-        binding.ristorantiButton.setOnClickListener {
-          // TODO: Implementare comportamento
-        }
-        binding.attrazioniButton.setOnClickListener {
-            // TODO: Implementare comportamento
-
-        }
-        binding.hotelsButton.setOnClickListener {
-            // TODO: Implementare comportamento
-
-        }
 
         return binding.root
     }

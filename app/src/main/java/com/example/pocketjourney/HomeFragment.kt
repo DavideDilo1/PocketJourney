@@ -43,6 +43,20 @@ class HomeFragment : Fragment() {
 
         })
 
+        //I bottoni serviranno da filtro o da altro?
+
+        binding.ristorantiButton.setOnClickListener {
+          // TODO: Implementare comportamento
+        }
+        binding.attrazioniButton.setOnClickListener {
+            // TODO: Implementare comportamento
+
+        }
+        binding.hotelsButton.setOnClickListener {
+            // TODO: Implementare comportamento
+
+        }
+
 
 
         */
