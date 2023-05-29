@@ -114,9 +114,10 @@ class RegistrationFragment : Fragment() {
 
     fun verificaEmail(email: String): Boolean {
         val emailRegex = Regex("^[A-Za-z0-9]+\\.[A-Za-z0-9]+@[A-Za-z]+\\.[A-Za-z]+$")
+        val emailRegex2 = Regex("^[A-Za-z0-9]+@[A-Za-z]+\\.[A-Za-z]+$")
         val isEmailValida = email.matches(emailRegex)
         if (!isEmailValida) {
-            Toast.makeText(context, "Inserisci un'email valida nel formato nome.cognome@provider.dominio", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Inserisci un'email valida", Toast.LENGTH_SHORT).show()
         }
         return isEmailValida
     }
