@@ -21,7 +21,19 @@
         android:name="com.example.pocketjourney.HomeFragment"
         tools:layout="@layout/fragment_home">
 
+
     </androidx.fragment.app.FragmentContainerView>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerViewProfile"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintTop_toTopOf="parent"
+        android:name="com.example.pocketjourney.ProfileFragment"
+        tools:layout="@layout/fragment_profile" />
+
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
