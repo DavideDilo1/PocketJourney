@@ -31,7 +31,7 @@
                     app:srcCompat="@drawable/pngwing_com__1_" />
 
                 <ImageView
-                    android:id="@+id/imageView2"
+                    android:id="@+id/imgImmagineProfilo"
                     android:layout_width="162dp"
                     android:layout_height="113dp"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView"
@@ -43,7 +43,7 @@
                     app:srcCompat="@drawable/_828447" />
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/tvNomeCognomeProfilo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nome Cognome"
@@ -52,17 +52,17 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.497"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+                    app:layout_constraintTop_toBottomOf="@+id/imgImmagineProfilo" />
 
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/tvEmail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="email"
                     android:textSize="20sp"
-                    app:layout_constraintEnd_toEndOf="@+id/textView"
-                    app:layout_constraintStart_toStartOf="@+id/textView"
-                    app:layout_constraintTop_toBottomOf="@+id/textView"/>
+                    app:layout_constraintEnd_toEndOf="@+id/tvNomeCognomeProfilo"
+                    app:layout_constraintStart_toStartOf="@+id/tvNomeCognomeProfilo"
+                    app:layout_constraintTop_toBottomOf="@+id/tvNomeCognomeProfilo"/>
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -72,7 +72,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView2"
+                    app:layout_constraintTop_toBottomOf="@+id/tvEmail"
                     app:layout_constraintVertical_bias="0.0">
 
                     <androidx.appcompat.widget.AppCompatButton
@@ -142,6 +142,7 @@
                         app:flow_horizontalAlign="center" />
 
                     <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnModificaPw"
                         style="@android:style/Widget.Button"
                         android:layout_width="179dp"
                         android:layout_height="wrap_content"
@@ -156,6 +157,7 @@
                         android:textStyle="bold" />
 
                     <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnLogout"
                         style="@android:style/Widget.Button"
                         android:layout_width="179dp"
                         android:layout_height="wrap_content"
