@@ -43,7 +43,7 @@ class HomeActivity : AppCompatActivity() {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
 
-        fragmentTransaction.replace(R.id.fragmentContainerView, fragment)
+        fragmentTransaction.replace(R.id.frameHomeLayout, fragment)
         fragmentTransaction.commit()
 
 
