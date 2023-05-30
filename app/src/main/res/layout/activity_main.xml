@@ -26,60 +26,53 @@
 
         <EditText
             android:id="@+id/etEmailLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="10dp"
+            android:layout_width="361dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="12dp"
             android:background="@drawable/login_edit_background"
             android:ems="10"
             android:hint="Email"
             android:inputType="textEmailAddress"
             android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ivMioLogo" />
 
         <EditText
             android:id="@+id/etPasswordLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="30dp"
+            android:layout_width="360dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="28dp"
             android:background="@drawable/login_edit_background"
             android:ems="10"
             android:hint="Password"
+            android:inputType="textPassword"
             android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.489"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etEmailLogin"
-            android:inputType="textPassword"/>
+            app:layout_constraintTop_toBottomOf="@+id/etEmailLogin" />
 
         <Button
             android:id="@+id/btnLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="232dp"
+            android:layout_height="41dp"
             android:layout_marginTop="30dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginStart="10dp"
             android:background="@drawable/button_background"
             android:text="Login"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etPasswordLogin" />
 
         <Button
             android:id="@+id/btnCreaAccount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
+            android:layout_width="166dp"
+            android:layout_height="41dp"
+            android:layout_marginTop="84dp"
             android:background="@drawable/button_background"
             android:text="Crea account"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 
@@ -97,6 +90,24 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ivMioLogo"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/loginText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Non hai ancora un account?"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/btnCreaAccount"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnLogin"
+            app:layout_constraintVertical_bias="0.742" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
