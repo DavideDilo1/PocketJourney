@@ -1,83 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/FragHomeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragment">
+    tools:context=".HomeFragment"
+    android:background="@color/purple_200">
 
     <!-- TODO: Update blank fragment layout -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="@color/purple_200"
-        tools:context=".HomeActivity"
+
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/search_view_bar"
+        app:iconifiedByDefault="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_goneMarginTop="10dp"
+        app:layout_constraintVertical_bias="0.05"
+        app:layout_constraintWidth_default="wrap"
+        app:queryHint="Dove vorresti andare? ">
+
+    </androidx.appcompat.widget.SearchView>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="130dp"
-        >
-
-
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:background="@drawable/search_view_bar"
-            app:iconifiedByDefault="false"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.181"
-            app:queryHint="Dove vorresti andare? ">
-
-        </androidx.appcompat.widget.SearchView>
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchView"
+        app:layout_constraintVertical_bias="0.01">
 
         <Button
             android:id="@+id/ristorantiButton"
             style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="Ristoranti"
             android:textColor="@color/white"
             app:icon="@drawable/baseline_dinner_dining_24"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/hotelsButton"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="1.0"
+            app:layout_constraintWidth_default="spread"
+            android:textSize="10dp" />
 
         <Button
-            style = "@style/Widget.MaterialComponents.Button.TextButton.Icon"
-
             android:id="@+id/attrazioniButton"
-            android:layout_width="wrap_content"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="Attrazioni"
             android:textColor="@color/white"
-            app:icon ="@drawable/baseline_local_activity_24"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/hotelsButton"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:icon="@drawable/baseline_local_activity_24"
+            app:layout_constraintVertical_bias="1.0"
+            app:layout_constraintWidth_default="spread"
+            android:textSize="10dp" />
 
         <Button
-            style = "@style/Widget.MaterialComponents.Button.TextButton.Icon"
-
             android:id="@+id/hotelsButton"
-            android:layout_width="wrap_content"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="0.8"
             android:text="Hotel"
             android:textColor="@color/white"
-            app:icon ="@drawable/baseline_hotel_24"
-
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/attrazioniButton"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/ristorantiButton"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:icon="@drawable/baseline_hotel_24"
+            app:layout_constraintVertical_bias="1.0"
+            app:layout_constraintWidth_default="spread"
+            android:textSize="10dp"/>
+    </LinearLayout>
 
 
         <!--ImageButton
@@ -92,9 +96,6 @@
             tools:srcCompat="@drawable/location_png" /-->
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
-</FrameLayout>
 
