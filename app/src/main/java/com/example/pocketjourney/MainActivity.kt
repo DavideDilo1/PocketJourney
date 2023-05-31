@@ -21,6 +21,9 @@ class MainActivity : AppCompatActivity() {
             val password=binding.etPasswordLogin.text.toString()
             if(verificaCredenziali(email,password)) {
                 val intent = Intent(this, HomeActivity::class.java)
+                val bundle= Bundle()
+                bundle.putString("emailutente",email)
+                intent.putExtras(bundle)
                 startActivity(intent)
             } else {
                 Toast.makeText(this,"Credenziali non valide",Toast.LENGTH_SHORT).show()

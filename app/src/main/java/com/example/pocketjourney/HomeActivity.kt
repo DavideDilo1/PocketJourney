@@ -15,6 +15,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         supportActionBar?.hide()
+        val bundle=intent.extras
 
 
         binding = ActivityHomeBinding.inflate(layoutInflater)
@@ -26,7 +27,11 @@ class HomeActivity : AppCompatActivity() {
             when(it.itemId){
                 R.id.home -> replaceFragment(HomeFragment())
                 R.id.preferiti -> replaceFragment(PreferitiFragment())
-                R.id.profile -> replaceFragment(ProfileFragment())
+                R.id.profile -> bundle?.let { it1 ->
+                    replaceFragmentProfile(ProfileFragment(),
+                        it1
+                    )
+                }
                 else ->{
 
                 }
@@ -45,6 +50,17 @@ class HomeActivity : AppCompatActivity() {
 
         fragmentTransaction.replace(R.id.frameHomeLayout, fragment)
         fragmentTransaction.commit()
+    }
+
+    private fun replaceFragmentProfile(fragment: Fragment,bundle:Bundle){
+
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+
+        fragment.arguments = bundle
+        fragmentTransaction.replace(R.id.frameHomeLayout, fragment)
+        fragmentTransaction.commit()
+
     }
 
 
