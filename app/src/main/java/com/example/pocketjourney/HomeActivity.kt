@@ -45,8 +45,6 @@ class HomeActivity : AppCompatActivity() {
 
         fragmentTransaction.replace(R.id.frameHomeLayout, fragment)
         fragmentTransaction.commit()
-
-
     }
 
 

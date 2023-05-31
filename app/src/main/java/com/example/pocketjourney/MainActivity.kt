@@ -69,4 +69,11 @@ class MainActivity : AppCompatActivity() {
         db.close()
         return false
     }
+
+    override fun onPause() {
+        super.onPause()
+        binding.etEmailLogin.text.clear()
+        binding.etPasswordLogin.text.clear()
+    }
+
 }

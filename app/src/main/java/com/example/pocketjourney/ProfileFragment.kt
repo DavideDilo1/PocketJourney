@@ -1,5 +1,6 @@
 package com.example.pocketjourney
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,12 +20,11 @@ class ProfileFragment : Fragment() {
         // Inflate the layout for this fragment
         binding= FragmentProfileBinding.inflate(layoutInflater,container,false)
 
-    /*    binding.btnModifica.setOnClickListener{
-            //mi porta a fragment modifica dati
-        }*/
-
-    /*    binding.btnLogout.setOnClickListener {
-        }*/
+       binding.btnLogout.setOnClickListener {
+           requireActivity().supportFragmentManager.popBackStack()
+           val intent = Intent(this.context, MainActivity::class.java)
+           startActivity(intent)
+        }
 
         return binding.root
     }
