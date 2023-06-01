@@ -3,7 +3,6 @@ package com.example.pocketjourney
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Window
-import android.widget.EditText
 import androidx.fragment.app.Fragment
 import com.example.pocketjourney.databinding.ActivityHomeBinding
 
@@ -21,11 +20,11 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        replaceFragment(HomeFragment())
+        replaceFragment(HomeFragmentNew())
 
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){
-                R.id.home -> replaceFragment(HomeFragment())
+                R.id.home -> replaceFragment(HomeFragmentNew())
                 R.id.preferiti -> replaceFragment(PreferitiFragment())
                 R.id.profile -> bundle?.let { it1 ->
                     replaceFragmentProfile(ProfileFragment(),
