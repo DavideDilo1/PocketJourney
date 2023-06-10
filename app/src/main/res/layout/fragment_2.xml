@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragment2"
+    android:id="@+id/fragment2"
+    android:background="@color/white"
+>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <ImageView
+            android:layout_width="412dp"
+            android:layout_height="291dp"
+            android:id="@+id/header_background"
+            android:transitionName="background_image_transition"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBaseline_toTopOf="parent"
+            app:srcCompat="@drawable/header_background"
+
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/down_arrow"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="34dp"
+            android:layout_marginRight="34dp"
+            app:layout_constraintEnd_toEndOf="@+id/header_background"
+            app:layout_constraintTop_toTopOf="@+id/header_background"
+            android:src="@drawable/ic_down_arrow" 
+            />
+
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:id="@+id/third_scrollView"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/header_background">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/third_title"
+                    android:fontFamily="@font/open_sans_extra_bold"
+                    android:text="The START hotel, Casino &amp; Skypod"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="24sp"
+                    
+                    />
+                
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <RatingBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/third_ratingbar"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_gravity="center_vertical"
+                        android:max="5"
+                        android:numStars="5"
+                        android:progressTint="@color/colorAccent"
+                        android:rating="4.5"
+                        android:stepSize="0.5"
+
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/third_rating_number"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:text="4.75"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15sp"
+
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/third_rating_number2"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:fontFamily="@font/open_sans_light"
+                        android:text="(510)"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15sp"
+                        />
+
+                    
+                     
+
+
+                </LinearLayout>
+                
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="32dp"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:text="about"
+                    android:id="@+id/about"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/abut_text"
+                    android:layout_marginTop="10dp"
+                    android:alpha="0.5"
+                    android:fontFamily="@font/open_sans_regular"
+                    android:text="Top of the world is known as one of the most romantic resturants in the city. It offers an intimate dining setting paired with an extravagent view of the entire city, all encompassed in 160 degrees ... "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp"
+                    
+
+                    />
+                
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/venue_type"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:text="venue Type"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp"
+
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/venue_text"
+                    android:layout_marginTop="10dp"
+                    android:alpha="0.5"
+                    android:fontFamily="@font/open_sans_regular"
+                    android:text="Resturant"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp"
+                    />
+                
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/type_of_view"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:text="Type of View"
+                    android:textSize="15sp"
+                    android:textColor="@color/colorPrimary"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/type_of_view_text"
+                    android:layout_marginTop="10dp"
+                    android:alpha="0.5"
+                    android:fontFamily="@font/open_sans_regular"
+                    android:text="It might surprise you, but this is the only revolving resturant in las vegas. Located 844 feet in the air, you're bound to get a great view of the city, with its massive floor-to-ceiling windows."
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp"
+                    />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:id="@+id/roadmap_button"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/custom_button"
+                    android:drawableEnd="@drawable/ic_steps"
+                    android:drawableRight="@drawable/ic_steps"
+                    android:fontFamily="@font/open_sans_extra_bold"
+                    android:paddingLeft="50dp"
+                    android:paddingRight="50dp"
+                    android:text="CH E C K RO A D M A P"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    />
+
+
+
+
+
+
+            </LinearLayout>
+
+
+
+
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</FrameLayout>
