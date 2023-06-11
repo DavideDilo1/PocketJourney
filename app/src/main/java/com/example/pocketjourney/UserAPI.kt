@@ -16,6 +16,16 @@ interface UserAPI {
     @FormUrlEncoded
     fun login(@Field("query") query: String): Call <JsonObject>
 
+    @POST("postInsert/")
+    @FormUrlEncoded
+    fun inserisciUtente(
+        @Field("Nome") Nome: String,
+        @Field("Cognome") Cognome: String,
+        @Field("email") email: String,
+        @Field("password") password: String,
+        @Field("cellulare") cellulare: String
+    ): Call<JsonObject>
+
     @POST("postUpdate/")
     @FormUrlEncoded
     fun modifica(@Field("query") query: String): Call <JsonObject>

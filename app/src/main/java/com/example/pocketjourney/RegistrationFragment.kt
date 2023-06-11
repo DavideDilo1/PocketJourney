@@ -8,6 +8,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import com.example.pocketjourney.databinding.FragmentRegistrationBinding
+import com.google.gson.JsonObject
+import retrofit2.Callback
+import retrofit2.Call
+import retrofit2.Response
 
 class RegistrationFragment : Fragment() {
     private lateinit var binding: FragmentRegistrationBinding
@@ -56,6 +60,27 @@ class RegistrationFragment : Fragment() {
                 } else {
                     Toast.makeText(requireContext(), "Errore nell'ottenimento del contesto.", Toast.LENGTH_SHORT).show()
                 }
+                //REGISTRAZIONE ONLINE
+                val userAPI=ClientNetwork.retrofit
+                val call = userAPI.inserisciUtente(Nome, Cognome, email, password, cellulare)
+                call.enqueue(object : Callback<JsonObject> {
+                    override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                        if (response.isSuccessful) {
+                            // L'inserimento dell'utente online è avvenuto con successo
+                            requireActivity().supportFragmentManager.popBackStack()
+                            Toast.makeText(requireContext(), "Registrazione avvenuta con successo!", Toast.LENGTH_SHORT).show()
+                        } else {
+                            // Si è verificato un errore nella richiesta online
+                            Toast.makeText(requireContext(), "Errore nella registrazione online.", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+                    override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                        // Si è verificato un errore durante la chiamata di rete online
+                        Toast.makeText(requireContext(), "Errore di rete.", Toast.LENGTH_SHORT).show()
+                    }
+                })
+
             }
 
             }
@@ -115,7 +140,7 @@ class RegistrationFragment : Fragment() {
     fun verificaEmail(email: String): Boolean {
         val emailRegex = Regex("^[A-Za-z0-9]+\\.[A-Za-z0-9]+@[A-Za-z]+\\.[A-Za-z]+$")
         val emailRegex2 = Regex("^[A-Za-z0-9]+@[A-Za-z]+\\.[A-Za-z]+$")
-        val isEmailValida = email.matches(emailRegex)
+        val isEmailValida = (email.matches(emailRegex) || email.matches(emailRegex2))
         if (!isEmailValida) {
             Toast.makeText(context, "Inserisci un'email valida", Toast.LENGTH_SHORT).show()
         }
