@@ -125,14 +125,27 @@
             android:layout_marginTop="30dp"
             android:background="@drawable/custom_search_view"
             android:elevation="20dp"
-            android:queryHint="Dove vuoi andare?"
+            android:queryHint="Dove vorresti andare?"
             app:layout_constraintEnd_toStartOf="@id/guideLineHome2"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@id/guideLineHome"
             app:layout_constraintTop_toBottomOf="@id/textView3"
-            tools:targetApi="lollipop"
 
             />
+
+        <!--androidx.appcompat.widget.SearchView
+            QUesta è la vecchia barra, qui si vede la scritta anche non cliccata, nella nuova no
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.505"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.19999999"
+            app:layout_constraintWidth_default="wrap"
+            app:layout_goneMarginTop="10dp"
+            app:queryHint="Dove vorresti andare? ">
+
+        </androidx.appcompat.widget.SearchView-->
 
         <ScrollView
             android:layout_width="0dp"
@@ -158,6 +171,21 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
+
+                        <ToggleButton
+                            android:id="@+id/FavoriteButton2"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/favorite_selector"
+                            android:textOff=""
+                            android:textOn=""
+                            app:layout_constraintBottom_toTopOf="@+id/textView5"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.934"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.21" />
+
 
                         <View
                             android:id="@+id/view"
@@ -257,6 +285,20 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
+
+                        <ToggleButton
+                            android:id="@+id/FavoriteButton"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/favorite_selector"
+                            android:textOff=""
+                            android:textOn=""
+                            app:layout_constraintBottom_toTopOf="@+id/textView8"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.934"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.21" />
 
                         <View
                             android:id="@+id/view2"
@@ -372,6 +414,21 @@
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="0.0"
                             />
+
+                        <ToggleButton
+                            android:id="@+id/FavoriteButton3"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/favorite_selector"
+                            android:textOff=""
+                            android:textOn=""
+                            app:layout_constraintBottom_toTopOf="@+id/textView11"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.934"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.21" />
+
 
                         <TextView
                             android:id="@+id/textView11"

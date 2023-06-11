@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PreferitiFragment">
+    tools:context=".PreferitiFragment"
+    android:id="@+id/lista_vuota_referiti"
+    >
 
     <!-- TODO: Update blank fragment layout -->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -11,12 +14,62 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/tvNomeCognome"
+            android:id="@+id/textNoFavorite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="PREFERITI"
-            tools:layout_editor_absoluteX="163dp"
-            tools:layout_editor_absoluteY="252dp" />
+            android:text="La lista dei tuoi preferiti è vuota!"
+            android:fontFamily="@font/open_sans_semi_bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textSize="16sp"
+            app:layout_constraintVertical_bias="0.5" />
+
+        <TextView
+            android:id="@+id/textNoFavorite2"
+            android:layout_width="314dp"
+            android:layout_height="39dp"
+            android:fontFamily="@font/open_sans_light"
+            android:text="Esplora la lista dei ristoranti e aggiungili alla lista dei preferiti per visualizzarli qui."
+            android:textAlignment="center"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textNoFavorite"
+            app:layout_constraintVertical_bias="0.041" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="131dp"
+            android:layout_height="127dp"
+            android:layout_marginBottom="28dp"
+            android:background="@drawable/baseline_heart_broken_24"
+            app:layout_constraintBottom_toTopOf="@+id/textNoFavorite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.94" />
+
+        <TextView
+            android:id="@+id/titleFavourites"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_bold"
+            android:text="Preferiti"
+            android:textColor="@color/colorPrimary"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toTopOf="@+id/imageView2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.052"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.098" />
+
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

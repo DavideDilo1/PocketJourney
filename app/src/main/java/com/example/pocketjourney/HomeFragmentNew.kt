@@ -15,6 +15,8 @@ import androidx.cardview.widget.CardView
 import com.example.pocketjourney.databinding.FragmentHomeNewBinding
 import android.os.Build.VERSION_CODES.S
 import android.view.animation.AnimationUtils
+import android.widget.Toast
+import android.widget.ToggleButton
 
 
 class HomeFragmentNew : Fragment() {
@@ -31,6 +33,9 @@ class HomeFragmentNew : Fragment() {
     private lateinit var textView4: TextView
     private lateinit var textView5: TextView
     private lateinit var searchView: SearchView
+    private lateinit var favoriteButton1: ToggleButton
+    private lateinit var favoriteButton2: ToggleButton
+    private lateinit var favoriteButton3: ToggleButton
 
     private lateinit var anim_from_button: Animation
     private lateinit var anim_from_top: Animation
@@ -83,7 +88,20 @@ class HomeFragmentNew : Fragment() {
             fragmentTransaction.commit()
         })
 
+        favoriteButton1 = binding.FavoriteButton
+        favoriteButton2 = binding.FavoriteButton2
+        favoriteButton3 = binding.FavoriteButton3
 
+        favoriteButton1.setOnClickListener {
+
+            if(favoriteButton1.isChecked()){
+                //TODO: se cliccato aggiungi ai preferiti
+                Toast.makeText(requireContext(), "Aggiunto ai Preferiti", Toast.LENGTH_SHORT).show()
+            }else{
+                //TODO: se non cliccato rimuovi dai preferiti
+
+            }
+        }
 
 
         return binding.root
