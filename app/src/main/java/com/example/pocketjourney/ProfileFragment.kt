@@ -30,7 +30,7 @@ class ProfileFragment : Fragment() {
             val user=getUserById(userId)
             if(user!=null){
                 binding.tvEmail.setText(emailUtente)
-                binding.tvNomeCognomeProfilo.setText(user.nome)
+                binding.tvNomeCognomeProfilo.setText(user.nome + " " + user.cognome)
             } else{
                 Toast.makeText(requireContext(), "Utente non risulta nel database", Toast.LENGTH_SHORT).show()
             }
