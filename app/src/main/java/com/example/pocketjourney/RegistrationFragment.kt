@@ -44,9 +44,9 @@ class RegistrationFragment : Fragment() {
             if(VerificaDatiRegistrazione(Nome,Cognome,email,password,confermaPassword,cellulare)) {
 
                 //REGISTRAZIONE ONLINE
-                val userAPI=ClientNetwork.retrofit
+                val serverAPI=ClientNetwork.retrofit
                 val queryInserimento = "insert into Utente(nome,cognome,email,password) values('$Nome','$Cognome','$email','$password')"
-                val call = userAPI.inserisci(queryInserimento)
+                val call = serverAPI.inserisci(queryInserimento)
                 call.enqueue(object : Callback<JsonObject> {
                     override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                         if (response.isSuccessful) {
