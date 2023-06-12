@@ -1,6 +1,7 @@
 package com.example.pocketjourney
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -41,43 +42,41 @@ class RegistrationFragment : Fragment() {
 
             //chiamo la funzione VerificaDatiRegistrazione
             if(VerificaDatiRegistrazione(Nome,Cognome,email,password,confermaPassword,cellulare)) {
-                //inserisco l'utente
-                dbManager = context?.let { it1 -> DBManager(it1) }
-                if(dbManager!=null) {
-                    dbManager?.open()
-                    dbManager?.insert_utente(
-                        Nome,
-                        Cognome,
-                        email,
-                        password,
-                        cellulare,
-                        "prova",
-                        "prova",
-                        "prova"
-                    )
-                    requireActivity().supportFragmentManager.popBackStack()
-                    Toast.makeText(requireContext(), "Registrazione avvenuta con successo!", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(requireContext(), "Errore nell'ottenimento del contesto.", Toast.LENGTH_SHORT).show()
-                }
+
                 //REGISTRAZIONE ONLINE
                 val userAPI=ClientNetwork.retrofit
-                val call = userAPI.inserisciUtente(Nome, Cognome, email, password, cellulare)
+                val queryInserimento = "insert into Utente(nome,cognome,email,password) values('$Nome','$Cognome','$email','$password')"
+                val call = userAPI.inserisci(queryInserimento)
                 call.enqueue(object : Callback<JsonObject> {
                     override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                         if (response.isSuccessful) {
-                            // L'inserimento dell'utente online è avvenuto con successo
-                            requireActivity().supportFragmentManager.popBackStack()
-                            Toast.makeText(requireContext(), "Registrazione avvenuta con successo!", Toast.LENGTH_SHORT).show()
+                            // L'inserimento dell'utente online è avvenuto con successo e lo inserisco in locale
+                            dbManager = context?.let { it1 -> DBManager(it1) }
+                            if(dbManager!=null) {
+                                dbManager?.open()
+                                dbManager?.insert_utente(
+                                    Nome,
+                                    Cognome,
+                                    email,
+                                    password,
+                                    cellulare,
+                                    "prova",
+                                    "prova",
+                                    "prova"
+                                )
+                                requireActivity().supportFragmentManager.popBackStack()
+                                Toast.makeText(requireContext(), "Registrazione avvenuta con successo!", Toast.LENGTH_SHORT).show()
+                            }
                         } else {
                             // Si è verificato un errore nella richiesta online
-                            Toast.makeText(requireContext(), "Errore nella registrazione online.", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), "Errore nella registrazione", Toast.LENGTH_SHORT).show()
                         }
                     }
 
                     override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                         // Si è verificato un errore durante la chiamata di rete online
-                        Toast.makeText(requireContext(), "Errore di rete.", Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(requireContext(), t.toString() + " " + t.message.toString(), Toast.LENGTH_SHORT).show()
+                        Log.e("ciao",t.toString() + " " + t.message.toString())
                     }
                 })
 
@@ -171,6 +170,7 @@ class RegistrationFragment : Fragment() {
                 && verificaNumeroTelefono(numeroTelefono)
                 && verificaEmail(email))
     }
+
 
 
 

@@ -10,7 +10,7 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Url
 
-interface UserAPI {
+interface ServerAPI {
 
     @POST("postSelect/")
     @FormUrlEncoded
@@ -18,13 +18,7 @@ interface UserAPI {
 
     @POST("postInsert/")
     @FormUrlEncoded
-    fun inserisciUtente(
-        @Field("Nome") Nome: String,
-        @Field("Cognome") Cognome: String,
-        @Field("email") email: String,
-        @Field("password") password: String,
-        @Field("cellulare") cellulare: String
-    ): Call<JsonObject>
+    fun inserisci(@Field("query") query: String): Call <JsonObject>
 
     @POST("postUpdate/")
     @FormUrlEncoded
