@@ -2,6 +2,7 @@ package com.example.pocketjourney
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +14,7 @@ import com.example.pocketjourney.databinding.FragmentProfileBinding
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     private lateinit var databaseHelper: DbHelper
-    private var userId:Int=1
+    private var userId:Int=1 //variabile utile per l'interrogazione del database locale
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -21,18 +22,27 @@ class ProfileFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding= FragmentProfileBinding.inflate(layoutInflater,container,false)
-        databaseHelper=DbHelper(requireContext())
 
-        val emailUtente=arguments?.getString("emailutente")
-        userId= getUserIdByEmail(emailUtente)
+        val emailUtenteOnline = arguments?.getString("emailutenteOnline")
+        val emailUtenteOffline = arguments?.getString("emailutenteOffline")
 
-        if(userId!=-1){
-            val user=getUserById(userId)
-            if(user!=null){
-                binding.tvEmail.setText(emailUtente)
-                binding.tvNomeCognomeProfilo.setText(user.nome + " " + user.cognome)
-            } else{
-                Toast.makeText(requireContext(), "Utente non risulta nel database", Toast.LENGTH_SHORT).show()
+        if (emailUtenteOnline != null){
+            //sono connesso a internet avendo ricevuto idUtente
+            Log.e("Ciao","sei al profile fragment e sei connesso")
+        } else {
+            Log.e("Ciao","sei al profile fragment non sei connesso")
+            databaseHelper=DbHelper(requireContext())
+
+            userId= getUserIdByEmail(emailUtenteOffline)
+
+            if(userId!=-1){
+                val user=getUserById(userId)
+                if(user!=null){
+                    binding.tvEmail.text = emailUtenteOffline
+                    binding.tvNomeCognomeProfilo.text = "${user?.nome} ${user?.cognome}"
+                } else{
+                    Toast.makeText(requireContext(), "Utente non risulta nel database", Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
@@ -45,18 +55,21 @@ class ProfileFragment : Fragment() {
         return binding.root
     }
 
-    private fun getUserIdByEmail(email:String?):Int{
-        val db=databaseHelper.readableDatabase
-        var userId=-1
+    private fun getUserIdByEmail(email: String?): Int {
+        val db = databaseHelper.readableDatabase
+        var userId = -1
 
-        val query="SELECT id FROM Utenti WHERE email=?"
-        val cursor=db.rawQuery(query, arrayOf(email))
-        if (cursor.moveToFirst()){
-            userId=cursor.getInt(cursor.getColumnIndexOrThrow("id"))
+        val query = "SELECT id FROM Utenti WHERE email=?"
+        if (email != null) {
+            val cursor = db.rawQuery(query, arrayOf(email))
+            if (cursor.moveToFirst()) {
+                userId = cursor.getInt(cursor.getColumnIndexOrThrow("id"))
+            }
+            cursor.close()
         }
-        cursor.close()
         return userId
     }
+
     private fun getUserById(userId: Int): User? {
         val db = databaseHelper.readableDatabase
         val columns = arrayOf("Nome", "Cognome", "email")

@@ -34,10 +34,12 @@ class MainActivity : AppCompatActivity() {
             call.enqueue(object : Callback<JsonObject> {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                     if (response.isSuccessful) {
+
                         //posso effettuare il login online
+                        Log.e("ciao","LOGIN ONLINE")
                         val intent = Intent(context, HomeActivity::class.java)
                         val bundle= Bundle()
-                        bundle.putString("emailutente",email)
+                        bundle.putString("emailutenteOnline",email)
                         intent.putExtras(bundle)
                         startActivity(intent)
                     } else {
@@ -50,9 +52,10 @@ class MainActivity : AppCompatActivity() {
                     // Si è verificato un errore durante la chiamata di rete online
                     //login in locale
                     if(verificaCredenzialiLocale(email,password)) {
+                        Log.e("ciao","LOGIN OFFLINE")
                         val intent = Intent(context, HomeActivity::class.java)
                         val bundle= Bundle()
-                        bundle.putString("emailutente",email)
+                        bundle.putString("emailutenteOffline",email)
                         intent.putExtras(bundle)
                         startActivity(intent)
                     } else {
@@ -69,15 +72,15 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
         }
-       binding.btnCreaAccount.setOnClickListener {
+        binding.btnCreaAccount.setOnClickListener {
             val registrationFragment= RegistrationFragment()
             val fragmentManager = supportFragmentManager
             fragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainerRegistration, registrationFragment)
                 .addToBackStack(null)
                 .commit()
-           binding.btnLogin.visibility=View.GONE
-           binding.btnCreaAccount.visibility=View.GONE
+            binding.btnLogin.visibility=View.GONE
+            binding.btnCreaAccount.visibility=View.GONE
         }
     }
     override fun onConfigurationChanged(newConfig: Configuration) {

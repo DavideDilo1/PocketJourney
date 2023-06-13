@@ -2,6 +2,7 @@ package com.example.pocketjourney
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Window
 import androidx.fragment.app.Fragment
 import com.example.pocketjourney.databinding.ActivityHomeBinding
@@ -14,11 +15,24 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         supportActionBar?.hide()
+        //questo valore bundle ottiene l'id dell'utente nel caso in cui sia connesso al server, l'email viceversa.
         val bundle=intent.extras
-
+        val emailOff= bundle?.getString("emailutenteOffline")
+        val emailOn= bundle?.getString("emailutenteOnline")
+        if(emailOn!=null){
+            Log.e("ciao","sono la home activity e ho ricevuto emailOn")
+        } else {
+            Log.e("ciao","sono la home activity e NON ho ricevuto emailOn")
+        }
+        if(emailOff!=null){
+            Log.e("ciao","sono la home activity e ho ricevuto emailOff ")
+        } else {
+            Log.e("ciao","sono la home activity e NON  ho ricevuto emailOff ")
+        }
 
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
         replaceFragment(HomeFragmentNew())
 
@@ -26,6 +40,7 @@ class HomeActivity : AppCompatActivity() {
             when(it.itemId){
                 R.id.home -> replaceFragment(HomeFragmentNew())
                 R.id.preferiti -> replaceFragment(PreferitiFragment())
+                //passo al fragment profilo l'id dell'utente nel caso sia connesso, l'email altrimenti
                 R.id.profile -> bundle?.let { it1 ->
                     replaceFragmentProfile(ProfileFragment(),
                         it1
