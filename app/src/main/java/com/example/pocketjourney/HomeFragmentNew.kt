@@ -15,6 +15,7 @@ import androidx.cardview.widget.CardView
 import com.example.pocketjourney.databinding.FragmentHomeNewBinding
 import android.os.Build.VERSION_CODES.S
 import android.view.animation.AnimationUtils
+import android.widget.Button
 import android.widget.Toast
 import android.widget.ToggleButton
 
@@ -30,12 +31,15 @@ class HomeFragmentNew : Fragment() {
     private lateinit var textView: TextView
     private lateinit var textView2: TextView
     private lateinit var textView3: TextView
-    private lateinit var textView4: TextView
-    private lateinit var textView5: TextView
+
     private lateinit var searchView: SearchView
     private lateinit var favoriteButton1: ToggleButton
     private lateinit var favoriteButton2: ToggleButton
     private lateinit var favoriteButton3: ToggleButton
+    private lateinit var ristorantiButton: Button
+    private lateinit var hotelButton: Button
+    private lateinit var attrazioniButton: Button
+    private lateinit var home_background: ImageView
 
     private lateinit var anim_from_button: Animation
     private lateinit var anim_from_top: Animation
@@ -55,12 +59,18 @@ class HomeFragmentNew : Fragment() {
         cardView2 = binding.cardView2
         cardView3 = binding.cardView3
         imageView = binding.imageViewHome
-      //  textView = binding.firstText
-        textView2 = binding.textView
-       // textView3 = binding.textView2
-     //   textView4 = binding.textView3
-     //   textView5 = binding.testView4
+
+        home_background = binding.imageBackground
+        ristorantiButton = binding.resturantButton
+        attrazioniButton = binding.attractionButton
+        hotelButton = binding.hotelButton
+
+        textView = binding.testoCosaStaiCercando
+        textView2 = binding.testoHome
+        textView3 = binding.testoMiglioriMete
         searchView = binding.searchViewHome
+
+
 
         //load animations
         anim_from_button = AnimationUtils.loadAnimation(requireContext(), R.anim.anim_from_bottom)
@@ -75,10 +85,15 @@ class HomeFragmentNew : Fragment() {
         imageView.setAnimation(anim_from_top)
         textView.setAnimation(anim_from_top)
         textView2.setAnimation(anim_from_top)
-        textView3.setAnimation(anim_from_top)
-        textView4.setAnimation(anim_from_top)
-        textView5.setAnimation(anim_from_top)
+        textView3.setAnimation(anim_from_button)
+
+
         searchView.setAnimation(anim_from_left)
+
+        home_background.setAnimation(anim_from_top)
+        ristorantiButton.setAnimation(anim_from_left)
+        attrazioniButton.setAnimation(anim_from_left)
+        hotelButton.setAnimation(anim_from_left)
 
         cardView.setOnClickListener(View.OnClickListener { view ->
             val childFragment = Fragment1()

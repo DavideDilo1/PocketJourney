@@ -62,7 +62,7 @@
         </androidx.appcompat.widget.SearchView-->
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/testoHome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -100,9 +100,8 @@
             android:textColor="@color/white"
             android:textSize="22sp"
             app:layout_constraintEnd_toStartOf="@+id/guideLineHome2"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@id/guideLineHome"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/testoHome" />
 
         <ImageView
             android:id="@+id/imageViewHome"
@@ -491,22 +490,30 @@
             android:layout_height="42dp"
             android:layout_marginStart="16dp"
             android:text="Ristoranti"
+            android:textColor="@color/colorPrimary"
+            android:backgroundTint="@color/white"
             app:icon="@drawable/baseline_dinner_dining_24"
             app:layout_constraintBottom_toBottomOf="@+id/imageBackground"
             app:layout_constraintEnd_toStartOf="@+id/hotelButton"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchViewHome" />
+            app:layout_constraintTop_toBottomOf="@+id/searchViewHome"
+            android:textAllCaps="false"
+            android:drawableTint="@color/colorPrimary"
+
+            />
 
         <Button
             android:id="@+id/hotelButton"
-
+            android:textAllCaps="false"
             style="@style/Widget.Material3.MaterialTimePicker.ImageButton"
             android:layout_width="wrap_content"
             android:layout_height="42dp"
-
+            android:textColor="@color/colorPrimary"
+            android:backgroundTint="@color/white"
             android:text="Hotel"
+            android:drawableTint="@color/colorPrimary"
             app:icon="@drawable/baseline_hotel_24"
             app:layout_constraintBottom_toBottomOf="@+id/imageBackground"
             app:layout_constraintEnd_toStartOf="@+id/attractionButton"
@@ -520,9 +527,12 @@
             android:layout_width="wrap_content"
             android:layout_height="42dp"
             android:layout_marginEnd="16dp"
-
+            android:textAllCaps="false"
             android:text="Attrazioni"
+            android:textColor="@color/colorPrimary"
+            android:backgroundTint="@color/white"
             app:icon="@drawable/baseline_local_activity_24"
+            android:drawableTint="@color/colorPrimary"
             app:layout_constraintBottom_toBottomOf="@+id/imageBackground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
