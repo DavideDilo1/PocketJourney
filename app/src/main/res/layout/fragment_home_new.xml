@@ -15,123 +15,37 @@
         android:layout_height="match_parent">
 
 
-        <androidx.constraintlayout.widget.Guideline
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/guideLineHome"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:orientation ="vertical"
-        app:layout_constraintGuide_end="349dp"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imageBackground"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/design_blue_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/roundImageView" />
 
         <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideLineHome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/guideLineHome2"
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
-            android:orientation ="vertical"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="349dp"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideLineHome2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:orientation="vertical"
             app:layout_constraintGuide_begin="349dp"
-            app:layout_constraintStart_toStartOf="parent"
-            />
+            app:layout_constraintStart_toStartOf="parent" />
 
-
-        <TextView
-            android:id="@+id/firstText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="44dp"
-            android:fontFamily="@font/open_sans_light"
-            android:text="One"
-            android:textColor="@color/colorPrimary"
-            android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="@+id/guideLineHome"
-
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/open_sans_extra_bold"
-            android:text="View"
-            android:textColor="@color/colorPrimary"
-            android:textSize="24sp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            app:layout_constraintStart_toEndOf="@+id/firstText"
-            app:layout_constraintTop_toTopOf="@+id/firstText" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView2"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:fontFamily="@font/open_sans_light"
-            android:text="Worth"
-            android:textColor="@color/colorPrimary"
-            android:textSize="24sp"
-            app:layout_constraintStart_toEndOf="@+id/textView"
-            app:layout_constraintTop_toTopOf="@+id/textView"
-
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView3"
-            android:fontFamily="@font/open_sans_light"
-            android:text="a"
-            android:textColor="@color/colorPrimary"
-            android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="@id/guideLineHome"
-            app:layout_constraintTop_toBottomOf="@id/firstText"
-            /> 
-
-        <TextView
-            android:id="@+id/testView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:fontFamily="@font/open_sans_extra_bold"
-            android:text="Thousand Words"
-            android:textColor="@color/colorPrimary"
-            android:textSize="24sp"
-            app:layout_constraintStart_toEndOf="@id/textView3"
-            app:layout_constraintTop_toTopOf="@+id/textView3"
-            />
-
-        <ImageView
-            android:id="@+id/imageViewHome"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="51dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginRight="5dp"
-            app:layout_constraintEnd_toStartOf="@id/guideLineHome2"
-            app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/ic_settings"
-
-            />
-
-        <SearchView
-            android:id="@+id/searchViewHome"
-            android:layout_width="0dp"
-            android:layout_height="55dp"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/custom_search_view"
-            android:elevation="20dp"
-            android:queryHint="Dove vorresti andare?"
-            app:layout_constraintEnd_toStartOf="@id/guideLineHome2"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@id/guideLineHome"
-            app:layout_constraintTop_toBottomOf="@id/textView3"
-
-            />
 
         <!--androidx.appcompat.widget.SearchView
             QUesta è la vecchia barra, qui si vede la scritta anche non cliccata, nella nuova no
@@ -147,27 +61,98 @@
 
         </androidx.appcompat.widget.SearchView-->
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/open_sans_extra_bold"
+            android:text="Home"
+            android:textColor="@color/colorPrimary"
+            android:textSize="26sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.048"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/testoMiglioriMete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/open_sans_semi_bold"
+
+            android:text="Le migliori mete del 2023"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toStartOf="@+id/guideLineHome2"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideLineHome"
+            app:layout_constraintTop_toBottomOf="@+id/imageBackground" />
+
+        <TextView
+            android:id="@+id/testoCosaStaiCercando"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/open_sans_light"
+            android:text="Cosa stai cercando?"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            app:layout_constraintEnd_toStartOf="@+id/guideLineHome2"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/guideLineHome"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <ImageView
+            android:id="@+id/imageViewHome"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_settings"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.853"
+            app:layout_constraintStart_toEndOf="@+id/testoCosaStaiCercando"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <SearchView
+            android:id="@+id/searchViewHome"
+            android:layout_width="225dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/custom_search_view"
+            android:elevation="20dp"
+            android:queryHint="Dove vorresti andare?"
+
+            app:layout_constraintEnd_toStartOf="@id/guideLineHome2"
+            app:layout_constraintStart_toStartOf="@id/guideLineHome"
+            app:layout_constraintTop_toBottomOf="@+id/testoCosaStaiCercando">
+
+        </SearchView>
+
         <ScrollView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="45dp"
+            android:layout_marginTop="24dp"
             android:scrollbars="none"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideLineHome2"
             app:layout_constraintHorizontal_bias="0.506"
             app:layout_constraintStart_toStartOf="@id/guideLineHome"
-            app:layout_constraintTop_toBottomOf="@id/searchViewHome"
+            app:layout_constraintTop_toBottomOf="@id/testoMiglioriMete"
             app:layout_constraintVertical_bias="0.0">
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-            >
+                android:orientation="vertical">
+
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardView"
                     android:layout_width="match_parent"
                     android:layout_height="226dp">
+
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
@@ -177,6 +162,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:background="@drawable/favorite_selector"
+                            android:onClick="aggiungiPreferitiClick"
                             android:textOff=""
                             android:textOn=""
                             app:layout_constraintBottom_toTopOf="@+id/textView5"
@@ -197,8 +183,7 @@
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.0"
-                            />
+                            app:layout_constraintVertical_bias="0.0" />
 
                         <TextView
                             android:id="@+id/textView5"
@@ -214,8 +199,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            />
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <RatingBar
                             android:id="@+id/ratingBar"
@@ -249,7 +233,7 @@
                             app:layout_constraintStart_toEndOf="@id/ratingBar"
                             app:layout_constraintTop_toBottomOf="@id/textView5"
 
-                        />
+                            />
 
                         <TextView
                             android:id="@+id/textView7"
@@ -264,10 +248,7 @@
                             app:layout_constraintTop_toTopOf="@id/textVIew6"
 
 
-
                             />
-
-
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -291,6 +272,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:background="@drawable/favorite_selector"
+                            android:onClick="aggiungiPreferitiClick"
                             android:textOff=""
                             android:textOn=""
                             app:layout_constraintBottom_toTopOf="@+id/textView8"
@@ -310,8 +292,7 @@
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.0"
-                            />
+                            app:layout_constraintVertical_bias="0.0" />
 
                         <TextView
                             android:id="@+id/textView8"
@@ -327,8 +308,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            />
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <RatingBar
                             android:id="@+id/ratingBar2"
@@ -378,10 +358,7 @@
                             app:layout_constraintTop_toTopOf="@id/textVIew9"
 
 
-
                             />
-
-
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -412,14 +389,14 @@
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.0"
-                            />
+                            app:layout_constraintVertical_bias="0.0" />
 
                         <ToggleButton
                             android:id="@+id/FavoriteButton3"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:background="@drawable/favorite_selector"
+                            android:onClick="aggiungiPreferitiClick"
                             android:textOff=""
                             android:textOn=""
                             app:layout_constraintBottom_toTopOf="@+id/textView11"
@@ -444,8 +421,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            />
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <RatingBar
                             android:id="@+id/ratingBar3"
@@ -495,10 +471,7 @@
                             app:layout_constraintTop_toTopOf="@id/textVIew12"
 
 
-
                             />
-
-
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -506,12 +479,55 @@
                 </androidx.cardview.widget.CardView>
 
 
-
-
             </LinearLayout>
 
 
         </ScrollView>
+
+        <Button
+            android:id="@+id/resturantButton"
+            style="@style/Widget.Material3.MaterialTimePicker.ImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:layout_marginStart="16dp"
+            android:text="Ristoranti"
+            app:icon="@drawable/baseline_dinner_dining_24"
+            app:layout_constraintBottom_toBottomOf="@+id/imageBackground"
+            app:layout_constraintEnd_toStartOf="@+id/hotelButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/searchViewHome" />
+
+        <Button
+            android:id="@+id/hotelButton"
+
+            style="@style/Widget.Material3.MaterialTimePicker.ImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+
+            android:text="Hotel"
+            app:icon="@drawable/baseline_hotel_24"
+            app:layout_constraintBottom_toBottomOf="@+id/imageBackground"
+            app:layout_constraintEnd_toStartOf="@+id/attractionButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/resturantButton"
+            app:layout_constraintTop_toBottomOf="@+id/searchViewHome" />
+
+        <Button
+            android:id="@+id/attractionButton"
+            style="@style/Widget.Material3.MaterialTimePicker.ImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:layout_marginEnd="16dp"
+
+            android:text="Attrazioni"
+            app:icon="@drawable/baseline_local_activity_24"
+            app:layout_constraintBottom_toBottomOf="@+id/imageBackground"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/hotelButton"
+            app:layout_constraintTop_toBottomOf="@+id/searchViewHome" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

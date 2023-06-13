@@ -55,11 +55,11 @@ class HomeFragmentNew : Fragment() {
         cardView2 = binding.cardView2
         cardView3 = binding.cardView3
         imageView = binding.imageViewHome
-        textView = binding.firstText
+      //  textView = binding.firstText
         textView2 = binding.textView
-        textView3 = binding.textView2
-        textView4 = binding.textView3
-        textView5 = binding.testView4
+       // textView3 = binding.textView2
+     //   textView4 = binding.textView3
+     //   textView5 = binding.testView4
         searchView = binding.searchViewHome
 
         //load animations

@@ -25,6 +25,14 @@
         <item name="android:background">@color/black_overlay</item>
         <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>
     </style>
+    
+    <style name="roundImageView" parent="">
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="cornerSizeBottomRight">40dp</item>
+        <item name="cornerSizeBottomLeft">40dp</item>
+        <item name="cornerFamily">rounded</item>
+        <item name="color">@color/white</item>
+    </style>
 
 
 </resources>
