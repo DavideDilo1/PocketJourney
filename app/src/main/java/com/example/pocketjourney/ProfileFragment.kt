@@ -27,21 +27,46 @@ class ProfileFragment : Fragment() {
         // Inflate the layout for this fragment
         binding= FragmentProfileBinding.inflate(layoutInflater,container,false)
 
-        val emailUtenteOnline = arguments?.getString("emailutenteOnline")
+        val idUtente = arguments?.getString("idUtente")
         val emailUtenteOffline = arguments?.getString("emailutenteOffline")
 
-        if (emailUtenteOnline != null ){
-            //sono connesso a internet avendo ricevuto emailOnline ed interrogo il database remoto
+        if (idUtente != null ){
+            //sono connesso a internet avendo ricevuto userId ed interrogo il database remoto
             Log.e("Ciao","sei al profile fragment e sei connesso")
 
             val userAPI=ClientNetwork.retrofit
-            val queryNomeCognome = "SELECT Nome, Cognome FROM Utente WHERE email = '$emailUtenteOnline'"
+            val queryNomeCognome = "SELECT Nome, Cognome, email FROM Utente WHERE idUtente = '$idUtente'"
             val call = userAPI.cerca(queryNomeCognome)
             call.enqueue(object : Callback<JsonObject> {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                     if (response.isSuccessful) {
                         //posso effettuare il login online
                         Log.e("Ciao","posso cambiare i dati con dbonline")
+                        val jsonObject = response.body() // Ottieni il JSON come JsonObject
+
+                        // Verifica se il JSON object è stato ottenuto correttamente come queryset
+                        if (jsonObject != null && jsonObject.has("queryset") ) {
+                            Log.e("Ciao", "HO OTTENUTO IL JSONOBJECT come queryset" )
+                            //salvo l'array e verifico che contenga almeno un elemento
+                            val querySetArray = jsonObject.getAsJsonArray("queryset")
+                            if (querySetArray != null && querySetArray.size()>0){
+                                val primoUtente=querySetArray[0].asJsonObject //prendo la prima corrispondenza
+                                Log.d("JSON", primoUtente.toString())
+
+                                //verifico che non sia null e che contenga i campi corretti
+
+                                if (primoUtente!=null && primoUtente.has("Nome") && primoUtente.has("Cognome") && primoUtente.has("email")){
+                                    //prelevo i campi e li setto nel fragment
+                                    val nome=primoUtente.get("Nome").asString
+                                    val cognome=primoUtente.get("Cognome").asString
+                                    val email=primoUtente.get("email").asString
+                                    binding.tvEmail.text = "${email}"
+                                    binding.tvNomeCognomeProfilo.text = "${nome} ${cognome}"
+                                    Log.e("Ciao", "HO CAMBIATO I DATI" )
+
+                                }
+                            }
+                        }
                     }
                 }
 

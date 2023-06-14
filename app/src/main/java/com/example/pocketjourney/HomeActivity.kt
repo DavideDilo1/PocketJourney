@@ -18,11 +18,11 @@ class HomeActivity : AppCompatActivity() {
         //questo valore bundle ottiene l'id dell'utente nel caso in cui sia connesso al server, l'email viceversa.
         val bundle=intent.extras
         val emailOff= bundle?.getString("emailutenteOffline")
-        val emailOn= bundle?.getString("emailutenteOnline")
-        if(emailOn!=null){
-            Log.e("ciao","sono la home activity e ho ricevuto emailOn")
+        val userId= bundle?.getString("idUtente")
+        if(userId!=null){
+            Log.e("ciao","sono la home activity e ho ricevuto l'id utente")
         } else {
-            Log.e("ciao","sono la home activity e NON ho ricevuto emailOn")
+            Log.e("ciao","sono la home activity e NON ho ricevuto id Utente")
         }
         if(emailOff!=null){
             Log.e("ciao","sono la home activity e ho ricevuto emailOff ")

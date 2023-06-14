@@ -34,14 +34,31 @@ class MainActivity : AppCompatActivity() {
             call.enqueue(object : Callback<JsonObject> {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                     if (response.isSuccessful) {
+                        val jsonObject = response.body()
+                        Log.d("JSON", response.body().toString())
+                        // Verifica se il JSON object è stato ottenuto correttamente come queryset
+                        if (jsonObject != null && jsonObject.has("queryset") ) {
+                            Log.e("Ciao", "HO OTTENUTO IL JSONOBJECT come queryset login" )
+                            //salvo l'array e verifico che contenga almeno un elemento
+                            val querySetArray = jsonObject.getAsJsonArray("queryset")
+                            if (querySetArray != null && querySetArray.size()>0){
+                                val primoUtente=querySetArray[0].asJsonObject //prendo la prima corrispondenza
+                                //verifico che non sia null e che contenga i campi corretti
+                                if (primoUtente!=null && primoUtente.has("idUtente") ){
+                                    //prelevo i campi e li setto nel fragment
+                                    val idUtente=primoUtente.get("idUtente").asString
+                                    //posso effettuare il login online
+                                    Log.e("ciao","LOGIN ONLINE")
+                                    val intent = Intent(context, HomeActivity::class.java)
+                                    val bundle= Bundle()
+                                    bundle.putString("idUtente",idUtente)
+                                    intent.putExtras(bundle)
+                                    startActivity(intent)
+                                }
+                            }
+                        }
 
-                        //posso effettuare il login online
-                        Log.e("ciao","LOGIN ONLINE")
-                        val intent = Intent(context, HomeActivity::class.java)
-                        val bundle= Bundle()
-                        bundle.putString("emailutenteOnline",email)
-                        intent.putExtras(bundle)
-                        startActivity(intent)
+
                     } else {
                         //credenziali errate
                         Toast.makeText(context,"Credenziali non valide",Toast.LENGTH_SHORT).show()
