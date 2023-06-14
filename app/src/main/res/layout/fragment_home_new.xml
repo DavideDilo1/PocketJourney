@@ -8,7 +8,7 @@
     tools:context=".HomeFragmentNew"
     android:background="@color/white"
     >
-
+<!-- TODO: aggiungere pulsante pacchetti -->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -103,28 +103,17 @@
             app:layout_constraintStart_toStartOf="@id/guideLineHome"
             app:layout_constraintTop_toBottomOf="@+id/testoHome" />
 
-        <ImageView
-            android:id="@+id/imageViewHome"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="20dp"
-            android:src="@drawable/ic_settings"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.853"
-            app:layout_constraintStart_toEndOf="@+id/testoCosaStaiCercando"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <SearchView
             android:id="@+id/searchViewHome"
-            android:layout_width="225dp"
-            android:layout_height="42dp"
-            android:layout_marginTop="20dp"
+            android:layout_width="245dp"
+            android:layout_height="43dp"
+            android:layout_marginTop="28dp"
             android:background="@drawable/custom_search_view"
             android:elevation="20dp"
             android:queryHint="Dove vorresti andare?"
 
             app:layout_constraintEnd_toStartOf="@id/guideLineHome2"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@id/guideLineHome"
             app:layout_constraintTop_toBottomOf="@+id/testoCosaStaiCercando">
 
@@ -506,14 +495,16 @@
 
         <Button
             android:id="@+id/hotelButton"
-            android:textAllCaps="false"
             style="@style/Widget.Material3.MaterialTimePicker.ImageButton"
             android:layout_width="wrap_content"
             android:layout_height="42dp"
-            android:textColor="@color/colorPrimary"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:backgroundTint="@color/white"
-            android:text="Hotel"
             android:drawableTint="@color/colorPrimary"
+            android:text="Hotel"
+            android:textAllCaps="false"
+            android:textColor="@color/colorPrimary"
             app:icon="@drawable/baseline_hotel_24"
             app:layout_constraintBottom_toBottomOf="@+id/imageBackground"
             app:layout_constraintEnd_toStartOf="@+id/attractionButton"
@@ -538,6 +529,20 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/hotelButton"
             app:layout_constraintTop_toBottomOf="@+id/searchViewHome" />
+
+        <ImageButton
+            android:id="@+id/ideaButton"
+            style="@android:style/Widget.ImageButton"
+            android:layout_width="44dp"
+            android:layout_height="43dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/idea_24"
+            app:layout_constraintBottom_toTopOf="@+id/attractionButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/searchViewHome"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.788" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

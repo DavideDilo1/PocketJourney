@@ -8,7 +8,6 @@
     tools:context=".Fragment1"
     android:background="@drawable/background"
     android:transitionName="background_imag_transition"
-    tools:targetApi="lollipop"
     >
 
     <!--TODO: mettere il bottone per aggiungere ai preferiti -->
