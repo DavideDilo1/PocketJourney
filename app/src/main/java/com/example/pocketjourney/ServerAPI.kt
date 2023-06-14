@@ -14,7 +14,8 @@ interface ServerAPI {
 
     @POST("postSelect/")
     @FormUrlEncoded
-    fun login(@Field("query") query: String): Call <JsonObject>
+    fun cerca(@Field("query") query: String): Call <JsonObject>
+    //"cerca" serve per effettuare delle interrogazioni in cui bisogna semplicemente recuperare dei dati o verificare che siano presenti nel database
 
     @POST("postInsert/")
     @FormUrlEncoded

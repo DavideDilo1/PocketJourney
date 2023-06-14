@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
             val password=binding.etPasswordLogin.text.toString()
             val userAPI=ClientNetwork.retrofit
             val queryLogin = "SELECT * FROM Utente WHERE email = '$email' AND password = '$password'"
-            val call = userAPI.login(queryLogin)
+            val call = userAPI.cerca(queryLogin)
             call.enqueue(object : Callback<JsonObject> {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                     if (response.isSuccessful) {

@@ -9,6 +9,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.pocketjourney.databinding.FragmentProfileBinding
+import com.google.gson.JsonObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class ProfileFragment : Fragment() {
@@ -26,13 +30,34 @@ class ProfileFragment : Fragment() {
         val emailUtenteOnline = arguments?.getString("emailutenteOnline")
         val emailUtenteOffline = arguments?.getString("emailutenteOffline")
 
-        if (emailUtenteOnline != null){
-            //sono connesso a internet avendo ricevuto idUtente
+        if (emailUtenteOnline != null ){
+            //sono connesso a internet avendo ricevuto emailOnline ed interrogo il database remoto
             Log.e("Ciao","sei al profile fragment e sei connesso")
+
+            val userAPI=ClientNetwork.retrofit
+            val queryNomeCognome = "SELECT Nome, Cognome FROM Utente WHERE email = '$emailUtenteOnline'"
+            val call = userAPI.cerca(queryNomeCognome)
+            call.enqueue(object : Callback<JsonObject> {
+                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                    if (response.isSuccessful) {
+                        //posso effettuare il login online
+                        Log.e("Ciao","posso cambiare i dati con dbonline")
+                    }
+                }
+
+                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                    // Si è verificato un errore durante la chiamata di rete online
+                    //login in locale
+                    Log.e("Ciao","posso cambiare i dati usando ONFAILURE")
+                }
+            })
+
         } else {
-            Log.e("Ciao","sei al profile fragment non sei connesso")
+            //emailUtenteOnline è null quindi opero col db in locale sfruttando emailUtenteOffline
+            Log.e("Ciao","CAMBIO I DATI CON L'ELSE ")
             databaseHelper=DbHelper(requireContext())
 
+            //query al database locale per cercae l'utente
             userId= getUserIdByEmail(emailUtenteOffline)
 
             if(userId!=-1){
@@ -41,11 +66,12 @@ class ProfileFragment : Fragment() {
                     binding.tvEmail.text = emailUtenteOffline
                     binding.tvNomeCognomeProfilo.text = "${user?.nome} ${user?.cognome}"
                 } else{
-                    Toast.makeText(requireContext(), "Utente non risulta nel database", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "L'utente non risulta nel database locale", Toast.LENGTH_SHORT).show()
                 }
             }
         }
 
+       //torna alla pagina di login resettando i campi inseriti precedentemente
        binding.btnLogout.setOnClickListener {
            requireActivity().supportFragmentManager.popBackStack()
            val intent = Intent(this.context, MainActivity::class.java)
