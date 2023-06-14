@@ -1,6 +1,7 @@
 package com.example.pocketjourney
 
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.pocketjourney.databinding.FragmentProfileBinding
 import com.google.gson.JsonObject
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -35,7 +37,7 @@ class ProfileFragment : Fragment() {
             Log.e("Ciao","sei al profile fragment e sei connesso")
 
             val userAPI=ClientNetwork.retrofit
-            val queryNomeCognome = "SELECT Nome, Cognome, email FROM Utente WHERE idUtente = '$idUtente'"
+            val queryNomeCognome = "SELECT Nome, Cognome, email, fotoProfilo FROM Utente WHERE idUtente = '$idUtente'"
             val call = userAPI.cerca(queryNomeCognome)
             call.enqueue(object : Callback<JsonObject> {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
@@ -55,14 +57,40 @@ class ProfileFragment : Fragment() {
 
                                 //verifico che non sia null e che contenga i campi corretti
 
-                                if (primoUtente!=null && primoUtente.has("Nome") && primoUtente.has("Cognome") && primoUtente.has("email")){
+                                if (primoUtente!=null && primoUtente.has("Nome") && primoUtente.has("Cognome") && primoUtente.has("email") && primoUtente.has("fotoProfilo")){
                                     //prelevo i campi e li setto nel fragment
                                     val nome=primoUtente.get("Nome").asString
                                     val cognome=primoUtente.get("Cognome").asString
                                     val email=primoUtente.get("email").asString
+                                    val foto=primoUtente.get("fotoProfilo").asString
+
                                     binding.tvEmail.text = "${email}"
                                     binding.tvNomeCognomeProfilo.text = "${nome} ${cognome}"
                                     Log.e("Ciao", "HO CAMBIATO I DATI" )
+
+                                    //setto l'immagine del profilo
+                                    val downloadFotoProfilo=userAPI.getAvatar(foto)
+                                    downloadFotoProfilo.enqueue(object :Callback<ResponseBody> {
+                                        override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                                            Log.e("Ciao", "sono dentro il blocco della foto" )
+                                            Log.d("RESPONSE",response.isSuccessful.toString())
+                                            if (response.isSuccessful){
+                                                Log.e("Ciao", "sono dentro il blocco della foto DENTRO IS SUCCESSFULL" )
+                                                val responseBody=response.body()
+                                                if(responseBody!=null){
+                                                    val inputStream=responseBody.byteStream()
+                                                    val bitmap=BitmapFactory.decodeStream(inputStream)
+                                                    //utilizza il Bitmap come immagine di profilo
+                                                    binding.imgImmagineProfilo.setImageBitmap(bitmap)
+
+                                                }
+                                            }
+                                        }
+
+                                        override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                                            Toast.makeText(requireContext(),"L'immagine non è stata trovaa correttamente",Toast.LENGTH_SHORT).show()
+                                        }
+                                    })
 
                                 }
                             }
