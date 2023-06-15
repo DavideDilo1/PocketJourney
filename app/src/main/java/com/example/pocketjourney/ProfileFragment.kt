@@ -26,7 +26,7 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
         binding= FragmentProfileBinding.inflate(layoutInflater,container,false)
 
         val idUtente = arguments?.getString("idUtente")
@@ -130,6 +130,18 @@ class ProfileFragment : Fragment() {
            val intent = Intent(this.context, MainActivity::class.java)
            startActivity(intent)
         }
+
+        //per accedere al fragment di modifica dei dati
+        binding.btnModificaDati.setOnClickListener(View.OnClickListener { view ->
+            val childFragment = ModificaDatiFragment()
+            val bundle=Bundle()
+            bundle.putString("idUtente",idUtente)
+            childFragment.arguments=bundle
+            val fragmentTransaction = childFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.modificaDatiFragment, childFragment)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        })
 
         return binding.root
     }

@@ -146,7 +146,7 @@
                         app:flow_horizontalAlign="center" />
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btnModificaPw"
+                        android:id="@+id/btnModificaDati"
                         style="@android:style/Widget.Button"
                         android:layout_width="179dp"
                         android:layout_height="wrap_content"
@@ -155,7 +155,7 @@
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="32dp"
                         android:background="@drawable/button_background"
-                        android:text="Modifica Password"
+                        android:text="Modifica Dati"
                         android:textColor="#ffffff"
                         android:textSize="18sp"
                         android:textStyle="bold" />
