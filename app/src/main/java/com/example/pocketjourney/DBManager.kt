@@ -75,7 +75,7 @@ class DBManager (val context: Context) {
     }
 
     fun deleteUtente(_id: Long) {
-        val selection = "${DbHelper._ID}=?"
+        val selection = "${DbHelper._ID}=? "
         val selectionArgs = arrayOf(_id.toString())
         db.delete(DbHelper.TABLE_NAME, selection, selectionArgs)
     }

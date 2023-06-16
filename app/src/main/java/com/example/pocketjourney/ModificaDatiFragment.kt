@@ -194,7 +194,7 @@ class ModificaDatiFragment : Fragment() {
         val isNumeroTelefonoValido = numeroTelefono.matches(telefonoRegex)
         if (!isNumeroTelefonoValido) {
             activity?.runOnUiThread {
-                Toast.makeText(activity, "inserisci una CELLULARE valido", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, " inserisci una CELLULARE valido", Toast.LENGTH_SHORT).show()
             }
         }
         return isNumeroTelefonoValido
