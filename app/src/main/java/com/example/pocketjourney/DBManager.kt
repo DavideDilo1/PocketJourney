@@ -53,6 +53,26 @@ class DBManager (val context: Context) {
         val rit=db.update(DbHelper.TABLE_NAME,values,selezione,selectionArgs)
         return rit
     }
+    fun updatePasswordUtente(password:String):Int{
+        val selezione= "${DbHelper.PASSWORD}=?"
+        val selectionArgs=arrayOf(password.toString())
+
+        val values=ContentValues().apply {
+            put(DbHelper.PASSWORD,password)
+        }
+        val rit=db.update(DbHelper.TABLE_NAME,values,selezione,selectionArgs)
+        return rit
+    }
+    fun updateTelefonoUtente(cellulare:String):Int{
+        val selezione= "${DbHelper.NUMEROCELLULARE}=?"
+        val selectionArgs=arrayOf(cellulare.toString())
+
+        val values=ContentValues().apply {
+            put(DbHelper.NUMEROCELLULARE,cellulare)
+        }
+        val rit=db.update(DbHelper.TABLE_NAME,values,selezione,selectionArgs)
+        return rit
+    }
 
     fun deleteUtente(_id: Long) {
         val selection = "${DbHelper._ID}=?"
