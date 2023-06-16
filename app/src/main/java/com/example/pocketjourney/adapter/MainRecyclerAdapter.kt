@@ -33,7 +33,7 @@ class MainRecyclerAdapter(private val context: Context, private val allRestauran
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         holder.restaurantTitle.text = allRestaurant[position].categoryTitle
-        setResturantItemRecycler(holder.itemRecycler, allRestaurant[position].resturantiItem)
+        setResturantItemRecycler(holder.itemRecycler, allRestaurant[position].restaurantItem)
     }
 
     private fun setResturantItemRecycler(recyclerView: RecyclerView, restaurantItem: List<RestaurantItem>){

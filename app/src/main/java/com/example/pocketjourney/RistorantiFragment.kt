@@ -46,8 +46,8 @@ class RistorantiFragment : Fragment() {
 
 
         val allRestaurant: MutableList<AllRestaurant> = ArrayList()
-        allRestaurant.add(AllRestaurant("pippo", restaurantItemList1))
-        allRestaurant.add(AllRestaurant("paperino",restaurantItemList2))
+        allRestaurant.add(AllRestaurant("I migliori ristoranti di sushi", restaurantItemList1))
+        allRestaurant.add(AllRestaurant("Le migliori pizzerie",restaurantItemList2))
 
         setMainCategoryRecycler(allRestaurant)
 
