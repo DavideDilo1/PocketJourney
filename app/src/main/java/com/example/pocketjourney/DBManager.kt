@@ -19,16 +19,13 @@ class DBManager (val context: Context) {
         helper.close()
     }
 
-    fun insert_utente(nome:String,cognome:String,email:String,pw:String,telefono:String,ref_metodo_pagamento:String,ref_rec:String,ref_prenotazioni:String){
+    fun insert_utente(nome:String,cognome:String,email:String,pw:String,telefono:String){
         val values=ContentValues().apply {
             put(DbHelper.NOME,nome)
             put(DbHelper.COGNOME,cognome)
             put(DbHelper.EMAIL,email)
             put(DbHelper.PASSWORD,pw)
             put(DbHelper.NUMEROCELLULARE,telefono)
-            put(DbHelper.REF_DATI_PAGAMENTO,ref_metodo_pagamento)
-            put(DbHelper.REF_RECENSISCE,ref_rec)
-            put(DbHelper.REF_PRENOTA,ref_prenotazioni)
         }
         val newRowId=db.insert(DbHelper.TABLE_NAME,null,values)
     }
@@ -41,6 +38,17 @@ class DBManager (val context: Context) {
             put(DbHelper.EMAIL,email)
             put(DbHelper.PASSWORD,pw)
             put(DbHelper.NUMEROCELLULARE,cell)
+        }
+        val rit=db.update(DbHelper.TABLE_NAME,values,selezione,selectionArgs)
+        return rit
+    }
+
+    fun updateEmailUtente(email:String):Int{
+        val selezione= "${DbHelper.EMAIL}=?"
+        val selectionArgs=arrayOf(email.toString())
+
+        val values=ContentValues().apply {
+            put(DbHelper.EMAIL,email)
         }
         val rit=db.update(DbHelper.TABLE_NAME,values,selezione,selectionArgs)
         return rit

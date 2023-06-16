@@ -52,6 +52,7 @@ class MainActivity : AppCompatActivity() {
                                     val intent = Intent(context, HomeActivity::class.java)
                                     val bundle= Bundle()
                                     bundle.putString("idUtente",idUtente)
+                                    bundle.putString("emailOnline",email)
                                     intent.putExtras(bundle)
                                     startActivity(intent)
                                 }

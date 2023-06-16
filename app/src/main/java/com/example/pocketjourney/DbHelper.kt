@@ -46,10 +46,7 @@ class DbHelper (context: Context): SQLiteOpenHelper (context,DB_NAME,null,DB_VER
                     "$COGNOME TEXT NOT NULL,"+
                     "$EMAIL TEXT NOT NULL," +
                     "$PASSWORD TEXT NOT NULL," +
-                    "$NUMEROCELLULARE TEXT NOT NULL," +
-                    "$REF_DATI_PAGAMENTO TEXT, " +
-                    "$REF_RECENSISCE TEXT, " +
-                    "$REF_PRENOTA TEXT);"
+                    "$NUMEROCELLULARE TEXT NOT NULL);"
 
         //stringhe per eliminare la tabella
         private const val SQL_DELETE_UTENTE =

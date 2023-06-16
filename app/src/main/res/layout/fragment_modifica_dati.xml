@@ -81,7 +81,7 @@
         app:layout_constraintTop_toBottomOf="@+id/etConfermaPasswordRegistrazione" />
 
     <Button
-        android:id="@+id/btnRegistrati"
+        android:id="@+id/btnModificaDati"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
@@ -102,6 +102,6 @@
         android:background="@drawable/button_background"
         android:text="Torna indietro"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnRegistrati" />
+        app:layout_constraintTop_toBottomOf="@+id/btnModificaDati" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

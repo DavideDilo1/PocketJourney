@@ -60,9 +60,6 @@ class RegistrationFragment : Fragment() {
                                     email,
                                     password,
                                     cellulare,
-                                    "prova",
-                                    "prova",
-                                    "prova"
                                 )
                                 requireActivity().supportFragmentManager.popBackStack()
                                 Toast.makeText(requireContext(), "Registrazione avvenuta con successo!", Toast.LENGTH_SHORT).show()

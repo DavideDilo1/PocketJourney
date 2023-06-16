@@ -30,6 +30,7 @@ class ProfileFragment : Fragment() {
         binding= FragmentProfileBinding.inflate(layoutInflater,container,false)
 
         val idUtente = arguments?.getString("idUtente")
+        val emailUtenteOnline=arguments?.getString("emailOnline")
         val emailUtenteOffline = arguments?.getString("emailutenteOffline")
 
         if (idUtente != null ){
@@ -136,9 +137,10 @@ class ProfileFragment : Fragment() {
             val childFragment = ModificaDatiFragment()
             val bundle=Bundle()
             bundle.putString("idUtente",idUtente)
+            bundle.putString("emailOnline",emailUtenteOnline)
             childFragment.arguments=bundle
             val fragmentTransaction = childFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.modificaDatiFragment, childFragment)
+            fragmentTransaction.replace(R.id.FragmentProfilo, childFragment)
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         })
