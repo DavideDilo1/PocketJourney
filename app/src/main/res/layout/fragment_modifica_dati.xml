@@ -13,7 +13,7 @@
 
 
     <EditText
-        android:id="@+id/etEmailRegistrazione"
+        android:id="@+id/etNuovaEmail"
         android:inputType="textEmailAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/etPasswordRegistrazione"
+        android:id="@+id/etModificaPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -44,10 +44,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etEmailRegistrazione" />
+        app:layout_constraintTop_toBottomOf="@+id/etNuovaEmail" />
 
     <EditText
-        android:id="@+id/etConfermaPasswordRegistrazione"
+        android:id="@+id/etConfermaPasswordMod"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -61,10 +61,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPasswordRegistrazione" />
+        app:layout_constraintTop_toBottomOf="@+id/etModificaPassword" />
 
     <EditText
-        android:id="@+id/etNumeroCellulare"
+        android:id="@+id/etCellulare"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -78,10 +78,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etConfermaPasswordRegistrazione" />
+        app:layout_constraintTop_toBottomOf="@+id/etConfermaPasswordMod" />
 
     <Button
-        android:id="@+id/btnModificaDati"
+        android:id="@+id/btnModifica"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
@@ -90,7 +90,7 @@
         android:background="@drawable/button_background"
         android:text="Modifica dati"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etNumeroCellulare" />
+        app:layout_constraintTop_toBottomOf="@+id/etCellulare" />
 
     <Button
         android:id="@+id/btnTornaProfilo"
@@ -102,6 +102,6 @@
         android:background="@drawable/button_background"
         android:text="Torna indietro"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnModificaDati" />
+        app:layout_constraintTop_toBottomOf="@+id/btnModifica" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

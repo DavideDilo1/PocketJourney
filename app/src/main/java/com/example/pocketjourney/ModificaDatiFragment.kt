@@ -41,11 +41,11 @@ class ModificaDatiFragment : Fragment() {
         Log.d("Ciao",emailOnline.toString())
         Log.e("Ciao", "SEI NEL FRAGMENT MODIFICA")
 
-        binding.btnModificaDati.setOnClickListener {
-            val nuovaEmail=binding.etEmailRegistrazione.text.toString()
-            val nuovaPassword=binding.etPasswordRegistrazione.text.toString()
-            val confermaNuovaPassword=binding.etConfermaPasswordRegistrazione.text.toString()
-            val nuovoCellulare=binding.etNumeroCellulare.text.toString()
+        binding.btnModifica.setOnClickListener {
+            val nuovaEmail=binding.etNuovaEmail.text.toString()
+            val nuovaPassword=binding.etModificaPassword.text.toString()
+            val confermaNuovaPassword=binding.etConfermaPasswordMod.text.toString()
+            val nuovoCellulare=binding.etCellulare.text.toString()
             //efettuo la modifica dei dati con un thread
             val scope = CoroutineScope(Dispatchers.Default)
             scope.launch {

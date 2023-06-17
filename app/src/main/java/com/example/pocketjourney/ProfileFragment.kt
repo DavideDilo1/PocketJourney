@@ -145,8 +145,22 @@ class ProfileFragment : Fragment() {
             fragmentTransaction.commit()
         })
 
+        binding.pagamentiButton.setOnClickListener(View.OnClickListener { view ->
+            val childFragment = CreditCardFragment()
+            val bundle=Bundle()
+            bundle.putString("idUtente",idUtente)
+            childFragment.arguments=bundle
+            val fragmentTransaction = childFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.FragmentProfilo, childFragment)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        })
+
+
         return binding.root
     }
+
+
 
     private fun getUserIdByEmail(email: String?): Int {
         val db = databaseHelper.readableDatabase

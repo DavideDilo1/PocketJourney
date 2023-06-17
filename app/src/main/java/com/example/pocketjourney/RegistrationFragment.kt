@@ -37,8 +37,8 @@ class RegistrationFragment : Fragment() {
             val Cognome=binding.etCognome.text.toString()
             val email=binding.etEmailRegistrazione.text.toString()
             val password=binding.etPasswordRegistrazione.text.toString()
-            val confermaPassword=binding.etConfermaPasswordRegistrazione.text.toString()
-            val cellulare=binding.etNumeroCellulare.text.toString()
+            val confermaPassword=binding.etConfermaPasswordReg.text.toString()
+            val cellulare=binding.etCellulare.text.toString()
 
             //chiamo la funzione VerificaDatiRegistrazione
             if(VerificaDatiRegistrazione(Nome,Cognome,email,password,confermaPassword,cellulare)) {
