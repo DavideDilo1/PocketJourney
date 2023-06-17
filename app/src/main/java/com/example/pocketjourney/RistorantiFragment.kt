@@ -5,12 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pocketjourney.adapter.MainRecyclerAdapter
+import com.example.pocketjourney.adapter.RestaurantItemAdapter
 import com.example.pocketjourney.databinding.FragmentRistorantiBinding
 import com.example.pocketjourney.model.AllRestaurant
 import com.example.pocketjourney.model.RestaurantItem
+import com.google.android.material.imageview.ShapeableImageView
 
 class RistorantiFragment : Fragment() {
 
@@ -47,10 +50,11 @@ class RistorantiFragment : Fragment() {
 
         val allRestaurant: MutableList<AllRestaurant> = ArrayList()
         allRestaurant.add(AllRestaurant("I migliori ristoranti di sushi", restaurantItemList1))
-        allRestaurant.add(AllRestaurant("Le migliori pizzerie",restaurantItemList2))
+        allRestaurant.add(AllRestaurant("Le miglioxri pizzerie",restaurantItemList2))
 
         setMainCategoryRecycler(allRestaurant)
 
+//TODO: Aggiungere i click listener per gli item della nested
 
         return binding.root
     }

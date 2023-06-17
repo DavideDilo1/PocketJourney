@@ -103,6 +103,32 @@
             app:layout_constraintStart_toStartOf="@id/guideLineHome"
             app:layout_constraintTop_toBottomOf="@+id/testoHome" />
 
+
+        <!--LinearLayout
+            android:layout_width="414dp"
+            android:layout_height="390dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/testoMiglioriMete"
+            tools:context=".HomeActivity">
+
+
+
+        </LinearLayout-->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/homeRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/testoMiglioriMete"
+            tools:listitem="@layout/card_view_design"
+            />
+
         <SearchView
             android:id="@+id/searchViewHome"
             android:layout_width="245dp"
@@ -111,15 +137,13 @@
             android:background="@drawable/custom_search_view"
             android:elevation="20dp"
             android:queryHint="Dove vorresti andare?"
-
             app:layout_constraintEnd_toStartOf="@id/guideLineHome2"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@id/guideLineHome"
-            app:layout_constraintTop_toBottomOf="@+id/testoCosaStaiCercando">
+            app:layout_constraintTop_toBottomOf="@+id/testoCosaStaiCercando"/>
 
-        </SearchView>
 
-        <ScrollView
+        <!--ScrollView
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="24dp"
@@ -136,6 +160,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+
+                /*
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardView"
                     android:layout_width="match_parent"
@@ -470,7 +496,7 @@
             </LinearLayout>
 
 
-        </ScrollView>
+        </ScrollView-->
 
         <Button
             android:id="@+id/resturantButton"
@@ -531,6 +557,7 @@
             app:layout_constraintTop_toBottomOf="@+id/searchViewHome" />
 
         <ImageButton
+
             android:id="@+id/ideaButton"
             style="@android:style/Widget.ImageButton"
             android:layout_width="44dp"
@@ -543,7 +570,6 @@
             app:layout_constraintStart_toEndOf="@+id/searchViewHome"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.788" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

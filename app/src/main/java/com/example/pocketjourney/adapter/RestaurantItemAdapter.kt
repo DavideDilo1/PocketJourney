@@ -30,9 +30,23 @@ class RestaurantItemAdapter(private val context: Context, private val restaurant
         position: Int
     ) {
         holder.itemImage.setImageResource(restaurantItem[position].imageUrl)
+
+        val item = restaurantItem[position]
+
+        holder.itemView.setOnClickListener {
+            onItemClickListener?.onItemClick(item)
+        }
+
     }
 
     override fun getItemCount(): Int {
         return restaurantItem.size
     }
+
+    private var onItemClickListener: OnItemClickListener? = null
+
+    interface OnItemClickListener {
+        fun onItemClick(item: RestaurantItem)
+    }
+
 }

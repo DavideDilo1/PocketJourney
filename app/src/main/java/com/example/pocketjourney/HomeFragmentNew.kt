@@ -11,26 +11,30 @@ import android.view.animation.Animation
 import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import com.example.pocketjourney.databinding.FragmentHomeNewBinding
-import android.os.Build.VERSION_CODES.S
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.ImageButton
-import android.widget.Toast
 import android.widget.ToggleButton
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.pocketjourney.adapter.HomeAdapter
+import com.example.pocketjourney.model.HomeItemModel
 
 
 class HomeFragmentNew : Fragment() {
 
     private lateinit var binding: FragmentHomeNewBinding
 
+
+/*
     private lateinit var cardView: CardView
     private lateinit var cardView2: CardView
-    private lateinit var cardView3: CardView
+    private lateinit var cardView3: CardView*/
     private lateinit var textView: TextView
     private lateinit var textView2: TextView
     private lateinit var textView3: TextView
+    private lateinit var homeRecycle: RecyclerView
 
     private lateinit var searchView: SearchView
     private lateinit var favoriteButton1: ToggleButton
@@ -42,7 +46,7 @@ class HomeFragmentNew : Fragment() {
     private lateinit var home_background: ImageView
     private lateinit var ideaButton: ImageButton
 
-    private lateinit var anim_from_button: Animation
+    private lateinit var anim_from_bottom: Animation
     private lateinit var anim_from_top: Animation
     private lateinit var anim_from_left: Animation
     private lateinit var anim_from_right: Animation
@@ -55,10 +59,45 @@ class HomeFragmentNew : Fragment() {
 
         binding = FragmentHomeNewBinding.inflate(inflater)
 
+        //definiamo la recycler view della home:
 
-        cardView = binding.cardView
-        cardView2 = binding.cardView2
-        cardView3 = binding.cardView3
+        binding.homeRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        //arraylist che contiene gli elementi della recycler
+
+        val data = ArrayList<HomeItemModel>()
+        //un ITEM VIEW MODEL é FATTO: val image: Int, val title: String, val numRec: String, val valutazione: String, val stelle: Float
+
+        data.add(HomeItemModel(R.drawable.image_one, "The START Hotel, Casino &amp; SkyPod", "(510)", "4.91", 4.5F ))
+        data.add(HomeItemModel(R.drawable.image_two, "Bar di economia", "(510)", "4.91", 4.5F ))
+        data.add(HomeItemModel(R.drawable.image_three, "Bar di architettura", "(510)", "4.91", 4.5F ))
+
+        //passiamo l'array list all'adapter:
+
+        val adapter = HomeAdapter(data)
+
+        //configuriamo l'adapter con la recycler view
+        binding.homeRecyclerView.adapter = adapter
+        adapter.setOnClickListener(object:
+            HomeAdapter.OnClickListener {
+                override fun onClick(position: Int, model: HomeItemModel){
+                    val childFragment = Fragment1()
+                    val fragmentTransaction = childFragmentManager.beginTransaction()
+                    fragmentTransaction.replace(R.id.frameNewHomeLayout, childFragment)
+                    fragmentTransaction.addToBackStack(null)
+                    fragmentTransaction.commit()
+                }
+
+            }
+        )
+
+
+       // cardView = binding.cardView
+      //  cardView2 = binding.cardView2
+      //  cardView3 = binding.cardView3
+
+
+        //TODO: modificare tutto quanto in base alla recycler view
 
         home_background = binding.imageBackground
         ristorantiButton = binding.resturantButton
@@ -72,20 +111,21 @@ class HomeFragmentNew : Fragment() {
 
         ideaButton = binding.ideaButton
 
+        homeRecycle = binding.homeRecyclerView
 
         //load animations
-        anim_from_button = AnimationUtils.loadAnimation(requireContext(), R.anim.anim_from_bottom)
+        anim_from_bottom = AnimationUtils.loadAnimation(requireContext(), R.anim.anim_from_bottom)
         anim_from_top = AnimationUtils.loadAnimation(requireContext(), R.anim.anim_from_top)
         anim_from_left = AnimationUtils.loadAnimation(requireContext(), R.anim.anim_from_left)
         anim_from_right = AnimationUtils.loadAnimation(requireContext(), R.anim.anim_from_right)
         //set animations
 
-        cardView.setAnimation(anim_from_button)
-        cardView2.setAnimation(anim_from_button)
-        cardView3.setAnimation(anim_from_button)
+        //cardView.setAnimation(anim_from_button)
+     //   cardView2.setAnimation(anim_from_button)
+      //  cardView3.setAnimation(anim_from_button)
         textView.setAnimation(anim_from_top)
         textView2.setAnimation(anim_from_top)
-        textView3.setAnimation(anim_from_button)
+        textView3.setAnimation(anim_from_bottom)
         ideaButton.setAnimation(anim_from_right)
 
         searchView.setAnimation(anim_from_left)
@@ -95,18 +135,21 @@ class HomeFragmentNew : Fragment() {
         attrazioniButton.setAnimation(anim_from_left)
         hotelButton.setAnimation(anim_from_left)
 
+
+        homeRecycle.setAnimation(anim_from_bottom)
+        /*
         cardView.setOnClickListener(View.OnClickListener { view ->
             val childFragment = Fragment1()
             val fragmentTransaction = childFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.frameNewHomeLayout, childFragment)
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
-        })
+        })*/
 
-        favoriteButton1 = binding.FavoriteButton
-        favoriteButton2 = binding.FavoriteButton2
-        favoriteButton3 = binding.FavoriteButton3
-
+       // favoriteButton1 = binding.FavoriteButton
+      //  favoriteButton2 = binding.FavoriteButton2
+      //  favoriteButton3 = binding.FavoriteButton3
+/*
         favoriteButton1.setOnClickListener {
 
             if(favoriteButton1.isChecked()){
@@ -116,7 +159,7 @@ class HomeFragmentNew : Fragment() {
                 //TODO: se non cliccato rimuovi dai preferiti
 
             }
-        }
+        }*/
 
         ideaButton.setOnClickListener{
             //TODO: implementare le schermate idea
