@@ -1,6 +1,5 @@
 package com.example.pocketjourney
 
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,12 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.example.pocketjourney.databinding.FragmentCreditCardBinding
-import com.example.pocketjourney.databinding.FragmentModificaDatiBinding
 import com.google.gson.JsonObject
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 
 
 class CreditCardFragment : Fragment() {
@@ -34,7 +33,7 @@ class CreditCardFragment : Fragment() {
         call.enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if (response.isSuccessful) {
-                    //posso effettuare il login online
+                    //il collegamento è avvenuto correttamente
                     Log.e("Ciao","ho effettuato la query correttamente ")
                     val jsonObject = response.body() // Ottieni il JSON come JsonObject
 
@@ -62,6 +61,7 @@ class CreditCardFragment : Fragment() {
                             }
                         }
                         else {
+                            //l'interrogazione ha dato un risultato nullo quindi non faccio niente
                             Log.e("ciao ", "LA QUERY è VUOTA PORCODDIOOOOOOO")
                         }
                     }
@@ -70,8 +70,7 @@ class CreditCardFragment : Fragment() {
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                 // Si è verificato un errore durante la chiamata di rete online
-                //login in locale
-                Log.e("Ciao","posso cambiare i dati usando ONFAILURE")
+                Log.e("Ciao"," ONFAILURE dentro onCreate ")
             }
         })
 
@@ -81,9 +80,72 @@ class CreditCardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val idUtente = arguments?.getString("idUtente")
-        Log.d("ciao ho ottenuto ",idUtente.toString())
+        Log.d("ciao sono on view created ho ottenuto ",idUtente.toString())
 
         binding.btnInserisciCarta.setOnClickListener{
+
+            val numeroCarta=binding.etNumeroCarta.text.toString()
+            val meseScadenza=binding.monthSpinner.selectedItem.toString().toInt()
+            val annoScadenza=binding.yearSpinner.selectedItem.toString().toInt()
+            val CVV=binding.etCvv.text.toString()
+
+            //effettuo una query per verificare che un utente non abbia già una carta inserita
+            val userAPI=ClientNetwork.retrofit
+            val queryCartaPresente = "SELECT idDatiPagamento FROM DatiPagamento WHERE ref_IdUtente = '$idUtente'"
+            val call = userAPI.cerca(queryCartaPresente)
+            call.enqueue(object : Callback<JsonObject> {
+                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                    if (response.isSuccessful) {
+                        //il collegamento è avvenuto correttamente
+                        Log.e("Ciao","ho effettuato la query correttamente per cercare se utente ha gia una carta ")
+                        val jsonObject = response.body() // Ottieni il JSON come JsonObject
+
+                        // Verifica se il JSON object è stato ottenuto correttamente come queryset
+                        if (jsonObject != null && jsonObject.has("queryset") ) {
+                            Log.e("Ciao", "HO OTTENUTO IL JSONOBJECT come queryset" )
+                            Log.d("ritorno dalla query: " , jsonObject.toString())
+                            //salvo l'array e verifico che contenga almeno un elemento
+                            val querySetArray = jsonObject.getAsJsonArray("queryset")
+                            if (querySetArray != null && querySetArray.size()>0){
+                                Log.e("ERRORE ", "UTENTE HA GIA UNA CARTA INSERITA")
+                            }
+                            else {
+                                //l'interrogazione ha dato un risultato nullo
+                                Log.e("ciao ", "LA QUERY è VUOTA POSSO INSERIRE CARTA MA VERIFICO I CAMPI")
+                                if(verificaDatiInseriti(numeroCarta,meseScadenza,annoScadenza,CVV)){
+                                    Log.e("ciao ", "CAMPI ok")
+                                    val queryInserisciCarta = "insert into DatiPagamento(ref_IdUtente,numeroCarta,codiceSicurezza,meseScadenza,annoScadenza) values('$idUtente','$numeroCarta','$CVV','$meseScadenza','$annoScadenza')"
+                                    val call = userAPI.inserisci(queryInserisciCarta)
+                                    call.enqueue(object : Callback<JsonObject> {
+                                        override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                                            if (response.isSuccessful) {
+                                                // L'inserimento della carta è avvenuto
+                                                Log.e("ciao","CARTA INSERITA")
+                                                requireActivity().supportFragmentManager.popBackStack()
+                                                Toast.makeText(requireContext(), "Registrazione CARTA avvenuta con successo!", Toast.LENGTH_SHORT).show()
+                                            }
+                                        }
+
+                                        override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                                            // Si è verificato un errore durante la chiamata di rete online
+                                            //Toast.makeText(requireContext(), t.toString() + " " + t.message.toString(), Toast.LENGTH_SHORT).show()
+                                            Log.e("ciao",t.toString() + " " + t.message.toString())
+                                        }
+                                    })
+                                }
+
+
+                            }
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                    // Si è verificato un errore durante la chiamata di rete online
+                    //login in locale
+                    Log.e("Ciao"," ONFAILURE sulla ricerca della carta ")
+                }
+            })
 
         }
 
@@ -94,6 +156,48 @@ class CreditCardFragment : Fragment() {
         binding.btnTornaProfilo.setOnClickListener {
 
         }
+    }
+
+    fun verificaNumeroCarta(numero: String): Boolean {
+        val numeroRegex = Regex("^[0-9]{16}$")
+        val isNumeroValido = numero.matches(numeroRegex)
+        if (!isNumeroValido) {
+            Toast.makeText(context, "Inserisci un numero di carta valido (16 cifre)", Toast.LENGTH_SHORT).show()
+        }
+        return isNumeroValido
+    }
+
+    fun verificaAnnoScadenza(anno: Int): Boolean {
+        val annoCorrente = Calendar.getInstance().get(Calendar.YEAR)
+        if (anno < annoCorrente) {
+            Toast.makeText(context, "L'anno di scadenza deve essere maggiore o uguale all'anno corrente", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        return true
+    }
+
+    fun verificaCVV(cvv: String): Boolean {
+        val cvvRegex = Regex("^[0-9]{3}$")
+        val isCVVValido = cvv.matches(cvvRegex)
+        if (!isCVVValido) {
+            Toast.makeText(context, "Inserisci un CVV valido (3 cifre)", Toast.LENGTH_SHORT).show()
+        }
+        return isCVVValido
+    }
+
+    fun verificaDatiInseriti(
+        numeroCarta: String,
+        meseScadenza: Int,
+        annoScadenza: Int,
+        cvv: String
+    ): Boolean {
+        if (numeroCarta.isEmpty() || cvv.isEmpty() || meseScadenza==null || annoScadenza== null) {
+            Toast.makeText(context, "Riempi tutti i campi ", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        return (verificaNumeroCarta(numeroCarta)
+                && verificaAnnoScadenza(annoScadenza)
+                && verificaCVV(cvv) )
     }
 
 }
