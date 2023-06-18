@@ -2,6 +2,7 @@ package com.example.pocketjourney
 
 import android.annotation.TargetApi
 import android.app.ActivityOptions
+import android.os.Parcelable
 import androidx.core.util.Pair
 import android.os.Build
 import android.os.Bundle
@@ -18,6 +19,8 @@ import android.widget.TextView
 import androidx.core.app.ActivityOptionsCompat
 import com.example.pocketjourney.databinding.Fragment1Binding
 import com.example.pocketjourney.databinding.FragmentHomeNewBinding
+import com.example.pocketjourney.model.HomeItemModel
+import kotlin.math.roundToInt
 
 class Fragment1 : Fragment() {
     private lateinit var binding: Fragment1Binding
@@ -42,10 +45,40 @@ class Fragment1 : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
+
     ): View? {
         // Inflate the layout for this fragment
 
         binding = Fragment1Binding.inflate(inflater)
+
+        val home = requireArguments().getParcelable<HomeItemModel>("home")
+
+
+        if(home != null){
+            val titolo : TextView = binding.secondTitle
+            val background_image = binding.fragment1
+            val rating: RatingBar = binding.secondRatingBar
+            val media_recensioni : TextView = binding.secondRatingNumber
+            val num_recensioni : TextView = binding.secondRatingNumber2
+
+            val descrizione : TextView = binding.secondSubtitle
+
+            //todo: mettere gli altri dati
+
+
+            // sets the text to the textview from our itemHolder class
+
+
+            titolo.text = home.title
+            background_image.setBackgroundResource(home.image)
+            rating.rating = home.stelle
+            media_recensioni.text = home.valutazione
+            num_recensioni.text = home.numRec
+
+            descrizione.text = "Query al dbms"
+
+
+        }
 
         second_arrow_up = binding.secondArrowUp
         second_back_arrow = binding.secondBackArrow

@@ -8,14 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
-import android.widget.ImageView
-import android.widget.SearchView
-import android.widget.TextView
 import com.example.pocketjourney.databinding.FragmentHomeNewBinding
 import android.view.animation.AnimationUtils
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.ToggleButton
+import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pocketjourney.adapter.HomeAdapter
@@ -34,6 +29,7 @@ class HomeFragmentNew : Fragment() {
     private lateinit var textView: TextView
     private lateinit var textView2: TextView
     private lateinit var textView3: TextView
+
     private lateinit var homeRecycle: RecyclerView
 
     private lateinit var searchView: SearchView
@@ -65,20 +61,38 @@ class HomeFragmentNew : Fragment() {
 
         //arraylist che contiene gli elementi della recycler
 
-        val data = ArrayList<HomeItemModel>()
+        val homeItem = ArrayList<HomeItemModel>()
         //un ITEM VIEW MODEL é FATTO: val image: Int, val title: String, val numRec: String, val valutazione: String, val stelle: Float
 
-        data.add(HomeItemModel(R.drawable.image_one, "The START Hotel, Casino &amp; SkyPod", "(510)", "4.91", 4.5F ))
-        data.add(HomeItemModel(R.drawable.image_two, "Bar di economia", "(510)", "4.91", 4.5F ))
-        data.add(HomeItemModel(R.drawable.image_three, "Bar di architettura", "(510)", "4.91", 4.5F ))
+        homeItem.add(HomeItemModel(R.drawable.image_one, "The START Hotel, Casino &amp; SkyPod", "(510)", "4.91", 4.5F ))
+        homeItem.add(HomeItemModel(R.drawable.image_two, "Bar di economia", "(510)", "4.91", 4.5F ))
+        homeItem.add(HomeItemModel(R.drawable.image_three, "Bar di architettura", "(510)", "4.91", 4.5F ))
 
         //passiamo l'array list all'adapter:
 
-        val adapter = HomeAdapter(data)
+        val homeAdapter = HomeAdapter(homeItem)
 
         //configuriamo l'adapter con la recycler view
-        binding.homeRecyclerView.adapter = adapter
-        adapter.setOnClickListener(object:
+        binding.homeRecyclerView.adapter = homeAdapter
+
+        homeAdapter.onItemClick = {
+
+            val bundle = Bundle()
+            bundle.putParcelable("home", it)
+
+            val childFragment = Fragment1()
+            childFragment.arguments=bundle
+
+            val fragmentManager = requireActivity().supportFragmentManager
+
+            fragmentManager.beginTransaction()
+                .replace(R.id.frameNewHomeLayout, childFragment)
+                .addToBackStack(null)
+                .commit()
+
+        }
+
+       /* adapter.setOnClickListener(object:
             HomeAdapter.OnClickListener {
                 override fun onClick(position: Int, model: HomeItemModel){
                     val childFragment = Fragment1()
@@ -91,6 +105,18 @@ class HomeFragmentNew : Fragment() {
             }
         )
 
+        //alla fine fa le stesse cose del precedente:
+
+        adapter.setOnItemClickListener(object: HomeAdapter.onItemClickListener{
+
+            override fun onItemClick(position: Int) {
+                super.onItemClick(position)
+                Toast.makeText(requireContext(), "Hai cliccato sull'elemento $position", Toast.LENGTH_SHORT).show()
+
+
+            }
+
+        })*/
 
        // cardView = binding.cardView
       //  cardView2 = binding.cardView2
