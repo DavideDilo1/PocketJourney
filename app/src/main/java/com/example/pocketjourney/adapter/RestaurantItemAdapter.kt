@@ -11,7 +11,7 @@ import com.example.pocketjourney.databinding.RestaurantRowItemBinding
 import com.example.pocketjourney.model.HomeItemModel
 import com.example.pocketjourney.model.RestaurantItem
 
-class RestaurantItemAdapter(private val context: Context, private val restaurantItem: List<RestaurantItem> ): RecyclerView.Adapter<RestaurantItemAdapter.RestaurantItemViewHolder>(){
+class RestaurantItemAdapter( private val restaurantItem: List<RestaurantItem> ): RecyclerView.Adapter<RestaurantItemAdapter.RestaurantItemViewHolder>(){
 
     var onItemClick : ((RestaurantItem) -> Unit)? = null
 

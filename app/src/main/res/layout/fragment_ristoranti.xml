@@ -47,8 +47,8 @@
             android:id="@+id/mainScrollView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -60,10 +60,24 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Le migliori pizzerie"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    />
+
                 <androidx.recyclerview.widget.RecyclerView
+                    android:layout_marginRight="4dp"
+                    android:layout_marginLeft="4dp"
                     android:id="@+id/RecyclerViewOrizzontale"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="horizontal"
                     />
 
 
@@ -71,15 +85,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:fontFamily="@font/open_sans_bold"
                     android:text="Tutti i ristoranti"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="20sp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    />
+                    android:textSize="18sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:layout_marginRight="4dp"
+                    android:layout_marginLeft="4dp"
                     android:id="@+id/RecyclerViewVerticale"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

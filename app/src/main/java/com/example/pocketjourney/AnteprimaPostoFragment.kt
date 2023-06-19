@@ -52,9 +52,7 @@ class AnteprimaPostoFragment : Fragment() {
 
         val home = requireArguments().getParcelable<HomeItemModel>("home")
 
-        val ristoranti = requireArguments().getParcelable<HomeItemModel>("ristoranti")
-
-
+        val ristoranti = requireArguments().getParcelable<RestaurantItem>("ristoranti")
 
 
         if(home != null){
@@ -73,7 +71,7 @@ class AnteprimaPostoFragment : Fragment() {
 
 
             titolo.text = home.title
-            background_image.setBackgroundResource(home.image)
+            background_image.setImageResource(home.image)
             rating.rating = home.stelle
             media_recensioni.text = home.valutazione
             num_recensioni.text = home.numRec
@@ -97,8 +95,8 @@ class AnteprimaPostoFragment : Fragment() {
 
             val descrizione : TextView = binding.secondSubtitle
 
-            titolo.text = ristoranti.title
-            background_image.setBackgroundResource(ristoranti.image)
+            titolo.text = ristoranti.nomeRistorante
+            background_image.setImageResource(ristoranti.imageUrl)
             rating.rating = ristoranti.stelle
             media_recensioni.text = ristoranti.valutazione
             num_recensioni.text = ristoranti.numRec

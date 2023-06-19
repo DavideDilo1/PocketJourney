@@ -9,10 +9,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pocketjourney.adapter.HomeAdapter
-import com.example.pocketjourney.adapter.MainRecyclerAdapter
+//import com.example.pocketjourney.adapter.MainRecyclerAdapter
 import com.example.pocketjourney.adapter.RestaurantItemAdapter
 import com.example.pocketjourney.databinding.FragmentRistorantiBinding
-import com.example.pocketjourney.model.AllRestaurant
 import com.example.pocketjourney.model.HomeItemModel
 import com.example.pocketjourney.model.RestaurantItem
 
@@ -21,7 +20,7 @@ class RistorantiFragment : Fragment() {
     private lateinit var binding: FragmentRistorantiBinding
 
     private var mainCategoryRecycler: RecyclerView? = null
-    private var mainRecyclerAdapter:MainRecyclerAdapter? = null
+   // private var mainRecyclerAdapter:MainRecyclerAdapter? = null
 
     private var recyclerViewOrizzontale: RecyclerView? = null
     private var recyclerViewVerticale: RecyclerView? = null
@@ -34,33 +33,42 @@ class RistorantiFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentRistorantiBinding.inflate(inflater)
 
-        //qui si aggiungono i dati al modello della classe
+        binding.RecyclerViewOrizzontale.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+
+
 
         //prima categoria
-        val restaurantItemList1: MutableList<RestaurantItem> = ArrayList()
+        val restaurantItemList1 = ArrayList<RestaurantItem>()
         restaurantItemList1.add(RestaurantItem(1,R.drawable.background, "Bar di economia", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
         restaurantItemList1.add(RestaurantItem(1,R.drawable.background, "Bar di Ing", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
         restaurantItemList1.add(RestaurantItem(1,R.drawable.background, "Bar di Architettura", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
         restaurantItemList1.add(RestaurantItem(1,R.drawable.background, "Bar di Grande", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
         restaurantItemList1.add(RestaurantItem(1,R.drawable.background, "Bar di Pippo", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
 
+
+        val ristorantiOrizzAdapter1 = RestaurantItemAdapter(restaurantItemList1)
+        binding.RecyclerViewOrizzontale.adapter = ristorantiOrizzAdapter1
+
+
         //seconda categoria
-        val restaurantItemList2: MutableList<RestaurantItem> = ArrayList()
+        val restaurantItemList2 = ArrayList<RestaurantItem>()
         restaurantItemList2.add(RestaurantItem(2,R.drawable.background, "Bar di Calogero", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
         restaurantItemList2.add(RestaurantItem(2,R.drawable.background, "Bar di Lillo", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
         restaurantItemList2.add(RestaurantItem(2,R.drawable.background, "Bar di Davide", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
         restaurantItemList2.add(RestaurantItem(2,R.drawable.background, "Bar di Suor Carmela", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
         restaurantItemList2.add(RestaurantItem(2,R.drawable.background, "Bar di Cetto", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
 
-
+/*
         val allRestaurant: MutableList<AllRestaurant> = ArrayList()
         allRestaurant.add(AllRestaurant("I migliori ristoranti di sushi", restaurantItemList1))
         allRestaurant.add(AllRestaurant("Le migliori pizzerie", restaurantItemList2))
+*/
+      //  setHorizontalRecycler(allRestaurant)
 
-        setHorizontalRecycler(allRestaurant)
 
-        val ristorantiOrizzAdapter1 = RestaurantItemAdapter(requireContext(), restaurantItemList1)
-        val ristorantiOrizzAdapter2 = RestaurantItemAdapter(requireContext(), restaurantItemList2)
+
+
+        //  val ristorantiOrizzAdapter2 = RestaurantItemAdapter(requireContext(), restaurantItemList2)
 
 //TODO: QUESTO NON FUNZIONA!!! AGGIUSTARLO
         ristorantiOrizzAdapter1.onItemClick = {
@@ -80,7 +88,7 @@ class RistorantiFragment : Fragment() {
                 .commit()
 
         }
-
+/*
         ristorantiOrizzAdapter2.onItemClick = {
 
             val bundle = Bundle()
@@ -96,7 +104,7 @@ class RistorantiFragment : Fragment() {
                 .addToBackStack(null)
                 .commit()
 
-        }
+        }*/
 
 
 //TODO: Aggiungere i click listener per gli item della nested
@@ -120,7 +128,7 @@ class RistorantiFragment : Fragment() {
         ristorantiAdapter.onItemClick = {
 
             val bundle = Bundle()
-            bundle.putParcelable("ristoranti", it)
+            bundle.putParcelable("home", it)
 
             val childFragment = AnteprimaPostoFragment()
             childFragment.arguments=bundle
@@ -140,7 +148,7 @@ class RistorantiFragment : Fragment() {
 
         return binding.root
     }
-
+/*
     private fun setHorizontalRecycler(allRestaurant: List<AllRestaurant>){
         mainCategoryRecycler = binding.RecyclerViewOrizzontale
         val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(requireContext())
@@ -149,6 +157,6 @@ class RistorantiFragment : Fragment() {
         mainRecyclerAdapter = MainRecyclerAdapter(requireContext(), allRestaurant)
         mainCategoryRecycler!!.adapter = mainRecyclerAdapter
 
-    }
+    }*/
 
 }
