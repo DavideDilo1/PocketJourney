@@ -21,6 +21,10 @@ interface ServerAPI {
     @FormUrlEncoded
     fun modifica(@Field("query") query: String): Call <JsonObject>
 
+    @POST("postRemove/")
+    @FormUrlEncoded
+    fun remove(@Field("query") query: String): Call <JsonObject>
+
     @GET
     fun getAvatar(@Url url: String) : Call <ResponseBody>
 

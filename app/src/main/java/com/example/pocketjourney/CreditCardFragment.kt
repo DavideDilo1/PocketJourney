@@ -151,11 +151,69 @@ class CreditCardFragment : Fragment() {
 
         binding.btnEliminaCarta.setOnClickListener{
 
+            //effettuo una query per verificare che un utente non abbia già una carta inserita
+            val userAPI=ClientNetwork.retrofit
+            val queryCartaPresente = "SELECT idDatiPagamento FROM DatiPagamento WHERE ref_IdUtente = '$idUtente'"
+            val call = userAPI.cerca(queryCartaPresente)
+            call.enqueue(object : Callback<JsonObject> {
+                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                    if (response.isSuccessful) {
+                        //il collegamento è avvenuto correttamente
+                        Log.e("Ciao","ho effettuato la query correttamente per cercare se utente ha gia una carta DA ELIMINARE")
+                        val jsonObject = response.body() // Ottieni il JSON come JsonObject
+
+                        // Verifica se il JSON object è stato ottenuto correttamente come queryset
+                        if (jsonObject != null && jsonObject.has("queryset") ) {
+                            Log.e("Ciao", "HO OTTENUTO IL JSONOBJECT come queryset" )
+                            Log.d("ritorno dalla query: " , jsonObject.toString())
+                            //salvo l'array e verifico che contenga almeno un elemento
+                            val querySetArray = jsonObject.getAsJsonArray("queryset")
+                            if (querySetArray != null && querySetArray.size()>0){
+                                Log.e("CIAO ", "UTENTE HA GIA UNA CARTA INSERITA")
+                                //l'interrogazione ha dato un risultato nullo
+                                Log.e("ciao ", "eseguo query per eliminare carta")
+
+                                val queryEliminaCarta = "DELETE FROM DatiPagamento WHERE ref_IdUtente = '$idUtente'"
+                                val call = userAPI.remove(queryEliminaCarta)
+                                call.enqueue(object : Callback<JsonObject> {
+                                        override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                                            if (response.isSuccessful) {
+                                                // L'inserimento della carta è avvenuto
+                                                Log.e("ciao","CARTA RIMOSSA")
+                                                binding.tvNumeroCarta.text = "Numero carta: "
+                                                binding.tvDataScadenza.text= " -- / -- "
+                                                Toast.makeText(context, "Hai rimosso la tua carta con successo e puoi inserirne una nuova", Toast.LENGTH_SHORT).show()
+                                            }
+                                        }
+
+                                        override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                                            // Si è verificato un errore durante la chiamata di rete online
+                                            //Toast.makeText(requireContext(), t.toString() + " " + t.message.toString(), Toast.LENGTH_SHORT).show()
+                                            Log.e("ciao",t.toString() + " " + t.message.toString())
+                                        }
+                                    })
+
+                            }
+                            else {
+                                Log.e("ciao","utente non ha carta non ho cosa rimuovere")
+                            }
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                    // Si è verificato un errore durante la chiamata di rete online
+                    //login in locale
+                    Log.e("Ciao"," ONFAILURE sulla ricerca della carta DA RIMUOVERE ")
+                }
+            })
+
         }
 
-        binding.btnTornaProfilo.setOnClickListener {
-
-        }
+        binding.btnTornaProfilo.setOnClickListener(View.OnClickListener { view ->
+            requireActivity().supportFragmentManager.popBackStack()
+            Toast.makeText(requireContext(), "Nessun dato modificato", Toast.LENGTH_SHORT).show()
+        })
     }
 
     fun verificaNumeroCarta(numero: String): Boolean {
