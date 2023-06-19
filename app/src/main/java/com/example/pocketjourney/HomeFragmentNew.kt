@@ -20,13 +20,7 @@ import com.example.pocketjourney.model.HomeItemModel
 class HomeFragmentNew : Fragment() {
 
     private lateinit var binding: FragmentHomeNewBinding
-
-
-/*
-    private lateinit var cardView: CardView
-    private lateinit var cardView2: CardView
-    private lateinit var cardView3: CardView*/
-
+    
     private lateinit var textView: TextView
     private lateinit var textView2: TextView
     private lateinit var textView3: TextView
@@ -65,7 +59,7 @@ class HomeFragmentNew : Fragment() {
         val homeItem = ArrayList<HomeItemModel>()
         //un ITEM VIEW MODEL é FATTO: val image: Int, val title: String, val numRec: String, val valutazione: String, val stelle: Float
 
-        homeItem.add(HomeItemModel(R.drawable.image_one, "The START Hotel, Casino &amp; SkyPod", "(510)", "4.91", 4.5F ))
+        homeItem.add(HomeItemModel(R.drawable.image_one, "Bar di ingegneria", "(510)", "4.91", 4.5F ))
         homeItem.add(HomeItemModel(R.drawable.image_two, "Bar di economia", "(510)", "4.91", 4.5F ))
         homeItem.add(HomeItemModel(R.drawable.image_three, "Bar di architettura", "(510)", "4.91", 4.5F ))
 
@@ -144,17 +138,17 @@ class HomeFragmentNew : Fragment() {
         //cardView.setAnimation(anim_from_button)
      //   cardView2.setAnimation(anim_from_button)
       //  cardView3.setAnimation(anim_from_button)
-        textView.setAnimation(anim_from_top)
-        textView2.setAnimation(anim_from_top)
-        textView3.setAnimation(anim_from_bottom)
-        ideaButton.setAnimation(anim_from_right)
+        textView.animation = anim_from_top
+        textView2.animation = anim_from_top
+        textView3.animation = anim_from_bottom
+        ideaButton.animation = anim_from_right
 
-        searchView.setAnimation(anim_from_left)
+        searchView.animation = anim_from_left
 
-        home_background.setAnimation(anim_from_top)
-        ristorantiButton.setAnimation(anim_from_left)
-        attrazioniButton.setAnimation(anim_from_left)
-        hotelButton.setAnimation(anim_from_left)
+        home_background.animation = anim_from_top
+        ristorantiButton.animation = anim_from_left
+        attrazioniButton.animation = anim_from_left
+        hotelButton.animation = anim_from_left
 
 
         homeRecycle.setAnimation(anim_from_bottom)

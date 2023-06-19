@@ -6,25 +6,39 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.widget.ImageView
+import android.widget.SearchView
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pocketjourney.adapter.HomeAdapter
 //import com.example.pocketjourney.adapter.MainRecyclerAdapter
-import com.example.pocketjourney.adapter.RestaurantItemAdapter
+import com.example.pocketjourney.adapter.HorizontalItemAdapter
 import com.example.pocketjourney.databinding.FragmentRistorantiBinding
 import com.example.pocketjourney.model.HomeItemModel
-import com.example.pocketjourney.model.RestaurantItem
+import com.example.pocketjourney.model.HorizontalRecyclerItem
 
 class RistorantiFragment : Fragment() {
 
     private lateinit var binding: FragmentRistorantiBinding
 
-    private var mainCategoryRecycler: RecyclerView? = null
-   // private var mainRecyclerAdapter:MainRecyclerAdapter? = null
+    private lateinit var topImage:ImageView
 
-    private var recyclerViewOrizzontale: RecyclerView? = null
-    private var recyclerViewVerticale: RecyclerView? = null
+    private lateinit var recyclerOrizzontale: RecyclerView
+    private lateinit var recyclerVerticale: RecyclerView
 
+    private lateinit var titoloFinestra: TextView
+    private lateinit var testoTutti: TextView
+    private lateinit var testoCategoria: TextView
+    private lateinit var searchView: SearchView
+    private lateinit var back_arrowR: ImageView
+
+    private lateinit var anim_from_bottom: Animation
+    private lateinit var anim_from_top: Animation
+    private lateinit var anim_from_left: Animation
+    private lateinit var anim_from_right: Animation
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,30 +47,30 @@ class RistorantiFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentRistorantiBinding.inflate(inflater)
 
-        binding.RecyclerViewOrizzontale.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.RecyclerViewOrizzontaleR.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
 
 
         //prima categoria
-        val restaurantItemList1 = ArrayList<RestaurantItem>()
-        restaurantItemList1.add(RestaurantItem(1,R.drawable.background, "Bar di economia", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
-        restaurantItemList1.add(RestaurantItem(1,R.drawable.background, "Bar di Ing", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
-        restaurantItemList1.add(RestaurantItem(1,R.drawable.background, "Bar di Architettura", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
-        restaurantItemList1.add(RestaurantItem(1,R.drawable.background, "Bar di Grande", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
-        restaurantItemList1.add(RestaurantItem(1,R.drawable.background, "Bar di Pippo", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
+        val restaurantItemList1 = ArrayList<HorizontalRecyclerItem>()
+        restaurantItemList1.add(HorizontalRecyclerItem(1,R.drawable.image_one, "Bar di economia", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
+        restaurantItemList1.add(HorizontalRecyclerItem(1,R.drawable.image_one, "Bar di Ing", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
+        restaurantItemList1.add(HorizontalRecyclerItem(1,R.drawable.image_one, "Bar di Architettura", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
+        restaurantItemList1.add(HorizontalRecyclerItem(1,R.drawable.image_one, "Bar di Grande", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
+        restaurantItemList1.add(HorizontalRecyclerItem(1,R.drawable.image_one, "Bar di Pippo", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
 
 
-        val ristorantiOrizzAdapter1 = RestaurantItemAdapter(restaurantItemList1)
-        binding.RecyclerViewOrizzontale.adapter = ristorantiOrizzAdapter1
+        val ristorantiOrizzAdapter1 = HorizontalItemAdapter(restaurantItemList1)
+        binding.RecyclerViewOrizzontaleR.adapter = ristorantiOrizzAdapter1
 
 
         //seconda categoria
-        val restaurantItemList2 = ArrayList<RestaurantItem>()
-        restaurantItemList2.add(RestaurantItem(2,R.drawable.background, "Bar di Calogero", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
-        restaurantItemList2.add(RestaurantItem(2,R.drawable.background, "Bar di Lillo", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
-        restaurantItemList2.add(RestaurantItem(2,R.drawable.background, "Bar di Davide", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
-        restaurantItemList2.add(RestaurantItem(2,R.drawable.background, "Bar di Suor Carmela", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
-        restaurantItemList2.add(RestaurantItem(2,R.drawable.background, "Bar di Cetto", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
+        val restaurantItemList2 = ArrayList<HorizontalRecyclerItem>()
+        restaurantItemList2.add(HorizontalRecyclerItem(2,R.drawable.background, "Bar di Calogero", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
+        restaurantItemList2.add(HorizontalRecyclerItem(2,R.drawable.background, "Bar di Lillo", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
+        restaurantItemList2.add(HorizontalRecyclerItem(2,R.drawable.background, "Bar di Davide", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
+        restaurantItemList2.add(HorizontalRecyclerItem(2,R.drawable.background, "Bar di Suor Carmela", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
+        restaurantItemList2.add(HorizontalRecyclerItem(2,R.drawable.background, "Bar di Cetto", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
 
 /*
         val allRestaurant: MutableList<AllRestaurant> = ArrayList()
@@ -106,9 +120,6 @@ class RistorantiFragment : Fragment() {
 
         }*/
 
-
-//TODO: Aggiungere i click listener per gli item della nested
-
         //QUESTA è LA RECYCLER VERTICALE CON TUTTI I RISTORANTI:
 
         val allTypeRestaurant = ArrayList<HomeItemModel>()
@@ -118,10 +129,10 @@ class RistorantiFragment : Fragment() {
         allTypeRestaurant.add(HomeItemModel(R.drawable.image_two, "Bar di economia", "(510)", "4.91", 4.5F ))
         allTypeRestaurant.add(HomeItemModel(R.drawable.image_three, "Bar di architettura", "(510)", "4.91", 4.5F ))
 
-        binding.RecyclerViewVerticale.layoutManager = LinearLayoutManager(requireContext())
+        binding.RecyclerViewVerticaleR.layoutManager = LinearLayoutManager(requireContext())
 
         val ristorantiAdapter = HomeAdapter(allTypeRestaurant)
-        binding.RecyclerViewVerticale.adapter = ristorantiAdapter
+        binding.RecyclerViewVerticaleR.adapter = ristorantiAdapter
 
 
 
@@ -143,20 +154,45 @@ class RistorantiFragment : Fragment() {
         }
 
 
+        back_arrowR = binding.backArrowR
+
+        back_arrowR.setOnClickListener(){
+            val childFragment = HomeFragmentNew()
+            val fragmentTransaction = childFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.frameRistoranti, childFragment)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
 
 
+        topImage = binding.imageBackground
+        recyclerOrizzontale = binding.RecyclerViewOrizzontaleR
+
+        recyclerVerticale = binding.RecyclerViewVerticaleR
+
+        titoloFinestra= binding.testoRistoranti
+
+        testoTutti= binding.testoTuttiR
+        testoCategoria= binding.testoCategoriaR
+        searchView= binding.searchView
+
+
+        anim_from_bottom = AnimationUtils.loadAnimation(requireContext(), R.anim.anim_from_bottom)
+        anim_from_top = AnimationUtils.loadAnimation(requireContext(), R.anim.anim_from_top)
+        anim_from_left = AnimationUtils.loadAnimation(requireContext(), R.anim.anim_from_left)
+        anim_from_right = AnimationUtils.loadAnimation(requireContext(), R.anim.anim_from_right)
+
+
+        topImage.animation = anim_from_top
+        recyclerOrizzontale.animation =  anim_from_left
+        recyclerVerticale.animation = anim_from_bottom
+        testoTutti.animation = anim_from_left
+        testoCategoria.animation = anim_from_left
+        titoloFinestra.animation = anim_from_top
+        searchView.animation = anim_from_right
 
         return binding.root
     }
-/*
-    private fun setHorizontalRecycler(allRestaurant: List<AllRestaurant>){
-        mainCategoryRecycler = binding.RecyclerViewOrizzontale
-        val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(requireContext())
 
-        mainCategoryRecycler!!.layoutManager = layoutManager
-        mainRecyclerAdapter = MainRecyclerAdapter(requireContext(), allRestaurant)
-        mainCategoryRecycler!!.adapter = mainRecyclerAdapter
-
-    }*/
 
 }

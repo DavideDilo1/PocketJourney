@@ -34,5 +34,12 @@
         <item name="color">@color/white</item>
     </style>
 
+    <style name="SoftRoundImageView" parent="">
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="cornerSizeBottomRight">25dp</item>
+        <item name="cornerSizeBottomLeft">25dp</item>
+        <item name="cornerFamily">rounded</item>
+        <item name="color">@color/white</item>
+    </style>
 
 </resources>

@@ -3,7 +3,7 @@ package com.example.pocketjourney.model
 import android.os.Parcel
 import android.os.Parcelable
 
-class RestaurantItem(val itemId: Int, val imageUrl: Int, val nomeRistorante: String,  val numRec: String, val valutazione: String, val stelle: Float, val testoVario: String ) : Parcelable{
+class HorizontalRecyclerItem(val itemId: Int, val imageUrl: Int, val nomeRistorante: String, val numRec: String, val valutazione: String, val stelle: Float, val testoVario: String ) : Parcelable{
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readInt(),
@@ -29,12 +29,12 @@ class RestaurantItem(val itemId: Int, val imageUrl: Int, val nomeRistorante: Str
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<RestaurantItem> {
-        override fun createFromParcel(parcel: Parcel): RestaurantItem {
-            return RestaurantItem(parcel)
+    companion object CREATOR : Parcelable.Creator<HorizontalRecyclerItem> {
+        override fun createFromParcel(parcel: Parcel): HorizontalRecyclerItem {
+            return HorizontalRecyclerItem(parcel)
         }
 
-        override fun newArray(size: Int): Array<RestaurantItem?> {
+        override fun newArray(size: Int): Array<HorizontalRecyclerItem?> {
             return arrayOfNulls(size)
         }
     }

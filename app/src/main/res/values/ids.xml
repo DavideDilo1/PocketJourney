@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="item_restaurant_Image" type="id"  />
+    <item name="item_Image" type="id"  />
     <item name="restaurant_item_recycler" type="id" />
-    <item name="titoloRistorante" type="id" />
-    <item name="cardViewRistorante" type="id" />
+    <item name="titolo" type="id" />
+    <item name="cardViewItem" type="id" />
     <item name="testoAnteprimaRistorante" type="id" />
     <item name= "numRecensioni" type="id"/>
-    <item name = "valutazioneRist" type="id"/>
+    <item name = "valutazioneItem" type="id"/>
     <item name="ratingBarResturant" type="id" />
 
 

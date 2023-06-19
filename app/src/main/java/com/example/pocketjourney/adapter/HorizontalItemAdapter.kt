@@ -1,27 +1,22 @@
 package com.example.pocketjourney.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.pocketjourney.R
-import com.example.pocketjourney.databinding.RestaurantRowItemBinding
-import com.example.pocketjourney.model.HomeItemModel
-import com.example.pocketjourney.model.RestaurantItem
+import com.example.pocketjourney.databinding.HorizontalViewDesignBinding
+import com.example.pocketjourney.model.HorizontalRecyclerItem
 
-class RestaurantItemAdapter( private val restaurantItem: List<RestaurantItem> ): RecyclerView.Adapter<RestaurantItemAdapter.RestaurantItemViewHolder>(){
+class HorizontalItemAdapter(private val horizontalRecyclerItem: List<HorizontalRecyclerItem> ): RecyclerView.Adapter<HorizontalItemAdapter.RestaurantItemViewHolder>(){
 
-    var onItemClick : ((RestaurantItem) -> Unit)? = null
+    var onItemClick : ((HorizontalRecyclerItem) -> Unit)? = null
 
-    class RestaurantItemViewHolder(binding: RestaurantRowItemBinding): RecyclerView.ViewHolder(binding.root){
-        val imageView = binding.itemRestaurantImage
-        val nomeRistorante = binding.titoloRistorante
+    class RestaurantItemViewHolder(binding: HorizontalViewDesignBinding): RecyclerView.ViewHolder(binding.root){
+        val imageView = binding.itemImage
+        val nomeRistorante = binding.titolo
         val numRecensioni = binding.numRecensioni
-        val valutazione = binding.valutazioneRist
-        val ratingBarRist = binding.ratingBarRestaurant
-        val testoVario = binding.testoRistorante
+        val valutazione = binding.valutazioneItem
+        val ratingBarRist = binding.ratingBarItem
+        val testoVario = binding.testo
 
     /*
         init {
@@ -33,7 +28,7 @@ class RestaurantItemAdapter( private val restaurantItem: List<RestaurantItem> ):
 
     override fun onBindViewHolder( holder: RestaurantItemViewHolder, position: Int) {
 
-        val RestaurantItemModel = restaurantItem[position]
+        val RestaurantItemModel = horizontalRecyclerItem[position]
 
         holder.imageView.setImageResource(RestaurantItemModel.imageUrl)
 
@@ -55,19 +50,19 @@ class RestaurantItemAdapter( private val restaurantItem: List<RestaurantItem> ):
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RestaurantItemViewHolder {
 
-        val view = RestaurantRowItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val view = HorizontalViewDesignBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         return RestaurantItemViewHolder(view)
     }
 
     override fun getItemCount(): Int {
-        return restaurantItem.size
+        return horizontalRecyclerItem.size
     }
 
     private var onItemClickListener: OnItemClickListener? = null
 
     interface OnItemClickListener {
-        fun onItemClick(item: RestaurantItem)
+        fun onItemClick(item: HorizontalRecyclerItem)
     }
 
 }

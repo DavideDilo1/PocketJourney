@@ -18,7 +18,7 @@ import android.widget.TextView
 import androidx.core.app.ActivityOptionsCompat
 import com.example.pocketjourney.databinding.FragmentAnteprimaPostoBinding
 import com.example.pocketjourney.model.HomeItemModel
-import com.example.pocketjourney.model.RestaurantItem
+import com.example.pocketjourney.model.HorizontalRecyclerItem
 
 class AnteprimaPostoFragment : Fragment() {
 
@@ -52,7 +52,7 @@ class AnteprimaPostoFragment : Fragment() {
 
         val home = requireArguments().getParcelable<HomeItemModel>("home")
 
-        val ristoranti = requireArguments().getParcelable<RestaurantItem>("ristoranti")
+        val ristoranti = requireArguments().getParcelable<HorizontalRecyclerItem>("ristoranti")
 
 
         if(home != null){

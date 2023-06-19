@@ -8,7 +8,10 @@
     android:id="@+id/fragment_pagina_posto"
     android:background="@color/white"
 >
-<!--TODO: mettere il bottone per aggiungere ai preferiti
+<!--
+
+    TODO: mettere il bottone per aggiungere ai preferiti
+    TODO: implementare la costruzione automatica del fragment tramite parcelable
     TODO: implementare tutto ciò che riguarda la prenotazione e i pagamenti
 
 -->
