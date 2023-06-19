@@ -54,7 +54,7 @@
         app:layout_constraintVertical_bias="0.38" />
 
     <TextView
-        android:id="@+id/valutazioneHome"
+        android:id="@+id/valutazioneRist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -62,24 +62,22 @@
         android:text="4.91"
         android:textColor="@color/colorPrimary"
         android:textSize="10dp"
-        app:layout_constraintStart_toEndOf="@+id/ratingBarRestaurant"
-        tools:layout_editor_absoluteY="34dp" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/numRecensioni"
+        app:layout_constraintStart_toEndOf="@+id/ratingBarRestaurant" />
 
     <TextView
-        android:id="@+id/numRecensioniHome"
+        android:id="@+id/numRecensioni"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:fontFamily="@font/open_sans_light"
         android:text="(510)"
-
-
         android:textColor="@color/colorPrimary"
         android:textSize="10dp"
         app:layout_constraintBottom_toTopOf="@+id/testoRistorante"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/valutazioneHome"
+        app:layout_constraintStart_toEndOf="@+id/valutazioneRist"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.829" />
 

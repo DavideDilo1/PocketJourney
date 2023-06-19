@@ -5,7 +5,8 @@
     <item name="titoloRistorante" type="id" />
     <item name="cardViewRistorante" type="id" />
     <item name="testoAnteprimaRistorante" type="id" />
-
+    <item name= "numRecensioni" type="id"/>
+    <item name = "valutazioneRist" type="id"/>
     <item name="ratingBarResturant" type="id" />
 
 

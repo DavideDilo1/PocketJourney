@@ -1,11 +1,10 @@
 package com.example.pocketjourney
 
 import android.annotation.TargetApi
-import android.app.ActivityOptions
-import android.os.Parcelable
 import androidx.core.util.Pair
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,13 +16,13 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.core.app.ActivityOptionsCompat
-import com.example.pocketjourney.databinding.Fragment1Binding
-import com.example.pocketjourney.databinding.FragmentHomeNewBinding
+import com.example.pocketjourney.databinding.FragmentAnteprimaPostoBinding
 import com.example.pocketjourney.model.HomeItemModel
-import kotlin.math.roundToInt
+import com.example.pocketjourney.model.RestaurantItem
 
-class Fragment1 : Fragment() {
-    private lateinit var binding: Fragment1Binding
+class AnteprimaPostoFragment : Fragment() {
+
+    private lateinit var binding: FragmentAnteprimaPostoBinding
 
 
     private lateinit var second_back_arrow: ImageView
@@ -49,21 +48,25 @@ class Fragment1 : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 
-        binding = Fragment1Binding.inflate(inflater)
+        binding = FragmentAnteprimaPostoBinding.inflate(inflater)
 
         val home = requireArguments().getParcelable<HomeItemModel>("home")
 
+        val ristoranti = requireArguments().getParcelable<HomeItemModel>("ristoranti")
+
+
+
 
         if(home != null){
+            Log.i("Home", "ALmeno qua ci entro?")
+
             val titolo : TextView = binding.secondTitle
-            val background_image = binding.fragment1
+            val background_image: ImageView = binding.imageBackgroundAnteprima
             val rating: RatingBar = binding.secondRatingBar
             val media_recensioni : TextView = binding.secondRatingNumber
             val num_recensioni : TextView = binding.secondRatingNumber2
 
             val descrizione : TextView = binding.secondSubtitle
-
-            //todo: mettere gli altri dati
 
 
             // sets the text to the textview from our itemHolder class
@@ -79,6 +82,34 @@ class Fragment1 : Fragment() {
 
 
         }
+        /*
+        else{
+            //TODO: SCHERMATA NESSUN DATO DISPONIBILE
+        }*/
+
+        if(ristoranti !=null ){
+            Log.i("Ristoranti", "ALmeno qua ci entro?")
+            val titolo : TextView = binding.secondTitle
+            val background_image: ImageView = binding.imageBackgroundAnteprima
+            val rating: RatingBar = binding.secondRatingBar
+            val media_recensioni : TextView = binding.secondRatingNumber
+            val num_recensioni : TextView = binding.secondRatingNumber2
+
+            val descrizione : TextView = binding.secondSubtitle
+
+            titolo.text = ristoranti.title
+            background_image.setBackgroundResource(ristoranti.image)
+            rating.rating = ristoranti.stelle
+            media_recensioni.text = ristoranti.valutazione
+            num_recensioni.text = ristoranti.numRec
+
+            descrizione.text = "Query al dbms"
+
+
+
+        }
+
+
 
         second_arrow_up = binding.secondArrowUp
         second_back_arrow = binding.secondBackArrow
@@ -92,7 +123,7 @@ class Fragment1 : Fragment() {
         second_back_arrow.setOnClickListener(){
             val childFragment = HomeFragmentNew()
             val fragmentTransaction = childFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.fragment1, childFragment)
+            fragmentTransaction.replace(R.id.fragment_anteprima_posto, childFragment)
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
@@ -132,10 +163,10 @@ class Fragment1 : Fragment() {
             )
             val options = ActivityOptionsCompat.makeSceneTransitionAnimation(requireActivity(), *pairs).toBundle()
 
-            val childFragment = Fragment2()
+            val childFragment = PaginaPostoFragment()
             val fragmentTransaction = childFragmentManager.beginTransaction()
             childFragment.arguments = options
-            fragmentTransaction.replace(R.id.fragment1, childFragment)
+            fragmentTransaction.replace(R.id.fragment_anteprima_posto, childFragment)
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
 

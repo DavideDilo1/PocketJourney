@@ -13,12 +13,13 @@ class HomeAdapter(private val mList: List<HomeItemModel>) : RecyclerView.Adapter
     var onItemClick : ((HomeItemModel) -> Unit)? = null
 
    // private lateinit var mListener: onItemClickListener
+    /*
     interface onItemClickListener{
         fun onItemClick(position: Int){
 
         }
     }
-/*
+
     fun setOnItemClickListener(listener: onItemClickListener){
 
         mListener = listener
@@ -31,7 +32,8 @@ class HomeAdapter(private val mList: List<HomeItemModel>) : RecyclerView.Adapter
         val view = CardViewDesignBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
-        return HomeViewHolder(view)    }
+        return HomeViewHolder(view)
+    }
 //, mListener
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
         val HomeItemModel = mList[position]
@@ -41,13 +43,13 @@ class HomeAdapter(private val mList: List<HomeItemModel>) : RecyclerView.Adapter
         holder.viewHome.setBackgroundResource(HomeItemModel.image)
 
         // sets the text to the textview from our itemHolder class
-        holder.titleViewHome.setText(HomeItemModel.title)
+        holder.titleViewHome.text = HomeItemModel.title
 
         holder.ratingBarHome.rating = HomeItemModel.stelle
 
-        holder.numRecensioni.setText(HomeItemModel.numRec)
+        holder.numRecensioni.text = HomeItemModel.numRec
 
-        holder.valutazione.setText(HomeItemModel.valutazione)
+        holder.valutazione.text = HomeItemModel.valutazione
 
         /* Finally add an onclickListener to the item.
         holder.itemView.setOnClickListener {

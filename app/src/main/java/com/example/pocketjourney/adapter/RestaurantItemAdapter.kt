@@ -7,36 +7,57 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pocketjourney.R
+import com.example.pocketjourney.databinding.RestaurantRowItemBinding
+import com.example.pocketjourney.model.HomeItemModel
 import com.example.pocketjourney.model.RestaurantItem
 
 class RestaurantItemAdapter(private val context: Context, private val restaurantItem: List<RestaurantItem> ): RecyclerView.Adapter<RestaurantItemAdapter.RestaurantItemViewHolder>(){
 
-    class RestaurantItemViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-        var itemImage: ImageView
+    var onItemClick : ((RestaurantItem) -> Unit)? = null
+
+    class RestaurantItemViewHolder(binding: RestaurantRowItemBinding): RecyclerView.ViewHolder(binding.root){
+        val imageView = binding.itemRestaurantImage
+        val nomeRistorante = binding.titoloRistorante
+        val numRecensioni = binding.numRecensioni
+        val valutazione = binding.valutazioneRist
+        val ratingBarRist = binding.ratingBarRestaurant
+        val testoVario = binding.testoRistorante
+
+    /*
         init {
             itemImage = itemView.findViewById(R.id.item_restaurant_Image)
-        }
+        }*/
     }
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): RestaurantItemAdapter.RestaurantItemViewHolder {
-        return RestaurantItemViewHolder(LayoutInflater.from(context).inflate(R.layout.restaurant_row_item, parent, false))
-    }
 
-    override fun onBindViewHolder(
-        holder: RestaurantItemAdapter.RestaurantItemViewHolder,
-        position: Int
-    ) {
-        holder.itemImage.setImageResource(restaurantItem[position].imageUrl)
 
-        val item = restaurantItem[position]
+    override fun onBindViewHolder( holder: RestaurantItemViewHolder, position: Int) {
+
+        val RestaurantItemModel = restaurantItem[position]
+
+        holder.imageView.setImageResource(RestaurantItemModel.imageUrl)
+
+        holder.nomeRistorante.text = RestaurantItemModel.nomeRistorante
+
+        holder.numRecensioni.text = RestaurantItemModel.numRec
+
+        holder.valutazione.text = RestaurantItemModel.valutazione
+
+        holder.ratingBarRist.rating = RestaurantItemModel.stelle
+
+        holder.testoVario.text = RestaurantItemModel.testoVario
 
         holder.itemView.setOnClickListener {
-            onItemClickListener?.onItemClick(item)
+            onItemClick?.invoke(RestaurantItemModel)
         }
 
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RestaurantItemViewHolder {
+
+        val view = RestaurantRowItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
+        return RestaurantItemViewHolder(view)
     }
 
     override fun getItemCount(): Int {

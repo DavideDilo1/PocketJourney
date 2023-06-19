@@ -14,10 +14,10 @@ import android.widget.ImageView
 import android.widget.ScrollView
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
-import com.example.pocketjourney.databinding.Fragment2Binding
+import com.example.pocketjourney.databinding.FragmentPaginaPostoBinding
 
-class Fragment2 : Fragment() {
-    private lateinit var binding: Fragment2Binding
+class PaginaPostoFragment : Fragment() {
+    private lateinit var binding: FragmentPaginaPostoBinding
 
     private lateinit var down_arrow: ImageView
     private lateinit var third_scrollView: ScrollView
@@ -31,7 +31,7 @@ class Fragment2 : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = Fragment2Binding.inflate(inflater)
+        binding = FragmentPaginaPostoBinding.inflate(inflater)
 
         down_arrow = binding.downArrow
         third_scrollView = binding.thirdScrollView
@@ -62,10 +62,10 @@ class Fragment2 : Fragment() {
             )
             val options = ActivityOptionsCompat.makeSceneTransitionAnimation(requireActivity(), *pairs).toBundle()
 
-            val childFragment = Fragment1()
+            val childFragment = AnteprimaPostoFragment()
             val fragmentTransaction = childFragmentManager.beginTransaction()
             childFragment.arguments = options
-            fragmentTransaction.replace(R.id.fragment2, childFragment)
+            fragmentTransaction.replace(R.id.fragment_pagina_posto, childFragment)
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
 

@@ -26,6 +26,7 @@ class HomeFragmentNew : Fragment() {
     private lateinit var cardView: CardView
     private lateinit var cardView2: CardView
     private lateinit var cardView3: CardView*/
+
     private lateinit var textView: TextView
     private lateinit var textView2: TextView
     private lateinit var textView3: TextView
@@ -75,12 +76,13 @@ class HomeFragmentNew : Fragment() {
         //configuriamo l'adapter con la recycler view
         binding.homeRecyclerView.adapter = homeAdapter
 
+
         homeAdapter.onItemClick = {
 
             val bundle = Bundle()
             bundle.putParcelable("home", it)
 
-            val childFragment = Fragment1()
+            val childFragment = AnteprimaPostoFragment()
             childFragment.arguments=bundle
 
             val fragmentManager = requireActivity().supportFragmentManager
@@ -92,7 +94,10 @@ class HomeFragmentNew : Fragment() {
 
         }
 
-       /* adapter.setOnClickListener(object:
+       /*  onclick listener su un elemento della recycler.
+
+
+       adapter.setOnClickListener(object:
             HomeAdapter.OnClickListener {
                 override fun onClick(position: Int, model: HomeItemModel){
                     val childFragment = Fragment1()
@@ -105,25 +110,15 @@ class HomeFragmentNew : Fragment() {
             }
         )
 
-        //alla fine fa le stesse cose del precedente:
 
-        adapter.setOnItemClickListener(object: HomeAdapter.onItemClickListener{
+       */
 
-            override fun onItemClick(position: Int) {
-                super.onItemClick(position)
-                Toast.makeText(requireContext(), "Hai cliccato sull'elemento $position", Toast.LENGTH_SHORT).show()
-
-
-            }
-
-        })*/
-
-       // cardView = binding.cardView
-      //  cardView2 = binding.cardView2
-      //  cardView3 = binding.cardView3
+        // cardView = binding.cardView
+        // cardView2 = binding.cardView2
+        // cardView3 = binding.cardView3
 
 
-        //TODO: modificare tutto quanto in base alla recycler view
+        //TODO: aggiungere le animazioni alla recycler view
 
         home_background = binding.imageBackground
         ristorantiButton = binding.resturantButton
@@ -163,18 +158,12 @@ class HomeFragmentNew : Fragment() {
 
 
         homeRecycle.setAnimation(anim_from_bottom)
-        /*
-        cardView.setOnClickListener(View.OnClickListener { view ->
-            val childFragment = Fragment1()
-            val fragmentTransaction = childFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.frameNewHomeLayout, childFragment)
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()
-        })*/
+
 
        // favoriteButton1 = binding.FavoriteButton
       //  favoriteButton2 = binding.FavoriteButton2
       //  favoriteButton3 = binding.FavoriteButton3
+
 /*
         favoriteButton1.setOnClickListener {
 

@@ -4,9 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/fragment1"
-    tools:context=".Fragment1"
-    android:background="@drawable/background"
+    android:id="@+id/fragment_anteprima_posto"
+    tools:context=".AnteprimaPostoFragment"
     android:transitionName="background_imag_transition"
     >
 
@@ -18,6 +17,17 @@
 
         >
 
+
+        <ImageView
+            android:id="@+id/imageBackgroundAnteprima"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:layout_width="wrap_content"

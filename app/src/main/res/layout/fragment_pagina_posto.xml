@@ -4,11 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Fragment2"
-    android:id="@+id/fragment2"
+    tools:context=".PaginaPostoFragment"
+    android:id="@+id/fragment_pagina_posto"
     android:background="@color/white"
 >
-<!--TODO: mettere il bottone per aggiungere ai preferiti -->
+<!--TODO: mettere il bottone per aggiungere ai preferiti
+    TODO: implementare tutto ciò che riguarda la prenotazione e i pagamenti
+
+-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -16,16 +19,16 @@
         >
 
         <ImageView
+            android:id="@+id/header_background"
             android:layout_width="412dp"
             android:layout_height="291dp"
-            android:id="@+id/header_background"
             android:transitionName="background_image_transition"
+            app:layout_constraintBaseline_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBaseline_toTopOf="parent"
-            app:srcCompat="@drawable/header_background"
+            app:layout_constraintTop_toTopOf="parent"
 
-            />
+            app:srcCompat="@drawable/header_background" />
 
         <ImageView
             android:layout_width="wrap_content"
