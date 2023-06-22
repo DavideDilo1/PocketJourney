@@ -77,6 +77,7 @@ class MainActivity : AppCompatActivity() {
                         intent.putExtras(bundle)
                         startActivity(intent)
                     } else {
+                        Log.e("ciao", "credenziali offline errate")
                         Toast.makeText(context,"Credenziali non valide",Toast.LENGTH_SHORT).show()
                     }
                     Log.e("ciao", t.toString() + " " + t.message.toString())

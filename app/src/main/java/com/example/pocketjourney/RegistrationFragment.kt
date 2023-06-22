@@ -45,7 +45,7 @@ class RegistrationFragment : Fragment() {
 
                 //REGISTRAZIONE ONLINE
                 val serverAPI=ClientNetwork.retrofit
-                val queryInserimento = "insert into Utente(nome,cognome,email,password) values('$Nome','$Cognome','$email','$password')"
+                val queryInserimento = "insert into Utente(nome,cognome,email,password,cellulare) values('$Nome','$Cognome','$email','$password','$cellulare')"
                 val call = serverAPI.inserisci(queryInserimento)
                 call.enqueue(object : Callback<JsonObject> {
                     override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
@@ -61,6 +61,7 @@ class RegistrationFragment : Fragment() {
                                     password,
                                     cellulare,
                                 )
+                                Log.d("NEL DB MANAGER HO INSERITO", Nome.toString() + Cognome.toString()+ email.toString() + password.toString() + cellulare.toString())
                                 requireActivity().supportFragmentManager.popBackStack()
                                 Toast.makeText(requireContext(), "Registrazione avvenuta con successo!", Toast.LENGTH_SHORT).show()
                             }
