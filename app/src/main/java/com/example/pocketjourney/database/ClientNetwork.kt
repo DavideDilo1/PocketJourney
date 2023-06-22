@@ -1,4 +1,4 @@
-package com.example.pocketjourney
+package com.example.pocketjourney.database
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

@@ -1,4 +1,4 @@
-package com.example.pocketjourney
+package com.example.pocketjourney.database
 
 
 import com.google.gson.JsonObject

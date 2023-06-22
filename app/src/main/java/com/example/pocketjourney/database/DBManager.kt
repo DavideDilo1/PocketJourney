@@ -1,4 +1,4 @@
-package com.example.pocketjourney
+package com.example.pocketjourney.database
 
 import android.content.ContentValues
 import android.content.Context
@@ -9,7 +9,7 @@ class DBManager (val context: Context) {
     private lateinit var helper: DbHelper
     private lateinit var db:SQLiteDatabase
 
-    fun open():DBManager{
+    fun open(): DBManager {
         helper= DbHelper(context)
         db=helper.writableDatabase
         return this
@@ -82,7 +82,17 @@ class DBManager (val context: Context) {
 
     //con la fetchAll ottengo tutte le risposte di una query
     fun fetchAll():Cursor {
-        val projection = arrayOf(DbHelper._ID, DbHelper.NOME, DbHelper.COGNOME,DbHelper.EMAIL,DbHelper.PASSWORD,DbHelper.NUMEROCELLULARE,DbHelper.REF_DATI_PAGAMENTO,DbHelper.REF_RECENSISCE,DbHelper.REF_PRENOTA)
+        val projection = arrayOf(
+            DbHelper._ID,
+            DbHelper.NOME,
+            DbHelper.COGNOME,
+            DbHelper.EMAIL,
+            DbHelper.PASSWORD,
+            DbHelper.NUMEROCELLULARE,
+            DbHelper.REF_DATI_PAGAMENTO,
+            DbHelper.REF_RECENSISCE,
+            DbHelper.REF_PRENOTA
+        )
         val cursor = db.query(
             DbHelper.TABLE_NAME,
             projection,

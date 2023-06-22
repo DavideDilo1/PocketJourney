@@ -1,10 +1,13 @@
-package com.example.pocketjourney
+package com.example.pocketjourney.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Window
 import androidx.fragment.app.Fragment
+import com.example.pocketjourney.preferiti.PreferitiFragment
+import com.example.pocketjourney.ProfileFragment
+import com.example.pocketjourney.R
 import com.example.pocketjourney.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
@@ -42,7 +45,8 @@ class HomeActivity : AppCompatActivity() {
                 R.id.preferiti -> replaceFragment(PreferitiFragment())
                 //passo al fragment profilo l'id dell'utente nel caso sia connesso, l'email altrimenti
                 R.id.profile -> bundle?.let { it1 ->
-                    replaceFragmentProfile(ProfileFragment(),
+                    replaceFragmentProfile(
+                        ProfileFragment(),
                         it1
                     )
                 }

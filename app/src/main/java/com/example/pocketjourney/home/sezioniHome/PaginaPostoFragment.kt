@@ -1,4 +1,4 @@
-package com.example.pocketjourney
+package com.example.pocketjourney.home.sezioniHome
 
 import android.annotation.TargetApi
 import android.os.Build
@@ -14,7 +14,9 @@ import android.widget.ImageView
 import android.widget.ScrollView
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
+import com.example.pocketjourney.R
 import com.example.pocketjourney.databinding.FragmentPaginaPostoBinding
+import com.example.pocketjourney.home.AnteprimaPostoFragment
 
 class PaginaPostoFragment : Fragment() {
     private lateinit var binding: FragmentPaginaPostoBinding

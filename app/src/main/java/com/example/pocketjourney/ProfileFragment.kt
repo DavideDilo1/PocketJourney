@@ -9,7 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.pocketjourney.accesso.MainActivity
+import com.example.pocketjourney.database.ClientNetwork
+import com.example.pocketjourney.database.DbHelper
 import com.example.pocketjourney.databinding.FragmentProfileBinding
+import com.example.pocketjourney.profilo.CreditCardFragment
+import com.example.pocketjourney.profilo.ModificaDatiFragment
 import com.google.gson.JsonObject
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -37,7 +42,7 @@ class ProfileFragment : Fragment() {
             //sono connesso a internet avendo ricevuto userId ed interrogo il database remoto
             Log.e("Ciao","sei al profile fragment e sei connesso")
 
-            val userAPI=ClientNetwork.retrofit
+            val userAPI= ClientNetwork.retrofit
             val queryNomeCognome = "SELECT Nome, Cognome, email, fotoProfilo FROM Utente WHERE idUtente = '$idUtente'"
             val call = userAPI.cerca(queryNomeCognome)
             call.enqueue(object : Callback<JsonObject> {
@@ -109,7 +114,7 @@ class ProfileFragment : Fragment() {
         } else {
             //emailUtenteOnline è null quindi opero col db in locale sfruttando emailUtenteOffline
             Log.e("Ciao","CAMBIO I DATI CON L'ELSE ")
-            databaseHelper=DbHelper(requireContext())
+            databaseHelper= DbHelper(requireContext())
 
             //query al database locale per cercae l'utente
             userId= getUserIdByEmail(emailUtenteOffline)

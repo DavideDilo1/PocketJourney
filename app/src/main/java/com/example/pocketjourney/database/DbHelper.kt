@@ -1,10 +1,10 @@
-package com.example.pocketjourney
+package com.example.pocketjourney.database
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class DbHelper (context: Context): SQLiteOpenHelper (context,DB_NAME,null,DB_VERSION) {
+class DbHelper (context: Context): SQLiteOpenHelper (context, DB_NAME,null, DB_VERSION) {
 
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL(SQL_CREATE_UTENTE)
@@ -40,7 +40,7 @@ class DbHelper (context: Context): SQLiteOpenHelper (context,DB_NAME,null,DB_VER
 
         //stringhe per creare la tabella
         private const val SQL_CREATE_UTENTE =
-            "CREATE TABLE ${TABLE_NAME} ( " +
+            "CREATE TABLE $TABLE_NAME ( " +
                     "$_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "$NOME TEXT NOT NULL," +
                     "$COGNOME TEXT NOT NULL,"+
@@ -50,7 +50,7 @@ class DbHelper (context: Context): SQLiteOpenHelper (context,DB_NAME,null,DB_VER
 
         //stringhe per eliminare la tabella
         private const val SQL_DELETE_UTENTE =
-            "DROP TABLE IF EXISTS ${TABLE_NAME};"
+            "DROP TABLE IF EXISTS $TABLE_NAME;"
 
     }
 

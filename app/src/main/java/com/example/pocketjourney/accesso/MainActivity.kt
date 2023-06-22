@@ -1,4 +1,4 @@
-package com.example.pocketjourney
+package com.example.pocketjourney.accesso
 
 import android.content.Context
 import android.content.Intent
@@ -8,12 +8,15 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import com.example.pocketjourney.database.ClientNetwork
+import com.example.pocketjourney.database.DbHelper
+import com.example.pocketjourney.R
 import com.example.pocketjourney.databinding.ActivityMainBinding
+import com.example.pocketjourney.home.HomeActivity
 import com.google.gson.JsonObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.net.PasswordAuthentication
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -28,7 +31,7 @@ class MainActivity : AppCompatActivity() {
             //provo a effettuare il login con le credenzili online
             val email = binding.etEmailLogin.text.toString()
             val password=binding.etPasswordLogin.text.toString()
-            val userAPI=ClientNetwork.retrofit
+            val userAPI= ClientNetwork.retrofit
             val queryLogin = "SELECT *  FROM Utente WHERE email = '$email' AND password = '$password'"
             val call = userAPI.cerca(queryLogin)
             call.enqueue(object : Callback<JsonObject> {
@@ -107,7 +110,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun verificaCredenzialiLocale(email:String,password:String):Boolean{
-        val dbHelper=DbHelper(this)
+        val dbHelper= DbHelper(this)
 
         val db=dbHelper.readableDatabase
         val proiezione=arrayOf("email","password")

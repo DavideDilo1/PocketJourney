@@ -33,10 +33,10 @@
             android:value="YOUR_API_KEY" />
 
         <activity
-            android:name=".HomeActivity"
+            android:name=".home.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".accesso.MainActivity"
             android:configChanges="orientation|screenSize"
             android:exported="true"
             android:theme="@style/LoginPage"

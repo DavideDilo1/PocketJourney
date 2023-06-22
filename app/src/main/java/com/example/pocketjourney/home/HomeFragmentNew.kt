@@ -1,4 +1,4 @@
-package com.example.pocketjourney
+package com.example.pocketjourney.home
 
 import android.annotation.TargetApi
 import android.os.Build
@@ -13,7 +13,11 @@ import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.pocketjourney.*
 import com.example.pocketjourney.adapter.HomeAdapter
+import com.example.pocketjourney.home.sezioniHome.AttrazioniFragment
+import com.example.pocketjourney.home.sezioniHome.HotelFragment
+import com.example.pocketjourney.home.sezioniHome.RistorantiFragment
 import com.example.pocketjourney.model.HomeItemModel
 
 

@@ -1,14 +1,14 @@
-package com.example.pocketjourney
+package com.example.pocketjourney.profilo
 
-import android.os.Binder
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
+import com.example.pocketjourney.database.ClientNetwork
+import com.example.pocketjourney.database.DBManager
 import com.example.pocketjourney.databinding.FragmentModificaDatiBinding
 import com.google.gson.JsonObject
 import kotlinx.coroutines.CoroutineScope

@@ -1,4 +1,4 @@
-package com.example.pocketjourney
+package com.example.pocketjourney.profilo
 
 import android.os.Bundle
 import android.util.Log
@@ -7,9 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.example.pocketjourney.database.ClientNetwork
 import com.example.pocketjourney.databinding.FragmentCreditCardBinding
 import com.google.gson.JsonObject
-import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -26,7 +26,7 @@ class CreditCardFragment : Fragment() {
         binding= FragmentCreditCardBinding.inflate(layoutInflater,container,false)
         //alla creazione del fragment carico i dati presenti nel db se ci sono
         val idUtente = arguments?.getString("idUtente")
-        val userAPI=ClientNetwork.retrofit
+        val userAPI= ClientNetwork.retrofit
         val queryDatiCarta = "SELECT idDatiPagamento, ref_IdUtente, numeroCarta, codiceSicurezza, meseScadenza, annoScadenza FROM DatiPagamento WHERE ref_IdUtente = '$idUtente'"
         val call = userAPI.cerca(queryDatiCarta)
 
@@ -90,7 +90,7 @@ class CreditCardFragment : Fragment() {
             val CVV=binding.etCvv.text.toString()
 
             //effettuo una query per verificare che un utente non abbia già una carta inserita
-            val userAPI=ClientNetwork.retrofit
+            val userAPI= ClientNetwork.retrofit
             val queryCartaPresente = "SELECT idDatiPagamento FROM DatiPagamento WHERE ref_IdUtente = '$idUtente'"
             val call = userAPI.cerca(queryCartaPresente)
             call.enqueue(object : Callback<JsonObject> {
@@ -152,7 +152,7 @@ class CreditCardFragment : Fragment() {
         binding.btnEliminaCarta.setOnClickListener{
 
             //effettuo una query per verificare che un utente non abbia già una carta inserita
-            val userAPI=ClientNetwork.retrofit
+            val userAPI= ClientNetwork.retrofit
             val queryCartaPresente = "SELECT idDatiPagamento FROM DatiPagamento WHERE ref_IdUtente = '$idUtente'"
             val call = userAPI.cerca(queryCartaPresente)
             call.enqueue(object : Callback<JsonObject> {

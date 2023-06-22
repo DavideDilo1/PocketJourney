@@ -1,4 +1,4 @@
-package com.example.pocketjourney
+package com.example.pocketjourney.home
 
 import android.annotation.TargetApi
 import androidx.core.util.Pair
@@ -16,6 +16,8 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.core.app.ActivityOptionsCompat
+import com.example.pocketjourney.home.sezioniHome.PaginaPostoFragment
+import com.example.pocketjourney.R
 import com.example.pocketjourney.databinding.FragmentAnteprimaPostoBinding
 import com.example.pocketjourney.model.HomeItemModel
 import com.example.pocketjourney.model.HorizontalRecyclerItem

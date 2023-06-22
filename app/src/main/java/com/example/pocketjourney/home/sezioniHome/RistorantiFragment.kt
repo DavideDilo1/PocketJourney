@@ -1,4 +1,4 @@
-package com.example.pocketjourney
+package com.example.pocketjourney.home.sezioniHome
 
 import android.os.Bundle
 import android.util.Log
@@ -13,10 +13,13 @@ import android.widget.SearchView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.pocketjourney.home.AnteprimaPostoFragment
+import com.example.pocketjourney.R
 import com.example.pocketjourney.adapter.HomeAdapter
 //import com.example.pocketjourney.adapter.MainRecyclerAdapter
 import com.example.pocketjourney.adapter.HorizontalItemAdapter
 import com.example.pocketjourney.databinding.FragmentRistorantiBinding
+import com.example.pocketjourney.home.HomeFragmentNew
 import com.example.pocketjourney.model.HomeItemModel
 import com.example.pocketjourney.model.HorizontalRecyclerItem
 
@@ -53,11 +56,16 @@ class RistorantiFragment : Fragment() {
 
         //prima categoria
         val restaurantItemList1 = ArrayList<HorizontalRecyclerItem>()
-        restaurantItemList1.add(HorizontalRecyclerItem(1,R.drawable.image_one, "Bar di economia", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
-        restaurantItemList1.add(HorizontalRecyclerItem(1,R.drawable.image_one, "Bar di Ing", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
-        restaurantItemList1.add(HorizontalRecyclerItem(1,R.drawable.image_one, "Bar di Architettura", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
-        restaurantItemList1.add(HorizontalRecyclerItem(1,R.drawable.image_one, "Bar di Grande", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
-        restaurantItemList1.add(HorizontalRecyclerItem(1,R.drawable.image_one, "Bar di Pippo", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
+        restaurantItemList1.add(HorizontalRecyclerItem(1,
+            R.drawable.image_one, "Bar di economia", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
+        restaurantItemList1.add(HorizontalRecyclerItem(1,
+            R.drawable.image_one, "Bar di Ing", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
+        restaurantItemList1.add(HorizontalRecyclerItem(1,
+            R.drawable.image_one, "Bar di Architettura", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
+        restaurantItemList1.add(HorizontalRecyclerItem(1,
+            R.drawable.image_one, "Bar di Grande", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
+        restaurantItemList1.add(HorizontalRecyclerItem(1,
+            R.drawable.image_one, "Bar di Pippo", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
 
 
         val ristorantiOrizzAdapter1 = HorizontalItemAdapter(restaurantItemList1)
@@ -66,11 +74,16 @@ class RistorantiFragment : Fragment() {
 
         //seconda categoria
         val restaurantItemList2 = ArrayList<HorizontalRecyclerItem>()
-        restaurantItemList2.add(HorizontalRecyclerItem(2,R.drawable.background, "Bar di Calogero", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
-        restaurantItemList2.add(HorizontalRecyclerItem(2,R.drawable.background, "Bar di Lillo", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
-        restaurantItemList2.add(HorizontalRecyclerItem(2,R.drawable.background, "Bar di Davide", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
-        restaurantItemList2.add(HorizontalRecyclerItem(2,R.drawable.background, "Bar di Suor Carmela", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
-        restaurantItemList2.add(HorizontalRecyclerItem(2,R.drawable.background, "Bar di Cetto", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
+        restaurantItemList2.add(HorizontalRecyclerItem(2,
+            R.drawable.background, "Bar di Calogero", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
+        restaurantItemList2.add(HorizontalRecyclerItem(2,
+            R.drawable.background, "Bar di Lillo", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
+        restaurantItemList2.add(HorizontalRecyclerItem(2,
+            R.drawable.background, "Bar di Davide", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
+        restaurantItemList2.add(HorizontalRecyclerItem(2,
+            R.drawable.background, "Bar di Suor Carmela", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
+        restaurantItemList2.add(HorizontalRecyclerItem(2,
+            R.drawable.background, "Bar di Cetto", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
 
 /*
         val allRestaurant: MutableList<AllRestaurant> = ArrayList()

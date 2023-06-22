@@ -1,4 +1,4 @@
-package com.example.pocketjourney
+package com.example.pocketjourney.accesso
 
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import com.example.pocketjourney.database.ClientNetwork
+import com.example.pocketjourney.database.DBManager
+import com.example.pocketjourney.R
 import com.example.pocketjourney.databinding.FragmentRegistrationBinding
 import com.google.gson.JsonObject
 import retrofit2.Callback
@@ -44,7 +47,7 @@ class RegistrationFragment : Fragment() {
             if(VerificaDatiRegistrazione(Nome,Cognome,email,password,confermaPassword,cellulare)) {
 
                 //REGISTRAZIONE ONLINE
-                val serverAPI=ClientNetwork.retrofit
+                val serverAPI= ClientNetwork.retrofit
                 val queryInserimento = "insert into Utente(nome,cognome,email,password,cellulare) values('$Nome','$Cognome','$email','$password','$cellulare')"
                 val call = serverAPI.inserisci(queryInserimento)
                 call.enqueue(object : Callback<JsonObject> {

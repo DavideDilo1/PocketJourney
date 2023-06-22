@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!-- NON UTILIZZATO-->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -26,7 +28,7 @@
     android:id="@+id/FragHomeLayout"
     android:layout_width="match_parent"
     android:layout_height="130dp"
-    tools:context=".HomeFragment"
+    tools:context=".home.HomeFragment"
     android:background="@color/purple_200">
 
     <!-- TODO: Update blank fragment layout -->

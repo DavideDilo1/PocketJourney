@@ -1,4 +1,4 @@
-package com.example.pocketjourney
+package com.example.pocketjourney.home.sezioniHome
 
 import android.os.Bundle
 import android.util.Log
@@ -13,18 +13,21 @@ import android.widget.SearchView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.pocketjourney.home.AnteprimaPostoFragment
+import com.example.pocketjourney.R
 import com.example.pocketjourney.adapter.HomeAdapter
 import com.example.pocketjourney.adapter.HorizontalItemAdapter
-import com.example.pocketjourney.databinding.FragmentAttrazioniBinding
+import com.example.pocketjourney.databinding.FragmentHotelBinding
+import com.example.pocketjourney.home.HomeFragmentNew
 import com.example.pocketjourney.model.HomeItemModel
 import com.example.pocketjourney.model.HorizontalRecyclerItem
 
 
-class AttrazioniFragment : Fragment() {
+class HotelFragment : Fragment() {
 
-    private lateinit var binding: FragmentAttrazioniBinding
+    private lateinit var binding: FragmentHotelBinding
 
-    private lateinit var back_arrowA: ImageView
+    private lateinit var back_arrowH: ImageView
 
     private lateinit var topImage:ImageView
 
@@ -48,58 +51,61 @@ class AttrazioniFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentAttrazioniBinding.inflate(inflater)
+        binding = FragmentHotelBinding.inflate(inflater)
 
-        binding.RecyclerViewOrizzontaleA.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.RecyclerViewOrizzontaleH.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+
+        val hotelItemList1 = ArrayList<HorizontalRecyclerItem>()
+        hotelItemList1.add(HorizontalRecyclerItem(1,
+            R.drawable.image_two, "Bar di economia", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
+        hotelItemList1.add(HorizontalRecyclerItem(1,
+            R.drawable.image_two, "Bar di Ing", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
+        hotelItemList1.add(HorizontalRecyclerItem(1,
+            R.drawable.image_two, "Bar di Architettura", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
+        hotelItemList1.add(HorizontalRecyclerItem(1,
+            R.drawable.image_two, "Bar di Grande", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
+        hotelItemList1.add(HorizontalRecyclerItem(1,
+            R.drawable.image_two, "Bar di Pippo", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
 
 
-        val attrazioniItemList1 = ArrayList<HorizontalRecyclerItem>()
-        attrazioniItemList1.add(HorizontalRecyclerItem(1,R.drawable.image_three, "Bar di economia", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
-        attrazioniItemList1.add(HorizontalRecyclerItem(1,R.drawable.image_three, "Bar di Ing", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
-        attrazioniItemList1.add(HorizontalRecyclerItem(1,R.drawable.image_three, "Bar di Architettura", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
-        attrazioniItemList1.add(HorizontalRecyclerItem(1,R.drawable.image_three, "Bar di Grande", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
-        attrazioniItemList1.add(HorizontalRecyclerItem(1,R.drawable.image_three, "Bar di Pippo", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
+        val hotelItemListAdapter1 = HorizontalItemAdapter(hotelItemList1)
+        binding.RecyclerViewOrizzontaleH.adapter = hotelItemListAdapter1
 
 
-
-        val ristorantiOrizzAdapter1 = HorizontalItemAdapter(attrazioniItemList1)
-        binding.RecyclerViewOrizzontaleA.adapter = ristorantiOrizzAdapter1
-
-
-        ristorantiOrizzAdapter1.onItemClick = {
+        hotelItemListAdapter1.onItemClick = {
 
             val bundle = Bundle()
-            bundle.putParcelable("attrazioni", it)
+            bundle.putParcelable("hotel", it)
 
             val childFragment = AnteprimaPostoFragment()
             childFragment.arguments=bundle
-            Log.i("Attrazioni" , "ALmeno qua ci entro e creo il fragment?")
+            Log.i("Hotel", "ALmeno qua ci entro e creo il fragment?")
 
             val fragmentManager = requireActivity().supportFragmentManager
 
             fragmentManager.beginTransaction()
-                .replace(R.id.frameAttrazioni, childFragment)
+                .replace(R.id.frameHotel, childFragment)
                 .addToBackStack(null)
                 .commit()
 
         }
 
 
-        val allTypeAttrazioni = ArrayList<HomeItemModel>()
+        val allTypeHotel = ArrayList<HomeItemModel>()
         //un ITEM VIEW MODEL é FATTO: val image: Int, val title: String, val numRec: String, val valutazione: String, val stelle: Float
 
-        allTypeAttrazioni.add(HomeItemModel(R.drawable.image_one, "The START Hotel, Casino &amp; SkyPod", "(510)", "4.91", 4.5F ))
-        allTypeAttrazioni.add(HomeItemModel(R.drawable.image_two, "Bar di economia", "(510)", "4.91", 4.5F ))
-        allTypeAttrazioni.add(HomeItemModel(R.drawable.image_three, "Bar di architettura", "(510)", "4.91", 4.5F ))
+        allTypeHotel.add(HomeItemModel(R.drawable.image_one, "The START Hotel, Casino &amp; SkyPod", "(510)", "4.91", 4.5F ))
+        allTypeHotel.add(HomeItemModel(R.drawable.image_two, "Bar di economia", "(510)", "4.91", 4.5F ))
+        allTypeHotel.add(HomeItemModel(R.drawable.image_three, "Bar di architettura", "(510)", "4.91", 4.5F ))
 
-        binding.RecyclerViewVerticaleA.layoutManager = LinearLayoutManager(requireContext())
+        binding.RecyclerViewVerticaleH.layoutManager = LinearLayoutManager(requireContext())
 
-        val attrazioniAdapter = HomeAdapter(allTypeAttrazioni)
-        binding.RecyclerViewVerticaleA.adapter = attrazioniAdapter
+        val hotelAdapter = HomeAdapter(allTypeHotel)
+        binding.RecyclerViewVerticaleH.adapter = hotelAdapter
 
 
 
-        attrazioniAdapter.onItemClick = {
+        hotelAdapter.onItemClick = {
 
             val bundle = Bundle()
             bundle.putParcelable("home", it)
@@ -117,25 +123,26 @@ class AttrazioniFragment : Fragment() {
         }
 
 
-        back_arrowA= binding.backArrowA
+        back_arrowH= binding.backArrowH
 
-        back_arrowA.setOnClickListener(){
+        back_arrowH.setOnClickListener(){
             val childFragment = HomeFragmentNew()
             val fragmentTransaction = childFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.frameAttrazioni, childFragment)
+            fragmentTransaction.replace(R.id.frameHotel, childFragment)
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
 
+
         topImage = binding.imageBackground
-        recyclerOrizzontale = binding.RecyclerViewOrizzontaleA
+        recyclerOrizzontale = binding.RecyclerViewOrizzontaleH
 
-        recyclerVerticale = binding.RecyclerViewVerticaleA
+        recyclerVerticale = binding.RecyclerViewVerticaleH
 
-        titoloFinestra= binding.testoAttrazioni
+        titoloFinestra= binding.testoHotel
 
-        testoTutti= binding.testoTuttiA
-        testoCategoria= binding.testoCategoriaA
+        testoTutti= binding.testoTuttiH
+        testoCategoria= binding.testoCategoriaH
         searchView= binding.searchView
 
 
@@ -152,8 +159,6 @@ class AttrazioniFragment : Fragment() {
         testoCategoria.animation = anim_from_left
         titoloFinestra.animation = anim_from_top
         searchView.animation = anim_from_right
-
-
 
         return binding.root
     }
