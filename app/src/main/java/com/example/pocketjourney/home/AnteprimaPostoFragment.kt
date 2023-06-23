@@ -52,62 +52,12 @@ class AnteprimaPostoFragment : Fragment() {
 
         binding = FragmentAnteprimaPostoBinding.inflate(inflater)
 
-        val home = requireArguments().getParcelable<HomeItemModel>("home")
 
-        val ristoranti = requireArguments().getParcelable<HorizontalRecyclerItem>("ristoranti")
-
-
-        if(home != null){
-            Log.i("Home", "ALmeno qua ci entro?")
-
-            val titolo : TextView = binding.secondTitle
-            val background_image: ImageView = binding.imageBackgroundAnteprima
-            val rating: RatingBar = binding.secondRatingBar
-            val media_recensioni : TextView = binding.secondRatingNumber
-            val num_recensioni : TextView = binding.secondRatingNumber2
-
-            val descrizione : TextView = binding.secondSubtitle
-
-
-            // sets the text to the textview from our itemHolder class
-
-
-            titolo.text = home.title
-            background_image.setImageResource(home.image)
-            rating.rating = home.stelle
-            media_recensioni.text = home.valutazione
-            num_recensioni.text = home.numRec
-
-            descrizione.text = "Query al dbms"
-
-
-        }
         /*
         else{
             //TODO: SCHERMATA NESSUN DATO DISPONIBILE
         }*/
 
-        if(ristoranti !=null ){
-            Log.i("Ristoranti", "ALmeno qua ci entro?")
-            val titolo : TextView = binding.secondTitle
-            val background_image: ImageView = binding.imageBackgroundAnteprima
-            val rating: RatingBar = binding.secondRatingBar
-            val media_recensioni : TextView = binding.secondRatingNumber
-            val num_recensioni : TextView = binding.secondRatingNumber2
-
-            val descrizione : TextView = binding.secondSubtitle
-
-            titolo.text = ristoranti.nomeRistorante
-            background_image.setImageResource(ristoranti.imageUrl)
-            rating.rating = ristoranti.stelle
-            media_recensioni.text = ristoranti.valutazione
-            num_recensioni.text = ristoranti.numRec
-
-            descrizione.text = "Query al dbms"
-
-
-
-        }
 
 
 

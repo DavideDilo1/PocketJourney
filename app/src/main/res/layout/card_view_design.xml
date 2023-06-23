@@ -27,17 +27,19 @@
                 app:layout_constraintVertical_bias="0.21" />
 
 
-            <View
+            <ImageView
                 android:id="@+id/viewHome"
                 android:layout_width="390dp"
                 android:layout_height="202dp"
-                android:background="@drawable/image_one"
+                android:adjustViewBounds="true"
+                android:src="@drawable/image_one"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="0.0"
+                android:scaleType="centerCrop"/>
 
             <TextView
                 android:id="@+id/titleViewHome"

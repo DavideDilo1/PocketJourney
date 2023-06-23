@@ -1,5 +1,6 @@
 package com.example.pocketjourney.adapter
 
+import android.graphics.drawable.BitmapDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -8,7 +9,7 @@ import com.example.pocketjourney.model.HomeItemModel
 
 class HomeAdapter(private val mList: List<HomeItemModel>) : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
 
- //   private var onClickListener: OnClickListener? = null
+    private var onClickListener: OnClickListener? = null
 
     var onItemClick : ((HomeItemModel) -> Unit)? = null
 
@@ -40,12 +41,12 @@ class HomeAdapter(private val mList: List<HomeItemModel>) : RecyclerView.Adapter
 
 
         // sets the image to the imageview from our itemHolder class
-        holder.viewHome.setBackgroundResource(HomeItemModel.image)
+        holder.viewHome.setImageBitmap(HomeItemModel.image)
 
         // sets the text to the textview from our itemHolder class
         holder.titleViewHome.text = HomeItemModel.title
 
-        holder.ratingBarHome.rating = HomeItemModel.stelle
+        holder.ratingBarHome.rating = HomeItemModel.valutazione.toFloat()
 
         holder.numRecensioni.text = HomeItemModel.numRec
 
@@ -67,6 +68,7 @@ class HomeAdapter(private val mList: List<HomeItemModel>) : RecyclerView.Adapter
         return mList.size
     }
 
+
     class HomeViewHolder(binding: CardViewDesignBinding) : RecyclerView.ViewHolder(binding.root) {
        // , listener: onItemClickListener
         val viewHome = binding.viewHome
@@ -84,7 +86,7 @@ class HomeAdapter(private val mList: List<HomeItemModel>) : RecyclerView.Adapter
 
     }
 
-    /* A function to bind the onclickListener.
+
     fun setOnClickListener(onClickListener: OnClickListener) {
         this.onClickListener = onClickListener
     }
@@ -92,7 +94,7 @@ class HomeAdapter(private val mList: List<HomeItemModel>) : RecyclerView.Adapter
     // onClickListener Interface
     interface OnClickListener {
         fun onClick(position: Int, model: HomeItemModel)
-    }*/
+    }
 
 
 }

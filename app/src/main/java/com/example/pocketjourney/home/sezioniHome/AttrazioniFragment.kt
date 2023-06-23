@@ -96,9 +96,7 @@ class AttrazioniFragment : Fragment() {
         val allTypeAttrazioni = ArrayList<HomeItemModel>()
         //un ITEM VIEW MODEL é FATTO: val image: Int, val title: String, val numRec: String, val valutazione: String, val stelle: Float
 
-        allTypeAttrazioni.add(HomeItemModel(R.drawable.image_one, "The START Hotel, Casino &amp; SkyPod", "(510)", "4.91", 4.5F ))
-        allTypeAttrazioni.add(HomeItemModel(R.drawable.image_two, "Bar di economia", "(510)", "4.91", 4.5F ))
-        allTypeAttrazioni.add(HomeItemModel(R.drawable.image_three, "Bar di architettura", "(510)", "4.91", 4.5F ))
+
 
         binding.RecyclerViewVerticaleA.layoutManager = LinearLayoutManager(requireContext())
 
@@ -109,11 +107,9 @@ class AttrazioniFragment : Fragment() {
 
         attrazioniAdapter.onItemClick = {
 
-            val bundle = Bundle()
-            bundle.putParcelable("home", it)
 
             val childFragment = AnteprimaPostoFragment()
-            childFragment.arguments=bundle
+
 
             val fragmentManager = requireActivity().supportFragmentManager
 

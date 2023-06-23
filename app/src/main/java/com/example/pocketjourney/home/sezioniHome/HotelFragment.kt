@@ -94,9 +94,6 @@ class HotelFragment : Fragment() {
         val allTypeHotel = ArrayList<HomeItemModel>()
         //un ITEM VIEW MODEL é FATTO: val image: Int, val title: String, val numRec: String, val valutazione: String, val stelle: Float
 
-        allTypeHotel.add(HomeItemModel(R.drawable.image_one, "The START Hotel, Casino &amp; SkyPod", "(510)", "4.91", 4.5F ))
-        allTypeHotel.add(HomeItemModel(R.drawable.image_two, "Bar di economia", "(510)", "4.91", 4.5F ))
-        allTypeHotel.add(HomeItemModel(R.drawable.image_three, "Bar di architettura", "(510)", "4.91", 4.5F ))
 
         binding.RecyclerViewVerticaleH.layoutManager = LinearLayoutManager(requireContext())
 
@@ -107,11 +104,9 @@ class HotelFragment : Fragment() {
 
         hotelAdapter.onItemClick = {
 
-            val bundle = Bundle()
-            bundle.putParcelable("home", it)
 
             val childFragment = AnteprimaPostoFragment()
-            childFragment.arguments=bundle
+
 
             val fragmentManager = requireActivity().supportFragmentManager
 
