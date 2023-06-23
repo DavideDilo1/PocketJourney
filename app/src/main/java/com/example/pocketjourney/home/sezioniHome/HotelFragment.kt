@@ -102,20 +102,7 @@ class HotelFragment : Fragment() {
 
 
 
-        hotelAdapter.onItemClick = {
 
-
-            val childFragment = AnteprimaPostoFragment()
-
-
-            val fragmentManager = requireActivity().supportFragmentManager
-
-            fragmentManager.beginTransaction()
-                .replace(R.id.frameHotel, childFragment)
-                .addToBackStack(null)
-                .commit()
-
-        }
 
 
         back_arrowH= binding.backArrowH

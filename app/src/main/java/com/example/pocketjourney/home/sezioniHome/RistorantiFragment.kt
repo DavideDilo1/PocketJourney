@@ -146,19 +146,7 @@ class RistorantiFragment : Fragment() {
 
 
 
-        ristorantiAdapter.onItemClick = {
 
-            val childFragment = AnteprimaPostoFragment()
-
-
-            val fragmentManager = requireActivity().supportFragmentManager
-
-            fragmentManager.beginTransaction()
-                .replace(R.id.frameRistoranti, childFragment)
-                .addToBackStack(null)
-                .commit()
-
-        }
 
 
         back_arrowR = binding.backArrowR

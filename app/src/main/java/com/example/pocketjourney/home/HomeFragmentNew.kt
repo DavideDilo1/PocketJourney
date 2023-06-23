@@ -204,8 +204,10 @@ class HomeFragmentNew : Fragment() {
     private fun setRecyclerView() {
         val homeItem = ArrayList<HomeItemModel>()
         val homeAdapter = HomeAdapter(homeItem)
-        clickItem(homeAdapter)
-        val queryPopolazioneLista= "SELECT nome,valutazione,numRecensioni,fotoRistorante as Foto FROM Ristoranti UNION SELECT nome,valutazione,numRecensioni,foto_hotel FROM Hotel"
+        //imposto adapter sulla recycler view
+        binding.homeRecyclerView.adapter=homeAdapter
+
+        val queryPopolazioneLista= "SELECT idPosti,nome,valutazione,numRecensioni,foto FROM Posti ORDER BY valutazione DESC"
         val userAPI= ClientNetwork.retrofit
         val call = userAPI.cerca(queryPopolazioneLista)
         call.enqueue(object : Callback<JsonObject> {
@@ -224,7 +226,7 @@ class HomeFragmentNew : Fragment() {
                             for(i in querySetArray){
                                 var bitmap : Bitmap
                                 val elemento= i as JsonObject
-                                val foto=elemento.get("Foto").asString
+                                val foto=elemento.get("foto").asString
                                 val downloadFotoPosto=userAPI.getAvatar(foto)
                                 downloadFotoPosto.enqueue(object : Callback<ResponseBody> {
                                     override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
@@ -245,6 +247,9 @@ class HomeFragmentNew : Fragment() {
                                                 )
                                                 // Aggiorna l'adapter dopo aver aggiunto l'elemento
                                                 homeAdapter.notifyDataSetChanged()
+                                            }
+                                            homeAdapter.setOnItemClickListener { homeItemModel ->
+                                                Log.e("CIAO", "CARD CLICCATA CORRETTAMENTE" + homeItemModel.title.toString())
                                             }
                                         }
                                         Log.d("DIMENSIONE DELLA HOME ITEM", homeItem.size.toString())
@@ -275,22 +280,7 @@ class HomeFragmentNew : Fragment() {
         })
     }
 
-    private fun clickItem(homeAdapter: HomeAdapter) {
-        Log.e("CIAO","HO PROVATO AD APRIRE IL FRAGMENT DEL POSTO SELEZIONATO")
-        homeAdapter.setOnClickListener(object:
-            HomeAdapter.OnClickListener {
-            override fun onClick(position: Int, model: HomeItemModel){
-                val childFragment = AnteprimaPostoFragment()
-                val fragmentTransaction = childFragmentManager.beginTransaction()
-                fragmentTransaction.replace(R.id.frameNewHomeLayout, childFragment)
-                fragmentTransaction.addToBackStack(null)
-                fragmentTransaction.commit()
 
-            }
-
-        }
-        )
-    }
 
 
 }

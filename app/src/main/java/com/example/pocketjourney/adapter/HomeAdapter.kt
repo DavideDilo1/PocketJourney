@@ -9,9 +9,12 @@ import com.example.pocketjourney.model.HomeItemModel
 
 class HomeAdapter(private val mList: List<HomeItemModel>) : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
 
-    private var onClickListener: OnClickListener? = null
 
-    var onItemClick : ((HomeItemModel) -> Unit)? = null
+    private var onItemClick: ((HomeItemModel) -> Unit)? = null
+
+    fun setOnItemClickListener(listener: (HomeItemModel) -> Unit) {
+        onItemClick = listener
+    }
 
    // private lateinit var mListener: onItemClickListener
     /*
@@ -28,11 +31,11 @@ class HomeAdapter(private val mList: List<HomeItemModel>) : RecyclerView.Adapter
     }*/
 
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
         val view = CardViewDesignBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
+
         return HomeViewHolder(view)
     }
 //, mListener
@@ -44,6 +47,7 @@ class HomeAdapter(private val mList: List<HomeItemModel>) : RecyclerView.Adapter
         holder.viewHome.setImageBitmap(HomeItemModel.image)
 
         // sets the text to the textview from our itemHolder class
+
         holder.titleViewHome.text = HomeItemModel.title
 
         holder.ratingBarHome.rating = HomeItemModel.valutazione.toFloat()
@@ -76,25 +80,15 @@ class HomeAdapter(private val mList: List<HomeItemModel>) : RecyclerView.Adapter
         val ratingBarHome = binding.ratingBar
         val numRecensioni = binding.numRecensioniHome
         val valutazione = binding.valutazioneHome
-/*
-        init{
-            viewHome.setOnClickListener {
-                listener.onItemClick(adapterPosition)
 
-            }
-        }*/
-
-    }
-
-
-    fun setOnClickListener(onClickListener: OnClickListener) {
-        this.onClickListener = onClickListener
-    }
-
-    // onClickListener Interface
-    interface OnClickListener {
-        fun onClick(position: Int, model: HomeItemModel)
-    }
-
+        }
 
 }
+
+
+
+
+
+
+
+
