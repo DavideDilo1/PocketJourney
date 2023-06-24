@@ -48,6 +48,8 @@ class HomeAdapter(private val mList: List<HomeItemModel>) : RecyclerView.Adapter
 
         // sets the text to the textview from our itemHolder class
 
+        holder.id.text = HomeItemModel.id.toString()
+
         holder.titleViewHome.text = HomeItemModel.title
 
         holder.ratingBarHome.rating = HomeItemModel.valutazione.toFloat()
@@ -75,6 +77,7 @@ class HomeAdapter(private val mList: List<HomeItemModel>) : RecyclerView.Adapter
 
     class HomeViewHolder(binding: CardViewDesignBinding) : RecyclerView.ViewHolder(binding.root) {
        // , listener: onItemClickListener
+        val id = binding.tvID
         val viewHome = binding.viewHome
         val titleViewHome = binding.titleViewHome
         val ratingBarHome = binding.ratingBar

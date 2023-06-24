@@ -23,6 +23,7 @@ import com.example.pocketjourney.home.sezioniHome.AttrazioniFragment
 import com.example.pocketjourney.home.sezioniHome.HotelFragment
 import com.example.pocketjourney.home.sezioniHome.RistorantiFragment
 import com.example.pocketjourney.model.HomeItemModel
+import com.example.pocketjourney.profilo.CreditCardFragment
 import com.google.gson.JsonObject
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -31,7 +32,7 @@ import retrofit2.Response
 
 
 class HomeFragmentNew : Fragment() {
-
+    private var idUtente: Int = 0
     private lateinit var binding: FragmentHomeNewBinding
     
     private lateinit var textView: TextView
@@ -61,8 +62,10 @@ class HomeFragmentNew : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+
         binding = FragmentHomeNewBinding.inflate(inflater)
 
+        val idUtente = arguments?.getString("idUtente")
         //definiamo la recycler view della home:
 
         binding.homeRecyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -79,7 +82,7 @@ class HomeFragmentNew : Fragment() {
 
         //configuriamo l'adapter con la recycler view
        // binding.homeRecyclerView.adapter = homeAdapter
-
+        Log.e("ATTENZIONEEEEE","HA APERTO LA HOME" + idUtente)
         setRecyclerView()
    /*     homeAdapter.onItemClick = {
 
@@ -239,6 +242,7 @@ class HomeFragmentNew : Fragment() {
                                                 bitmap = BitmapFactory.decodeStream(inputStream)
                                                 homeItem.add(
                                                     HomeItemModel(
+                                                        elemento.get("idPosti").asInt,
                                                         bitmap,
                                                         elemento.get("nome").toString(),
                                                         elemento.get("numRecensioni").toString(),
@@ -249,8 +253,18 @@ class HomeFragmentNew : Fragment() {
                                                 homeAdapter.notifyDataSetChanged()
                                             }
                                             homeAdapter.setOnItemClickListener { homeItemModel ->
-                                                Log.e("CIAO", "CARD CLICCATA CORRETTAMENTE" + homeItemModel.title.toString())
+                                                val id = homeItemModel.id
+                                                val childFragment = AnteprimaPostoFragment()
+                                                val bundle=Bundle()
+                                                bundle.putInt("idPosto",id)
+                                                bundle.putInt("idUtente",idUtente)
+                                                childFragment.arguments=bundle
+                                                val fragmentTransaction = childFragmentManager.beginTransaction()
+                                                fragmentTransaction.replace(R.id.frameNewHomeLayout, childFragment)
+                                                fragmentTransaction.addToBackStack(null)
+                                                fragmentTransaction.commit()
                                             }
+
                                         }
                                         Log.d("DIMENSIONE DELLA HOME ITEM", homeItem.size.toString())
                                     }
@@ -279,6 +293,7 @@ class HomeFragmentNew : Fragment() {
             }
         })
     }
+
 
 
 

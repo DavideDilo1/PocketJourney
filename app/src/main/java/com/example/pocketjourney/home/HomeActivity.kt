@@ -37,12 +37,12 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        replaceFragment(HomeFragmentNew())
+        replaceFragment(HomeFragmentNew(),userId)
 
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){
-                R.id.home -> replaceFragment(HomeFragmentNew())
-                R.id.preferiti -> replaceFragment(PreferitiFragment())
+                R.id.home -> replaceFragment(HomeFragmentNew(), userId)
+                R.id.preferiti -> replaceFragment(PreferitiFragment(), userId)
                 //passo al fragment profilo l'id dell'utente nel caso sia connesso, l'email altrimenti
                 R.id.profile -> bundle?.let { it1 ->
                     replaceFragmentProfile(
@@ -62,10 +62,13 @@ class HomeActivity : AppCompatActivity() {
     }
 
 
-    private fun replaceFragment(fragment : Fragment){
+    private fun replaceFragment(fragment: Fragment, userId: String?){
+        val idUtente=userId
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-
+        val bundle=Bundle()
+        bundle.putString("idUtente",idUtente)
+        fragment.arguments = bundle
 
         fragmentTransaction.replace(R.id.frameHomeLayout, fragment)
         fragmentTransaction.addToBackStack(null)
