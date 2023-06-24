@@ -18,12 +18,9 @@ import android.widget.RatingBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityOptionsCompat
-import com.example.pocketjourney.home.sezioniHome.PaginaPostoFragment
 import com.example.pocketjourney.R
 import com.example.pocketjourney.database.ClientNetwork
 import com.example.pocketjourney.databinding.FragmentAnteprimaPostoBinding
-import com.example.pocketjourney.model.HomeItemModel
-import com.example.pocketjourney.model.HorizontalRecyclerItem
 import com.google.gson.JsonObject
 import okhttp3.ResponseBody
 import retrofit2.Call

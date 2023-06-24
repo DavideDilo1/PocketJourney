@@ -1,4 +1,4 @@
-package com.example.pocketjourney.home.sezioniHome
+package com.example.pocketjourney.home
 
 import android.annotation.TargetApi
 import android.os.Build
@@ -16,7 +16,6 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import com.example.pocketjourney.R
 import com.example.pocketjourney.databinding.FragmentPaginaPostoBinding
-import com.example.pocketjourney.home.AnteprimaPostoFragment
 
 class PaginaPostoFragment : Fragment() {
     private lateinit var binding: FragmentPaginaPostoBinding
@@ -73,6 +72,15 @@ class PaginaPostoFragment : Fragment() {
 
         }
 
+        binding.prenotaAdessoButton.setOnClickListener{
+
+            val childFragment = BookingFragment()
+            val fragmentTransaction = childFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.fragment_pagina_posto, childFragment)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+
+        }
 
 
 

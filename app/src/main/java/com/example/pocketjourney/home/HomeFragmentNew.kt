@@ -20,6 +20,7 @@ import com.example.pocketjourney.*
 import com.example.pocketjourney.adapter.HomeAdapter
 import com.example.pocketjourney.database.ClientNetwork
 import com.example.pocketjourney.home.sezioniHome.AttrazioniFragment
+import com.example.pocketjourney.home.sezioniHome.ConsigliatiFragment
 import com.example.pocketjourney.home.sezioniHome.HotelFragment
 import com.example.pocketjourney.home.sezioniHome.RistorantiFragment
 import com.example.pocketjourney.model.HomeItemModel
@@ -198,6 +199,15 @@ class HomeFragmentNew : Fragment() {
             fragmentTransaction.replace(R.id.frameNewHomeLayout, childFragment)
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
+        }
+
+        binding.ideaButton.setOnClickListener{
+            val childFragment = ConsigliatiFragment()
+            val fragmentTransaction = childFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.frameNewHomeLayout, childFragment)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+
         }
 
 

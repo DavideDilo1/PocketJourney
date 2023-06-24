@@ -8,15 +8,22 @@
 
 -->
 
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".home.PaginaPostoFragment"
+    android:id="@+id/fragment_pagina_posto"
+    android:background="@color/white">
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        tools:context=".home.sezioniHome.PaginaPostoFragment"
-        android:id="@+id/fragment_pagina_posto"
-        android:background="@color/white"
+
         >
 
         <ImageView
@@ -197,21 +204,21 @@
                     />
 
                 <Button
+                    android:id="@+id/prenotaAdessoButton"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
-                    android:id="@+id/roadmap_button"
                     android:layout_marginTop="30dp"
                     android:layout_marginBottom="16dp"
                     android:background="@drawable/custom_button"
-                    android:drawableEnd="@drawable/ic_steps"
-                    android:drawableRight="@drawable/ic_steps"
+                    android:drawableEnd="@drawable/baseline_check_24"
+                    android:drawableRight="@drawable/baseline_check_24"
                     android:fontFamily="@font/open_sans_extra_bold"
                     android:paddingLeft="50dp"
                     android:paddingRight="50dp"
-                    android:text="CH E C K RO A D M A P"
+                    android:text="PRENOTA"
+
                     android:textColor="@color/white"
-                    android:textSize="18sp"
-                    />
+                    android:textSize="18sp" />
 
 
 
@@ -229,3 +236,4 @@
 
 
 
+</FrameLayout>
