@@ -65,7 +65,6 @@ class HomeFragmentNew : Fragment() {
 
 
         binding = FragmentHomeNewBinding.inflate(inflater)
-
         val idUtente = arguments?.getString("idUtente")
         //definiamo la recycler view della home:
 
@@ -84,6 +83,7 @@ class HomeFragmentNew : Fragment() {
         //configuriamo l'adapter con la recycler view
        // binding.homeRecyclerView.adapter = homeAdapter
         Log.e("ATTENZIONEEEEE","HA APERTO LA HOME" + idUtente)
+
         setRecyclerView()
    /*     homeAdapter.onItemClick = {
 

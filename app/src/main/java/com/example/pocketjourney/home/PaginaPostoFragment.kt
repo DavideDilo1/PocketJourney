@@ -16,10 +16,12 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import com.example.pocketjourney.R
 import com.example.pocketjourney.databinding.FragmentPaginaPostoBinding
+import com.google.gson.JsonObject
+import com.google.gson.JsonParser
 
 class PaginaPostoFragment : Fragment() {
     private lateinit var binding: FragmentPaginaPostoBinding
-
+    private var queryResult: JsonObject? = null
     private lateinit var down_arrow: ImageView
     private lateinit var third_scrollView: ScrollView
     private lateinit var from_bottom: Animation
@@ -33,6 +35,14 @@ class PaginaPostoFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentPaginaPostoBinding.inflate(inflater)
+
+        val queryResultString = arguments?.getString("queryResult")
+        if (queryResultString != null) {
+            val jsonParser = JsonParser()
+            val queryResult = jsonParser.parse(queryResultString).asJsonObject
+            // Utilizza il risultato della query come desideri
+            // Esempio: val nome = queryResult.get("nome").asString
+        }
 
         down_arrow = binding.downArrow
         third_scrollView = binding.thirdScrollView

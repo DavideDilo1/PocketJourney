@@ -44,7 +44,7 @@ class AnteprimaPostoFragment : Fragment() {
     private lateinit var from_left: Animation
     private lateinit var from_right: Animation
     private lateinit var from_bottom: Animation
-
+    private lateinit var queryResult: JsonObject
     @TargetApi(Build.VERSION_CODES.S)
 
 
@@ -68,6 +68,7 @@ class AnteprimaPostoFragment : Fragment() {
         val queryMostraAnteprima = "SELECT * FROM Posti WHERE idPosti = '$idPosto'"
         val call = userAPI.cerca(queryMostraAnteprima)
         call.enqueue(object : Callback<JsonObject> {
+
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if (response.isSuccessful) {
                     Log.e("Ciao","sto mostrando anteprima")
@@ -86,6 +87,7 @@ class AnteprimaPostoFragment : Fragment() {
 
                             if (primoPosto != null && primoPosto.has("nome") && primoPosto.has("citta") && primoPosto.has("paese") && primoPosto.has("categoria") && primoPosto.has("tipologia") && primoPosto.has("descrizione") && primoPosto.has("prezzo") && primoPosto.has("valutazione") && primoPosto.has("numRecensioni") && primoPosto.has("foto")) {
                                 //prelevo i campi e li setto nel fragment
+                                queryResult = primoPosto
                                 val nome=primoPosto.get("nome").asString
                                 val descrizione=primoPosto.get("descrizione").asString
                                 val valutazione=primoPosto.get("valutazione").asString
@@ -195,17 +197,11 @@ class AnteprimaPostoFragment : Fragment() {
         more_details.setAnimation(from_bottom)
 
         second_arrow_up.setOnClickListener{
-            val pairs = arrayOf<Pair<View, String>>(
-                Pair(second_arrow_up, "background_image_transition")
-            )
-            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(requireActivity(), *pairs).toBundle()
+            val bundle = Bundle()
+            bundle.putString("queryResult", queryResult.toString())
 
             val childFragment = PaginaPostoFragment()
-            val fragmentTransaction = childFragmentManager.beginTransaction()
-            childFragment.arguments = options
-            fragmentTransaction.replace(R.id.fragment_anteprima_posto, childFragment)
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()
+            childFragment.arguments = bundle
 
         }
 
