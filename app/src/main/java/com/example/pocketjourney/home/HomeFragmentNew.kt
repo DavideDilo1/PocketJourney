@@ -24,7 +24,6 @@ import com.example.pocketjourney.home.sezioniHome.ConsigliatiFragment
 import com.example.pocketjourney.home.sezioniHome.HotelFragment
 import com.example.pocketjourney.home.sezioniHome.RistorantiFragment
 import com.example.pocketjourney.model.HomeItemModel
-import com.example.pocketjourney.profilo.CreditCardFragment
 import com.google.gson.JsonObject
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -33,7 +32,6 @@ import retrofit2.Response
 
 
 class HomeFragmentNew : Fragment() {
-    private var idUtente: Int = 0
     private lateinit var binding: FragmentHomeNewBinding
     
     private lateinit var textView: TextView
@@ -65,7 +63,7 @@ class HomeFragmentNew : Fragment() {
 
 
         binding = FragmentHomeNewBinding.inflate(inflater)
-        val idUtente = arguments?.getString("idUtente")
+        val idUtente = requireActivity().intent.getStringExtra("idUtente")
         //definiamo la recycler view della home:
 
         binding.homeRecyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -84,7 +82,9 @@ class HomeFragmentNew : Fragment() {
        // binding.homeRecyclerView.adapter = homeAdapter
         Log.e("ATTENZIONEEEEE","HA APERTO LA HOME" + idUtente)
 
-        setRecyclerView()
+        if (idUtente != null) {
+            setRecyclerView(idUtente.toInt())
+        }
    /*     homeAdapter.onItemClick = {
 
             val bundle = Bundle()
@@ -214,7 +214,7 @@ class HomeFragmentNew : Fragment() {
         return binding.root
     }
 
-    private fun setRecyclerView() {
+    private fun setRecyclerView(idUtente: Int) {
         val homeItem = ArrayList<HomeItemModel>()
         val homeAdapter = HomeAdapter(homeItem)
         //imposto adapter sulla recycler view
@@ -265,11 +265,13 @@ class HomeFragmentNew : Fragment() {
                                             homeAdapter.setOnItemClickListener { homeItemModel ->
                                                 val id = homeItemModel.id
                                                 val childFragment = AnteprimaPostoFragment()
-                                                val bundle=Bundle()
+                                                requireActivity().intent.putExtra("idPosto",id.toString())
+                                                requireActivity().intent.putExtra("idUtente",idUtente.toString())
+                                               /* val bundle=Bundle()
                                                 bundle.putInt("idPosto",id)
                                                 bundle.putInt("idUtente",idUtente)
-                                                childFragment.arguments=bundle
-                                                val fragmentTransaction = childFragmentManager.beginTransaction()
+                                                childFragment.arguments=bundle*/
+                                                val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
                                                 fragmentTransaction.replace(R.id.frameNewHomeLayout, childFragment)
                                                 fragmentTransaction.addToBackStack(null)
                                                 fragmentTransaction.commit()

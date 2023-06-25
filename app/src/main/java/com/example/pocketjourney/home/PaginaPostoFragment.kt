@@ -1,8 +1,10 @@
 package com.example.pocketjourney.home
 
 import android.annotation.TargetApi
+import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,12 +14,18 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.ScrollView
+import android.widget.Toast
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import com.example.pocketjourney.R
+import com.example.pocketjourney.database.ClientNetwork
 import com.example.pocketjourney.databinding.FragmentPaginaPostoBinding
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class PaginaPostoFragment : Fragment() {
     private lateinit var binding: FragmentPaginaPostoBinding
@@ -36,13 +44,68 @@ class PaginaPostoFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentPaginaPostoBinding.inflate(inflater)
 
-        val queryResultString = arguments?.getString("queryResult")
+        val queryResultString = requireActivity().intent.getStringExtra("queryResult")
+        val idUtente = requireActivity().intent.getStringExtra("idUtente")
+        Log.d("SONO PAGINA POSTO E HO RICEVUTO ", queryResultString.toString() + " " + idUtente)
+
         if (queryResultString != null) {
             val jsonParser = JsonParser()
             val queryResult = jsonParser.parse(queryResultString).asJsonObject
-            // Utilizza il risultato della query come desideri
-            // Esempio: val nome = queryResult.get("nome").asString
+
+            // Recupero tutti i valori della query
+            val idPosto = queryResult.get("idPosti")?.asString!!
+            val nome = queryResult.get("nome")?.asString!!
+            val citta = queryResult.get("citta")?.asString!!
+            val paese = queryResult.get("paese")?.asString!!
+            val categoria = queryResult.get("categoria")?.asString!!
+            val tipologia = queryResult.get("tipologia")?.asString!!
+            val descrizione = queryResult.get("descrizione")?.asString!!
+            val prezzo = queryResult.get("prezzo")?.asString!!
+            val valutazione = queryResult.get("valutazione")?.asString!!
+            val numRecensioni = queryResult.get("numRecensioni")?.asString!!
+            val foto = queryResult.get("foto")?.asString!!
+
+            // Continuo con l'utilizzo dei valori ottenuti
+
+            //per prima cosa setto la foto
+            val userAPI= ClientNetwork.retrofit
+            val downloadFotoPosto=userAPI.getAvatar(foto)
+            downloadFotoPosto.enqueue(object : Callback<ResponseBody> {
+                override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                    Log.e("Ciao", "sono dentro il blocco della foto dell'anteprima" )
+                    Log.d("RESPONSE",response.isSuccessful.toString())
+                    if (response.isSuccessful){
+                        Log.e("Ciao", "sono dentro il blocco della foto  anteprima DENTRO IS SUCCESSFULL" )
+                        val responseBody=response.body()
+                        if(responseBody!=null){
+                            val inputStream=responseBody.byteStream()
+                            val bitmap= BitmapFactory.decodeStream(inputStream)
+                            //utilizza il Bitmap come immagine di profilo
+                            binding.headerBackground.setImageBitmap(bitmap)
+
+                        }
+                        //ora setto il resto dei valori
+                        binding.thirdTitle.setText(nome)
+                        binding.thirdRatingbar.rating=valutazione.toFloat()
+                        binding.thirdRatingNumber.setText(valutazione)
+                        binding.thirdRatingNumber2.setText(numRecensioni)
+                        binding.abutText.setText(descrizione)
+                        binding.venueType.text = "${categoria},${tipologia}"
+                        binding.venueText.text= "${prezzo}€"
+                        binding.viewPlace.text= "${citta},${paese}"
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    Toast.makeText(requireContext(),"L'immagine non è stata trovaa correttamente",
+                        Toast.LENGTH_SHORT).show()
+                }
+            })
+
         }
+
+
+
 
         down_arrow = binding.downArrow
         third_scrollView = binding.thirdScrollView
@@ -74,7 +137,7 @@ class PaginaPostoFragment : Fragment() {
             val options = ActivityOptionsCompat.makeSceneTransitionAnimation(requireActivity(), *pairs).toBundle()
 
             val childFragment = AnteprimaPostoFragment()
-            val fragmentTransaction = childFragmentManager.beginTransaction()
+            val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
             childFragment.arguments = options
             fragmentTransaction.replace(R.id.fragment_pagina_posto, childFragment)
             fragmentTransaction.addToBackStack(null)

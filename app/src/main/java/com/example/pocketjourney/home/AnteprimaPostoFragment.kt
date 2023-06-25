@@ -58,8 +58,8 @@ class AnteprimaPostoFragment : Fragment() {
         binding = FragmentAnteprimaPostoBinding.inflate(inflater)
 
 
-        val idPosto = arguments?.getInt("idPosto")
-        val idUtente = arguments?.getInt("idUtente")
+        val idPosto = requireActivity().intent.getStringExtra("idPosto")
+        val idUtente = requireActivity().intent.getStringExtra("idUtente")
 
         Log.d("Sono anteprima e ho ricevuto" , idPosto.toString() + " e" + idUtente.toString() )
 
@@ -88,6 +88,7 @@ class AnteprimaPostoFragment : Fragment() {
                             if (primoPosto != null && primoPosto.has("nome") && primoPosto.has("citta") && primoPosto.has("paese") && primoPosto.has("categoria") && primoPosto.has("tipologia") && primoPosto.has("descrizione") && primoPosto.has("prezzo") && primoPosto.has("valutazione") && primoPosto.has("numRecensioni") && primoPosto.has("foto")) {
                                 //prelevo i campi e li setto nel fragment
                                 queryResult = primoPosto
+                                Log.d("oggetto che passo al paginaposto", queryResult.toString())
                                 val nome=primoPosto.get("nome").asString
                                 val descrizione=primoPosto.get("descrizione").asString
                                 val valutazione=primoPosto.get("valutazione").asString
@@ -161,7 +162,7 @@ class AnteprimaPostoFragment : Fragment() {
 
         second_back_arrow.setOnClickListener(){
             val childFragment = HomeFragmentNew()
-            val fragmentTransaction = childFragmentManager.beginTransaction()
+            val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.fragment_anteprima_posto, childFragment)
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
@@ -197,12 +198,14 @@ class AnteprimaPostoFragment : Fragment() {
         more_details.setAnimation(from_bottom)
 
         second_arrow_up.setOnClickListener{
-            val bundle = Bundle()
-            bundle.putString("queryResult", queryResult.toString())
-
+            requireActivity().intent.putExtra("queryResult",queryResult.toString())
+            Log.d("hai cliccato arrow up e passo",queryResult.toString() )
             val childFragment = PaginaPostoFragment()
-            childFragment.arguments = bundle
-
+            // Assumi che tu stia eseguendo questo codice all'interno di un'attività
+            val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.fragment_anteprima_posto, childFragment) // R.id.fragment_container rappresenta l'ID del contenitore del frammento nel layout dell'attività
+            fragmentTransaction.addToBackStack(null) // Aggiunge il frammento alla pila retrostante per poter tornare indietro se necessario
+            fragmentTransaction.commit()
         }
 
 

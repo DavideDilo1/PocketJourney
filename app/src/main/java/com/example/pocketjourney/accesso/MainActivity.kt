@@ -53,10 +53,8 @@ class MainActivity : AppCompatActivity() {
                                     //posso effettuare il login online
                                     Log.e("ciao","LOGIN ONLINE")
                                     val intent = Intent(context, HomeActivity::class.java)
-                                    val bundle= Bundle()
-                                    bundle.putString("idUtente",idUtente)
-                                    bundle.putString("emailOnline",email)
-                                    intent.putExtras(bundle)
+                                    intent.putExtra("idUtente",idUtente)
+                                    intent.putExtra("emailOnline",email)
                                     startActivity(intent)
                                 }
                             }
@@ -75,9 +73,7 @@ class MainActivity : AppCompatActivity() {
                     if(verificaCredenzialiLocale(email,password)) {
                         Log.e("ciao","LOGIN OFFLINE")
                         val intent = Intent(context, HomeActivity::class.java)
-                        val bundle= Bundle()
-                        bundle.putString("emailutenteOffline",email)
-                        intent.putExtras(bundle)
+                        intent.putExtra("emailutenteOffline",email)
                         startActivity(intent)
                     } else {
                         Log.e("ciao", "credenziali offline errate")

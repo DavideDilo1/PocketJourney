@@ -19,9 +19,8 @@ class HomeActivity : AppCompatActivity() {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         supportActionBar?.hide()
         //questo valore bundle ottiene l'id dell'utente nel caso in cui sia connesso al server, l'email viceversa.
-        val bundle=intent.extras
-        val emailOff= bundle?.getString("emailutenteOffline")
-        val userId= bundle?.getString("idUtente")
+        val emailOff= intent.getStringExtra("emailUtenteOffline")
+        val userId= intent.getStringExtra("idUtente")
         if(userId!=null){
             Log.e("ciao","sono la home activity e ho ricevuto l'id utente")
         } else {
@@ -44,10 +43,10 @@ class HomeActivity : AppCompatActivity() {
                 R.id.home -> replaceFragment(HomeFragmentNew(), userId)
                 R.id.preferiti -> replaceFragment(PreferitiFragment(), userId)
                 //passo al fragment profilo l'id dell'utente nel caso sia connesso, l'email altrimenti
-                R.id.profile -> bundle?.let { it1 ->
+                R.id.profile -> userId?.let { it1 ->
                     replaceFragmentProfile(
                         ProfileFragment(),
-                        it1
+                        userId
                     )
                 }
                 else ->{
@@ -66,21 +65,17 @@ class HomeActivity : AppCompatActivity() {
         val idUtente=userId
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-        val bundle=Bundle()
-        bundle.putString("idUtente",idUtente)
-        fragment.arguments = bundle
-
+        intent.putExtra("idUtente",idUtente)
         fragmentTransaction.replace(R.id.frameHomeLayout, fragment)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
     }
 
-    private fun replaceFragmentProfile(fragment: Fragment,bundle:Bundle){
+    private fun replaceFragmentProfile(fragment: Fragment,userId: String){
 
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
 
-        fragment.arguments = bundle
         fragmentTransaction.replace(R.id.frameHomeLayout, fragment)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
