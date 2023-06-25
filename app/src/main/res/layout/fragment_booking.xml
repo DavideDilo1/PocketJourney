@@ -98,15 +98,16 @@
                 app:layout_constraintTop_toBottomOf="@+id/inserisciOraText"
                 app:layout_constraintVertical_bias="1.0" />
 
-            <CalendarView
-                android:id="@+id/bookingCalendar"
+            <TextView
+                android:id="@+id/dataSelezionata"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:fontFamily="@font/open_sans_light"
+                android:text="data selezionata"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintBaseline_toBaselineOf="@+id/inserisciDataText"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.491"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/inserisciDataText" />
+                app:layout_constraintStart_toEndOf="@+id/inserisciDataText" />
 
             <TextView
                 android:id="@+id/inserisciDatiText"
@@ -133,7 +134,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.125"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/bookingCalendar" />
+                app:layout_constraintTop_toBottomOf="@+id/inserisciDataText" />
 
             <TextView
                 android:id="@+id/inserisciOraText"
@@ -150,24 +151,24 @@
 
             <Spinner
                 android:id="@+id/personSpinner"
-                android:layout_width="93dp"
+                android:layout_width="wrap_content"
                 android:layout_height="24dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="32dp"
+                android:entries="@array/numero_persone"
+                app:layout_constraintBaseline_toBaselineOf="@+id/inserisciPersoneText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/inserisciPersoneText"
-                app:layout_constraintTop_toBottomOf="@+id/bookingCalendar" />
+                app:layout_constraintStart_toEndOf="@+id/inserisciPersoneText" />
 
             <Spinner
-                android:id="@+id/spinner3"
-                android:layout_width="93dp"
+                android:id="@+id/spinnerOrario"
+                android:layout_width="wrap_content"
                 android:layout_height="24dp"
-                android:layout_marginTop="16dp"
+                android:entries="@array/orario"
+                app:layout_constraintBaseline_toBaselineOf="@+id/inserisciOraText"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.305"
-                app:layout_constraintStart_toEndOf="@+id/inserisciOraText"
-                app:layout_constraintTop_toBottomOf="@+id/personSpinner" />
+                app:layout_constraintHorizontal_bias="0.2"
+                app:layout_constraintStart_toEndOf="@+id/inserisciOraText" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

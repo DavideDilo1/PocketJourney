@@ -65,13 +65,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TestoConsigliati1" />
 
-        <EditText
-            android:id="@+id/editText2"
+        <Spinner
+            android:id="@+id/spinner1"
             android:layout_width="190dp"
             android:layout_height="40dp"
             android:layout_marginTop="60dp"
             android:background="@drawable/custom_search_view"
-            android:hint="Cosa vorresti fare? "
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.484"
             app:layout_constraintStart_toStartOf="parent"
@@ -98,7 +97,7 @@
             android:hint="Cosa vorresti fare?"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText2" />
+            app:layout_constraintTop_toBottomOf="@+id/spinner1" />
 
         <Button
             android:id="@+id/cercaMetaButton"

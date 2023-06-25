@@ -19,6 +19,9 @@ class ConsigliatiFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentConsigliatiBinding.inflate(inflater)
 
+        binding.spinner1
+
+
         binding.backArrow.setOnClickListener(){
             val childFragment = HomeFragmentNew()
             val fragmentTransaction = childFragmentManager.beginTransaction()
@@ -26,6 +29,8 @@ class ConsigliatiFragment : Fragment() {
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
+
+
         return binding.root
     }
 
