@@ -14,6 +14,7 @@ import com.example.pocketjourney.database.ClientNetwork
 import com.example.pocketjourney.database.DbHelper
 import com.example.pocketjourney.databinding.FragmentProfileBinding
 import com.example.pocketjourney.profilo.CreditCardFragment
+import com.example.pocketjourney.profilo.ListaPrenotazioniFragment
 import com.example.pocketjourney.profilo.ModificaDatiFragment
 import com.google.gson.JsonObject
 import okhttp3.ResponseBody
@@ -149,6 +150,18 @@ class ProfileFragment : Fragment() {
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         })
+
+        binding.prenotazioniButton.setOnClickListener{
+            val childFragment = ListaPrenotazioniFragment()
+            val bundle=Bundle()
+            bundle.putString("idUtente",idUtente)
+            bundle.putString("emailOnline",emailUtenteOnline)
+            childFragment.arguments=bundle
+            val fragmentTransaction = childFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.FragmentProfilo, childFragment)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
 
         binding.pagamentiButton.setOnClickListener(View.OnClickListener { view ->
             val childFragment = CreditCardFragment()
