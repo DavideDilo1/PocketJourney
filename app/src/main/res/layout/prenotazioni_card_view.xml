@@ -13,60 +13,58 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/nomeText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/open_sans_semi_bold"
-            android:text="Nome:"
-            android:textColor="@color/colorPrimary"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.091"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.198" />
-
-        <TextView
             android:id="@+id/dataText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="16dp"
+
             android:fontFamily="@font/open_sans_semi_bold"
-
             android:text="Data:"
-            android:textColor="@color/colorPrimary"
 
+            android:textColor="@color/colorPrimary"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/nomeText" />
+            app:layout_constraintTop_toBottomOf="@+id/nomePostoPrenotato" />
 
         <TextView
             android:id="@+id/numpersText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
             android:fontFamily="@font/open_sans_semi_bold"
-            android:text="Numero persone:"
 
+            android:text="Numero persone:"
             android:textColor="@color/colorPrimary"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dataText"
-            app:layout_constraintVertical_bias="0.382" />
+            app:layout_constraintTop_toBottomOf="@+id/dataText" />
+
+        <TextView
+            android:id="@+id/oraText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+
+            android:fontFamily="@font/open_sans_semi_bold"
+            android:text="Ora:"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/numpersText" />
 
         <TextView
             android:id="@+id/nomePostoPrenotato"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/open_sans_semi_bold"
+
+            android:text="NomePosto"
             android:textColor="@color/colorPrimary"
-
-            android:text="TextView"
-            app:layout_constraintBaseline_toBaselineOf="@+id/nomeText"
             app:layout_constraintEnd_toEndOf="parent"
-            android:fontFamily="@font/open_sans_light"
-
-            app:layout_constraintHorizontal_bias="0.43"
-            app:layout_constraintStart_toEndOf="@+id/nomeText" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/dataPrenotazione"
@@ -93,6 +91,18 @@ android:fontFamily="@font/open_sans_light"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.201"
             app:layout_constraintStart_toEndOf="@+id/numpersText" />
+
+        <TextView
+            android:id="@+id/oraPrenotazione"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_light"
+            android:text="TextView"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintBaseline_toBaselineOf="@+id/oraText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.461"
+            app:layout_constraintStart_toEndOf="@+id/oraText" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -57,6 +57,8 @@ class BookingFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
 
         dataSelezionataText.setOnClickListener {
+            //CALENDARIO DATA RANGE:
+           //TODO if()
             val picker = MaterialDatePicker.Builder.dateRangePicker()
                 .setTheme(R.style.ThemeMaterialCalendar)
                 .setTitleText("Seleziona la data")
@@ -76,6 +78,25 @@ class BookingFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         }
 
+/*CALENDARIO SINGOLO
+
+            val picker = MaterialDatePicker.Builder.datePicker()
+                .setTheme(R.style.ThemeMaterialCalendar)
+                .setTitleText("Seleziona una data")
+                .build()
+
+            picker.show(parentFragmentManager, "TAG")
+
+            picker.addOnPositiveButtonClickListener {
+                dataSelezionataText.text = convertTimeToDate(it)
+            }
+
+            picker.addOnNegativeButtonClickListener {
+                picker.dismiss()
+            }
+
+
+        */
 
 
 
