@@ -35,8 +35,8 @@
         <item>2031</item>
         <item>2032</item>
     </string-array>
-    
-    
+
+
     <string-array name="orario">
         <item>8.00</item>
         <item>8.30</item>
@@ -80,6 +80,12 @@
         <item>08</item>
         <item>09</item>
         <item>10</item>
+    </string-array>
+
+    <string-array name="cosaFareList">
+        <item>Andare a mangiare</item>
+        <item>Fare qualcosa di divertente</item>
+        <item>Soggiornare</item>
     </string-array>
 
 
