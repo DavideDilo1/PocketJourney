@@ -134,7 +134,7 @@ class BookingFragment : Fragment(){
 
 
 
-        binding.backArrowR.setOnClickListener{
+        binding.backArrowBok.setOnClickListener{
             val childFragment = PaginaPostoFragment()
             val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.booking_Layout, childFragment)

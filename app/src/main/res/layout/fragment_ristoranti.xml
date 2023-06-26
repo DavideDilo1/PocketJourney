@@ -43,7 +43,7 @@
         app:layout_goneMarginTop="10dp" />
 
     <ImageView
-        android:id="@+id/back_arrowB"
+        android:id="@+id/back_arrowR"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fillColor="@color/colorPrimary"

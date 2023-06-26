@@ -79,15 +79,15 @@
             android:layout_marginTop="152dp"
             android:fontFamily="@font/open_sans_semi_bold"
             android:text="Cosa ti andrebbe di fare?"
-            android:textColor="@color/white"
+            android:textColor="@color/colorPrimary"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.086"
+            app:layout_constraintHorizontal_bias="0.167"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Spinner
-            android:id="@+id/spinner1"
+            android:id="@+id/spinnerConsigliati1"
             android:layout_width="190dp"
             android:layout_height="40dp"
             android:layout_marginTop="24dp"
@@ -103,15 +103,15 @@
             android:id="@+id/testoConsigliati3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="96dp"
             android:fontFamily="@font/open_sans_semi_bold"
             android:text="Dove vuoi andare?"
-            android:textColor="@color/white"
+            android:textColor="@color/colorPrimary"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.145"
+            app:layout_constraintHorizontal_bias="0.121"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner1" />
+            app:layout_constraintTop_toBottomOf="@+id/spinnerConsigliati1" />
 
         <Spinner
             android:id="@+id/spinnerConsigliati2"
@@ -126,16 +126,16 @@
             app:layout_constraintTop_toBottomOf="@+id/testoConsigliati3" />
 
         <TextView
-            android:id="@+id/testoConsigliati4"
+            android:id="@+id/terzaDomandaConsigliati"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="96dp"
+            android:layout_marginTop="64dp"
             android:fontFamily="@font/open_sans_semi_bold"
             android:text="terza domanda?"
-            android:textColor="@color/white"
+            android:textColor="@color/colorPrimary"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.134"
+            app:layout_constraintHorizontal_bias="0.11"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spinnerConsigliati2" />
 
@@ -149,14 +149,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.805"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/testoConsigliati4" />
+            app:layout_constraintTop_toBottomOf="@+id/terzaDomandaConsigliati" />
 
         <Button
             android:id="@+id/cercaMetaButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-
+            android:layout_marginTop="40dp"
             android:text="Cerca Meta"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

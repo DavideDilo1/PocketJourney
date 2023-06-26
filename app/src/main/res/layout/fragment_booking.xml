@@ -21,16 +21,15 @@
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imageBackground"
         android:layout_width="0dp"
-        android:scaleType="fitXY"
         android:layout_height="70dp"
         android:adjustViewBounds="true"
+        android:scaleType="fitXY"
         android:src="@drawable/design_blue_background3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/SoftRoundImageView"
-        />
+        app:shapeAppearanceOverlay="@style/SoftRoundImageView" />
 
     <ImageView
         android:id="@+id/back_arrowBok"

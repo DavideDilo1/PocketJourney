@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.pocketjourney.R
 import com.example.pocketjourney.databinding.FragmentPacchettiBinding
+import com.example.pocketjourney.home.HomeFragmentNew
 
 class PacchettiFragment : Fragment() {
 
@@ -20,6 +21,13 @@ class PacchettiFragment : Fragment() {
         binding = FragmentPacchettiBinding.inflate(inflater)
 
 
+        binding.backArrowP.setOnClickListener {
+            val childFragment = HomeFragmentNew()
+            val fragmentTransaction = childFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.framePacchetti, childFragment)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
         return binding.root
     }
 
