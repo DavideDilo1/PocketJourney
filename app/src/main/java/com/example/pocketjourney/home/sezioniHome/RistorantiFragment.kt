@@ -233,9 +233,7 @@ class RistorantiFragment : Fragment() {
         val ristorantiAdapter = HomeAdapter(allTypeRestaurant)
         binding.RecyclerViewVerticaleR.adapter = ristorantiAdapter
 
-        back_arrowR = binding.backArrowR
-
-        back_arrowR.setOnClickListener() {
+        binding.backArrowR.setOnClickListener() {
             val childFragment = HomeFragmentNew()
             val fragmentTransaction = childFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.frameRistoranti, childFragment)

@@ -152,7 +152,9 @@ class PaginaPostoFragment : Fragment() {
             val jsonParser = JsonParser()
             val queryResult = jsonParser.parse(queryResultString).asJsonObject
             val categoria = queryResult.get("categoria")?.asString!!
+            val nomePosto= queryResult.get("nome").asString!!
             requireActivity().intent.putExtra("categoria",categoria)
+            requireActivity().intent.putExtra("nomePosto",nomePosto)
             val fragmentTransaction = childFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.fragment_pagina_posto, childFragment)
             fragmentTransaction.addToBackStack(null)

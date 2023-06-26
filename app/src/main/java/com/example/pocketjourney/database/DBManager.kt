@@ -32,6 +32,18 @@ class DBManager (val context: Context) {
         val newRowId=db.insert(DbHelper.TABLE_NAME,null,values)
     }
 
+    fun insertPrenotazione(emailUtente: String, nomePosto: String, data: String, numPersone: String, orario: String) {
+        val values = ContentValues().apply {
+            put(DbHelper.EMAIL_UTENTE, emailUtente)
+            put(DbHelper.NOME_POSTO, nomePosto)
+            put(DbHelper.DATA, data)
+            put(DbHelper.NUM_PERSONE, numPersone)
+            put(DbHelper.ORARIO, orario)
+        }
+        val newRowId = db.insert(DbHelper.TABLE_PRENOTAZIONI, null, values)
+    }
+
+
     fun updateUtente(_id:Long,nome:String,cognome:String,email:String,pw:String,cell:String):Int{
         val selezione= "${DbHelper._ID}=?"
         val selectionArgs=arrayOf(_id.toString())

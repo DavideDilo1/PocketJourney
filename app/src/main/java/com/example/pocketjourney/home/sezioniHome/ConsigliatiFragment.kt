@@ -19,7 +19,6 @@ class ConsigliatiFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentConsigliatiBinding.inflate(inflater)
 
-        binding.spinner1
 
 
         binding.backArrow.setOnClickListener(){

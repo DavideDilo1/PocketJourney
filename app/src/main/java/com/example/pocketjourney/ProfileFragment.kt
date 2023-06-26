@@ -151,10 +151,8 @@ class ProfileFragment : Fragment() {
 
         binding.prenotazioniButton.setOnClickListener{
             val childFragment = ListaPrenotazioniFragment()
-            val bundle=Bundle()
-            bundle.putString("idUtente",idUtente)
-            bundle.putString("emailOnline",emailUtenteOnline)
-            childFragment.arguments=bundle
+            requireActivity().intent.putExtra("idUtente",idUtente)
+            requireActivity().intent.putExtra("emailUtenteOnline",emailUtenteOnline)
             val fragmentTransaction = childFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.FragmentProfilo, childFragment)
             fragmentTransaction.addToBackStack(null)

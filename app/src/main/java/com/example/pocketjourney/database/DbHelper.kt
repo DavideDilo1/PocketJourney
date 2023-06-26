@@ -8,10 +8,12 @@ class DbHelper (context: Context): SQLiteOpenHelper (context, DB_NAME,null, DB_V
 
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL(SQL_CREATE_UTENTE)
+        db?.execSQL(SQL_CREATE_PRENOTAZIONI)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, p1: Int, p2: Int) {
-        db?.execSQL(SQL_DELETE_UTENTE)
+        db?.execSQL(SQL_CREATE_UTENTE)
+        db?.execSQL(SQL_CREATE_PRENOTAZIONI)
         onCreate(db)
     }
 
@@ -52,6 +54,30 @@ class DbHelper (context: Context): SQLiteOpenHelper (context, DB_NAME,null, DB_V
         private const val SQL_DELETE_UTENTE =
             "DROP TABLE IF EXISTS $TABLE_NAME;"
 
+
+        //TABELLA PRENOTAZIONI
+        const val TABLE_PRENOTAZIONI = "Prenotazioni"
+        const val _ID_PRENOTAZIONI = "idPrenotazioni"
+        const val EMAIL_UTENTE = "email_utente"
+        const val NOME_POSTO = "nome_posto"
+        const val DATA = "data"
+        const val NUM_PERSONE = "numPersone"
+        const val ORARIO = "orario"
+
+        // Aggiungi la stringa per creare la tabella Prenotazioni
+        private const val SQL_CREATE_PRENOTAZIONI =
+            "CREATE TABLE $TABLE_PRENOTAZIONI (" +
+                    "$_ID_PRENOTAZIONI INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "$EMAIL_UTENTE TEXT NOT NULL," +
+                    "$NOME_POSTO TEXT NOT NULL," +
+                    "$DATA TEXT NOT NULL," +
+                    "$NUM_PERSONE TEXT NOT NULL," +
+                    "$ORARIO TEXT NOT NULL);"
+
+        // Aggiungi la stringa per eliminare la tabella Prenotazioni
+        private const val SQL_DELETE_PRENOTAZIONI =
+            "DROP TABLE IF EXISTS $TABLE_PRENOTAZIONI;"
     }
 
 }
+
