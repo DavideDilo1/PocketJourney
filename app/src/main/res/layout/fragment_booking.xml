@@ -169,7 +169,8 @@
                 app:layout_constraintBaseline_toBaselineOf="@+id/inserisciOraText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.2"
-                app:layout_constraintStart_toEndOf="@+id/inserisciOraText" />
+                app:layout_constraintStart_toEndOf="@+id/inserisciOraText"
+                android:spinnerMode="dialog" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

@@ -47,7 +47,6 @@ class PaginaPostoFragment : Fragment() {
         val queryResultString = requireActivity().intent.getStringExtra("queryResult")
         val idUtente = requireActivity().intent.getStringExtra("idUtente")
         val idPosto= requireActivity().intent.getStringExtra("idPosto")
-        val queryResult = jsonParser.parse(queryResultString).asJsonObject
         Log.d("SONO PAGINA POSTO E HO RICEVUTO ", queryResultString.toString() + " " + idUtente)
 
         if (queryResultString != null) {
@@ -153,7 +152,10 @@ class PaginaPostoFragment : Fragment() {
             val childFragment = BookingFragment()
             requireActivity().intent.putExtra("idPosto",idPosto)
             requireActivity().intent.putExtra("idUtente",idUtente)
-            requireActivity().intent.putExtra("cat",categoria)
+            val jsonParser = JsonParser()
+            val queryResult = jsonParser.parse(queryResultString).asJsonObject
+            val categoria = queryResult.get("categoria")?.asString!!
+            requireActivity().intent.putExtra("categoria",categoria)
             val fragmentTransaction = childFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.fragment_pagina_posto, childFragment)
             fragmentTransaction.addToBackStack(null)
