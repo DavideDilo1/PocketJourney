@@ -198,9 +198,9 @@ class AnteprimaPostoFragment : Fragment() {
         more_details.setAnimation(from_bottom)
 
         second_arrow_up.setOnClickListener{
-            requireActivity().intent.putExtra("queryResult",queryResult.toString())
             Log.d("hai cliccato arrow up e passo",queryResult.toString() )
             val childFragment = PaginaPostoFragment()
+            requireActivity().intent.putExtra("queryResult",queryResult.toString())
             // Assumi che tu stia eseguendo questo codice all'interno di un'attività
             val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.fragment_anteprima_posto, childFragment) // R.id.fragment_container rappresenta l'ID del contenitore del frammento nel layout dell'attività

@@ -35,9 +35,9 @@ class ProfileFragment : Fragment() {
 
         binding= FragmentProfileBinding.inflate(layoutInflater,container,false)
 
-        val idUtente = arguments?.getString("idUtente")
-        val emailUtenteOnline=arguments?.getString("emailOnline")
-        val emailUtenteOffline = arguments?.getString("emailutenteOffline")
+        val idUtente = requireActivity().intent.getStringExtra("idUtente")
+        val emailUtenteOnline=requireActivity().intent.getStringExtra("emailOnline")
+        val emailUtenteOffline = requireActivity().intent.getStringExtra("emailOff")
 
         if (idUtente != null ){
             //sono connesso a internet avendo ricevuto userId ed interrogo il database remoto
@@ -141,10 +141,8 @@ class ProfileFragment : Fragment() {
         //per accedere al fragment di modifica dei dati
         binding.btnModificaDati.setOnClickListener(View.OnClickListener { view ->
             val childFragment = ModificaDatiFragment()
-            val bundle=Bundle()
-            bundle.putString("idUtente",idUtente)
-            bundle.putString("emailOnline",emailUtenteOnline)
-            childFragment.arguments=bundle
+            requireActivity().intent.putExtra("idUtente",idUtente)
+            requireActivity().intent.putExtra("emailUtenteOnline",emailUtenteOnline)
             val fragmentTransaction = childFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.FragmentProfilo, childFragment)
             fragmentTransaction.addToBackStack(null)

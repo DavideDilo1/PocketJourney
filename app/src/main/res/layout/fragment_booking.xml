@@ -28,7 +28,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/SoftRoundImageView" />
+        app:shapeAppearanceOverlay="@style/SoftRoundImageView"
+        />
 
     <ImageView
         android:id="@+id/back_arrowR"

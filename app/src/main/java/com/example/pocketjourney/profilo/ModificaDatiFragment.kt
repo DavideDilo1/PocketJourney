@@ -35,10 +35,10 @@ class ModificaDatiFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //ottengo l'id dell'utente col quale interrogherò il db e i dati che mi servono
-        val idUtente = arguments?.getString("idUtente")
-        val emailOnline=arguments?.getString("emailOnline")
+        val idUtente = requireActivity().intent.getStringExtra("idUtente")
+        val emailUtenteOnline=requireActivity().intent.getStringExtra("emailOnline")
         Log.d("Ciao",idUtente.toString())
-        Log.d("Ciao",emailOnline.toString())
+        Log.d("Ciao",emailUtenteOnline.toString())
         Log.e("Ciao", "SEI NEL FRAGMENT MODIFICA")
 
         binding.btnModifica.setOnClickListener {
@@ -71,9 +71,11 @@ class ModificaDatiFragment : Fragment() {
                                         if (dbManager!=null){
                                             dbManager?.open()
                                             dbManager?.updateEmailUtente(
-                                                emailOnline!!
+                                                nuovaEmail,
+                                                emailUtenteOnline.toString()
                                             )
                                             Log.e("Ciao", "MODIFICATO ANCHE IN LOCALE")
+                                            dbManager?.close()
 
                                         }
 

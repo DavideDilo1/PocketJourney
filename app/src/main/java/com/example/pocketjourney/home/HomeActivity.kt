@@ -20,6 +20,7 @@ class HomeActivity : AppCompatActivity() {
         supportActionBar?.hide()
         //questo valore bundle ottiene l'id dell'utente nel caso in cui sia connesso al server, l'email viceversa.
         val emailOff= intent.getStringExtra("emailUtenteOffline")
+        val emailOn= intent.getStringExtra("emailOnline")
         val userId= intent.getStringExtra("idUtente")
         if(userId!=null){
             Log.e("ciao","sono la home activity e ho ricevuto l'id utente")
@@ -46,7 +47,8 @@ class HomeActivity : AppCompatActivity() {
                 R.id.profile -> userId?.let { it1 ->
                     replaceFragmentProfile(
                         ProfileFragment(),
-                        userId
+                        userId,
+                        emailOff
                     )
                 }
                 else ->{
@@ -71,11 +73,12 @@ class HomeActivity : AppCompatActivity() {
         fragmentTransaction.commit()
     }
 
-    private fun replaceFragmentProfile(fragment: Fragment,userId: String){
-
+    private fun replaceFragmentProfile(fragment: Fragment,userId: String?,emailOff:String?){
+        val idUtente=userId
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-
+        intent.putExtra("idUtente",idUtente)
+        intent.putExtra("emailOff",emailOff)
         fragmentTransaction.replace(R.id.frameHomeLayout, fragment)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()

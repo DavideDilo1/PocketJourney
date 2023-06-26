@@ -1,9 +1,11 @@
 package com.example.pocketjourney.database
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
+import android.util.Log
 
 class DBManager (val context: Context) {
     private lateinit var helper: DbHelper
@@ -43,15 +45,41 @@ class DBManager (val context: Context) {
         return rit
     }
 
-    fun updateEmailUtente(email:String):Int{
-        val selezione= "${DbHelper.EMAIL}=?"
-        val selectionArgs=arrayOf(email.toString())
+    @SuppressLint("Range")
+    fun updateEmailUtente(nuovaEmail:String, vecchiaEmail:String):Int{
+        val query = "SELECT id FROM Utenti WHERE email = ?"
+        val selectionArgs = arrayOf(vecchiaEmail)
+        val cursor = db.rawQuery(query, selectionArgs)
 
-        val values=ContentValues().apply {
-            put(DbHelper.EMAIL,email)
+        var idUtente: Int? = null
+
+        if (cursor.moveToFirst()) {
+            idUtente = cursor.getInt(cursor.getColumnIndex("idUtente"))
+
+
+            cursor.close()
+
+// Restituisci l'ID dell'utente corrispondente all'email specificata
+
+            /* val selezione = "${DbHelper.EMAIL}=?"
+         val selectionArgs = arrayOf(vecchiaEmail) // Vecchia email
+         Log.d("selezione:",selezione)
+         Log.d("vecchiaemali:",vecchiaEmail)
+         Log.d("nuovamail:",nuovaEmail)
+         val values = ContentValues().apply {
+             put(DbHelper.EMAIL, nuovaEmail) // Nuova email
+         }
+
+         val righeModificate = db.update(DbHelper.TABLE_NAME, values, selezione, selectionArgs)
+         Log.d("righe mod", righeModificate.toString())
+         db.close()
+
+         return righeModificate*/
+            val query2 = "UPDATE Utenti SET email='${nuovaEmail}' WHERE id='${idUtente}'"
+            Log.d("query", query2)
+            db.execSQL(query)
         }
-        val rit=db.update(DbHelper.TABLE_NAME,values,selezione,selectionArgs)
-        return rit
+        return 1
     }
     fun updatePasswordUtente(password:String):Int{
         val selezione= "${DbHelper.PASSWORD}=?"

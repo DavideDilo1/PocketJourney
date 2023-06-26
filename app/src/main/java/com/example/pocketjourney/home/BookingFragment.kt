@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,16 +17,20 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.findViewTreeViewModelStoreOwner
 import com.example.pocketjourney.R
+import com.example.pocketjourney.database.ClientNetwork
 import com.example.pocketjourney.databinding.FragmentBookingBinding
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.gson.JsonObject
 import kotlinx.coroutines.NonDisposableHandle.parent
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.*
 
-class BookingFragment : Fragment(), AdapterView.OnItemSelectedListener {
+class BookingFragment : Fragment(){
 
     private lateinit var binding: FragmentBookingBinding
     private lateinit var spinnerPersone: Spinner
-    private lateinit var adapterPersone: ArrayAdapter<CharSequence>
     private lateinit var dataSelezionataText: TextView
 
 
@@ -35,27 +40,11 @@ class BookingFragment : Fragment(), AdapterView.OnItemSelectedListener {
     ): View? {
         // Inflate the layout for this fragment
 
-        binding = FragmentBookingBinding.inflate(inflater)
-
+        binding = FragmentBookingBinding.inflate(layoutInflater,container,false)
+        val idUtente = requireActivity().intent.getStringExtra("idUtente")
+        val idPosto= requireActivity().intent.getStringExtra("idPosto")
+        Log.d("sono prenotazione ho ricevuto",idUtente + " " + idPosto)
         dataSelezionataText = binding.dataSelezionata
-
-        spinnerPersone = binding.personSpinner
-        adapterPersone= ArrayAdapter.createFromResource(requireContext(), R.array.numero_persone, android.R.layout.simple_spinner_item )
-        adapterPersone.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinnerPersone.adapter = adapterPersone
-
-        spinnerPersone.onItemSelectedListener = this
-
-
-
-
-        binding.buttonPrenota.setOnClickListener{
-
-            Toast.makeText(requireContext(), "Prenotazione avvenuta con successo", Toast.LENGTH_SHORT ).show()
-        }
-
-
-
         dataSelezionataText.setOnClickListener {
             //CALENDARIO DATA RANGE:
            //TODO if()
@@ -103,13 +92,16 @@ class BookingFragment : Fragment(), AdapterView.OnItemSelectedListener {
         return binding.root
     }
 
-    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-        TODO("Not yet implemented")
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        binding.buttonPrenota.setOnClickListener{
+
+            Toast.makeText(requireContext(), "Prenotazione avvenuta con successo", Toast.LENGTH_SHORT ).show()
+        }
     }
 
-    override fun onNothingSelected(p0: AdapterView<*>?) {
-        TODO("Not yet implemented")
-    }
+
 
     private fun convertTimeToDate(time: Long): String{
         val utc = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
