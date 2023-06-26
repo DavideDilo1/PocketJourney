@@ -11,8 +11,21 @@
     tools:context=".home.AnteprimaPostoFragment"
     android:transitionName="background_imag_transition">
 
+    <ImageView
+        android:id="@+id/imageBackgroundAnteprima"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background"
+       />
 
     <!--TODO: mettere il bottone per aggiungere ai preferiti -->
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="none">
+
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
 
@@ -24,31 +37,16 @@
 
 
         <ImageView
-            android:id="@+id/imageBackgroundAnteprima"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/background"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
+            android:id="@+id/second_back_arrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/second_back_arrow"
-            android:layout_marginStart="34dp"
-            android:layout_marginLeft="34dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="356dp"
-            android:layout_marginRight="356dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="44dp"
             android:src="@drawable/ic_back_arrow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.092"
+            app:layout_constraintStart_toStartOf="parent"
 
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/second_title"
@@ -147,25 +145,18 @@
             android:id="@+id/second_arrow_up"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="175dp"
-            android:layout_marginLeft="175dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="196dp"
-            android:layout_marginRight="196dp"
+            android:layout_marginTop="44dp"
+            android:src="@drawable/ic_up_arrow"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/second_ratingBar"
-            android:src="@drawable/ic_up_arrow"
 
-/>
+            />
 
         <TextView
-             android:id="@+id/more_details"
+            android:id="@+id/more_details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="150dp"
-            android:layout_marginLeft="150dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="30dp"
             android:fontFamily="@font/open_sans_light"
@@ -174,7 +165,7 @@
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/second_arrow_up"
             app:layout_constraintVertical_bias="0.0"
@@ -183,7 +174,7 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
+</ScrollView>
 
 
 </FrameLayout>
