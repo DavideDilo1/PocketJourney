@@ -1,8 +1,10 @@
 package com.example.pocketjourney.database
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import com.example.pocketjourney.model.PrenotazioniModel
 
 class DbHelper (context: Context): SQLiteOpenHelper (context, DB_NAME,null, DB_VERSION) {
 
@@ -15,6 +17,33 @@ class DbHelper (context: Context): SQLiteOpenHelper (context, DB_NAME,null, DB_V
         db?.execSQL(SQL_CREATE_UTENTE)
         db?.execSQL(SQL_CREATE_PRENOTAZIONI)
         onCreate(db)
+    }
+
+
+    @SuppressLint("Range")
+    fun getAllPrenotazioni(email:String): List<PrenotazioniModel> {
+        val prenotazioniList = ArrayList<PrenotazioniModel>()
+        val query = "SELECT * FROM $TABLE_PRENOTAZIONI WHERE $EMAIL_UTENTE='$email'"
+        val db = this.readableDatabase
+        val cursor = db.rawQuery(query, null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                val id = cursor.getInt(cursor.getColumnIndex(_ID_PRENOTAZIONI))
+                val nomePosto = cursor.getString(cursor.getColumnIndex(NOME_POSTO))
+                val data = cursor.getString(cursor.getColumnIndex(DATA))
+                val numPersone = cursor.getString(cursor.getColumnIndex(NUM_PERSONE))
+                val orario = cursor.getString(cursor.getColumnIndex(ORARIO))
+
+                val prenotazione = PrenotazioniModel(id, nomePosto, data, numPersone, orario)
+                prenotazioniList.add(prenotazione)
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        db.close()
+
+        return prenotazioniList
     }
 
     companion object {

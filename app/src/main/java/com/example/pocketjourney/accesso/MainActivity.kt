@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
                     if(verificaCredenzialiLocale(email,password)) {
                         Log.e("ciao","LOGIN OFFLINE")
                         val intent = Intent(context, HomeActivity::class.java)
-                        intent.putExtra("emailutenteOffline",email)
+                        intent.putExtra("emailUtenteOffline",email)
                         startActivity(intent)
                     } else {
                         Log.e("ciao", "credenziali offline errate")

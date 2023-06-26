@@ -1,30 +1,21 @@
 package com.example.pocketjourney.profilo
 
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.pocketjourney.ProfileFragment
 import com.example.pocketjourney.R
-import com.example.pocketjourney.adapter.HomeAdapter
 import com.example.pocketjourney.adapter.PrenotazioniAdapter
 import com.example.pocketjourney.database.ClientNetwork
 import com.example.pocketjourney.database.DbHelper
-import com.example.pocketjourney.databinding.FragmentBookingBinding
-import com.example.pocketjourney.databinding.FragmentListaPreferitiBinding
 import com.example.pocketjourney.databinding.FragmentListaPrenotazioniBinding
-import com.example.pocketjourney.databinding.FragmentProfileBinding
-import com.example.pocketjourney.home.AnteprimaPostoFragment
-import com.example.pocketjourney.model.HomeItemModel
 import com.example.pocketjourney.model.PrenotazioniModel
 import com.google.gson.JsonObject
-import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -39,20 +30,35 @@ class ListaPrenotazioniFragment : Fragment() {
     ): View? {
         binding=FragmentListaPrenotazioniBinding.inflate(layoutInflater,container,false)
         val idUtente = requireActivity().intent.getStringExtra("idUtente")
-        val emailUtenteOnline=requireActivity().intent.getStringExtra("emailOnline")
-        Log.d("dati ricevuti ", idUtente + emailUtenteOnline)
+        val emailUtente=requireActivity().intent.getStringExtra("emailUtenteOffline")
+        Log.d("dati ricevuti ", idUtente + emailUtente)
         // Inflate the layout for this fragment
 
         binding.recyclerPrenotazioni.layoutManager = LinearLayoutManager(requireContext())
 
         if (idUtente != null) {
             setRecyclerView(idUtente)
+        } else {
+            if (emailUtente != null) {
+                setRecyclerView(emailUtente)
+            }
         }
 
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.backArrowR.setOnClickListener {
+            val childFragment = ProfileFragment()
+            val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.FrameListaPrenotazioni, childFragment)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
+    }
+
     private fun setRecyclerView(idUtente: String) {
+        //in questo metodo uso id utente ma nel caso delle funzionalita in locale la variabile contiene la email
         val bookItem = ArrayList<PrenotazioniModel>()
         val bookAdapter = PrenotazioniAdapter(bookItem)
         //imposto adapter sulla recycler view
@@ -102,9 +108,19 @@ class ListaPrenotazioniFragment : Fragment() {
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                 // Si è verificato un errore durante la chiamata di rete online
-                //query offline
+                // Popolare dalla tabella Prenotazioni locale
+                val dbHelper = DbHelper(requireContext())
+                val dataList = dbHelper.getAllPrenotazioni(idUtente)
+
+                // Aggiungere gli elementi alla lista dell'adapter
+                bookItem.addAll(dataList)
+
+                // Notificare all'adapter che i dati sono cambiati
+                bookAdapter.notifyDataSetChanged()
+
                 Log.e("ciao", t.toString() + " " + t.message.toString())
             }
+
         })
     }
 

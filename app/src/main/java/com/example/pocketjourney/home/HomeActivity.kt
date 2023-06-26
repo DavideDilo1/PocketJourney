@@ -44,16 +44,7 @@ class HomeActivity : AppCompatActivity() {
                 R.id.home -> replaceFragment(HomeFragmentNew(), userId)
                 R.id.preferiti -> replaceFragment(PreferitiNoListFragment(), userId)
                 //passo al fragment profilo l'id dell'utente nel caso sia connesso, l'email altrimenti
-                R.id.profile -> userId?.let { it1 ->
-                    replaceFragmentProfile(
-                        ProfileFragment(),
-                        userId,
-                        emailOff
-                    )
-                }
-                else ->{
-
-                }
+                R.id.profile -> replaceFragmentProfile(ProfileFragment(), userId, emailOff)
 
             }
 
