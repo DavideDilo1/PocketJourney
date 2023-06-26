@@ -31,7 +31,6 @@ import retrofit2.Response
 class PaginaPostoFragment : Fragment() {
     private lateinit var binding: FragmentPaginaPostoBinding
     private lateinit var down_arrow: ImageView
-    private lateinit var third_scrollView: ScrollView
     private lateinit var from_bottom: Animation
 
 
@@ -109,12 +108,10 @@ class PaginaPostoFragment : Fragment() {
 
 
         down_arrow = binding.downArrow
-        third_scrollView = binding.thirdScrollView
 
         from_bottom = AnimationUtils.loadAnimation(requireContext(), R.anim.anim_from_bottom)
 
         down_arrow.setAnimation(from_bottom)
-        third_scrollView.setAnimation(from_bottom)
 
 
         requireActivity().window.apply {
