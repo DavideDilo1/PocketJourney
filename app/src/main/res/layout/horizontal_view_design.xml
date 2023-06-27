@@ -25,15 +25,21 @@
     <TextView
         android:id="@+id/testo"
         android:layout_width="173dp"
-        android:layout_height="29dp"
+        android:layout_height="wrap_content"
 
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
+        android:paddingLeft="6dp"
+        android:paddingRight="6dp"
         android:text="Testo anteprima bal ma dsokfsmdfad "
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.357"
-        app:layout_constraintStart_toEndOf="@+id/cardViewItem" />
+        app:layout_constraintHorizontal_bias="0.269"
+        app:layout_constraintStart_toEndOf="@+id/cardViewItem"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBarItem"
+        app:layout_constraintVertical_bias="1.0" />
 
     <RatingBar
         android:id="@+id/ratingBarItem"
@@ -85,10 +91,10 @@
         android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@+id/testo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.016"
         app:layout_constraintStart_toEndOf="@+id/valutazioneItem"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.829" />
+        app:layout_constraintVertical_bias="0.755" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewItem"
