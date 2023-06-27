@@ -25,7 +25,7 @@ class CreditCardFragment : Fragment() {
     ): View? {
         binding= FragmentCreditCardBinding.inflate(layoutInflater,container,false)
         //alla creazione del fragment carico i dati presenti nel db se ci sono
-        val idUtente = arguments?.getString("idUtente")
+        val idUtente = requireActivity().intent.getStringExtra("idUtente")
         val userAPI= ClientNetwork.retrofit
         val queryDatiCarta = "SELECT idDatiPagamento, ref_IdUtente, numeroCarta, codiceSicurezza, meseScadenza, annoScadenza FROM DatiPagamento WHERE ref_IdUtente = '$idUtente'"
         val call = userAPI.cerca(queryDatiCarta)

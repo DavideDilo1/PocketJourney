@@ -21,6 +21,7 @@ import androidx.core.app.ActivityOptionsCompat
 import com.example.pocketjourney.R
 import com.example.pocketjourney.database.ClientNetwork
 import com.example.pocketjourney.databinding.FragmentAnteprimaPostoBinding
+import com.example.pocketjourney.home.sezioniHome.RistorantiFragment
 import com.google.gson.JsonObject
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -160,13 +161,20 @@ class AnteprimaPostoFragment : Fragment() {
         more_details = binding.moreDetails
         second_rating_number2 = binding.secondRatingNumber2
 
-        second_back_arrow.setOnClickListener(){
-            val childFragment = HomeFragmentNew()
+        second_back_arrow.setOnClickListener{
+            val provenienza = requireActivity().intent.getStringExtra("provenienza")
+            val childFragment: Fragment = if (provenienza == "ristorantiFragment") {
+                RistorantiFragment()
+            } else {
+                HomeFragmentNew()
+            }
             val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.fragment_anteprima_posto, childFragment)
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
+
+
 
         requireActivity().window.apply {
             setFlags(

@@ -57,16 +57,6 @@ class AttrazioniFragment : Fragment() {
 
 
         val attrazioniItemList1 = ArrayList<HorizontalRecyclerItem>()
-        attrazioniItemList1.add(HorizontalRecyclerItem(1,
-            R.drawable.image_three, "Bar di economia", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
-        attrazioniItemList1.add(HorizontalRecyclerItem(1,
-            R.drawable.image_three, "Bar di Ing", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
-        attrazioniItemList1.add(HorizontalRecyclerItem(1,
-            R.drawable.image_three, "Bar di Architettura", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
-        attrazioniItemList1.add(HorizontalRecyclerItem(1,
-            R.drawable.image_three, "Bar di Grande", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
-        attrazioniItemList1.add(HorizontalRecyclerItem(1,
-            R.drawable.image_three, "Bar di Pippo", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
 
 
 
@@ -77,7 +67,6 @@ class AttrazioniFragment : Fragment() {
         ristorantiOrizzAdapter1.onItemClick = {
 
             val bundle = Bundle()
-            bundle.putParcelable("attrazioni", it)
 
             val childFragment = AnteprimaPostoFragment()
             childFragment.arguments=bundle

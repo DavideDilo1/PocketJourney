@@ -94,7 +94,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:fontFamily="@font/open_sans_bold"
-                android:text="Le migliori pizzerie"
+                android:text="I 5 migliori ristoranti"
                 android:textColor="@color/colorPrimary"
                 android:textSize="18sp" />
 

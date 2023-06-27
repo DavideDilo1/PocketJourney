@@ -56,16 +56,6 @@ class HotelFragment : Fragment() {
         binding.RecyclerViewOrizzontaleH.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
         val hotelItemList1 = ArrayList<HorizontalRecyclerItem>()
-        hotelItemList1.add(HorizontalRecyclerItem(1,
-            R.drawable.image_two, "Bar di economia", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
-        hotelItemList1.add(HorizontalRecyclerItem(1,
-            R.drawable.image_two, "Bar di Ing", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
-        hotelItemList1.add(HorizontalRecyclerItem(1,
-            R.drawable.image_two, "Bar di Architettura", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
-        hotelItemList1.add(HorizontalRecyclerItem(1,
-            R.drawable.image_two, "Bar di Grande", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
-        hotelItemList1.add(HorizontalRecyclerItem(1,
-            R.drawable.image_two, "Bar di Pippo", "(510)", "4.91", 4.5F, "Questo ristorante è molto bello"))
 
 
         val hotelItemListAdapter1 = HorizontalItemAdapter(hotelItemList1)
@@ -75,7 +65,7 @@ class HotelFragment : Fragment() {
         hotelItemListAdapter1.onItemClick = {
 
             val bundle = Bundle()
-            bundle.putParcelable("hotel", it)
+
 
             val childFragment = AnteprimaPostoFragment()
             childFragment.arguments=bundle

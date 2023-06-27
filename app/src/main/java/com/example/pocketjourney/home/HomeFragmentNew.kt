@@ -65,9 +65,7 @@ class HomeFragmentNew : Fragment() {
 
         binding.homeRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        //arraylist che contiene gli elementi della recycler
 
-        val homeItem = ArrayList<HomeItemModel>()
         //un ITEM VIEW MODEL é FATTO: val image: Int, val title: String, val numRec: String, val valutazione: String, val stelle: Float
 
 
@@ -177,6 +175,7 @@ class HomeFragmentNew : Fragment() {
         ristorantiButton.setOnClickListener(View.OnClickListener { view ->
             val childFragment = RistorantiFragment()
             val fragmentTransaction = childFragmentManager.beginTransaction()
+            requireActivity().intent.putExtra("idUtente",idUtente)
             fragmentTransaction.replace(R.id.frameNewHomeLayout, childFragment)
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
@@ -185,6 +184,7 @@ class HomeFragmentNew : Fragment() {
         hotelButton.setOnClickListener{
             val childFragment = HotelFragment()
             val fragmentTransaction = childFragmentManager.beginTransaction()
+            requireActivity().intent.putExtra("idUtente",idUtente)
             fragmentTransaction.replace(R.id.frameNewHomeLayout, childFragment)
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
@@ -193,6 +193,7 @@ class HomeFragmentNew : Fragment() {
         attrazioniButton.setOnClickListener{
             val childFragment = AttrazioniFragment()
             val fragmentTransaction = childFragmentManager.beginTransaction()
+            requireActivity().intent.putExtra("idUtente",idUtente)
             fragmentTransaction.replace(R.id.frameNewHomeLayout, childFragment)
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()

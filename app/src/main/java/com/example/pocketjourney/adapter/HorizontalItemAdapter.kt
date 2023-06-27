@@ -4,13 +4,19 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pocketjourney.databinding.HorizontalViewDesignBinding
+import com.example.pocketjourney.model.HomeItemModel
 import com.example.pocketjourney.model.HorizontalRecyclerItem
 
 class HorizontalItemAdapter(private val horizontalRecyclerItem: List<HorizontalRecyclerItem> ): RecyclerView.Adapter<HorizontalItemAdapter.RestaurantItemViewHolder>(){
 
     var onItemClick : ((HorizontalRecyclerItem) -> Unit)? = null
 
+    fun setOnItemClickListener(listener: (HorizontalRecyclerItem) -> Unit) {
+        onItemClick = listener
+    }
+
     class RestaurantItemViewHolder(binding: HorizontalViewDesignBinding): RecyclerView.ViewHolder(binding.root){
+        val id=binding.tvID
         val imageView = binding.itemImage
         val nomeRistorante = binding.titolo
         val numRecensioni = binding.numRecensioni
@@ -30,7 +36,9 @@ class HorizontalItemAdapter(private val horizontalRecyclerItem: List<HorizontalR
 
         val RestaurantItemModel = horizontalRecyclerItem[position]
 
-        holder.imageView.setImageResource(RestaurantItemModel.imageUrl)
+        holder.id.text=RestaurantItemModel.id.toString()
+
+        holder.imageView.setImageBitmap(RestaurantItemModel.imageUrl)
 
         holder.nomeRistorante.text = RestaurantItemModel.nomeRistorante
 
@@ -38,7 +46,7 @@ class HorizontalItemAdapter(private val horizontalRecyclerItem: List<HorizontalR
 
         holder.valutazione.text = RestaurantItemModel.valutazione
 
-        holder.ratingBarRist.rating = RestaurantItemModel.stelle
+        holder.ratingBarRist.rating=RestaurantItemModel.valutazione.toFloat()
 
         holder.testoVario.text = RestaurantItemModel.testoVario
 
@@ -57,12 +65,6 @@ class HorizontalItemAdapter(private val horizontalRecyclerItem: List<HorizontalR
 
     override fun getItemCount(): Int {
         return horizontalRecyclerItem.size
-    }
-
-    private var onItemClickListener: OnItemClickListener? = null
-
-    interface OnItemClickListener {
-        fun onItemClick(item: HorizontalRecyclerItem)
     }
 
 }

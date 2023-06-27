@@ -161,9 +161,7 @@ class ProfileFragment : Fragment() {
 
         binding.pagamentiButton.setOnClickListener(View.OnClickListener { view ->
             val childFragment = CreditCardFragment()
-            val bundle=Bundle()
-            bundle.putString("idUtente",idUtente)
-            childFragment.arguments=bundle
+            requireActivity().intent.putExtra("idUtente",idUtente)
             val fragmentTransaction = childFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.FragmentProfilo, childFragment)
             fragmentTransaction.addToBackStack(null)
