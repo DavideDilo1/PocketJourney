@@ -21,6 +21,8 @@ import androidx.core.app.ActivityOptionsCompat
 import com.example.pocketjourney.R
 import com.example.pocketjourney.database.ClientNetwork
 import com.example.pocketjourney.databinding.FragmentAnteprimaPostoBinding
+import com.example.pocketjourney.home.sezioniHome.AttrazioniFragment
+import com.example.pocketjourney.home.sezioniHome.HotelFragment
 import com.example.pocketjourney.home.sezioniHome.RistorantiFragment
 import com.google.gson.JsonObject
 import okhttp3.ResponseBody
@@ -163,10 +165,11 @@ class AnteprimaPostoFragment : Fragment() {
 
         second_back_arrow.setOnClickListener{
             val provenienza = requireActivity().intent.getStringExtra("provenienza")
-            val childFragment: Fragment = if (provenienza == "ristorantiFragment") {
-                RistorantiFragment()
-            } else {
-                HomeFragmentNew()
+            val childFragment: Fragment = when (provenienza) {
+                "ristorantiFragment" -> RistorantiFragment()
+                "hotelFragment" -> HotelFragment()
+                "attrazioniFragment" -> AttrazioniFragment()
+                else -> HomeFragmentNew()
             }
             val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.fragment_anteprima_posto, childFragment)

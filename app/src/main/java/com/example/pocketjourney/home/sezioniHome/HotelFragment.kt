@@ -1,5 +1,7 @@
 package com.example.pocketjourney.home.sezioniHome
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,16 +13,23 @@ import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pocketjourney.home.AnteprimaPostoFragment
 import com.example.pocketjourney.R
 import com.example.pocketjourney.adapter.HomeAdapter
 import com.example.pocketjourney.adapter.HorizontalItemAdapter
+import com.example.pocketjourney.database.ClientNetwork
 import com.example.pocketjourney.databinding.FragmentHotelBinding
 import com.example.pocketjourney.home.HomeFragmentNew
 import com.example.pocketjourney.model.HomeItemModel
 import com.example.pocketjourney.model.HorizontalRecyclerItem
+import com.google.gson.JsonObject
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class HotelFragment : Fragment() {
@@ -52,52 +61,18 @@ class HotelFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentHotelBinding.inflate(inflater)
+        val idUtente = requireActivity().intent.getStringExtra("idUtente")
+        Log.e("ATTENZIONEEEEE","HA APERTO LA ristoranti fragment " + idUtente)
 
-        binding.RecyclerViewOrizzontaleH.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-
-        val hotelItemList1 = ArrayList<HorizontalRecyclerItem>()
-
-
-        val hotelItemListAdapter1 = HorizontalItemAdapter(hotelItemList1)
-        binding.RecyclerViewOrizzontaleH.adapter = hotelItemListAdapter1
-
-
-        hotelItemListAdapter1.onItemClick = {
-
-            val bundle = Bundle()
-
-
-            val childFragment = AnteprimaPostoFragment()
-            childFragment.arguments=bundle
-            Log.i("Hotel", "ALmeno qua ci entro e creo il fragment?")
-
-            val fragmentManager = requireActivity().supportFragmentManager
-
-            fragmentManager.beginTransaction()
-                .replace(R.id.frameHotel, childFragment)
-                .addToBackStack(null)
-                .commit()
-
+        if (idUtente != null) {
+            setRecyclerView(idUtente.toInt())
+            setRecyclerViewOrizzontale(idUtente.toInt())
         }
 
-
-        val allTypeHotel = ArrayList<HomeItemModel>()
-        //un ITEM VIEW MODEL é FATTO: val image: Int, val title: String, val numRec: String, val valutazione: String, val stelle: Float
-
-
+        binding.RecyclerViewOrizzontaleH.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.RecyclerViewVerticaleH.layoutManager = LinearLayoutManager(requireContext())
 
-        val hotelAdapter = HomeAdapter(allTypeHotel)
-        binding.RecyclerViewVerticaleH.adapter = hotelAdapter
-
-
-
-
-
-
-        back_arrowH= binding.backArrowH
-
-        back_arrowH.setOnClickListener(){
+        binding.backArrowH.setOnClickListener(){
             val childFragment = HomeFragmentNew()
             val fragmentTransaction = childFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.frameHotel, childFragment)
@@ -133,6 +108,187 @@ class HotelFragment : Fragment() {
         searchView.animation = anim_from_right
 
         return binding.root
+    }
+
+    private fun setRecyclerView(idUtente: Int) {
+        val homeItem = ArrayList<HomeItemModel>()
+        val homeAdapter = HomeAdapter(homeItem)
+        //imposto adapter sulla recycler view
+        binding.RecyclerViewVerticaleH.adapter=homeAdapter
+
+        val queryPopolazioneLista= "SELECT idPosti,nome,valutazione,numRecensioni,foto FROM Posti WHERE categoria='Soggiorno'"
+        val userAPI= ClientNetwork.retrofit
+        val call = userAPI.cerca(queryPopolazioneLista)
+        call.enqueue(object : Callback<JsonObject> {
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                if (response.isSuccessful) {
+                    val jsonObject = response.body()
+                    Log.d("JSON", response.body().toString())
+                    // Verifica se il JSON object è stato ottenuto correttamente come queryset
+                    if (jsonObject != null && jsonObject.has("queryset") ) {
+                        Log.e("Ciao", "HO OTTENUTO IL JSONOBJECT come queryset per la popolazione" )
+                        //salvo l'array e verifico che contenga almeno un elemento
+                        val querySetArray = jsonObject.getAsJsonArray("queryset")
+                        Log.d("RISULTATO DELLA QUERY PER LA POPOLAZIONE", querySetArray.toString())
+                        if (querySetArray != null && querySetArray.size()>0){
+                            Log.e("Ciao", "sto per entrare nel for")
+                            for(i in querySetArray){
+                                var bitmap : Bitmap
+                                val elemento= i as JsonObject
+                                val foto=elemento.get("foto").asString
+                                val downloadFotoPosto=userAPI.getAvatar(foto)
+                                downloadFotoPosto.enqueue(object : Callback<ResponseBody> {
+                                    override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                                        Log.d("RESPONSE", response.isSuccessful.toString())
+                                        if (response.isSuccessful) {
+                                            Log.e("Ciao", "sono dentro il blocco della foto DENTRO IS SUCCESSFULL")
+                                            val responseBody = response.body()
+                                            if (responseBody != null) {
+                                                val inputStream = responseBody.byteStream()
+                                                bitmap = BitmapFactory.decodeStream(inputStream)
+                                                homeItem.add(
+                                                    HomeItemModel(
+                                                        elemento.get("idPosti").asInt,
+                                                        bitmap,
+                                                        elemento.get("nome").toString(),
+                                                        elemento.get("numRecensioni").toString(),
+                                                        elemento.get("valutazione").toString()
+                                                    )
+                                                )
+                                                // Aggiorna l'adapter dopo aver aggiunto l'elemento
+                                                homeAdapter.notifyDataSetChanged()
+                                            }
+                                            homeAdapter.setOnItemClickListener { homeItemModel ->
+                                                val id = homeItemModel.id
+                                                val childFragment = AnteprimaPostoFragment()
+                                                requireActivity().intent.putExtra("idPosto",id.toString())
+                                                requireActivity().intent.putExtra("idUtente",idUtente.toString())
+                                                requireActivity().intent.putExtra("provenienza","hotelFragment")
+                                                val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
+                                                fragmentTransaction.replace(R.id.frameNewHomeLayout, childFragment)
+                                                fragmentTransaction.addToBackStack(null)
+                                                fragmentTransaction.commit()
+                                            }
+
+                                        }
+                                        Log.d("DIMENSIONE DELLA HOME ITEM", homeItem.size.toString())
+                                    }
+
+                                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                                        Toast.makeText(requireContext(), "L'immagine non è stata trovata correttamente", Toast.LENGTH_SHORT).show()
+                                    }
+                                })
+
+                            }
+
+
+                            //configuriamo l'adapter con la recycler view
+                            binding.RecyclerViewVerticaleH.adapter = homeAdapter
+
+                        }
+                    }
+
+
+                }
+            }
+
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                // Si è verificato un errore durante la chiamata di rete online
+                Log.e("ciao", t.toString() + " " + t.message.toString())
+            }
+        })
+    }
+
+
+
+    private fun setRecyclerViewOrizzontale(idUtente: Int) {
+        val horizontalItem = ArrayList<HorizontalRecyclerItem>()
+        val horizontalAdapter = HorizontalItemAdapter(horizontalItem)
+        //imposto adapter sulla recycler view
+        binding.RecyclerViewOrizzontaleH.adapter=horizontalAdapter
+
+        val queryPopolazioneTop5= "SELECT idPosti,nome,valutazione,numRecensioni,foto,descrizione FROM Posti WHERE categoria='Soggiorno' ORDER BY valutazione DESC  LIMIT 5"
+        val userAPI= ClientNetwork.retrofit
+        val call = userAPI.cerca(queryPopolazioneTop5)
+        call.enqueue(object : Callback<JsonObject> {
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                if (response.isSuccessful) {
+                    val jsonObject = response.body()
+                    Log.d("JSON", response.body().toString())
+                    // Verifica se il JSON object è stato ottenuto correttamente come queryset
+                    if (jsonObject != null && jsonObject.has("queryset") ) {
+                        Log.e("Ciao", "HO OTTENUTO IL JSONOBJECT come queryset per la popolazione della recycler orizzontale" )
+                        //salvo l'array e verifico che contenga almeno un elemento
+                        val querySetArray = jsonObject.getAsJsonArray("queryset")
+                        Log.d("RISULTATO DELLA QUERY PER LA POPOLAZIONE ORIZZONTALE", querySetArray.toString())
+                        if (querySetArray != null && querySetArray.size()>0){
+                            Log.e("Ciao", "sto per entrare nel for DELLA RECYCLER ORIZZONTALE")
+                            for(i in querySetArray){
+                                var bitmap : Bitmap
+                                val elemento= i as JsonObject
+                                val foto=elemento.get("foto").asString
+                                val downloadFotoPosto=userAPI.getAvatar(foto)
+                                downloadFotoPosto.enqueue(object : Callback<ResponseBody> {
+                                    override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                                        Log.d("RESPONSE", response.isSuccessful.toString())
+                                        if (response.isSuccessful) {
+                                            Log.e("Ciao", "sono dentro il blocco della foto DENTRO IS SUCCESSFULL")
+                                            val responseBody = response.body()
+                                            if (responseBody != null) {
+                                                val inputStream = responseBody.byteStream()
+                                                bitmap = BitmapFactory.decodeStream(inputStream)
+                                                horizontalItem.add(
+                                                    HorizontalRecyclerItem(
+                                                        elemento.get("idPosti").asInt,
+                                                        bitmap,
+                                                        elemento.get("nome").toString(),
+                                                        elemento.get("numRecensioni").toString(),
+                                                        elemento.get("valutazione").toString(),
+                                                        elemento.get("descrizione").toString()
+                                                    )
+                                                )
+                                                // Aggiorna l'adapter dopo aver aggiunto l'elemento
+                                                horizontalAdapter.notifyDataSetChanged()
+                                            }
+                                            horizontalAdapter.setOnItemClickListener { horizontalRecyclerItem ->
+                                                val id = horizontalRecyclerItem.id
+                                                val childFragment = AnteprimaPostoFragment()
+                                                requireActivity().intent.putExtra("idPosto",id.toString())
+                                                requireActivity().intent.putExtra("idUtente",idUtente.toString())
+                                                requireActivity().intent.putExtra("provenienza","hotelFragment")
+                                                val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
+                                                fragmentTransaction.replace(R.id.frameNewHomeLayout, childFragment)
+                                                fragmentTransaction.addToBackStack(null)
+                                                fragmentTransaction.commit()
+                                            }
+
+                                        }
+                                        Log.d("DIMENSIONE DELLA HOME ITEM", horizontalItem.size.toString())
+                                    }
+
+                                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                                        Toast.makeText(requireContext(), "L'immagine non è stata trovata correttamente", Toast.LENGTH_SHORT).show()
+                                    }
+                                })
+
+                            }
+
+
+                            //configuriamo l'adapter con la recycler view
+                            binding.RecyclerViewOrizzontaleH.adapter = horizontalAdapter
+
+                        }
+                    }
+
+
+                }
+            }
+
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                // Si è verificato un errore durante la chiamata di rete online
+                Log.e("ciao", t.toString() + " " + t.message.toString())
+            }
+        })
     }
 
 }
