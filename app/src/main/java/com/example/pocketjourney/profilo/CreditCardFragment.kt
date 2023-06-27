@@ -79,7 +79,7 @@ class CreditCardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val idUtente = arguments?.getString("idUtente")
+        val idUtente = requireActivity().intent.getStringExtra("idUtente")
         Log.d("ciao sono on view created ho ottenuto ",idUtente.toString())
 
         binding.btnInserisciCarta.setOnClickListener{
@@ -107,6 +107,7 @@ class CreditCardFragment : Fragment() {
                             //salvo l'array e verifico che contenga almeno un elemento
                             val querySetArray = jsonObject.getAsJsonArray("queryset")
                             if (querySetArray != null && querySetArray.size()>0){
+                                Toast.makeText(requireContext(), "Elimina la carta corrente prima di inserirne una nuova.", Toast.LENGTH_SHORT).show()
                                 Log.e("ERRORE ", "UTENTE HA GIA UNA CARTA INSERITA")
                             }
                             else {
@@ -195,6 +196,7 @@ class CreditCardFragment : Fragment() {
 
                             }
                             else {
+                                Toast.makeText(requireContext(), "Nessuna carta da rimuovere trovata. ", Toast.LENGTH_SHORT).show()
                                 Log.e("ciao","utente non ha carta non ho cosa rimuovere")
                             }
                         }

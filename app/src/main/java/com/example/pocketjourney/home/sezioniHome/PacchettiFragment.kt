@@ -106,7 +106,7 @@ class PacchettiFragment : Fragment() {
                                                 requireActivity().intent.putExtra("idPacchetto",id.toString())
                                                 requireActivity().intent.putExtra("idUtente",idUtente.toString())
                                                 val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-                                                fragmentTransaction.replace(R.id.frameNewHomeLayout, childFragment)
+                                                fragmentTransaction.replace(R.id.framePacchetti, childFragment)
                                                 fragmentTransaction.addToBackStack(null)
                                                 fragmentTransaction.commit()
                                             }

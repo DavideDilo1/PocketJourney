@@ -159,14 +159,14 @@ class ProfileFragment : Fragment() {
             fragmentTransaction.commit()
         }
 
-        binding.pagamentiButton.setOnClickListener(View.OnClickListener { view ->
+        binding.pagamentiButton.setOnClickListener{
             val childFragment = CreditCardFragment()
             requireActivity().intent.putExtra("idUtente",idUtente)
             val fragmentTransaction = childFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.FragmentProfilo, childFragment)
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
-        })
+        }
 
 
         return binding.root
