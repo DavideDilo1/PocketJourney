@@ -36,8 +36,6 @@ class AttrazioniFragment : Fragment() {
 
     private lateinit var binding: FragmentAttrazioniBinding
 
-    private lateinit var back_arrowA: ImageView
-
     private lateinit var topImage:ImageView
 
     private lateinit var recyclerOrizzontale: RecyclerView
