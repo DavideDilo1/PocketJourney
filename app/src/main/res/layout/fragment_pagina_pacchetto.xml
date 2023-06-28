@@ -49,6 +49,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
+                android:id="@+id/firstLinearPack"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingLeft="8dp"
@@ -112,6 +113,7 @@
                         android:textSize="15sp" />
 
 
+
                 </LinearLayout>
 
                 <TextView
@@ -168,11 +170,61 @@
                     android:textColor="@color/white"
                     android:textSize="18sp" />
 
+
+
+
                 <TextView
+                    android:id="@+id/recensioniText5P"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:text="Lascia un tuo parere"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp" />
+
+                <RatingBar
+                    android:id="@+id/ratingBarRecensioneP"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Lascia una recensione"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="12dp"
+                    android:numStars="5"
+                    android:rating="0" />
+
+
+                <EditText
+                    android:id="@+id/titleReviewEditText3P"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@android:color/transparent"
+                    android:gravity="start|top"
+                    android:hint="Inserisci il titolo della recensione"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:minLines="1"
+                    android:padding="4dp"
+                    android:textSize="16sp"
+
                     />
+
+                <EditText
+                    android:id="@+id/reviewEditText3P"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@android:color/transparent"
+                    android:gravity="start|top"
+                    android:hint="Inserisci la tua recensione"
+                    android:inputType="textMultiLine"
+                    android:maxLines="5"
+                    android:minLines="3"
+                    android:padding="8dp"
+                    android:textSize="16sp" />
 
 
 
@@ -180,6 +232,53 @@
 
 
             </LinearLayout>
+
+
+
+            <TextView
+                android:id="@+id/testoPaginaPostoRec1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Scopri cos'hanno detto i nostri utenti:"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/open_sans_bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/firstLinearPack" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerPaginaPostoRecensioni"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="8dp"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/testoPaginaPostoRec1"
+                tools:listitem="@layout/recensioni_card_view_design" />
+
+            <TextView
+                android:id="@+id/scopriTutteLeRec2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="32dp"
+                android:fontFamily="@font/open_sans_semi_bold"
+                android:text="Scopri tutte le recensioni >"
+
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/recyclerPaginaPostoRecensioni" />
+
+
 
 
 

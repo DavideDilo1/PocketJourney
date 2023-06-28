@@ -18,6 +18,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import com.example.pocketjourney.R
+import com.example.pocketjourney.adapter.RecensioniAdapter
 import com.example.pocketjourney.database.ClientNetwork
 import com.example.pocketjourney.databinding.FragmentPaginaPostoBinding
 import com.google.gson.JsonObject
@@ -160,6 +161,21 @@ class PaginaPostoFragment : Fragment() {
             fragmentTransaction.commit()
 
         }
+
+        //TODO: AGGIUNGERE IL CORRETTO CAMBIO DI FRAGMENT
+        binding.scopriTutteLeRec.setOnClickListener {
+            //fai comparire fragment recensioni
+
+        }
+        //TODO: INSERIRE IN DATALIST LE RECENSIONI COSI DA LIMITARE IL NUMERO DI REC VISIBILI DALLA SCHERMATA POSTO
+
+       // val datalist = //lista delle recensioni
+
+        val maxItemsToShow = 3
+
+        //val adapter = RecensioniAdapter(dataList, maxItemsToShow)
+
+     //   binding.recyclerPaginaPostoRecensioni.adapter = adapter
 
 
 
