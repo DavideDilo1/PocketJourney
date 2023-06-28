@@ -53,7 +53,6 @@ class PaginaPostoFragment : Fragment() {
             val queryResult = jsonParser.parse(queryResultString).asJsonObject
 
             // Recupero tutti i valori della query
-            val idPosto = queryResult.get("idPosti")?.asString!!
             val nome = queryResult.get("nome")?.asString!!
             val citta = queryResult.get("citta")?.asString!!
             val paese = queryResult.get("paese")?.asString!!
