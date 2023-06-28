@@ -201,6 +201,7 @@ class HomeFragmentNew : Fragment() {
 
         binding.ideaButton.setOnClickListener{
             val childFragment = ConsigliatiFragment()
+            requireActivity().intent.putExtra("idUtente",idUtente)
             val fragmentTransaction = childFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.frameNewHomeLayout, childFragment)
             fragmentTransaction.addToBackStack(null)
@@ -274,10 +275,6 @@ class HomeFragmentNew : Fragment() {
                                                 val childFragment = AnteprimaPostoFragment()
                                                 requireActivity().intent.putExtra("idPosto",id.toString())
                                                 requireActivity().intent.putExtra("idUtente",idUtente.toString())
-                                               /* val bundle=Bundle()
-                                                bundle.putInt("idPosto",id)
-                                                bundle.putInt("idUtente",idUtente)
-                                                childFragment.arguments=bundle*/
                                                 val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
                                                 fragmentTransaction.replace(R.id.frameNewHomeLayout, childFragment)
                                                 fragmentTransaction.addToBackStack(null)

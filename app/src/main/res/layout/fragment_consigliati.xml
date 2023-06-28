@@ -30,7 +30,7 @@
 
 
         <ImageView
-            android:id="@+id/back_arrow"
+            android:id="@+id/back_arrowC"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="34dp"
@@ -78,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="152dp"
             android:fontFamily="@font/open_sans_semi_bold"
-            android:text="Cosa ti andrebbe di fare?"
+            android:text="Sto cercando un..."
             android:textColor="@color/colorPrimary"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -87,7 +87,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Spinner
-            android:id="@+id/spinnerConsigliati1"
+            android:id="@+id/spnCosaFare"
             android:layout_width="190dp"
             android:layout_height="40dp"
             android:layout_marginTop="24dp"
@@ -103,49 +103,59 @@
             android:id="@+id/testoConsigliati3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="96dp"
+            android:layout_marginTop="92dp"
             android:fontFamily="@font/open_sans_semi_bold"
             android:text="Dove vuoi andare?"
             android:textColor="@color/colorPrimary"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.121"
+            app:layout_constraintHorizontal_bias="0.178"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinnerConsigliati1" />
+            app:layout_constraintTop_toBottomOf="@+id/spnCosaFare" />
 
         <Spinner
-            android:id="@+id/spinnerConsigliati2"
-            android:layout_width="190dp"
+            android:id="@+id/spnPaese"
+            android:layout_width="120dp"
             android:layout_height="40dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="32dp"
             android:background="@drawable/custom_search_view"
-            android:entries="@array/cosaFareList"
+            android:entries="@array/paesi"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.805"
+            app:layout_constraintHorizontal_bias="0.189"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/testoConsigliati3" />
+
+        <Spinner
+            android:id="@+id/spnCitta"
+
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="68dp"
+            android:background="@drawable/custom_search_view"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/testoConsigliati3" />
 
         <TextView
             android:id="@+id/terzaDomandaConsigliati"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="36dp"
             android:fontFamily="@font/open_sans_semi_bold"
-            android:text="terza domanda?"
+            android:text="Che tipo di esperienza vuoi fare?"
             android:textColor="@color/colorPrimary"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.11"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinnerConsigliati2" />
+            app:layout_constraintTop_toBottomOf="@+id/spnPaese" />
 
         <Spinner
-            android:id="@+id/spinnerConsigliati3"
+            android:id="@+id/spinnerTipoAttivita"
             android:layout_width="190dp"
             android:layout_height="40dp"
             android:layout_marginTop="24dp"
             android:background="@drawable/custom_search_view"
-            android:entries="@array/cosaFareList"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.805"
             app:layout_constraintStart_toStartOf="parent"
@@ -160,7 +170,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinnerConsigliati3" />
+            app:layout_constraintTop_toBottomOf="@+id/spinnerTipoAttivita" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

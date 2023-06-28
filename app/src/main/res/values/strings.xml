@@ -70,23 +70,151 @@
     </string-array>
 
     <string-array name="numero_persone">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-        <item>8</item>
-        <item>9</item>
-        <item>10</item>
-    </string-array>
+     <item>1</item>
+    <item>2</item>
+    <item>3</item>
+    <item>4</item>
+    <item>5</item>
+    <item>6</item>
+    <item>7</item>
+    <item>8</item>
+    <item>9</item>
+    <item>10</item>
+</string-array>
 
     <string-array name="cosaFareList">
-        <item>Andare a mangiare</item>
-        <item>Fare qualcosa di divertente</item>
-        <item>Soggiornare</item>
+        <item>Ristorante</item>
+        <item>Attrazione</item>
+        <item>Soggiorno</item>
     </string-array>
+
+    <string-array name="paesi">
+        <item>Brasile</item>
+        <item>Canada</item>
+        <item>Cina</item>
+        <item>Francia</item>
+        <item>Germania</item>
+        <item>Grecia</item>
+        <item>Giappone</item>
+        <item>Irlanda</item>
+        <item>Italia</item>
+        <item>Paesi Bassi</item>
+        <item>Regno Unito</item>
+        <item>Spagna</item>
+        <item>Stati Uniti</item>
+        <item>Tailandia</item>
+    </string-array>
+
+    <string-array name="soggiorni">
+        <item>BeB</item>
+        <item>Hotel</item>
+        <item>Ostello</item>
+    </string-array>
+
+    <string-array name="ristoranti">
+        <item>Italiana</item>
+        <item>Fast Food</item>
+        <item>Giapponese</item>
+        <item>Cinese</item>
+    </string-array>
+
+    <string-array name="attrazioni">
+        <item>Monumento</item>
+        <item>Spiaggia</item>
+        <item>Escursione</item>
+        <item>Nightlife</item>
+    </string-array>
+
+
+
+    <string-array name="brasile_citta">
+        <item>Brasilia</item>
+        <item>Sao Paulo</item>
+        <item>Rio de Janeiro</item>
+    </string-array>
+
+    <string-array name="canada_citta">
+        <item>Toronto</item>
+        <item>Vancouver</item>
+        <item>Niagara Falls</item>
+    </string-array>
+
+    <string-array name="cina_citta">
+        <item>Pechino</item>
+        <item>Shanghai</item>
+        <item>Hong Kong</item>
+    </string-array>
+
+    <string-array name="francia_citta">
+        <item>Parigi</item>
+        <item>Nizza</item>
+        <item>Lione</item>
+    </string-array>
+
+    <string-array name="germania_citta">
+        <item>Berlino</item>
+        <item>Monaco di Baviera</item>
+        <item>Francoforte</item>
+    </string-array>
+
+    <string-array name="giappone_citta">
+        <item>Tokyo</item>
+        <item>Kyoto</item>
+        <item>Osaka</item>
+    </string-array>
+
+    <string-array name="grecia_citta">
+        <item>Atene</item>
+        <item>Santorini</item>
+        <item>Mykonos</item>
+    </string-array>
+
+    <string-array name="irlanda_citta">
+        <item>Dublino</item>
+        <item>Galway</item>
+        <item>Cork</item>
+    </string-array>
+
+    <string-array name="italia_citta">
+        <item>Roma</item>
+        <item>Firenze</item>
+        <item>Milano</item>
+        <item>Venezia</item>
+        <item>Palermo</item>
+        <item>Napoli</item>
+    </string-array>
+
+    <string-array name="paesibassi_citta">
+        <item>Amsterdam</item>
+        <item>Rotterdam</item>
+        <item>Aia</item>
+    </string-array>
+
+    <string-array name="regnounito_citta">
+        <item>Londra</item>
+        <item>Edimburgo</item>
+        <item>Manchester</item>
+    </string-array>
+
+    <string-array name="spagna_citta">
+        <item>Barcellona</item>
+        <item>Madrid</item>
+        <item>Valencia</item>
+    </string-array>
+
+    <string-array name="statiuniti_citta">
+        <item>New York</item>
+        <item>Los Angeles</item>
+        <item>Chicago</item>
+    </string-array>
+
+    <string-array name="tailandia_citta">
+        <item>Bangkok</item>
+        <item>Phuket</item>
+        <item>Chiang Mai</item>
+    </string-array>
+
+
 
 
 </resources>

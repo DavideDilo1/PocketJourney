@@ -23,6 +23,7 @@ import com.example.pocketjourney.database.ClientNetwork
 import com.example.pocketjourney.databinding.FragmentAnteprimaPostoBinding
 import com.example.pocketjourney.home.sezioniHome.AttrazioniFragment
 import com.example.pocketjourney.home.sezioniHome.HotelFragment
+import com.example.pocketjourney.home.sezioniHome.PaginaConsigliatiFragment
 import com.example.pocketjourney.home.sezioniHome.RistorantiFragment
 import com.google.gson.JsonObject
 import okhttp3.ResponseBody
@@ -48,7 +49,6 @@ class AnteprimaPostoFragment : Fragment() {
     private lateinit var from_right: Animation
     private lateinit var from_bottom: Animation
     private lateinit var queryResult: JsonObject
-    @TargetApi(Build.VERSION_CODES.S)
 
 
     override fun onCreateView(
@@ -169,6 +169,7 @@ class AnteprimaPostoFragment : Fragment() {
                 "ristorantiFragment" -> RistorantiFragment()
                 "hotelFragment" -> HotelFragment()
                 "attrazioniFragment" -> AttrazioniFragment()
+                "consigliati" -> PaginaConsigliatiFragment()
                 else -> HomeFragmentNew()
             }
             val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
