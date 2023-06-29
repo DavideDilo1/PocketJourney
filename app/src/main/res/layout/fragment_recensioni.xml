@@ -278,8 +278,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:listitem="@layout/recensioni_card_view_design"
-                app:layout_constraintTop_toBottomOf="@+id/recensioniText3" />
+                app:layout_constraintTop_toBottomOf="@+id/recensioniText3"
+                tools:listitem="@layout/recensioni_card_view_design" />
 
             <TextView
                 android:id="@+id/recensioniText3"
@@ -295,34 +295,35 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cardViewLasciaUnaRec" />
 
+
+            <RatingBar
+                android:id="@+id/ratingBarLasciaRecensione"
+                android:layout_width="236dp"
+                android:layout_height="42dp"
+                android:numStars="5"
+                android:rating="0"
+                android:scaleX="0.8"
+                android:scaleY="0.8"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recensioniText4" />
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardViewLasciaUnaRec"
                 android:layout_width="366dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="6dp"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recensioniText4">
+                app:layout_constraintTop_toBottomOf="@+id/ratingBarLasciaRecensione">
+
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-
-                    <RatingBar
-                        android:id="@+id/ratingBarLasciaRecensione"
-                        style="@style/Widget.AppCompat.RatingBar.Small"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="6dp"
-                        android:layout_marginTop="12dp"
-                        android:numStars="5"
-                        android:rating="0"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
 
 
                     <EditText
@@ -331,7 +332,6 @@
                         android:layout_width="0dp"
                         android:layout_height="30dp"
                         android:layout_marginStart="6dp"
-                        android:layout_marginTop="6dp"
                         android:layout_marginEnd="6dp"
                         android:background="@drawable/recensioni_border"
                         android:gravity="start|top"
@@ -345,7 +345,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/ratingBarLasciaRecensione"
+                        app:layout_constraintTop_toBottomOf="parent"
                         app:layout_constraintVertical_bias="0.0"
                         app:layout_constraintVertical_chainStyle="packed" />
 
@@ -377,11 +377,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:backgroundTint="@color/white"
-                        android:textColor="@color/black"
-
                         android:text="Invia recensione"
 
                         android:textAllCaps="false"
+
+                        android:textColor="@color/black"
                         android:textSize="13sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -407,7 +407,6 @@
                 app:layout_constraintHorizontal_bias="0.056"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardViewRatingRecensioni" />
-
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
