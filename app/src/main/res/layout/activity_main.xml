@@ -31,6 +31,7 @@
             android:layout_marginTop="12dp"
             android:background="@drawable/login_edit_background"
             android:ems="10"
+            android:textColor="@color/colorPrimary"
             android:hint="Email"
             android:inputType="textEmailAddress"
             android:padding="10dp"

@@ -1,6 +1,7 @@
 package com.example.pocketjourney.home
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -37,6 +38,22 @@ class RecensioniFragment : Fragment() {
         averageProgressBar.progress = numRecensioniNellaMedia
         poorProgressBar.progress = numRecensioniScarse
         terribleProgressBar.progress = numRecensioniTerribili
+
+
+        val ratingBar = binding.ratingBarLasciaRecensione
+        var selectedRating = 0.0f
+        var titleRecText = ""
+        var testoRec = ""
+        ratingBar.apply {
+            setOnRatingBarChangeListener { ratingBar, rating, fromUser ->
+                Log.i("ciao", "$rating")
+                selectedRating = rating
+            }
+
+        }
+
+         titleRecText= binding.titleReviewEditText.text.toString()
+         testoRec =  binding.reviewEditText.text.toString()
 
         return binding.root
     }

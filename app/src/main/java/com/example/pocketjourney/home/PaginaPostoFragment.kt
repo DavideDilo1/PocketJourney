@@ -18,7 +18,6 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import com.example.pocketjourney.R
 import com.example.pocketjourney.database.ClientNetwork
-import com.example.pocketjourney.database.DBManager
 import com.example.pocketjourney.databinding.FragmentPaginaPostoBinding
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
@@ -154,7 +153,7 @@ class PaginaPostoFragment : Fragment() {
 
         }
 
-        val ratingBarRecensione = binding.root.findViewById<RatingBar>(R.id.ratingBarRecensione)
+        val ratingBarRecensione = binding.root.findViewById<RatingBar>(R.id.ratingBarLasciaRecensione)
         ratingBarRecensione.setOnRatingBarChangeListener { ratingBarRecensione, rating, fromUser ->
             selectedRating = rating
             Log.e("ciao", selectedRating.toString())
