@@ -102,9 +102,10 @@ class PacchettiFragment : Fragment() {
                                             }
                                             homeAdapter.setOnItemClickListener { homeItemModel ->
                                                 val id = homeItemModel.id
-                                                val childFragment = AnteprimaPostoFragment()
+                                                val childFragment = PaginaPacchettoFragment()
                                                 requireActivity().intent.putExtra("idPacchetto",id.toString())
                                                 requireActivity().intent.putExtra("idUtente",idUtente.toString())
+                                                Log.d("CIAO SONO IL CLICK LISTENER STO PASSANDO", id.toString() + idUtente.toString())
                                                 val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
                                                 fragmentTransaction.replace(R.id.framePacchetti, childFragment)
                                                 fragmentTransaction.addToBackStack(null)

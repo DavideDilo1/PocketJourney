@@ -15,7 +15,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".home.PaginaPostoFragment"
-    android:id="@+id/fragment_pagina_posto"
+    android:id="@+id/fragment_pagina_pacchetto"
     android:background="@color/white">
 <ScrollView
     android:layout_width="match_parent"

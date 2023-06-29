@@ -13,15 +13,12 @@ import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
-import android.widget.ScrollView
 import android.widget.Toast
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import com.example.pocketjourney.R
-import com.example.pocketjourney.adapter.RecensioniAdapter
 import com.example.pocketjourney.database.ClientNetwork
 import com.example.pocketjourney.databinding.FragmentPaginaPostoBinding
-import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -138,7 +135,7 @@ class PaginaPostoFragment : Fragment() {
             val childFragment = AnteprimaPostoFragment()
             val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
             childFragment.arguments = options
-            fragmentTransaction.replace(R.id.fragment_pagina_posto, childFragment)
+            fragmentTransaction.replace(R.id.fragment_pagina_pacchetto, childFragment)
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
 
@@ -156,7 +153,7 @@ class PaginaPostoFragment : Fragment() {
             requireActivity().intent.putExtra("categoria",categoria)
             requireActivity().intent.putExtra("nomePosto",nomePosto)
             val fragmentTransaction = childFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.fragment_pagina_posto, childFragment)
+            fragmentTransaction.replace(R.id.fragment_pagina_pacchetto, childFragment)
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
 
