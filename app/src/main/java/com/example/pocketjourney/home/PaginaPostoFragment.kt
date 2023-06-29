@@ -9,28 +9,32 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
+import android.widget.RatingBar
 import android.widget.Toast
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import com.example.pocketjourney.R
 import com.example.pocketjourney.database.ClientNetwork
+import com.example.pocketjourney.database.DBManager
 import com.example.pocketjourney.databinding.FragmentPaginaPostoBinding
+import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class PaginaPostoFragment : Fragment() {
     private lateinit var binding: FragmentPaginaPostoBinding
     private lateinit var down_arrow: ImageView
     private lateinit var from_bottom: Animation
-
+    private var selectedRating:Float=0f
 
     @TargetApi(Build.VERSION_CODES.S)
 
@@ -111,21 +115,6 @@ class PaginaPostoFragment : Fragment() {
         down_arrow.setAnimation(from_bottom)
 
 
-        requireActivity().window.apply {
-            setFlags(
-                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
-            )
-            decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                    or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                    or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                    or View.SYSTEM_UI_FLAG_FULLSCREEN
-                    or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                    )
-        }
-
-
         down_arrow.setOnClickListener{
             val pairs = arrayOf<Pair<View, String>>(
                 Pair(down_arrow, "background_image_transition")
@@ -164,21 +153,61 @@ class PaginaPostoFragment : Fragment() {
             //fai comparire fragment recensioni
 
         }
-        //TODO: INSERIRE IN DATALIST LE RECENSIONI COSI DA LIMITARE IL NUMERO DI REC VISIBILI DALLA SCHERMATA POSTO
 
-       // val datalist = //lista delle recensioni
+        val ratingBarRecensione = binding.root.findViewById<RatingBar>(R.id.ratingBarRecensione)
+        ratingBarRecensione.setOnRatingBarChangeListener { ratingBarRecensione, rating, fromUser ->
+            selectedRating = rating
+            Log.e("ciao", selectedRating.toString())
+        }
 
-        val maxItemsToShow = 3
 
-        //val adapter = RecensioniAdapter(dataList, maxItemsToShow)
+        binding.sendReviewButton.setOnClickListener {
+            val titolo = binding.titleReviewEditText.text.toString()
+            val testo=binding.reviewEditText.text.toString()
+            val currentDate = Date()
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            val formattedDate = dateFormat.format(currentDate)
 
-     //   binding.recyclerPaginaPostoRecensioni.adapter = adapter
-
+            if (titolo!=null && testo!=null && selectedRating!=0f && idUtente!=null && idPosto!=null){
+                inserisciRecensione(idUtente,idPosto,titolo,testo,selectedRating,formattedDate)
+            }
+        }
 
 
 
 
         return binding.root
     }
+
+    private fun inserisciRecensione(
+        idUtente: String,
+        idPosto: String,
+        titolo: String,
+        testo: String,
+        rating: Float,
+        formattedDate: String
+    ) {
+            //dati utili per l'inserimetno in locale
+            Log.d("DATI OFFLINE=",idPosto + " " + idUtente + " " + titolo + " " + rating.toString() + " "+ formattedDate + " " + testo)
+            val userAPI = ClientNetwork.retrofit
+            val queryinserisciRecensione = "INSERT INTO RecensioniPosti (ref_utente, ref_posto, valutazione, titolo, testo, data) VALUES ('$idUtente', '$idPosto', '$titolo','$testo','$rating','$formattedDate')"
+            val call = userAPI.inserisci(queryinserisciRecensione)
+            call.enqueue(object : Callback<JsonObject> {
+                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                    if (response.isSuccessful) {
+                        // L'inserimento della carta è avvenuto
+                        Log.e("ciao","Recensione inserita")
+                    }
+                }
+
+                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                    // Si è verificato un errore durante la chiamata di rete online
+                    //Toast.makeText(requireContext(), t.toString() + " " + t.message.toString(), Toast.LENGTH_SHORT).show()
+                    Log.e("ciao",t.toString() + " " + t.message.toString())
+                }
+            })
+    }
+
+
 
 }
