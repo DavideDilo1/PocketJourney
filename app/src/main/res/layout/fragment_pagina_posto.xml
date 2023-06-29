@@ -228,13 +228,11 @@
 
                     <RatingBar
                         android:id="@+id/ratingBarLasciaRecensione"
-                        style="@style/Widget.AppCompat.RatingBar.Small"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="6dp"
                         android:layout_marginTop="12dp"
                         android:numStars="5"
-                        android:rating="0"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"

@@ -153,10 +153,10 @@ class PaginaPostoFragment : Fragment() {
 
         }
 
-        val ratingBarRecensione = binding.root.findViewById<RatingBar>(R.id.ratingBarLasciaRecensione)
-        ratingBarRecensione.setOnRatingBarChangeListener { ratingBarRecensione, rating, fromUser ->
-            selectedRating = rating
-            Log.e("ciao", selectedRating.toString())
+        binding.ratingBarLasciaRecensione.apply {
+            setOnRatingBarChangeListener{ _, rating, _ ->
+                Log.e("CIAO", "$rating")
+            }
         }
 
 
@@ -167,7 +167,7 @@ class PaginaPostoFragment : Fragment() {
             val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
             val formattedDate = dateFormat.format(currentDate)
 
-            if (titolo!=null && testo!=null && selectedRating!=0f && idUtente!=null && idPosto!=null){
+            if (selectedRating!=0f && idUtente!=null && idPosto!=null){
                 inserisciRecensione(idUtente,idPosto,titolo,testo,selectedRating,formattedDate)
             }
         }
