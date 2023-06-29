@@ -20,6 +20,18 @@
             android:layout_height="match_parent">
 
 
+            <ImageView
+                android:id="@+id/back_arrowRec"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fillColor="@color/colorPrimary"
+                android:src="@drawable/baseline_arrow_back_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.041"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/titoloPostoRec"
                 android:layout_width="wrap_content"
@@ -118,13 +130,13 @@
                         android:id="@+id/EccellenteText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
+                        android:layout_marginStart="24dp"
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/open_sans_light"
                         android:text="Eccellente"
                         android:textColor="@color/colorPrimary"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.052"
+                        app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -181,66 +193,76 @@
                     <ProgressBar
                         android:id="@+id/excellentProgressBar"
                         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                        android:layout_width="220dp"
+                        android:layout_width="0dp"
                         android:layout_height="18dp"
+                        android:layout_marginStart="140dp"
                         android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
                         android:max="100"
                         android:progress="0"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.649"
-                        app:layout_constraintStart_toEndOf="@+id/EccellenteText"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <ProgressBar
                         android:id="@+id/goodProgressBar"
                         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                        android:layout_width="220dp"
+                        android:layout_width="0dp"
                         android:layout_height="18dp"
+                        android:layout_marginStart="140dp"
                         android:layout_marginTop="10dp"
+                        android:layout_marginEnd="16dp"
                         android:max="100"
                         android:progress="0"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.459"
-                        app:layout_constraintStart_toEndOf="@+id/MoltoBuonoText"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/excellentProgressBar" />
 
                     <ProgressBar
                         android:id="@+id/averageProgressBar"
                         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                        android:layout_width="220dp"
+                        android:layout_width="0dp"
                         android:layout_height="16dp"
+                        android:layout_marginStart="140dp"
                         android:layout_marginTop="10dp"
+                        android:layout_marginEnd="16dp"
                         android:max="100"
                         android:progress="0"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.545"
-                        app:layout_constraintStart_toEndOf="@+id/NellaMediaText"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/goodProgressBar" />
 
                     <ProgressBar
                         android:id="@+id/poorProgressBar"
                         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                        android:layout_width="220dp"
+                        android:layout_width="0dp"
                         android:layout_height="18dp"
+                        android:layout_marginStart="140dp"
                         android:layout_marginTop="10dp"
+                        android:layout_marginEnd="16dp"
                         android:max="100"
                         android:progress="0"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.74"
-                        app:layout_constraintStart_toEndOf="@+id/ScarsoText"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/averageProgressBar" />
 
                     <ProgressBar
                         android:id="@+id/terribleProgressBar"
                         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                        android:layout_width="220dp"
+                        android:layout_width="0dp"
                         android:layout_height="18dp"
+                        android:layout_marginStart="140dp"
                         android:layout_marginTop="10dp"
+                        android:layout_marginEnd="16dp"
                         android:max="100"
                         android:progress="0"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.696"
-                        app:layout_constraintStart_toEndOf="@+id/PessimoText"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/poorProgressBar" />
 
 
@@ -263,7 +285,7 @@
                 android:id="@+id/recensioniText3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 android:fontFamily="@font/open_sans_regular"
                 android:text="Cosa dicono di noi"
                 android:textColor="@color/colorPrimary"
@@ -271,45 +293,106 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.058"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/reviewEditText" />
+                app:layout_constraintTop_toBottomOf="@id/cardViewLasciaUnaRec" />
 
-            <EditText
-                android:id="@+id/titleReviewEditText"
-                android:layout_width="293dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:background="@android:color/transparent"
-                android:gravity="start|top"
-                android:hint="Inserisci il titolo della recensione"
-                android:inputType="text"
-                android:maxLines="1"
-                android:minLines="1"
-                android:padding="4dp"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ratingBarRecensione" />
-
-            <EditText
-                android:id="@+id/reviewEditText"
-                android:layout_width="match_parent"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewLasciaUnaRec"
+                android:layout_width="366dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:background="@android:color/transparent"
-                android:gravity="start|top"
-                android:hint="Inserisci la tua recensione"
-                android:inputType="textMultiLine"
-                android:maxLines="5"
-                android:minLines="3"
-                android:padding="8dp"
-                android:textSize="16sp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/titleReviewEditText" />
+                app:layout_constraintTop_toBottomOf="@+id/recensioniText4">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RatingBar
+                        android:id="@+id/ratingBarRecensione"
+                        style="@style/Widget.AppCompat.RatingBar.Small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginTop="12dp"
+                        android:numStars="5"
+                        android:rating="0"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <EditText
+
+                        android:id="@+id/titleReviewEditText"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginEnd="6dp"
+                        android:background="@drawable/recensioni_border"
+                        android:gravity="start|top"
+                        android:hint="Inserisci il titolo della recensione"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:minLines="1"
+                        android:padding="4dp"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toTopOf="@+id/reviewEditText"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/ratingBarRecensione"
+                        app:layout_constraintVertical_bias="0.0"
+                        app:layout_constraintVertical_chainStyle="packed" />
+
+                    <EditText
+                        android:id="@+id/reviewEditText"
+                        android:layout_width="0dp"
+                        android:layout_height="80dp"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginEnd="6dp"
+                        android:layout_marginBottom="6dp"
+                        android:background="@drawable/recensioni_border"
+                        android:gravity="start|top"
+                        android:hint="Inserisci la tua recensione"
+                        android:inputType="textMultiLine"
+                        android:maxLines="5"
+                        android:minLines="3"
+                        android:padding="8dp"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/titleReviewEditText" />
+
+                    <Button
+                        android:id="@+id/sendReviewButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:backgroundTint="@color/white"
+                        android:textColor="@color/black"
+
+                        android:text="Invia recensione"
+
+                        android:textAllCaps="false"
+                        android:textSize="13sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.942"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/reviewEditText"
+                        app:layout_constraintVertical_bias="0.0" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.cardview.widget.CardView>
 
             <TextView
                 android:id="@+id/recensioniText4"
@@ -325,18 +408,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardViewRatingRecensioni" />
 
-            <RatingBar
-                android:id="@+id/ratingBarRecensione"
-                style="@style/Widget.AppCompat.RatingBar.Small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:numStars="5"
-                android:rating="0"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.057"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recensioniText4" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
