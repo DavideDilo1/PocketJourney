@@ -13,11 +13,14 @@ import com.example.pocketjourney.database.ClientNetwork
 import com.example.pocketjourney.database.DBManager
 import com.example.pocketjourney.databinding.FragmentPaginaPacchettoBinding
 import com.example.pocketjourney.home.PaginaPostoFragment
+import com.example.pocketjourney.home.RecensioniFragment
 import com.google.gson.JsonObject
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class PaginaPacchettoFragment : Fragment() {
@@ -32,6 +35,7 @@ class PaginaPacchettoFragment : Fragment() {
     private lateinit var nomeRistorante:String
     private lateinit var nomeSoggiorno:String
     private lateinit var nomeAttrazione:String
+    private var selectedRating:Float=0f
 
     private lateinit var binding: FragmentPaginaPacchettoBinding
 
@@ -143,31 +147,9 @@ class PaginaPacchettoFragment : Fragment() {
 
         }
 
-      /*  binding.scopriTutteLeRec2.setOnClickListener {
-            //fai comparire fragment recensioni
-
-        }*/
-        //TODO: INSERIRE IN DATALIST LE RECENSIONI COSI DA LIMITARE IL NUMERO DI REC VISIBILI DALLA SCHERMATA POSTO
-
-        // val datalist = //lista delle recensioni
-
-      //  val maxItemsToShow = 3
-
-        //val adapter = RecensioniAdapter(dataList, maxItemsToShow)
-
-        //   binding.recyclerPaginaPostoRecensioni.adapter = adapter
-
-
-        return binding.root
-    }
-
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         binding.prenotaAdessoButton.setOnClickListener{
             val idUtente = requireActivity().intent.getStringExtra("idUtente")
-            val idPacchetto= requireActivity().intent.getStringExtra("idPacchetto")
             verificaCartaDiCredito(idUtente) { bool ->
                 if (bool) {
                     // L'utente ha la carta di credito
@@ -183,13 +165,36 @@ class PaginaPacchettoFragment : Fragment() {
             }
         }
 
+        binding.ratingBarLasciaRecensione.apply {
+            setOnRatingBarChangeListener{ _, rating, _ ->
+                selectedRating=rating
+                Log.e("ciao", selectedRating.toString())
+            }
+        }
 
+        binding.sendReviewButton.setOnClickListener {
+            val titolo = binding.titleReviewEditText.text.toString()
+            val testo=binding.reviewEditText.text.toString()
+            val currentDate = Date()
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            val formattedDate = dateFormat.format(currentDate)
 
+            if (selectedRating!=0f && idUtente!=null && idPacchetto!=null){
+                inserisciRecensione(idUtente,idPacchetto,titolo,testo,selectedRating,formattedDate)
+                Log.d("sto passando a inserisci recensione:",idUtente+idPacchetto+titolo+testo+selectedRating+formattedDate)
+            }
+        }
 
-
-
-
-
+        binding.scopriTutteLeRec2.setOnClickListener {
+            val childFragment = RecensioniFragment()
+            requireActivity().intent.putExtra("idPack",idPacchetto)
+            requireActivity().intent.putExtra("idUtente",idUtente)
+            requireActivity().intent.putExtra("provenienzaRec","pacchetto")
+            val fragmentTransaction = childFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.fragment_pagina_pacchetto, childFragment)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
 
         binding.downArrowP.setOnClickListener{
             val childFragment = PacchettiFragment()
@@ -198,6 +203,8 @@ class PaginaPacchettoFragment : Fragment() {
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
+
+        return binding.root
     }
 
 
@@ -262,9 +269,37 @@ class PaginaPacchettoFragment : Fragment() {
                                 ora,
                             )
                         }
-                        Log.d("NEL DB MANAGER HO INSERITO", email + nome + dataPrenotazione + numPersone + ora)
-                        Toast.makeText(requireContext(), "Registrazione avvenuta con successo!", Toast.LENGTH_SHORT).show()
                     }
+                    Toast.makeText(requireContext(), "Prenotazione avvenuta con successo!", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                // Si è verificato un errore durante la chiamata di rete online
+                //Toast.makeText(requireContext(), t.toString() + " " + t.message.toString(), Toast.LENGTH_SHORT).show()
+                Log.e("ciao",t.toString() + " " + t.message.toString())
+            }
+        })
+    }
+
+    private fun inserisciRecensione(
+        idUtente: String,
+        idPacchetto: String,
+        titolo: String,
+        testo: String,
+        rating: Float,
+        formattedDate: String
+    ) {
+        Log.d("DATI OFFLINE=",idPacchetto + " " + idUtente + " " + titolo + " " + rating.toString() + " "+ formattedDate + " " + testo + " "+ rating)
+        val userAPI = ClientNetwork.retrofit
+        val queryinserisciRecensione = "INSERT INTO RecensioniPacchetti (ref_utente, ref_pacchetto, titolo, testo, valutazione, data) VALUES ('$idUtente', '$idPacchetto', '$titolo','$testo','$rating','$formattedDate')"
+        val call = userAPI.inserisci(queryinserisciRecensione)
+        Log.d("query:",queryinserisciRecensione)
+        call.enqueue(object : Callback<JsonObject> {
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                if (response.isSuccessful) {
+                    // L'inserimento della carta è avvenuto
+                    Log.e("ciao","Recensione inserita")
                     Toast.makeText(requireContext(), "Prenotazione avvenuta con successo!", Toast.LENGTH_SHORT).show()
                 }
             }

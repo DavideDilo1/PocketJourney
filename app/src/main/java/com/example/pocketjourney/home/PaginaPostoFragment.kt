@@ -149,13 +149,20 @@ class PaginaPostoFragment : Fragment() {
 
         //TODO: AGGIUNGERE IL CORRETTO CAMBIO DI FRAGMENT
         binding.scopriTutteLeRec.setOnClickListener {
-            //fai comparire fragment recensioni
-
+            val childFragment = RecensioniFragment()
+            requireActivity().intent.putExtra("idPosto",idPosto)
+            requireActivity().intent.putExtra("provenienzaRec","postoSemplice")
+            requireActivity().intent.putExtra("idUtente",idUtente)
+            val fragmentTransaction = childFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.fragment_pagina_pacchetto, childFragment)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
         }
 
         binding.ratingBarLasciaRecensione.apply {
             setOnRatingBarChangeListener{ _, rating, _ ->
-                Log.e("CIAO", "$rating")
+                selectedRating=rating
+                Log.e("ciao", selectedRating.toString())
             }
         }
 
@@ -187,9 +194,9 @@ class PaginaPostoFragment : Fragment() {
         formattedDate: String
     ) {
             //dati utili per l'inserimetno in locale
-            Log.d("DATI OFFLINE=",idPosto + " " + idUtente + " " + titolo + " " + rating.toString() + " "+ formattedDate + " " + testo)
+            Log.d("DATI OFFLINE=",idPosto + " " + idUtente + " " + titolo + " " + rating.toString() + " "+ formattedDate + " " + testo + " "+ rating)
             val userAPI = ClientNetwork.retrofit
-            val queryinserisciRecensione = "INSERT INTO RecensioniPosti (ref_utente, ref_posto, valutazione, titolo, testo, data) VALUES ('$idUtente', '$idPosto', '$titolo','$testo','$rating','$formattedDate')"
+            val queryinserisciRecensione = "INSERT INTO RecensioniPosti (ref_utente, ref_posto, titolo, testo, valutazione, data) VALUES ('$idUtente', '$idPosto', '$titolo','$testo','$rating','$formattedDate')"
             val call = userAPI.inserisci(queryinserisciRecensione)
             call.enqueue(object : Callback<JsonObject> {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {

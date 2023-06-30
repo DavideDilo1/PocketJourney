@@ -68,50 +68,11 @@ class HomeFragmentNew : Fragment() {
 
         binding.homeRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-
-        //un ITEM VIEW MODEL é FATTO: val image: Int, val title: String, val numRec: String, val valutazione: String, val stelle: Float
-
-
-        //passiamo l'array list all'adapter:
-
-       // val homeAdapter = HomeAdapter(homeItem)
-
-        //configuriamo l'adapter con la recycler view
-       // binding.homeRecyclerView.adapter = homeAdapter
         Log.e("ATTENZIONEEEEE","HA APERTO LA HOME" + idUtente)
         if (idUtente != null) {
                 setRecyclerView(idUtente.toInt())
 
         }
-   /*     homeAdapter.onItemClick = {
-
-            val bundle = Bundle()
-            bundle.putParcelable("home", it)
-
-            val childFragment = AnteprimaPostoFragment()
-            childFragment.arguments=bundle
-
-            val fragmentManager = requireActivity().supportFragmentManager
-
-            fragmentManager.beginTransaction()
-                .replace(R.id.frameNewHomeLayout, childFragment)
-                .addToBackStack(null)
-                .commit()
-
-        } */
-
-       //onclick listener su un elemento della recycler.
-
-
-
-
-
-
-
-        // cardView = binding.cardView
-        // cardView2 = binding.cardView2
-        // cardView3 = binding.cardView3
-
 
         //TODO: aggiungere le animazioni alla recycler view
 
@@ -171,9 +132,6 @@ class HomeFragmentNew : Fragment() {
             }
         }*/
 
-        ideaButton.setOnClickListener{
-            //TODO: implementare le schermate idea
-        }
 
         ristorantiButton.setOnClickListener(View.OnClickListener { view ->
             val childFragment = RistorantiFragment()
@@ -220,8 +178,6 @@ class HomeFragmentNew : Fragment() {
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
-
-
         return binding.root
     }
 

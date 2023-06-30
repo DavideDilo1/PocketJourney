@@ -26,6 +26,8 @@ class RecensioniAdapter(private val mList: List<RecensioniModel>) : RecyclerView
         holder.testoRecensione.text = recensioniModel.testoRecensione
 
         holder.ratingBarRec.rating = recensioniModel.numStelle
+
+        holder.data.text=recensioniModel.data
     }
 
 
@@ -40,6 +42,7 @@ class RecensioniAdapter(private val mList: List<RecensioniModel>) : RecyclerView
         val titoloRecensione = binding.titoloRecensione
         val testoRecensione = binding.testoRecensione
         val ratingBarRec = binding.ratingBarRecensioneLay
+        val data=binding.dataRecensione
     }
 
 }
