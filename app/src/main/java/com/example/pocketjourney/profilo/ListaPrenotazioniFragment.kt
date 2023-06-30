@@ -22,8 +22,6 @@ import retrofit2.Response
 
 class ListaPrenotazioniFragment : Fragment() {
     private lateinit var binding: FragmentListaPrenotazioniBinding
-    private lateinit var databaseHelper: DbHelper
-    private lateinit var bookRecycle: RecyclerView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,10 +42,7 @@ class ListaPrenotazioniFragment : Fragment() {
             }
         }
 
-        return binding.root
-    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.backArrowR.setOnClickListener {
             val childFragment = ProfileFragment()
             val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
@@ -55,6 +50,8 @@ class ListaPrenotazioniFragment : Fragment() {
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
+
+        return binding.root
     }
 
     private fun setRecyclerView(idUtente: String) {

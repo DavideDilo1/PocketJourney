@@ -72,6 +72,9 @@ class HomeFragmentNew : Fragment() {
         if (idUtente != null) {
                 setRecyclerView(idUtente.toInt())
 
+        } else {
+            binding.normalConstraintHome.visibility=View.GONE
+            binding.errorConstraint.visibility=View.VISIBLE
         }
 
         //TODO: aggiungere le animazioni alla recycler view
@@ -209,9 +212,7 @@ class HomeFragmentNew : Fragment() {
                                     val downloadFotoPosto=userAPI.getAvatar(foto)
                                     downloadFotoPosto.enqueue(object : Callback<ResponseBody> {
                                         override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                                            Log.d("RESPONSE", response.isSuccessful.toString())
                                             if (response.isSuccessful) {
-                                                Log.e("Ciao", "sono dentro il blocco della foto DENTRO IS SUCCESSFULL")
                                                 val responseBody = response.body()
                                                 if (responseBody != null) {
                                                     val inputStream = responseBody.byteStream()
@@ -240,10 +241,12 @@ class HomeFragmentNew : Fragment() {
                                                 }
 
                                             }
-                                            Log.d("DIMENSIONE DELLA HOME ITEM", homeItem.size.toString())
                                         }
 
                                         override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                                            Log.e("sono","nel primo on failure")
+                                            binding.normalConstraintHome.visibility=View.GONE
+                                            binding.errorConstraint.visibility=View.VISIBLE
                                             Toast.makeText(requireContext(), "L'immagine non è stata trovata correttamente", Toast.LENGTH_SHORT).show()
                                         }
                                     })
@@ -263,7 +266,9 @@ class HomeFragmentNew : Fragment() {
 
                 override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                     // Si è verificato un errore durante la chiamata di rete online
-                    Log.e("ciao", t.toString() + " " + t.message.toString())
+                    Log.e("sono","nel secondo on failure")
+                    binding.normalConstraintHome.visibility=View.GONE
+                    binding.errorConstraint.visibility=View.VISIBLE
                 }
             })
         }

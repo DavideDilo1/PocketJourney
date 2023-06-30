@@ -6,7 +6,8 @@
     android:id="@+id/frameLeMieRecensioni"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".profilo.LeMieRecensioniFragment">
+    tools:context=".profilo.LeMieRecensioniFragment"
+    android:background="@color/white">
 
 
 
@@ -45,13 +46,13 @@
 
 
         <ImageView
-            android:visibility="gone"
+            android:id="@+id/nessunaRecImg"
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/nessun_dato_img"
-            android:id="@+id/nessunaRecImg"
-
+            android:visibility="gone"
+            android:layout_marginTop="98dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

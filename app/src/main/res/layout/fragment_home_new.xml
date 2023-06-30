@@ -10,16 +10,17 @@
     android:id="@+id/frameNewHomeLayout"
     tools:context=".home.HomeFragmentNew"
     >
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:visibility="gone"
         android:id="@+id/errorConstraint"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
         <TextView
+            android:id="@+id/textErrorHome3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textErrorHome3"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/open_sans_extra_bold"
             android:text="Home"
@@ -28,8 +29,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.048"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/image404Home"
@@ -83,29 +83,29 @@
         android:layout_height="match_parent">
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:visibility="visible"
-            android:layout_width="match_parent"
-            android:id="@+id/normalConstraintHome"
-            android:layout_height="match_parent"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/normalConstraintHome"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible"
 
-            >
-
-
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/imageBackground"
-                android:layout_width="0dp"
-                android:layout_height="250dp"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/design_blue_background"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:shapeAppearanceOverlay="@style/roundImageView" />
+                >
 
 
-            <!--androidx.appcompat.widget.SearchView
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imageBackground"
+                    android:layout_width="0dp"
+                    android:layout_height="250dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/design_blue_background"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shapeAppearanceOverlay="@style/roundImageView" />
+
+
+                <!--androidx.appcompat.widget.SearchView
                 QUesta è la vecchia barra, qui si vede la scritta anche non cliccata, nella nuova no
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -119,165 +119,165 @@
 
             </androidx.appcompat.widget.SearchView-->
 
-            <TextView
-                android:id="@+id/testoHome"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/open_sans_extra_bold"
-                android:text="Home"
-                android:textColor="@color/colorPrimary"
-                android:textSize="26sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.048"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/testoHome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/open_sans_extra_bold"
+                    android:text="Home"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="26sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.048"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/testoMiglioriMete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/open_sans_semi_bold"
+                <TextView
+                    android:id="@+id/testoMiglioriMete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/open_sans_semi_bold"
 
-                android:text="Le migliori mete del 2023"
-                android:textColor="@color/colorPrimary"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageBackground" />
+                    android:text="Le migliori mete del 2023"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageBackground" />
 
-            <TextView
-                android:id="@+id/testoCosaStaiCercando"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:fontFamily="@font/open_sans_light"
-                android:text="Cosa stai cercando?"
-                android:textColor="@color/white"
-                android:textSize="22sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/testoHome" />
+                <TextView
+                    android:id="@+id/testoCosaStaiCercando"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/open_sans_light"
+                    android:text="Cosa stai cercando?"
+                    android:textColor="@color/white"
+                    android:textSize="22sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/testoHome" />
 
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/homeRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/testoMiglioriMete"
-                app:layout_constraintVertical_bias="0.0"
-                tools:listitem="@layout/card_view_design" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/homeRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/testoMiglioriMete"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:listitem="@layout/card_view_design" />
 
-            <Button
-                android:id="@+id/resturantButton"
-                style="@style/Widget.Material3.MaterialTimePicker.ImageButton"
-                android:layout_width="wrap_content"
-                android:layout_height="42dp"
-                android:layout_marginStart="16dp"
-                android:text="Ristoranti"
-                android:textColor="@color/colorPrimary"
-                android:backgroundTint="@color/white"
-                app:icon="@drawable/baseline_dinner_dining_24"
-                app:layout_constraintBottom_toBottomOf="@+id/imageBackground"
-                app:layout_constraintEnd_toStartOf="@+id/hotelButton"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintHorizontal_chainStyle="spread_inside"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/searchViewHome"
-                android:textAllCaps="false"
-                android:drawableTint="@color/colorPrimary"
+                <Button
+                    android:id="@+id/resturantButton"
+                    style="@style/Widget.Material3.MaterialTimePicker.ImageButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:layout_marginStart="16dp"
+                    android:backgroundTint="@color/white"
+                    android:drawableTint="@color/colorPrimary"
+                    android:text="Ristoranti"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimary"
+                    app:icon="@drawable/baseline_dinner_dining_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageBackground"
+                    app:layout_constraintEnd_toStartOf="@+id/hotelButton"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/searchViewHome"
 
-                />
+                    />
 
-            <Button
-                android:id="@+id/hotelButton"
-                style="@style/Widget.Material3.MaterialTimePicker.ImageButton"
-                android:layout_width="wrap_content"
-                android:layout_height="42dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:backgroundTint="@color/white"
-                android:drawableTint="@color/colorPrimary"
-                android:text="Hotel"
-                android:textAllCaps="false"
-                android:textColor="@color/colorPrimary"
-                app:icon="@drawable/baseline_hotel_24"
-                app:layout_constraintBottom_toBottomOf="@+id/imageBackground"
-                app:layout_constraintEnd_toStartOf="@+id/attractionButton"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/resturantButton"
-                app:layout_constraintTop_toBottomOf="@+id/searchViewHome" />
+                <Button
+                    android:id="@+id/hotelButton"
+                    style="@style/Widget.Material3.MaterialTimePicker.ImageButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:backgroundTint="@color/white"
+                    android:drawableTint="@color/colorPrimary"
+                    android:text="Hotel"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimary"
+                    app:icon="@drawable/baseline_hotel_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageBackground"
+                    app:layout_constraintEnd_toStartOf="@+id/attractionButton"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/resturantButton"
+                    app:layout_constraintTop_toBottomOf="@+id/searchViewHome" />
 
-            <Button
-                android:id="@+id/attractionButton"
-                style="@style/Widget.Material3.MaterialTimePicker.ImageButton"
-                android:layout_width="wrap_content"
-                android:layout_height="42dp"
-                android:layout_marginEnd="16dp"
-                android:textAllCaps="false"
-                android:text="Attrazioni"
-                android:textColor="@color/colorPrimary"
-                android:backgroundTint="@color/white"
-                app:icon="@drawable/baseline_local_activity_24"
-                android:drawableTint="@color/colorPrimary"
-                app:layout_constraintBottom_toBottomOf="@+id/imageBackground"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/hotelButton"
-                app:layout_constraintTop_toBottomOf="@+id/searchViewHome" />
+                <Button
+                    android:id="@+id/attractionButton"
+                    style="@style/Widget.Material3.MaterialTimePicker.ImageButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:layout_marginEnd="16dp"
+                    android:backgroundTint="@color/white"
+                    android:drawableTint="@color/colorPrimary"
+                    android:text="Attrazioni"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimary"
+                    app:icon="@drawable/baseline_local_activity_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageBackground"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/hotelButton"
+                    app:layout_constraintTop_toBottomOf="@+id/searchViewHome" />
 
-            <SearchView
-                android:id="@+id/searchViewHome"
-                android:layout_width="245dp"
-                android:layout_height="43dp"
-                android:layout_marginTop="28dp"
-                android:background="@drawable/custom_search_view"
-                android:elevation="20dp"
-                android:queryHint="Dove vorresti andare?"
-                app:layout_constraintBottom_toBottomOf="@+id/imageBackground"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/testoCosaStaiCercando"
-                app:layout_constraintVertical_bias="0.0" />
+                <SearchView
+                    android:id="@+id/searchViewHome"
+                    android:layout_width="245dp"
+                    android:layout_height="43dp"
+                    android:layout_marginTop="28dp"
+                    android:background="@drawable/custom_search_view"
+                    android:elevation="20dp"
+                    android:queryHint="Dove vorresti andare?"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageBackground"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/testoCosaStaiCercando"
+                    app:layout_constraintVertical_bias="0.0" />
 
-            <ImageButton
+                <ImageButton
 
-                android:id="@+id/ideaButton"
-                style="@android:style/Widget.ImageButton"
-                android:layout_width="44dp"
-                android:layout_height="43dp"
-                android:background="@android:color/transparent"
-                android:src="@drawable/idea_24"
-                app:layout_constraintBottom_toTopOf="@+id/attractionButton"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.956"
-                app:layout_constraintStart_toStartOf="@+id/imageBackground"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.854" />
+                    android:id="@+id/ideaButton"
+                    style="@android:style/Widget.ImageButton"
+                    android:layout_width="44dp"
+                    android:layout_height="43dp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/idea_24"
+                    app:layout_constraintBottom_toTopOf="@+id/attractionButton"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.956"
+                    app:layout_constraintStart_toStartOf="@+id/imageBackground"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.854" />
 
-            <ImageButton
-                android:id="@+id/pacchettiButton"
-                style="@android:style/Widget.ImageButton"
-                android:layout_width="44dp"
-                android:layout_height="43dp"
-                android:background="@android:color/transparent"
-                android:src="@drawable/icons8_briefcase_24"
-                app:layout_constraintBottom_toBottomOf="@+id/imageBackground"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.043"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/testoCosaStaiCercando"
-                app:layout_constraintVertical_bias="0.25" />
+                <ImageButton
+                    android:id="@+id/pacchettiButton"
+                    style="@android:style/Widget.ImageButton"
+                    android:layout_width="44dp"
+                    android:layout_height="43dp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/icons8_briefcase_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageBackground"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.043"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/testoCosaStaiCercando"
+                    app:layout_constraintVertical_bias="0.25" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
 

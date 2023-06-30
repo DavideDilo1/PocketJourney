@@ -300,7 +300,9 @@ class PaginaPacchettoFragment : Fragment() {
                 if (response.isSuccessful) {
                     // L'inserimento della carta è avvenuto
                     Log.e("ciao","Recensione inserita")
-                    Toast.makeText(requireContext(), "Prenotazione avvenuta con successo!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Recensione inserita con successo!", Toast.LENGTH_SHORT).show()
+                    binding.titleReviewEditText.text.clear()
+                    binding.reviewEditText.text.clear()
                 }
             }
 

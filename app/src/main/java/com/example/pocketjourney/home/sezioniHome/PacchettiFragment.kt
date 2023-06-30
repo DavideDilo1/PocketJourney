@@ -42,6 +42,8 @@ class PacchettiFragment : Fragment() {
 
         if (idUtente != null) {
             setRecyclerView(idUtente.toInt())
+        } else {
+           // binding.
         }
 
         binding.backArrowP.setOnClickListener {

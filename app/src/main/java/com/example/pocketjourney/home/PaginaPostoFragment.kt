@@ -203,6 +203,11 @@ class PaginaPostoFragment : Fragment() {
                     if (response.isSuccessful) {
                         // L'inserimento della carta è avvenuto
                         Log.e("ciao","Recensione inserita")
+                        Toast.makeText(requireContext(),"Recensione inserita!",
+                            Toast.LENGTH_SHORT).show()
+                        binding.titleReviewEditText.text.clear()
+                        binding.reviewEditText.text.clear()
+
                     }
                 }
 
