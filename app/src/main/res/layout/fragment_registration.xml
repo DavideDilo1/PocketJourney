@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/miocolore"
+    android:background="@drawable/registration_back"
     tools:context=".accesso.RegistrationFragment">
 
     <EditText
@@ -13,10 +13,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
+        android:fontFamily="@font/open_sans_light"
+
         android:layout_marginTop="160dp"
         android:layout_marginEnd="40dp"
         android:background="@drawable/login_edit_background"
         android:ems="10"
+        android:textColorHint="@color/colorPrimary"
+        android:textColor="@color/colorPrimary"
         android:hint="Nome"
         android:inputType="textPersonName"
         android:padding="10dp"
@@ -27,6 +31,8 @@
 
     <EditText
         android:id="@+id/etCognome"
+        android:textColorHint="@color/colorPrimary"
+        android:textColor="@color/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -35,6 +41,8 @@
         android:background="@drawable/login_edit_background"
         android:ems="10"
         android:hint="Cognome"
+        android:fontFamily="@font/open_sans_light"
+
         android:inputType="textPersonName"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,6 +53,10 @@
     <EditText
         android:id="@+id/etEmailRegistrazione"
         android:layout_width="match_parent"
+        android:fontFamily="@font/open_sans_light"
+
+        android:textColorHint="@color/colorPrimary"
+        android:textColor="@color/colorPrimary"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="20dp"
@@ -61,6 +73,10 @@
 
     <EditText
         android:id="@+id/etPasswordRegistrazione"
+        android:textColorHint="@color/colorPrimary"
+        android:textColor="@color/colorPrimary"
+        android:fontFamily="@font/open_sans_light"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -78,6 +94,8 @@
 
     <EditText
         android:id="@+id/etConfermaPasswordReg"
+        android:fontFamily="@font/open_sans_light"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -85,6 +103,8 @@
         android:layout_marginEnd="40dp"
         android:background="@drawable/login_edit_background"
         android:ems="10"
+        android:textColorHint="@color/colorPrimary"
+        android:textColor="@color/colorPrimary"
         android:hint="Conferma Password"
         android:inputType="textPassword"
         android:padding="10dp"
@@ -95,6 +115,8 @@
 
     <EditText
         android:id="@+id/etCellulare"
+        android:fontFamily="@font/open_sans_light"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -104,6 +126,8 @@
         android:ems="10"
         android:hint="Cellulare"
         android:inputType="textPersonName"
+        android:textColorHint="@color/colorPrimary"
+        android:textColor="@color/colorPrimary"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -112,26 +136,38 @@
 
     <Button
         android:id="@+id/btnRegistrati"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="100dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/button_background"
         android:text="Registrati"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etCellulare" />
 
     <Button
         android:id="@+id/btnTornaLogin"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="100dp"
         android:background="@drawable/button_background"
         android:text="Torna indietro"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnRegistrati" />
+
+    <TextView
+        android:id="@+id/registrazioneText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/open_sans_extra_bold"
+        android:text="Registrati"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.062"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

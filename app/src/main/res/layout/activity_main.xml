@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragmentContainerRegistration"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
 
 <androidx.constraintlayout.widget.ConstraintLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
+
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:background="@color/white"
+            android:background="@drawable/login_image_back"
             android:id="@+id/frameLayoutLogin"
+
             tools:context=".accesso.MainActivity">
 
-            <ImageView
-                android:id="@+id/background_login"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="fitXY"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/login_background" />
 
-            <ImageView
+
+
+
+
+    <ImageView
                 android:id="@+id/ivMioLogo"
                 android:layout_width="227dp"
                 android:layout_height="206dp"
@@ -124,16 +125,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 
-            <FrameLayout
-                android:id="@+id/fragmentContainerRegistration"
-                android:layout_width="410dp"
-                android:layout_height="45dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.817"></FrameLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
