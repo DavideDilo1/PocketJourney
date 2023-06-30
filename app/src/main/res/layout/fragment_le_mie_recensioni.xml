@@ -3,16 +3,18 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLeMieRecensioni"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".profilo.ListaPrenotazioniFragment"
-    android:id="@+id/FrameListaPrenotazioni"
-    android:background="@color/white"
-    >
+    tools:context=".profilo.LeMieRecensioniFragment">
+
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imageBackground"
@@ -29,24 +31,40 @@
             app:shapeAppearanceOverlay="@style/SoftRoundImageView" />
 
         <ImageView
-            android:id="@+id/back_arrowR"
+            android:id="@+id/back_arrowMyRec"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fillColor="@color/colorPrimary"
             android:src="@drawable/baseline_arrow_back_24"
             app:layout_constraintBottom_toBottomOf="@+id/imageBackground"
-            app:layout_constraintEnd_toStartOf="@+id/leTuePrenotazioni"
+            app:layout_constraintEnd_toStartOf="@+id/leTueRecensionii"
             app:layout_constraintHorizontal_bias="0.266"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.49" />
 
+
+        <ImageView
+            android:visibility="gone"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/nessun_dato_img"
+            android:id="@+id/nessunaRecImg"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageBackground" />
+
+
         <TextView
-            android:id="@+id/leTuePrenotazioni"
+
+            android:id="@+id/leTueRecensionii"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans_extra_bold"
-            android:text="Le tue prenotazioni"
+            android:text="Le tue recensioni"
             android:textColor="@color/colorPrimary"
             android:textSize="26sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageBackground"
@@ -57,19 +75,6 @@
             app:layout_constraintVertical_bias="0.457" />
 
 
-        <ImageView
-            android:visibility="gone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/nessun_dato_img"
-            android:id="@+id/nessunaPrenImg"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageBackground" />
-
-
-
         <TextView
             android:visibility="gone"
 
@@ -77,14 +82,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans_semi_bold"
-            android:text="Non ci sono prenotazioni!"
+            android:text="Non ci sono recensioni!"
             android:textColor="@color/loginColor"
             android:textSize="18sp"
 
-            app:layout_constraintBottom_toBottomOf="@+id/nessunaPrenImg"
+            app:layout_constraintBottom_toBottomOf="@+id/nessunaRecImg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/nessunaPrenImg"
+            app:layout_constraintTop_toTopOf="@+id/nessunaRecImg"
             app:layout_constraintVertical_bias="0.033" />
 
         <TextView
@@ -94,7 +99,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:fontFamily="@font/open_sans_semi_bold"
-            android:text="Effettua una prenotazione per visualizzarla qui"
+            android:text="Lascia una recensione per visualizzarla qui"
             android:textColor="@color/loginColor"
 
             android:textSize="16sp"
@@ -104,7 +109,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:visibility="visible"
-            android:id="@+id/recyclerPrenotazioni"
+            android:id="@+id/recyclerMieRecensioni"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -115,9 +120,7 @@
 
             app:layout_constraintTop_toBottomOf="@+id/imageBackground"
             app:layout_constraintVertical_bias="0.0"
-            tools:listitem="@layout/prenotazioni_card_view" />
-
+            tools:listitem="@layout/recensioni_card_view_design" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </FrameLayout>

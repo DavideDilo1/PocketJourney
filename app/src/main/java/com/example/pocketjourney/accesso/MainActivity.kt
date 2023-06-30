@@ -3,11 +3,13 @@ package com.example.pocketjourney.accesso
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
+import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import com.example.pocketjourney.database.ClientNetwork
 import com.example.pocketjourney.database.DbHelper
 import com.example.pocketjourney.R
@@ -26,6 +28,9 @@ class MainActivity : AppCompatActivity() {
         binding=ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         context=this
+
+
+
 
         binding.btnLogin.setOnClickListener{
             //provo a effettuare il login con le credenzili online
@@ -90,6 +95,7 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
         }
+
         binding.btnCreaAccount.setOnClickListener {
             val registrationFragment= RegistrationFragment()
             val fragmentManager = supportFragmentManager
