@@ -5,112 +5,139 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/miocolore"
+    android:background="@color/white"
     tools:context=".profilo.ModificaDatiFragment"
     android:id="@+id/FragmentCartaDiCredito"
     >
 
 
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/creditcard_back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/creditCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="192dp"
+        android:src="@drawable/carta_credito"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView3" />
+
     <EditText
         android:id="@+id/etNumeroCarta"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="96dp"
-        android:layout_marginEnd="40dp"
-        android:background="@drawable/login_edit_background"
+        android:layout_width="293dp"
+        android:layout_height="37dp"
+
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
         android:digits="0123456789 "
         android:ems="10"
         android:hint="Numero carta"
         android:inputType="number"
         android:maxLength="19"
         android:padding="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDataScadenza" />
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/creditCard"
+        app:layout_constraintEnd_toEndOf="@+id/creditCard"
+        app:layout_constraintHorizontal_bias="0.173"
+        app:layout_constraintStart_toStartOf="@+id/creditCard"
+        app:layout_constraintTop_toTopOf="@+id/creditCard"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Spinner
         android:id="@+id/monthSpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="108dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvMeseScadenza"
-        android:entries="@array/month_values"/>
+        android:layout_marginStart="204dp"
+        android:entries="@array/month_values"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvMeseScadenza"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Spinner
         android:id="@+id/yearSpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="88dp"
         android:entries="@array/year_values"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvAnnoScadenza"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvAnnoScadenza" />
+        app:layout_constraintHorizontal_bias="0.975"
+        app:layout_constraintStart_toEndOf="@+id/tvAnnoScadenza" />
 
     <EditText
         android:id="@+id/etCvv"
-        android:layout_width="match_parent"
+        android:layout_width="64dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="108dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="40dp"
-        android:background="@drawable/login_edit_background"
         android:ems="10"
         android:hint="CVV"
         android:inputType="numberPassword"
         android:maxLength="3"
         android:padding="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etNumeroCarta" />
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/creditCard"
+        app:layout_constraintHorizontal_bias="0.776"
+        app:layout_constraintStart_toStartOf="@+id/creditCard"
+        app:layout_constraintTop_toBottomOf="@+id/tvAnnoScadenza" />
 
     <Button
         android:id="@+id/btnEliminaCarta"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="101dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="100dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/button_background"
         android:text="Elimina carta corrente"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/imageView3"
         app:layout_constraintTop_toBottomOf="@+id/btnInserisciCarta" />
 
     <Button
         android:id="@+id/btnInserisciCarta"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="100dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/button_background"
         android:text="Inserisci carta"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etCvv" />
 
     <Button
-    android:id="@+id/btnTornaProfilo"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="101dp"
-    android:layout_marginTop="20dp"
-    android:layout_marginEnd="100dp"
-    android:background="@drawable/button_background"
-    android:text="Torna indietro"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/btnEliminaCarta" />
+        android:id="@+id/btnTornaProfilo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="104dp"
+        android:background="@drawable/button_background"
+        android:text="Torna indietro"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnEliminaCarta" />
 
     <TextView
         android:id="@+id/tvMeseScadenza"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="16dp"
         android:text="Mese scadenza"
+        android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etNumeroCarta" />
@@ -119,19 +146,20 @@
         android:id="@+id/tvAnnoScadenza"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
         android:text="Anno scadenza"
+        android:textColor="@color/white"
         android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/tvMeseScadenza"
-        app:layout_constraintTop_toBottomOf="@+id/etNumeroCarta" />
+        app:layout_constraintStart_toStartOf="@+id/creditCard"
+        app:layout_constraintTop_toBottomOf="@+id/tvMeseScadenza" />
 
     <TextView
         android:id="@+id/tvNumeroCarta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="112dp"
         android:text="Numero carta:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -141,9 +169,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="72dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="140dp"
         android:text="Data di scadenza:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/pagamentoText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/open_sans_extra_bold"
+        android:text="Metodi di pagamento"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView3" />
+
+    <TextView
+        android:id="@+id/pagamentoText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/open_sans_regular"
+        android:text="Aggiungi o rimuovi qui i tuoi metodi di pagamento"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pagamentoText" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
