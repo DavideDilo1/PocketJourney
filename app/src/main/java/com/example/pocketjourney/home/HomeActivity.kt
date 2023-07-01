@@ -20,19 +20,10 @@ class HomeActivity : AppCompatActivity() {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         supportActionBar?.hide()
         //questo valore bundle ottiene l'id dell'utente nel caso in cui sia connesso al server, l'email viceversa.
-        val emailOff= intent.getStringExtra("emailUtenteOffline")
+        val emailOff= intent.getStringExtra("email")
         val emailOn= intent.getStringExtra("emailOnline")
         val userId= intent.getStringExtra("idUtente")
-        if(userId!=null){
-            Log.e("ciao","sono la home activity e ho ricevuto l'id utente")
-        } else {
-            Log.e("ciao","sono la home activity e NON ho ricevuto id Utente")
-        }
-        if(emailOff!=null){
-            Log.e("ciao","sono la home activity e ho ricevuto emailOff ")
-        } else {
-            Log.e("ciao","sono la home activity e NON  ho ricevuto emailOff ")
-        }
+        Log.e("SONO H ACT:","${emailOff} ${userId}")
 
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -75,6 +66,12 @@ class HomeActivity : AppCompatActivity() {
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
 
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finishAffinity()
+        return
     }
 
 

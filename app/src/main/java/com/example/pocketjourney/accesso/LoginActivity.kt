@@ -3,6 +3,7 @@ package com.example.pocketjourney.accesso
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
+import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -21,13 +22,33 @@ import retrofit2.Response
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var context:Context
+
+    companion object {
+        const val PREFS_NAME = "MyPrefs"
+        const val KEY_IS_LOGGED_IN = "isLoggedIn"
+        const val KEY_IDUTENTE = "idUtente"
+        const val KEY_EMAIL ="email"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding=ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         context=this
 
-
+        val sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val isLoggedIn = sharedPreferences.getBoolean(KEY_IS_LOGGED_IN, false)
+        if (isLoggedIn){
+            Log.e("ciao","l'utente è loggato")
+            val idUtente = sharedPreferences.getString(KEY_IDUTENTE, null)
+            val email = sharedPreferences.getString(KEY_EMAIL, null)
+            if (idUtente != null && email != null) {
+                val intent = Intent(context, HomeActivity::class.java)
+                intent.putExtra("idUtente", idUtente)
+                intent.putExtra("email", email)
+                startActivity(intent)
+            }
+        }
 
 
         binding.btnLogin.setOnClickListener{
@@ -54,11 +75,18 @@ class LoginActivity : AppCompatActivity() {
                                     //prelevo i campi e li setto nel fragment
                                     val idUtente=primoUtente.get("idUtente").asString
                                     //posso effettuare il login online
-                                    Log.e("ciao","LOGIN ONLINE")
+                                    val sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+                                    val editor = sharedPreferences.edit()
+                                    editor.putBoolean(KEY_IS_LOGGED_IN, true)
+                                    editor.putString(KEY_IDUTENTE,idUtente)
+                                    editor.putString(KEY_EMAIL,email)
+                                    editor.apply()
+                                    Log.e("HO SCRITTO LE SP", editor.toString())
                                     val intent = Intent(context, HomeActivity::class.java)
                                     intent.putExtra("idUtente",idUtente)
                                     intent.putExtra("emailOnline",email)
                                     startActivity(intent)
+                                    finish()
                                 }
                             }
                         }
@@ -76,8 +104,9 @@ class LoginActivity : AppCompatActivity() {
                     if(verificaCredenzialiLocale(email,password)) {
                         Log.e("ciao","LOGIN OFFLINE")
                         val intent = Intent(context, HomeActivity::class.java)
-                        intent.putExtra("emailUtenteOffline",email)
+                        intent.putExtra("email",email)
                         startActivity(intent)
+                        finish()
                     } else {
                         Log.e("ciao", "credenziali offline errate")
                         Toast.makeText(context,"Credenziali non valide",Toast.LENGTH_SHORT).show()

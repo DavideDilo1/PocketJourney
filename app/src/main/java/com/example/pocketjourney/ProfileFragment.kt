@@ -1,5 +1,6 @@
 package com.example.pocketjourney
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -133,10 +134,17 @@ class ProfileFragment : Fragment() {
         }
 
        //torna alla pagina di login resettando i campi inseriti precedentemente
-       binding.btnLogout.setOnClickListener {
-           requireActivity().supportFragmentManager.popBackStack()
-           val intent = Intent(this.context, LoginActivity::class.java)
-           startActivity(intent)
+        binding.btnLogout.setOnClickListener {
+            val sharedPreferences = requireContext().getSharedPreferences(LoginActivity.PREFS_NAME, Context.MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            editor.putBoolean(LoginActivity.KEY_IS_LOGGED_IN, false)
+            editor.putString(LoginActivity.KEY_IDUTENTE, "idUtente")
+            editor.putString(LoginActivity.KEY_EMAIL, "email")
+            editor.apply()
+
+            requireActivity().supportFragmentManager.popBackStack()
+            val intent = Intent(requireContext(), LoginActivity::class.java)
+            startActivity(intent)
         }
 
         //per accedere al fragment di modifica dei dati
