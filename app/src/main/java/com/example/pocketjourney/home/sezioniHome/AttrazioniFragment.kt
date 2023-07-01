@@ -89,7 +89,7 @@ class AttrazioniFragment : Fragment() {
         testoTutti= binding.testoTuttiA
         testoCategoria= binding.testoCategoriaA
         searchView= binding.searchView
-
+/*
 
         anim_from_bottom = AnimationUtils.loadAnimation(requireContext(), R.anim.anim_from_bottom)
         anim_from_top = AnimationUtils.loadAnimation(requireContext(), R.anim.anim_from_top)
@@ -105,7 +105,7 @@ class AttrazioniFragment : Fragment() {
         titoloFinestra.animation = anim_from_top
         searchView.animation = anim_from_right
 
-
+*/
 
         return binding.root
     }

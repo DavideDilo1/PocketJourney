@@ -10,9 +10,14 @@
     android:background="@color/white">
 
 
+    <ScrollView
+        android:scrollbars="none"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -50,9 +55,9 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
             android:src="@drawable/nessun_dato_img"
-            android:visibility="gone"
-            android:layout_marginTop="98dp"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -77,7 +82,7 @@
 
 
         <TextView
-            android:visibility="gone"
+            android:visibility="visible"
 
             android:id="@+id/textNessunDato"
             android:layout_width="wrap_content"
@@ -94,7 +99,7 @@
             app:layout_constraintVertical_bias="0.033" />
 
         <TextView
-            android:visibility="gone"
+            android:visibility="visible"
             android:id="@+id/textNessunDato2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -109,14 +114,13 @@
             app:layout_constraintTop_toBottomOf="@+id/textNessunDato" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:visibility="visible"
             android:id="@+id/recyclerMieRecensioni"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
 
             app:layout_constraintTop_toBottomOf="@+id/imageBackground"
@@ -124,4 +128,5 @@
             tools:listitem="@layout/recensioni_card_view_design" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </FrameLayout>

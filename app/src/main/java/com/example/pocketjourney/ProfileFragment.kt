@@ -145,7 +145,7 @@ class ProfileFragment : Fragment() {
             requireActivity().intent.putExtra("idUtente",idUtente)
             requireActivity().intent.putExtra("emailUtenteOnline",emailUtenteOnline)
             val fragmentTransaction = childFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.FragmentProfilo, childFragment)
+            fragmentTransaction.replace(R.id.frameProfilo, childFragment)
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         })
@@ -155,7 +155,7 @@ class ProfileFragment : Fragment() {
             requireActivity().intent.putExtra("idUtente",idUtente)
             requireActivity().intent.putExtra("emailUtenteOffline",emailUtenteOffline)
             val fragmentTransaction = childFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.FragmentProfilo, childFragment)
+            fragmentTransaction.replace(R.id.frameProfilo, childFragment)
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
@@ -164,7 +164,7 @@ class ProfileFragment : Fragment() {
             val childFragment = CreditCardFragment()
             requireActivity().intent.putExtra("idUtente",idUtente)
             val fragmentTransaction = childFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.FragmentProfilo, childFragment)
+            fragmentTransaction.replace(R.id.frameProfilo, childFragment)
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
@@ -173,7 +173,7 @@ class ProfileFragment : Fragment() {
             val childFragment = LeMieRecensioniFragment()
             requireActivity().intent.putExtra("idUtente",idUtente)
             val fragmentTransaction = childFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.FragmentProfilo, childFragment)
+            fragmentTransaction.replace(R.id.frameProfilo, childFragment)
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }

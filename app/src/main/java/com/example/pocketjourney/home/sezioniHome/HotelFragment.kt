@@ -97,7 +97,7 @@ class HotelFragment : Fragment() {
         anim_from_top = AnimationUtils.loadAnimation(requireContext(), R.anim.anim_from_top)
         anim_from_left = AnimationUtils.loadAnimation(requireContext(), R.anim.anim_from_left)
         anim_from_right = AnimationUtils.loadAnimation(requireContext(), R.anim.anim_from_right)
-
+/*
 
         topImage.animation = anim_from_top
         recyclerOrizzontale.animation =  anim_from_left
@@ -106,7 +106,7 @@ class HotelFragment : Fragment() {
         testoCategoria.animation = anim_from_left
         titoloFinestra.animation = anim_from_top
         searchView.animation = anim_from_right
-
+*/
         return binding.root
     }
 

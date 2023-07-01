@@ -100,6 +100,7 @@ class HomeFragmentNew : Fragment() {
         //cardView.setAnimation(anim_from_button)
      //   cardView2.setAnimation(anim_from_button)
       //  cardView3.setAnimation(anim_from_button)
+        /*
         textView.animation = anim_from_top
         textView2.animation = anim_from_top
         textView3.animation = anim_from_bottom
@@ -114,7 +115,7 @@ class HomeFragmentNew : Fragment() {
 
 
         homeRecycle.setAnimation(anim_from_bottom)
-
+*/
 
        // favoriteButton1 = binding.FavoriteButton
       //  favoriteButton2 = binding.FavoriteButton2
