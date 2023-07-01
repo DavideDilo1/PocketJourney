@@ -170,12 +170,17 @@ class HomeFragmentNew : Fragment() {
         }
 
         binding.pacchettiButton.setOnClickListener {
-            val childFragment = PacchettiFragment()
-            val fragmentTransaction = childFragmentManager.beginTransaction()
+            //val childFragment = PacchettiFragment()
+           // val fragmentTransaction = childFragmentManager.beginTransaction()
+            //requireActivity().intent.putExtra("idUtente",idUtente)
+            //fragmentTransaction.replace(R.id.frameNewHomeLayout, childFragment)
+            //fragmentTransaction.addToBackStack(null)
+            //fragmentTransaction.commit()
+            val managaer=requireActivity().supportFragmentManager
             requireActivity().intent.putExtra("idUtente",idUtente)
-            fragmentTransaction.replace(R.id.frameNewHomeLayout, childFragment)
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()
+            managaer.beginTransaction().replace(R.id.frameNewHomeLayout, PacchettiFragment())
+                .addToBackStack(null)
+                .commit()
         }
         return binding.root
     }

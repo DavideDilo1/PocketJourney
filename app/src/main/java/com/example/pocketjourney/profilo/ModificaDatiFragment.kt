@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.example.pocketjourney.ProfileFragment
+import com.example.pocketjourney.R
 import com.example.pocketjourney.database.ClientNetwork
 import com.example.pocketjourney.database.DBManager
 import com.example.pocketjourney.databinding.FragmentModificaDatiBinding
@@ -166,8 +168,13 @@ class ModificaDatiFragment : Fragment() {
         }
 
         binding.btnTornaProfilo.setOnClickListener{
-            requireActivity().supportFragmentManager.popBackStack()
-            Toast.makeText(requireContext(), "Nessun dato modificato", Toast.LENGTH_SHORT).show()
+            binding.btnModifica.visibility=View.GONE
+            binding.btnTornaProfilo.visibility=View.GONE
+            val fragmentManager = requireActivity().supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.modificaDatiFragment, ProfileFragment())
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
         }
 
 

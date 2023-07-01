@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.example.pocketjourney.ProfileFragment
+import com.example.pocketjourney.R
 import com.example.pocketjourney.database.ClientNetwork
 import com.example.pocketjourney.databinding.FragmentCreditCardBinding
 import com.google.gson.JsonObject
@@ -212,10 +214,13 @@ class CreditCardFragment : Fragment() {
 
         }
 
-        binding.btnTornaProfilo.setOnClickListener(View.OnClickListener { view ->
-            requireActivity().supportFragmentManager.popBackStack()
-            Toast.makeText(requireContext(), "Nessun dato modificato", Toast.LENGTH_SHORT).show()
-        })
+        binding.btnTornaProfilo.setOnClickListener{
+            val fragmentManager = requireActivity().supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.frameHomeLayout, ProfileFragment())
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
     }
 
     fun verificaNumeroCarta(numero: String): Boolean {

@@ -47,12 +47,11 @@ class PacchettiFragment : Fragment() {
         }
 
         binding.backArrowP.setOnClickListener {
-            val childFragment = HomeFragmentNew()
-            val fragmentTransaction = childFragmentManager.beginTransaction()
+            val manager=requireActivity().supportFragmentManager
             requireActivity().intent.putExtra("idUtente",idUtente)
-            fragmentTransaction.replace(R.id.framePacchetti, childFragment)
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()
+            manager.beginTransaction().replace(R.id.framePacchetti, HomeFragmentNew())
+                .addToBackStack(null)
+                .commit()
         }
         return binding.root
     }
