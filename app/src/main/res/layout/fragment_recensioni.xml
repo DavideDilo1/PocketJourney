@@ -286,7 +286,6 @@
                 android:id="@+id/recensioniText3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:fontFamily="@font/open_sans_regular"
                 android:text="Cosa dicono di noi"
                 android:textColor="@color/colorPrimary"
@@ -294,7 +293,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.058"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cardViewLasciaUnaRec" />
+                app:layout_constraintTop_toBottomOf="@+id/sendReviewButton" />
 
 
             <RatingBar
@@ -353,7 +352,7 @@
                     <EditText
                         android:id="@+id/reviewEditText"
                         android:layout_width="0dp"
-                        android:layout_height="80dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="6dp"
                         android:layout_marginTop="6dp"
                         android:layout_marginEnd="6dp"
@@ -395,17 +394,18 @@
                 android:id="@+id/sendReviewButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="76dp"
-                android:layout_marginTop="40dp"
+
+                android:layout_marginTop="12dp"
 
                 android:backgroundTint="@color/white"
-
                 android:text="Invia recensione"
                 android:textAllCaps="false"
                 android:textColor="@color/black"
                 android:textSize="13sp"
-                app:layout_constraintStart_toEndOf="@+id/recensioniText4"
-                app:layout_constraintTop_toBottomOf="@+id/cardViewRatingRecensioni" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.916"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardViewLasciaUnaRec" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

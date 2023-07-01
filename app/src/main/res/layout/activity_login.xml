@@ -17,7 +17,7 @@
             android:background="@drawable/login_image_back"
             android:id="@+id/frameLayoutLogin"
 
-            tools:context=".accesso.MainActivity">
+            tools:context=".accesso.LoginActivity">
 
 
 

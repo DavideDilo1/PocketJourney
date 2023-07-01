@@ -12,22 +12,21 @@
         android:id="@+id/titolo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/open_sans_bold"
         android:text="Titolo"
         android:textColor="@color/colorPrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.064"
         app:layout_constraintStart_toEndOf="@+id/cardViewItem"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/testo"
         android:layout_width="173dp"
-        android:layout_height="wrap_content"
+        android:layout_height="25dp"
 
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
         android:paddingLeft="6dp"
@@ -36,65 +35,59 @@
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.269"
         app:layout_constraintStart_toEndOf="@+id/cardViewItem"
-        app:layout_constraintTop_toBottomOf="@+id/ratingBarItem"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/ratingBarItem" />
 
     <RatingBar
         android:id="@+id/ratingBarItem"
         style="?android:attr/ratingBarStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:max="5"
         android:numStars="5"
         android:progressTint="@color/colorAccent"
         android:rating="4.5"
         android:stepSize="0.5"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.083"
         app:layout_constraintStart_toEndOf="@+id/cardViewItem"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.38" />
+        app:layout_constraintTop_toBottomOf="@+id/titolo" />
 
     <TextView
         android:id="@+id/tvID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/ratingBarItem"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:visibility="invisible"/>
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="395dp" />
 
     <TextView
         android:id="@+id/valutazioneItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="36dp"
         android:fontFamily="@font/open_sans_bold"
         android:text="4.91"
         android:textColor="@color/colorPrimary"
         android:textSize="10sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/numRecensioni"
-        app:layout_constraintStart_toEndOf="@+id/ratingBarItem" />
+        app:layout_constraintStart_toEndOf="@+id/ratingBarItem"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/numRecensioni"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="6dp"
         android:fontFamily="@font/open_sans_light"
         android:text="(510)"
         android:textColor="@color/colorPrimary"
         android:textSize="10sp"
-        app:layout_constraintBottom_toTopOf="@+id/testo"
+        app:layout_constraintBaseline_toBaselineOf="@+id/valutazioneItem"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.016"
-        app:layout_constraintStart_toEndOf="@+id/valutazioneItem"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.755" />
+        app:layout_constraintHorizontal_bias="0.114"
+        app:layout_constraintStart_toEndOf="@+id/valutazioneItem" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewItem"
@@ -103,8 +96,6 @@
         app:cardCornerRadius="5dp"
         app:cardElevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 

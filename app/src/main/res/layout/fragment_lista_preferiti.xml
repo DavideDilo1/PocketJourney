@@ -9,12 +9,6 @@
     android:id="@+id/frameListaPreferiti"
     android:background="@color/white">
 
-   <ScrollView
-       android:scrollbars="none"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       >
-
    <androidx.constraintlayout.widget.ConstraintLayout
        android:layout_width="match_parent"
        android:layout_height="match_parent">
@@ -51,6 +45,32 @@
           app:layout_constraintTop_toTopOf="parent"
           app:layout_constraintVertical_bias="0.0" />
 
+      <ScrollView
+          android:layout_width="0dp"
+          android:layout_height="0dp"
+          android:scrollbars="none"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.0"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/imageBackground">
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="vertical"
+          >
+
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:textColor="@color/colorPrimary"
+             android:fontFamily="@font/open_sans_semi_bold"
+             android:layout_gravity="center"
+             android:layout_marginTop="8dp"
+             android:text="Visita rapidamente quei luoghi che più ti sono piaciuti"
+
+             />
       <androidx.recyclerview.widget.RecyclerView
           android:visibility="visible"
           android:id="@+id/recyclerMieiPreferiti"
@@ -66,8 +86,9 @@
           app:layout_constraintVertical_bias="0.0"
           tools:listitem="@layout/card_view_design"
           />
+      </LinearLayout>
+      </ScrollView>
 
 
    </androidx.constraintlayout.widget.ConstraintLayout>
-   </ScrollView>
 </FrameLayout>

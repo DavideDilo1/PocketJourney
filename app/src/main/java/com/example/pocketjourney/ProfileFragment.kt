@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.pocketjourney.accesso.MainActivity
+import com.example.pocketjourney.accesso.LoginActivity
 import com.example.pocketjourney.database.ClientNetwork
 import com.example.pocketjourney.database.DbHelper
 import com.example.pocketjourney.databinding.FragmentProfileBinding
@@ -135,7 +135,7 @@ class ProfileFragment : Fragment() {
        //torna alla pagina di login resettando i campi inseriti precedentemente
        binding.btnLogout.setOnClickListener {
            requireActivity().supportFragmentManager.popBackStack()
-           val intent = Intent(this.context, MainActivity::class.java)
+           val intent = Intent(this.context, LoginActivity::class.java)
            startActivity(intent)
         }
 

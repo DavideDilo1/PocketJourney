@@ -36,7 +36,7 @@
             android:name=".home.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".accesso.MainActivity"
+            android:name=".accesso.LoginActivity"
             android:configChanges="orientation|screenSize"
             android:exported="true"
             android:theme="@style/LoginPage"

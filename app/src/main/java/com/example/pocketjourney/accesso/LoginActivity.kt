@@ -3,29 +3,27 @@ package com.example.pocketjourney.accesso
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
-import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import com.example.pocketjourney.database.ClientNetwork
 import com.example.pocketjourney.database.DbHelper
 import com.example.pocketjourney.R
-import com.example.pocketjourney.databinding.ActivityMainBinding
+import com.example.pocketjourney.databinding.ActivityLoginBinding
 import com.example.pocketjourney.home.HomeActivity
 import com.google.gson.JsonObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+class LoginActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityLoginBinding
     private lateinit var context:Context
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding=ActivityMainBinding.inflate(layoutInflater)
+        binding=ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         context=this
 
