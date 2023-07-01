@@ -96,6 +96,12 @@ class ListaPrenotazioniFragment : Fragment() {
                             //configuriamo l'adapter con la recycler view
                             binding.recyclerPrenotazioni.adapter = bookAdapter
 
+                        }else {
+                            binding.textNessunDato.visibility = View.VISIBLE
+                            binding.textNessunDato2.visibility = View.VISIBLE
+                            binding.nessunaPrenImg.visibility = View.VISIBLE
+
+                            binding.scrollPrenotazioni.visibility =View.GONE
                         }
                     }
 
@@ -111,6 +117,17 @@ class ListaPrenotazioniFragment : Fragment() {
 
                 // Aggiungere gli elementi alla lista dell'adapter
                 bookItem.addAll(dataList)
+
+                //TODO VErificae grandezza datalist, se vuota immagine: GIUSTO?
+                //
+                if (dataList == null){
+
+                    binding.textNessunDato.visibility = View.VISIBLE
+                    binding.textNessunDato2.visibility = View.VISIBLE
+                    binding.nessunaPrenImg.visibility = View.VISIBLE
+
+                    binding.scrollPrenotazioni.visibility =View.GONE
+                }
 
                 // Notificare all'adapter che i dati sono cambiati
                 bookAdapter.notifyDataSetChanged()

@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Window
 import androidx.fragment.app.Fragment
-import com.example.pocketjourney.preferiti.PreferitiNoListFragment
 import com.example.pocketjourney.ProfileFragment
 import com.example.pocketjourney.R
 import com.example.pocketjourney.databinding.ActivityHomeBinding

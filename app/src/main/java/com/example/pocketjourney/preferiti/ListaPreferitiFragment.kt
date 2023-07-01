@@ -39,6 +39,13 @@ class ListaPreferitiFragment : Fragment() {
 
         if (idUtente != null) {
             setRecyclerView(idUtente.toInt())
+        }else{
+            binding.preferitiText2.visibility = View.GONE
+            binding.textNoFavorite.visibility = View.VISIBLE
+            binding.textNoFavorite2.visibility = View.VISIBLE
+            binding.imageNoPreferiti.visibility = View.VISIBLE
+            binding.preferitiLinearL.visibility = View.GONE
+            binding.scrollPreferiti.visibility = View.GONE
         }
 
         // Inflate the layout for this fragment
@@ -152,6 +159,13 @@ class ListaPreferitiFragment : Fragment() {
                                 //configuriamo l'adapter con la recycler view
                                 binding.recyclerMieiPreferiti.adapter = favAdapter
 
+                            }else{
+                                binding.preferitiText2.visibility = View.GONE
+                                binding.textNoFavorite.visibility = View.VISIBLE
+                                binding.textNoFavorite2.visibility = View.VISIBLE
+                                binding.imageNoPreferiti.visibility = View.VISIBLE
+                                binding.preferitiLinearL.visibility = View.GONE
+                                binding.scrollPreferiti.visibility = View.GONE
                             }
                         }
 
@@ -161,6 +175,12 @@ class ListaPreferitiFragment : Fragment() {
 
                 override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                     // Si è verificato un errore durante la chiamata di rete online
+                    binding.preferitiText2.visibility = View.GONE
+                    binding.textNoFavorite.visibility = View.VISIBLE
+                    binding.textNoFavorite2.visibility = View.VISIBLE
+                    binding.imageNoPreferiti.visibility = View.VISIBLE
+                    binding.preferitiLinearL.visibility = View.GONE
+                    binding.scrollPreferiti.visibility = View.GONE
                     Log.e("ciao", t.toString() + " " + t.message.toString())
                 }
             })
