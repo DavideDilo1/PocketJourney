@@ -11,10 +11,17 @@ class HomeAdapter(private val mList: List<HomeItemModel>) : RecyclerView.Adapter
 
 
     private var onItemClick: ((HomeItemModel) -> Unit)? = null
+    private var onToggleClickListener: ((HomeItemModel, Boolean) -> Unit)? = null
 
     fun setOnItemClickListener(listener: (HomeItemModel) -> Unit) {
         onItemClick = listener
     }
+
+    fun setOnToggleClickListener(listener: (HomeItemModel, Boolean) -> Unit) {
+        onToggleClickListener = listener
+    }
+
+
 
    // private lateinit var mListener: onItemClickListener
     /*
@@ -67,6 +74,10 @@ class HomeAdapter(private val mList: List<HomeItemModel>) : RecyclerView.Adapter
             onItemClick?.invoke(HomeItemModel)
         }
 
+        holder.favButton.setOnCheckedChangeListener { buttonView, isChecked ->
+        onToggleClickListener?.invoke(HomeItemModel, isChecked)
+     }
+
 
     }
 
@@ -83,6 +94,7 @@ class HomeAdapter(private val mList: List<HomeItemModel>) : RecyclerView.Adapter
         val ratingBarHome = binding.ratingBar
         val numRecensioni = binding.numRecensioniHome
         val valutazione = binding.valutazioneHome
+        val favButton = binding.FavoriteButton2
 
         }
 

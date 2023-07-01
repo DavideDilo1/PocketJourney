@@ -25,6 +25,7 @@ import com.example.pocketjourney.home.sezioniHome.AttrazioniFragment
 import com.example.pocketjourney.home.sezioniHome.HotelFragment
 import com.example.pocketjourney.home.sezioniHome.PaginaConsigliatiFragment
 import com.example.pocketjourney.home.sezioniHome.RistorantiFragment
+import com.example.pocketjourney.preferiti.ListaPreferitiFragment
 import com.google.gson.JsonObject
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -170,6 +171,7 @@ class AnteprimaPostoFragment : Fragment() {
                 "hotelFragment" -> HotelFragment()
                 "attrazioniFragment" -> AttrazioniFragment()
                 "consigliati" -> PaginaConsigliatiFragment()
+                "preferiti" -> ListaPreferitiFragment()
                 else -> HomeFragmentNew()
             }
             val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()

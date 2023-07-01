@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".preferiti.ListaPreferitiFragment"
-    android:id="@+id/frameListaPreferiti">
+    android:id="@+id/frameListaPreferiti"
+    android:background="@color/white">
 
    <androidx.constraintlayout.widget.ConstraintLayout
        android:layout_width="match_parent"
@@ -45,13 +46,19 @@
           app:layout_constraintVertical_bias="0.0" />
 
       <androidx.recyclerview.widget.RecyclerView
-          android:id="@+id/recyclerPreferiti"
+          android:visibility="visible"
+          android:id="@+id/recyclerMieiPreferiti"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
+          android:layout_marginTop="8dp"
+          app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.0"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/imageBackground"
 
+          app:layout_constraintTop_toBottomOf="@+id/imageBackground"
+          app:layout_constraintVertical_bias="0.0"
+          tools:listitem="@layout/card_view_design"
           />
 
 

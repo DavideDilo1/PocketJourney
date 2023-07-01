@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.pocketjourney.ProfileFragment
 import com.example.pocketjourney.R
 import com.example.pocketjourney.adapter.PrenotazioniAdapter
 import com.example.pocketjourney.adapter.RecensioniAdapter
@@ -47,7 +48,11 @@ class LeMieRecensioniFragment : Fragment() {
         }
 
         binding.backArrowMyRec.setOnClickListener {
-            requireActivity().supportFragmentManager.popBackStack()
+            val childFragment = ProfileFragment()
+            val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.frameLeMieRecensioni, childFragment)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
         }
 
         return binding.root

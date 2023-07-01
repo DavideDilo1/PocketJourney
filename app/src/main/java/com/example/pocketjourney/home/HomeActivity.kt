@@ -9,6 +9,7 @@ import com.example.pocketjourney.preferiti.PreferitiNoListFragment
 import com.example.pocketjourney.ProfileFragment
 import com.example.pocketjourney.R
 import com.example.pocketjourney.databinding.ActivityHomeBinding
+import com.example.pocketjourney.preferiti.ListaPreferitiFragment
 
 class HomeActivity : AppCompatActivity() {
 
@@ -42,7 +43,7 @@ class HomeActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.home -> replaceFragment(HomeFragmentNew(), userId)
-                R.id.preferiti -> replaceFragment(PreferitiNoListFragment(), userId)
+                R.id.preferiti -> replaceFragment(ListaPreferitiFragment(), userId)
                 //passo al fragment profilo l'id dell'utente nel caso sia connesso, l'email altrimenti
                 R.id.profile -> replaceFragmentProfile(ProfileFragment(), userId, emailOff)
 
