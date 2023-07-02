@@ -328,20 +328,12 @@
                     android:layout_gravity="center"
                     />
 
-
-
-
-
-
-
-
             </LinearLayout>
 
 
 
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
-                </ScrollView>
-
-            </FrameLayout>
+</FrameLayout>

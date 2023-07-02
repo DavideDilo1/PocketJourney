@@ -85,7 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimary"
-android:fontFamily="@font/open_sans_light"
+            android:fontFamily="@font/open_sans_light"
             android:text="TextView"
             app:layout_constraintBaseline_toBaselineOf="@+id/numpersText"
             app:layout_constraintEnd_toEndOf="parent"
