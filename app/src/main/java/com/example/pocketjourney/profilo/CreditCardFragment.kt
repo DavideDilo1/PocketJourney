@@ -1,6 +1,8 @@
 package com.example.pocketjourney.profilo
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -53,8 +55,10 @@ class CreditCardFragment : Fragment() {
 
             }
 
+
             formCardIsShowing = !formCardIsShowing
         }
+
 
 
         call.enqueue(object : Callback<JsonObject> {
@@ -82,7 +86,7 @@ class CreditCardFragment : Fragment() {
                                 val meseScadenza=primaCarta.get("meseScadenza").asString
                                 val annoScadenza=primaCarta.get("annoScadenza").asString
 
-                                binding.creditCardNumber.text = "${numCarta}"
+                                binding.creditCardNumber.text = formatCreditCardNumber("${numCarta}")
                                 binding.expireCreditCard.text= "${meseScadenza}/${annoScadenza}"
                                 Log.e("Ciao", "HO mostrato I DATI della tua carta" )
                             }
@@ -208,8 +212,8 @@ class CreditCardFragment : Fragment() {
                                             if (response.isSuccessful) {
                                                 // L'inserimento della carta è avvenuto
                                                 Log.e("ciao","CARTA RIMOSSA")
-                                                binding.tvNumeroCarta.text = "Numero carta: "
-                                                binding.tvDataScadenza.text= " -- / -- "
+                                                binding.creditCardNumber.text = "XXXX XXXX XXXX XXXX"
+                                                binding.expireCreditCard.text= " --/-- "
                                                 Toast.makeText(context, "Hai rimosso la tua carta con successo e puoi inserirne una nuova", Toast.LENGTH_SHORT).show()
                                             }
                                         }
@@ -290,4 +294,17 @@ class CreditCardFragment : Fragment() {
                 && verificaCVV(cvv) )
     }
 
+    private fun formatCreditCardNumber(input: String): String {
+        val cardNumber = input.replace(" ", "")
+        val formattedText = StringBuilder()
+
+        for (i in cardNumber.indices) {
+            if (i > 0 && i % 4 == 0) {
+                formattedText.append(" ")
+            }
+            formattedText.append(cardNumber[i])
+        }
+
+        return formattedText.toString()
+    }
 }

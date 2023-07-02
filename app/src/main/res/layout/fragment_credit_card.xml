@@ -60,7 +60,7 @@
         android:padding="10dp"
         android:textColor="@color/colorPrimary"
         android:textColorHint="@color/colorPrimary"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnEliminaCarta" />
