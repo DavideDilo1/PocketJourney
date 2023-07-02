@@ -121,6 +121,7 @@ class ListaPrenotazioniFragment : Fragment() {
                 //TODO VErificae grandezza datalist, se vuota immagine: GIUSTO?
                 //
                 if (dataList == null){
+                    Log.e("ciao", "non ci sono elementi")
 
                     binding.textNessunDato.visibility = View.VISIBLE
                     binding.textNessunDato2.visibility = View.VISIBLE

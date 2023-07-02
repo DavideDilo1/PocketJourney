@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pocketjourney.databinding.CardViewDesignBinding
 import com.example.pocketjourney.model.HomeItemModel
 
-class HomeAdapter(private val mList: List<HomeItemModel>) : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
+class HomeAdapter(private var mList: List<HomeItemModel>) : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
 
 
     private var onItemClick: ((HomeItemModel) -> Unit)? = null
@@ -21,8 +21,10 @@ class HomeAdapter(private val mList: List<HomeItemModel>) : RecyclerView.Adapter
         onToggleClickListener = listener
     }
 
-
-
+    fun setFilteredList(mList: List<HomeItemModel>){
+        this.mList = mList
+        notifyDataSetChanged()
+    }
    // private lateinit var mListener: onItemClickListener
     /*
     interface onItemClickListener{

@@ -234,19 +234,21 @@
                     app:layout_constraintStart_toEndOf="@+id/hotelButton"
                     app:layout_constraintTop_toBottomOf="@+id/searchViewHome" />
 
-                <SearchView
+                <androidx.appcompat.widget.SearchView
                     android:id="@+id/searchViewHome"
-                    android:layout_width="245dp"
-                    android:layout_height="43dp"
+                    android:layout_width="277dp"
+                    android:layout_height="48dp"
                     android:layout_marginTop="28dp"
                     android:background="@drawable/custom_search_view"
                     android:elevation="20dp"
-                    android:queryHint="Dove vorresti andare?"
+                    app:iconifiedByDefault="false"
                     app:layout_constraintBottom_toBottomOf="@+id/imageBackground"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+
+                    app:layout_constraintEnd_toStartOf="@+id/ideaButton"
+                    app:layout_constraintStart_toEndOf="@+id/pacchettiButton"
                     app:layout_constraintTop_toBottomOf="@+id/testoCosaStaiCercando"
-                    app:layout_constraintVertical_bias="0.0" />
+                    app:layout_constraintVertical_bias="0.0"
+                    app:queryHint="Dove vorresti andare?" />
 
                 <ImageButton
 
@@ -254,28 +256,30 @@
                     style="@android:style/Widget.ImageButton"
                     android:layout_width="44dp"
                     android:layout_height="43dp"
+                    android:layout_marginEnd="16dp"
                     android:background="@android:color/transparent"
                     android:src="@drawable/idea_24"
                     app:layout_constraintBottom_toTopOf="@+id/attractionButton"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.956"
+                    app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="@+id/imageBackground"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.854" />
+                    app:layout_constraintTop_toBottomOf="@+id/testoCosaStaiCercando"
+                    app:layout_constraintVertical_bias="0.55" />
 
                 <ImageButton
                     android:id="@+id/pacchettiButton"
                     style="@android:style/Widget.ImageButton"
                     android:layout_width="44dp"
                     android:layout_height="43dp"
+                    android:layout_marginStart="16dp"
                     android:background="@android:color/transparent"
                     android:src="@drawable/icons8_briefcase_24"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageBackground"
+                    app:layout_constraintBottom_toTopOf="@+id/resturantButton"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.043"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/testoCosaStaiCercando"
-                    app:layout_constraintVertical_bias="0.25" />
+                    app:layout_constraintVertical_bias="0.55" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

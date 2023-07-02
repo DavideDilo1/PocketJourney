@@ -29,6 +29,9 @@ import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
+import kotlin.collections.ArrayList
+import androidx.appcompat.widget.SearchView
 
 
 class HomeFragmentNew : Fragment() {
@@ -46,11 +49,9 @@ class HomeFragmentNew : Fragment() {
     private lateinit var attrazioniButton: Button
     private lateinit var home_background: ImageView
     private lateinit var ideaButton: ImageButton
+    private var homeItem = ArrayList<HomeItemModel>()
+    private var homeAdapter = HomeAdapter(homeItem)
 
-    private lateinit var anim_from_bottom: Animation
-    private lateinit var anim_from_top: Animation
-    private lateinit var anim_from_left: Animation
-    private lateinit var anim_from_right: Animation
 
     @TargetApi(Build.VERSION_CODES.S)
     override fun onCreateView(
@@ -84,52 +85,34 @@ class HomeFragmentNew : Fragment() {
         textView = binding.testoCosaStaiCercando
         textView2 = binding.testoHome
         textView3 = binding.testoMiglioriMete
-        searchView = binding.searchViewHome
 
         ideaButton = binding.ideaButton
 
         homeRecycle = binding.homeRecyclerView
-
-        //load animations
-        anim_from_bottom = AnimationUtils.loadAnimation(requireContext(), R.anim.anim_from_bottom)
-        anim_from_top = AnimationUtils.loadAnimation(requireContext(), R.anim.anim_from_top)
-        anim_from_left = AnimationUtils.loadAnimation(requireContext(), R.anim.anim_from_left)
-        anim_from_right = AnimationUtils.loadAnimation(requireContext(), R.anim.anim_from_right)
-        //set animations
-
-        //cardView.setAnimation(anim_from_button)
-     //   cardView2.setAnimation(anim_from_button)
-      //  cardView3.setAnimation(anim_from_button)
-        /*
-        textView.animation = anim_from_top
-        textView2.animation = anim_from_top
-        textView3.animation = anim_from_bottom
-        ideaButton.animation = anim_from_right
-
-        searchView.animation = anim_from_left
-
-        home_background.animation = anim_from_top
-        ristorantiButton.animation = anim_from_left
-        attrazioniButton.animation = anim_from_left
-        hotelButton.animation = anim_from_left
+        searchView = binding.searchViewHome
 
 
-        homeRecycle.setAnimation(anim_from_bottom)
-*/
 
-       // favoriteButton1 = binding.FavoriteButton
-      //  favoriteButton2 = binding.FavoriteButton2
-      //  favoriteButton3 = binding.FavoriteButton3
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
 
-/*
-        favoriteButton1.setOnClickListener {
-
-            if(favoriteButton1.isChecked()){
-
-                Toast.makeText(requireContext(), "Aggiunto ai Preferiti", Toast.LENGTH_SHORT).show()
-            }else
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
             }
-        }*/
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText != null) {
+                    filterList(newText)
+                }
+
+                return true
+            }
+
+
+        })
+
+
+
+
 
 
         ristorantiButton.setOnClickListener(View.OnClickListener { view ->
@@ -185,9 +168,11 @@ class HomeFragmentNew : Fragment() {
         return binding.root
     }
 
+
+
     private fun setRecyclerView(idUtente: Int) {
-        val homeItem = ArrayList<HomeItemModel>()
-        val homeAdapter = HomeAdapter(homeItem)
+       // val homeItem = ArrayList<HomeItemModel>()
+       // val homeAdapter = HomeAdapter(homeItem)
         //imposto adapter sulla recycler view
         binding.homeRecyclerView.adapter=homeAdapter
         val scope = CoroutineScope(Dispatchers.Default)
@@ -367,6 +352,27 @@ class HomeFragmentNew : Fragment() {
         }
     }
 
+    private fun filterList(query : String){
+        if( query != null){
+            val filteredList = ArrayList<HomeItemModel>()
+            for(i in homeItem ){
+                if(i.title.lowercase(Locale.ROOT).contains(query)){
+                    filteredList.add(i)
+                }
+            }
+
+            if(filteredList.isEmpty()){
+                //se la vista è vuota<<'
+                Toast.makeText(requireContext(), "Nessun dato trovato", Toast.LENGTH_SHORT)
+            }else{
+                homeAdapter.setFilteredList(filteredList)
+            }
+
+
+
+        }
+
+    }
 
 
 
