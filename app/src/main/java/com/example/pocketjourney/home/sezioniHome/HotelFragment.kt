@@ -33,6 +33,8 @@ import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class HotelFragment : Fragment() {
@@ -50,12 +52,8 @@ class HotelFragment : Fragment() {
     private lateinit var testoTutti: TextView
     private lateinit var testoCategoria: TextView
     private lateinit var searchView: SearchView
-
-
-    private lateinit var anim_from_bottom: Animation
-    private lateinit var anim_from_top: Animation
-    private lateinit var anim_from_left: Animation
-    private lateinit var anim_from_right: Animation
+    private var homeItem = ArrayList<HomeItemModel>()
+    private var homeAdapter = HomeAdapter(homeItem)
 
 
     override fun onCreateView(
@@ -96,27 +94,30 @@ class HotelFragment : Fragment() {
         testoCategoria= binding.testoCategoriaH
         searchView= binding.searchView
 
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
 
-        anim_from_bottom = AnimationUtils.loadAnimation(requireContext(), R.anim.anim_from_bottom)
-        anim_from_top = AnimationUtils.loadAnimation(requireContext(), R.anim.anim_from_top)
-        anim_from_left = AnimationUtils.loadAnimation(requireContext(), R.anim.anim_from_left)
-        anim_from_right = AnimationUtils.loadAnimation(requireContext(), R.anim.anim_from_right)
-/*
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
 
-        topImage.animation = anim_from_top
-        recyclerOrizzontale.animation =  anim_from_left
-        recyclerVerticale.animation = anim_from_bottom
-        testoTutti.animation = anim_from_left
-        testoCategoria.animation = anim_from_left
-        titoloFinestra.animation = anim_from_top
-        searchView.animation = anim_from_right
-*/
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText != null) {
+                    filterList(newText)
+                }
+
+                return true
+            }
+
+
+        })
+
+
+
         return binding.root
     }
 
     private fun setRecyclerView(idUtente: Int) {
-        val homeItem = ArrayList<HomeItemModel>()
-        val homeAdapter = HomeAdapter(homeItem)
+
         val scope = CoroutineScope(Dispatchers.Default)
         //imposto adapter sulla recycler view
         binding.RecyclerViewVerticaleH.adapter=homeAdapter
@@ -450,6 +451,28 @@ class HotelFragment : Fragment() {
                 }
             })
         }
+    }
+
+    private fun filterList(query : String){
+        if( query != null){
+            val filteredList = ArrayList<HomeItemModel>()
+            for(i in homeItem ){
+                if(i.title.lowercase(Locale.ROOT).contains(query)){
+                    filteredList.add(i)
+                }
+            }
+
+            if(filteredList.isEmpty()){
+                //se la vista è vuota<<'
+                Toast.makeText(requireContext(), "Nessun dato trovato", Toast.LENGTH_SHORT)
+            }else{
+                homeAdapter.setFilteredList(filteredList)
+            }
+
+
+
+        }
+
     }
 
 }

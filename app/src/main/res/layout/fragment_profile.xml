@@ -6,187 +6,178 @@
     android:layout_height="match_parent"
     android:id="@+id/frameProfilo"
     tools:context=".accesso.LoginActivity"
-    android:background="@color/purple_200">
-
-
-
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:background="@color/white">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/profile_back1"
+        />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/tvNomeCognomeProfilo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/open_sans_bold"
+                android:text="Nome Cognome"
+                android:textColor="@color/colorPrimary"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgImmagineProfilo" />
 
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="0dp"
-                    android:layout_height="195dp"
-                    android:scaleType="fitXY"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/pngwing_com__1_" />
+            <ImageView
+                android:id="@+id/imgImmagineProfilo"
+                android:layout_width="162dp"
+                android:layout_height="113dp"
+                android:layout_marginTop="88dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/_828447" />
 
-                <ImageView
-                    android:id="@+id/imgImmagineProfilo"
-                    android:layout_width="162dp"
-                    android:layout_height="113dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.493"
-                    app:layout_constraintStart_toStartOf="@+id/imageView"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView"
-                    app:layout_constraintVertical_bias="0.495"
-                    app:srcCompat="@drawable/_828447" />
+            <TextView
+                android:id="@+id/tvEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/open_sans_semi_bold"
+                android:text="email"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvNomeCognomeProfilo" />
 
-                <TextView
-                    android:id="@+id/tvNomeCognomeProfilo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Nome Cognome"
-                    android:textSize="25sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.497"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imgImmagineProfilo" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/recensioniButton"
+                android:layout_width="300dp"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="24dp"
+                android:layout_weight="1"
+                android:background="@drawable/round_button"
+                android:backgroundTint="@color/azzurro"
+                android:drawableStart="@drawable/baseline_reviews_24"
+                android:icon="@drawable/baseline_reviews_24"
+                android:paddingStart="20dp"
+                android:text="Le mie recensioni"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
 
-                <TextView
-                    android:id="@+id/tvEmail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="email"
-                    android:textSize="20sp"
-                    app:layout_constraintEnd_toEndOf="@+id/tvNomeCognomeProfilo"
-                    app:layout_constraintStart_toStartOf="@+id/tvNomeCognomeProfilo"
-                    app:layout_constraintTop_toBottomOf="@+id/tvNomeCognomeProfilo" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnLogout"
+                style="@android:style/Widget.Button"
+                android:layout_width="179dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/button_background"
+                android:text="Logout"
+                android:backgroundTint="@color/loginColor"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnModificaDati" />
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvEmail"
-                    app:layout_constraintVertical_bias="0.0">
+            <androidx.appcompat.widget.AppCompatButton
+                android:drawableStart="@drawable/baseline_manage_accounts_24"
+                android:layout_width="300dp"
+                android:id="@+id/btnModificaDati"
+                style="@android:style/Widget.Button"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/round_button"
+                android:backgroundTint="@color/azzurro"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:text="Modifica Dati"
 
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/recensioniButton"
-                        android:layout_width="300dp"
-                        android:layout_height="0dp"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="32dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/round_button"
-                        android:backgroundTint="@color/azzurro"
-                        android:drawableStart="@drawable/baseline_reviews_24"
-                        android:icon="@drawable/baseline_reviews_24"
-                        android:paddingStart="20dp"
-                        android:text="Le mie recensioni"
-                        android:textAllCaps="false"
-                        android:textColor="@color/white"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
+                android:drawablePadding="20dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="53dp"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pagamentiButton" />
 
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/prenotazioniButton"
-                        android:layout_width="300dp"
-                        android:layout_height="0dp"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="32dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/round_button"
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/prenotazioniButton"
+                android:layout_width="300dp"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:layout_weight="1"
+                android:background="@drawable/round_button"
+                android:drawableStart="@drawable/profile_png"
+                android:drawablePadding="20dp"
+                android:paddingStart="20dp"
+                android:text="Le mie prenotazioni"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:flow_horizontalAlign="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recensioniButton" />
 
-                        android:backgroundTint="@color/azzurro"
-                        android:drawableStart="@drawable/profile_png"
-                        android:drawablePadding="20dp"
-                        android:paddingStart="20dp"
-                        android:text="Le mie prenotazioni"
-                        android:textAllCaps="false"
-                        android:textColor="@color/white"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        app:flow_horizontalAlign="center" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/pagamentiButton"
+                android:layout_width="300dp"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:layout_weight="1"
+                android:background="@drawable/round_button"
+                android:backgroundTint="@color/azzurro"
+                android:drawableStart="@drawable/baseline_credit_card_24"
+                android:drawablePadding="20dp"
+                android:paddingStart="20dp"
+                android:text="Gestione pagamenti"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:flow_horizontalAlign="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/prenotazioniButton" />
 
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/pagamentiButton"
-                        android:layout_width="300dp"
-                        android:layout_height="0dp"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="32dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/round_button"
-                        android:backgroundTint="@color/azzurro"
-                        android:drawableStart="@drawable/baseline_credit_card_24"
-                        android:drawablePadding="20dp"
-                        android:paddingStart="20dp"
-                        android:text="Gestione pagamenti"
-                        android:textAllCaps="false"
-                        android:textColor="@color/white"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        app:flow_horizontalAlign="center" />
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btnModificaDati"
-                        style="@android:style/Widget.Button"
-                        android:layout_width="179dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="32dp"
-                        android:background="@drawable/button_background"
-                        android:text="Modifica Dati"
-                        android:textColor="#ffffff"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btnLogout"
-                        style="@android:style/Widget.Button"
-                        android:layout_width="179dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="32dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="@drawable/button_background"
-                        android:text="Logout"
-                        android:textColor="#ffffff"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </LinearLayout>
+            <TextView
+                android:id="@+id/profileText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/open_sans_extra_bold"
+                android:text="Profilo"
+                android:textColor="@color/colorPrimary"
+                android:textSize="26sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.049"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
 </FrameLayout>

@@ -20,7 +20,7 @@ import java.util.*
 
 class CreditCardFragment : Fragment() {
     private lateinit var binding: FragmentCreditCardBinding
-
+    private var formCardIsShowing= false
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,6 +31,31 @@ class CreditCardFragment : Fragment() {
         val userAPI= ClientNetwork.retrofit
         val queryDatiCarta = "SELECT idDatiPagamento, ref_IdUtente, numeroCarta, codiceSicurezza, meseScadenza, annoScadenza FROM DatiPagamento WHERE ref_IdUtente = '$idUtente'"
         val call = userAPI.cerca(queryDatiCarta)
+
+        binding.buttonMostraFormCarta.setOnClickListener{
+            if(formCardIsShowing){
+                binding.etNumeroCarta.visibility = View.VISIBLE
+                binding.etCvv.visibility = View.VISIBLE
+                binding.tvAnnoScadenza.visibility = View.VISIBLE
+                binding.tvMeseScadenza.visibility = View.VISIBLE
+                binding.yearSpinner.visibility = View.VISIBLE
+                binding.monthSpinner.visibility = View.VISIBLE
+                binding.btnInserisciCarta.visibility =View.VISIBLE
+
+            }else{
+                binding.etNumeroCarta.visibility = View.GONE
+                binding.etCvv.visibility = View.GONE
+                binding.tvAnnoScadenza.visibility = View.GONE
+                binding.tvMeseScadenza.visibility = View.GONE
+                binding.yearSpinner.visibility = View.GONE
+                binding.monthSpinner.visibility = View.GONE
+                binding.btnInserisciCarta.visibility =View.GONE
+
+            }
+
+            formCardIsShowing = !formCardIsShowing
+        }
+
 
         call.enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
@@ -57,8 +82,8 @@ class CreditCardFragment : Fragment() {
                                 val meseScadenza=primaCarta.get("meseScadenza").asString
                                 val annoScadenza=primaCarta.get("annoScadenza").asString
 
-                                binding.tvNumeroCarta.text = "Numero carta: ${numCarta}"
-                                binding.tvDataScadenza.text= " ${meseScadenza} / ${annoScadenza}"
+                                binding.creditCardNumber.text = "${numCarta}"
+                                binding.expireCreditCard.text= "${meseScadenza}/${annoScadenza}"
                                 Log.e("Ciao", "HO mostrato I DATI della tua carta" )
                             }
                         }
