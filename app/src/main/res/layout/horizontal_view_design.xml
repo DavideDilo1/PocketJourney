@@ -111,6 +111,5 @@
 
     </androidx.cardview.widget.CardView>
 
-    <!-- TODO: CAMBIARE L'ID, da errore-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
