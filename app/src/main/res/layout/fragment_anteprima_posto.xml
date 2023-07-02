@@ -53,10 +53,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
-            android:layout_marginLeft="18dp"
+            android:layout_marginTop="400dp"
             android:layout_marginEnd="18dp"
-            android:layout_marginRight="18dp"
-            android:layout_marginTop="420dp"
             android:fontFamily="@font/open_sans_semi_bold"
             android:text="THE START Hotel, Casino &amp; SkyPod"
             android:textColor="@color/white"
@@ -67,7 +65,7 @@
             app:layout_constraintTop_toTopOf="parent"
 
 
-        />
+            />
 
         <TextView
             android:id="@+id/second_subtitle"
@@ -145,7 +143,7 @@
             android:id="@+id/second_arrow_up"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="44dp"
+            android:layout_marginTop="40dp"
             android:src="@drawable/ic_up_arrow"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

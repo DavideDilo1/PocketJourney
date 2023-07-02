@@ -29,20 +29,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/SoftRoundImageView" />
 
-        <SearchView
-            android:id="@+id/searchView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:iconifiedByDefault="false"
-            app:layout_constraintBottom_toBottomOf="@+id/imageBackground"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.955"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.666"
-            app:layout_constraintWidth_default="wrap"
-            app:layout_goneMarginTop="10dp" />
-
         <ImageView
             android:id="@+id/back_arrowC"
             android:layout_width="wrap_content"
@@ -71,11 +57,61 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/nessunConImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:src="@drawable/nessun_dato_img"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageBackground" />
+
+        <TextView
+            android:id="@+id/textNessunDato"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_semi_bold"
+            android:text="Ci dispiace!"
+            android:textAlignment="center"
+            android:textColor="@color/loginColor"
+            android:textSize="18sp"
+            android:visibility="gone"
+
+            app:layout_constraintBottom_toBottomOf="@+id/nessunaRecImg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/nessunaRecImg"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textNessunDato2"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_semi_bold"
+            android:text="Non abbiamo trovato nessuna località che abbia rispettato i criteri di ricerca!"
+            android:textAlignment="center"
+            android:textColor="@color/loginColor"
+            android:textSize="18sp"
+            android:visibility="gone"
+
+            app:layout_constraintBottom_toBottomOf="@+id/nessunConImg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/nessunConImg"
+            app:layout_constraintVertical_bias="0.084" />
 
         <ScrollView
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:scrollbars="none"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -83,6 +119,8 @@
             app:layout_constraintTop_toBottomOf="@+id/imageBackground">
 
             <LinearLayout
+                android:visibility="visible"
+                android:id="@+id/linearConsigliati"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
@@ -91,23 +129,22 @@
                     android:id="@+id/testoCategoriaC"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Ecco cosa abbiamo trovato per te"
-                    android:fontFamily="@font/open_sans_bold"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="18sp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
-                    />
+                    android:fontFamily="@font/open_sans_bold"
+                    android:text="Ecco cosa abbiamo trovato per te"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:layout_marginRight="4dp"
-                    android:layout_marginLeft="4dp"
                     android:id="@+id/RecyclerViewConsigliati"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
                     android:orientation="vertical"
-                    tools:listitem="@layout/card_view_design"
-                    />
+                    tools:listitem="@layout/card_view_design" />
 
             </LinearLayout>
         </ScrollView>

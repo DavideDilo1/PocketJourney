@@ -188,6 +188,13 @@ class PaginaConsigliatiFragment : Fragment() {
                                 //configuriamo l'adapter con la recycler view
                                 binding.RecyclerViewConsigliati.adapter = homeAdapter
 
+                            }else{
+                                binding.nessunConImg.visibility = View.VISIBLE
+                                binding.textNessunDato.visibility = View.VISIBLE
+                                binding.textNessunDato2.visibility = View.VISIBLE
+                                binding.linearConsigliati.visibility = View.GONE
+
+
                             }
                         }
 
@@ -197,6 +204,11 @@ class PaginaConsigliatiFragment : Fragment() {
 
                 override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                     // Si è verificato un errore durante la chiamata di rete online
+                    binding.nessunConImg.visibility = View.VISIBLE
+                    binding.textNessunDato.visibility = View.VISIBLE
+                    binding.textNessunDato2.visibility = View.VISIBLE
+                    binding.linearConsigliati.visibility = View.GONE
+
                     Log.e("ciao", t.toString() + " " + t.message.toString())
                 }
             })
