@@ -1,7 +1,6 @@
 package com.example.pocketjourney.home
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -58,17 +57,14 @@ class RecensioniFragment : Fragment() {
 
 
         binding.recyclerReview.layoutManager = LinearLayoutManager(requireContext())
-        Log.e("dati:", idUtente +" "+ idPosto +" " + querySetDatiRecensione + " " + queryInserisciRec + " " + provenienza)
         val userAPI= ClientNetwork.retrofit
         val call = userAPI.cerca(querySetDatiRecensione)
         call.enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if (response.isSuccessful) {
                     //posso effettuare il login online
-                    Log.e("Ciao","posso cambiare i dati con dbonline")
                     val jsonObject = response.body() // Ottieni il JSON come JsonObject
                     if (jsonObject != null && jsonObject.has("queryset") ) {
-                        Log.e("Ciao", "HO OTTENUTO IL JSONOBJECT come queryset" )
                         val querySetArray = jsonObject.getAsJsonArray("queryset")
                         if (querySetArray != null && querySetArray.size()>0){
                             val primoPosto=querySetArray[0].asJsonObject //prendo la prima corrispondenza
@@ -138,11 +134,9 @@ class RecensioniFragment : Fragment() {
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                 // Si è verificato un errore durante la chiamata di rete online
                 //login in locale
-                Log.e("Ciao","posso cambiare i dati usando ONFAILURE")
             }
         })
 
-        Log.e("sono recensioni fragment mi ha aperto",idUtente + idPosto)
 
         binding.backArrowRec.setOnClickListener {
             if(provenienza=="pacchetto") {
@@ -163,7 +157,6 @@ class RecensioniFragment : Fragment() {
         binding.ratingBarLasciaRecensione.apply {
             setOnRatingBarChangeListener{ _, rating, _ ->
                 selectedRating=rating
-                Log.e("ciao", selectedRating.toString())
             }
         }
 
@@ -199,14 +192,11 @@ class RecensioniFragment : Fragment() {
                         val jsonObject = response.body()
                         // Verifica se il JSON object è stato ottenuto correttamente come queryset
                         if (jsonObject != null && jsonObject.has("queryset") ) {
-                            Log.e("Ciao", "HO OTTENUTO IL JSONOBJECT come queryset per la popolazione" )
                             //salvo l'array e verifico che contenga almeno un elemento
                             val querySetArray = jsonObject.getAsJsonArray("queryset")
                             if (querySetArray != null && querySetArray.size()>0){
-                                Log.e("Ciao", "sto per entrare nel for")
                                 for(i in querySetArray){
                                     val elemento= i as JsonObject
-                                    Log.e("Ciao", "sono dentro il blocco della foto DENTRO IS SUCCESSFULL")
                                     reviewItem.add(
                                         RecensioniModel(
                                             elemento.get("Nome").asString,
@@ -218,7 +208,6 @@ class RecensioniFragment : Fragment() {
                                     )
                                     // Aggiorna l'adapter dopo aver aggiunto l'elemento
                                     reviewAdapter.notifyDataSetChanged()
-                                    Log.d("DIMENSIONE DELLA HOME ITEM", reviewItem.size.toString())
 
 
 
@@ -239,7 +228,6 @@ class RecensioniFragment : Fragment() {
 
                 override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                     // Si è verificato un errore durante la chiamata di rete online
-                    Log.e("ciao", t.toString() + " " + t.message.toString())
                 }
             })
         }
@@ -257,11 +245,9 @@ class RecensioniFragment : Fragment() {
         primaParteQuery:String
     ) {
         //dati utili per l'inserimetno in locale
-        Log.d("DATI OFFLINE=",idPosto + " " + idUtente + " " + titolo + " " + rating.toString() + " "+ formattedDate + " " + testo + " "+ rating)
         val userAPI = ClientNetwork.retrofit
         val secondaParteQuery = " VALUES ('$idUtente', '$idPosto', '$titolo','$testo','$rating','$formattedDate')"
         val queryInserisciRecensioneFin= primaParteQuery+secondaParteQuery
-        Log.e("query finale:",queryInserisciRecensioneFin)
         val call = userAPI.inserisci(queryInserisciRecensioneFin)
         call.enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
@@ -276,7 +262,6 @@ class RecensioniFragment : Fragment() {
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                 // Si è verificato un errore durante la chiamata di rete online
                 //Toast.makeText(requireContext(), t.toString() + " " + t.message.toString(), Toast.LENGTH_SHORT).show()
-                Log.e("ciao",t.toString() + " " + t.message.toString())
             }
         })
     }

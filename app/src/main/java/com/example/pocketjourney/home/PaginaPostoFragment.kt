@@ -4,7 +4,6 @@ import android.annotation.TargetApi
 import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,10 +11,7 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
-import android.widget.RatingBar
 import android.widget.Toast
-import androidx.core.app.ActivityOptionsCompat
-import androidx.core.util.Pair
 import com.example.pocketjourney.R
 import com.example.pocketjourney.database.ClientNetwork
 import com.example.pocketjourney.databinding.FragmentPaginaPostoBinding
@@ -47,7 +43,6 @@ class PaginaPostoFragment : Fragment() {
         val queryResultString = requireActivity().intent.getStringExtra("queryResult")
         val idUtente = requireActivity().intent.getStringExtra("idUtente")
         val idPosto= requireActivity().intent.getStringExtra("idPosto")
-        Log.d("SONO PAGINA POSTO E HO RICEVUTO ", queryResultString.toString() + " " + idUtente)
         requireActivity().intent.putExtra("frame","fragment_pagina_posto")
         val email = requireActivity().intent.getStringExtra("email")
         if (queryResultString != null) {
@@ -73,10 +68,8 @@ class PaginaPostoFragment : Fragment() {
             val downloadFotoPosto=userAPI.getAvatar(foto)
             downloadFotoPosto.enqueue(object : Callback<ResponseBody> {
                 override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                    Log.e("Ciao", "sono dentro il blocco della foto dell'anteprima" )
-                    Log.d("RESPONSE",response.isSuccessful.toString())
+
                     if (response.isSuccessful){
-                        Log.e("Ciao", "sono dentro il blocco della foto  anteprima DENTRO IS SUCCESSFULL" )
                         val responseBody=response.body()
                         if(responseBody!=null){
                             val inputStream=responseBody.byteStream()
@@ -157,7 +150,6 @@ class PaginaPostoFragment : Fragment() {
         binding.ratingBarLasciaRecensione.apply {
             setOnRatingBarChangeListener{ _, rating, _ ->
                 selectedRating=rating
-                Log.e("ciao", selectedRating.toString())
             }
         }
 
@@ -189,7 +181,6 @@ class PaginaPostoFragment : Fragment() {
         formattedDate: String
     ) {
             //dati utili per l'inserimetno in locale
-            Log.d("DATI OFFLINE=",idPosto + " " + idUtente + " " + titolo + " " + rating.toString() + " "+ formattedDate + " " + testo + " "+ rating)
             val userAPI = ClientNetwork.retrofit
             val queryinserisciRecensione = "INSERT INTO RecensioniPosti (ref_utente, ref_posto, titolo, testo, valutazione, data) VALUES ('$idUtente', '$idPosto', '$titolo','$testo','$rating','$formattedDate')"
             val call = userAPI.inserisci(queryinserisciRecensione)
@@ -197,7 +188,6 @@ class PaginaPostoFragment : Fragment() {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                     if (response.isSuccessful) {
                         // L'inserimento della carta è avvenuto
-                        Log.e("ciao","Recensione inserita")
                         Toast.makeText(requireContext(),"Recensione inserita!",
                             Toast.LENGTH_SHORT).show()
                         binding.titleReviewEditText.text.clear()
@@ -209,7 +199,6 @@ class PaginaPostoFragment : Fragment() {
                 override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                     // Si è verificato un errore durante la chiamata di rete online
                     //Toast.makeText(requireContext(), t.toString() + " " + t.message.toString(), Toast.LENGTH_SHORT).show()
-                    Log.e("ciao",t.toString() + " " + t.message.toString())
                 }
             })
     }
