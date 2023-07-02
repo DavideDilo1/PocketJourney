@@ -49,7 +49,7 @@ class PacchettiFragment : Fragment() {
         binding.backArrowP.setOnClickListener {
             val manager=requireActivity().supportFragmentManager
             requireActivity().intent.putExtra("idUtente",idUtente)
-            manager.beginTransaction().replace(R.id.framePacchetti, HomeFragmentNew())
+            manager.beginTransaction().replace(R.id.framePacchetti, HomeFragmentNew()).remove(this)
                 .addToBackStack(null)
                 .commit()
         }

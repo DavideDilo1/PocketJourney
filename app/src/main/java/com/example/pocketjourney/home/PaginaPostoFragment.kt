@@ -48,6 +48,7 @@ class PaginaPostoFragment : Fragment() {
         val idUtente = requireActivity().intent.getStringExtra("idUtente")
         val idPosto= requireActivity().intent.getStringExtra("idPosto")
         Log.d("SONO PAGINA POSTO E HO RICEVUTO ", queryResultString.toString() + " " + idUtente)
+        requireActivity().intent.putExtra("frame","fragment_pagina_posto")
 
         if (queryResultString != null) {
             val jsonParser = JsonParser()
@@ -115,15 +116,9 @@ class PaginaPostoFragment : Fragment() {
 
 
         down_arrow.setOnClickListener{
-            val pairs = arrayOf<Pair<View, String>>(
-                Pair(down_arrow, "background_image_transition")
-            )
-            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(requireActivity(), *pairs).toBundle()
-
             val childFragment = AnteprimaPostoFragment()
             val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-            childFragment.arguments = options
-            fragmentTransaction.replace(R.id.fragment_pagina_pacchetto, childFragment)
+            fragmentTransaction.replace(R.id.fragment_pagina_pacchetto, childFragment).remove(this)
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
 
@@ -140,7 +135,7 @@ class PaginaPostoFragment : Fragment() {
             val nomePosto= queryResult.get("nome").asString!!
             requireActivity().intent.putExtra("categoria",categoria)
             requireActivity().intent.putExtra("nomePosto",nomePosto)
-            val fragmentTransaction = childFragmentManager.beginTransaction()
+            val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.fragment_pagina_pacchetto, childFragment)
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
@@ -153,7 +148,7 @@ class PaginaPostoFragment : Fragment() {
             requireActivity().intent.putExtra("idPosto",idPosto)
             requireActivity().intent.putExtra("provenienzaRec","postoSemplice")
             requireActivity().intent.putExtra("idUtente",idUtente)
-            val fragmentTransaction = childFragmentManager.beginTransaction()
+            val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.fragment_pagina_pacchetto, childFragment)
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()

@@ -66,6 +66,7 @@ class HotelFragment : Fragment() {
         binding = FragmentHotelBinding.inflate(inflater)
         val idUtente = requireActivity().intent.getStringExtra("idUtente")
         Log.e("ATTENZIONEEEEE","HA APERTO LA ristoranti fragment " + idUtente)
+        requireActivity().intent.putExtra("frame","frameHotel")
 
         if (idUtente != null) {
             setRecyclerView(idUtente.toInt())
@@ -76,11 +77,11 @@ class HotelFragment : Fragment() {
         binding.RecyclerViewVerticaleH.layoutManager = LinearLayoutManager(requireContext())
 
         binding.backArrowH.setOnClickListener(){
-            val childFragment = HomeFragmentNew()
-            val fragmentTransaction = childFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.frameHotel, childFragment)
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()
+            val manager=requireActivity().supportFragmentManager
+            requireActivity().intent.putExtra("idUtente",idUtente)
+            manager.beginTransaction().replace(R.id.frameHotel, HomeFragmentNew())
+                .addToBackStack(null)
+                .commit()
         }
 
 
@@ -131,18 +132,12 @@ class HotelFragment : Fragment() {
                         Log.d("JSON", response.body().toString())
                         // Verifica se il JSON object è stato ottenuto correttamente come queryset
                         if (jsonObject != null && jsonObject.has("queryset")) {
-                            Log.e(
-                                "Ciao",
-                                "HO OTTENUTO IL JSONOBJECT come queryset per la popolazione"
-                            )
+
                             //salvo l'array e verifico che contenga almeno un elemento
                             val querySetArray = jsonObject.getAsJsonArray("queryset")
-                            Log.d(
-                                "RISULTATO DELLA QUERY PER LA POPOLAZIONE",
-                                querySetArray.toString()
-                            )
+
                             if (querySetArray != null && querySetArray.size() > 0) {
-                                Log.e("Ciao", "sto per entrare nel for")
+
                                 for (i in querySetArray) {
                                     var bitmap: Bitmap
                                     val elemento = i as JsonObject
@@ -153,12 +148,9 @@ class HotelFragment : Fragment() {
                                             call: Call<ResponseBody>,
                                             response: Response<ResponseBody>
                                         ) {
-                                            Log.d("RESPONSE", response.isSuccessful.toString())
+
                                             if (response.isSuccessful) {
-                                                Log.e(
-                                                    "Ciao",
-                                                    "sono dentro il blocco della foto DENTRO IS SUCCESSFULL"
-                                                )
+
                                                 val responseBody = response.body()
                                                 if (responseBody != null) {
                                                     val inputStream = responseBody.byteStream()
@@ -217,10 +209,6 @@ class HotelFragment : Fragment() {
                                                 }
 
                                             }
-                                            Log.d(
-                                                "DIMENSIONE DELLA HOME ITEM",
-                                                homeItem.size.toString()
-                                            )
                                         }
 
                                         override fun onFailure(

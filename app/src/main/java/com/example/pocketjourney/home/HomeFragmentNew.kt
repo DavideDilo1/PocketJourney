@@ -52,6 +52,8 @@ class HomeFragmentNew : Fragment() {
     private var homeItem = ArrayList<HomeItemModel>()
     private var homeAdapter = HomeAdapter(homeItem)
 
+    private var isHomeOpen:Boolean=true
+
 
     @TargetApi(Build.VERSION_CODES.S)
     override fun onCreateView(
@@ -62,14 +64,20 @@ class HomeFragmentNew : Fragment() {
 
         binding = FragmentHomeNewBinding.inflate(inflater)
         val idUtente = requireActivity().intent.getStringExtra("idUtente")
+        val email = requireActivity().intent.getStringExtra("email")
         //definiamo la recycler view della home:
 
         binding.homeRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        Log.e("ATTENZIONEEEEE","HA APERTO LA HOME" + idUtente)
+        Log.e("ATTENZIONEEEEE","HA APERTO LA HOME" + idUtente + " " + email)
+        Log.e("OPEN:",isHomeOpen.toString())
+        requireActivity().intent.putExtra("isHomeOpen",isHomeOpen.toString())
+
+        requireActivity().intent.putExtra("isHomeOpen",isHomeOpen.toString())
         if (idUtente != null) {
                 setRecyclerView(idUtente.toInt())
-
+                val count =requireActivity().supportFragmentManager.backStackEntryCount.toString()
+            Log.e("IMPORTANTISSIMISSIMO",count)
         } else {
             binding.normalConstraintHome.visibility=View.GONE
             binding.errorConstraint.visibility=View.VISIBLE
@@ -111,44 +119,56 @@ class HomeFragmentNew : Fragment() {
         })
 
 
-
-
-
-
-        ristorantiButton.setOnClickListener(View.OnClickListener { view ->
-            val childFragment = RistorantiFragment()
-            val fragmentTransaction = childFragmentManager.beginTransaction()
+        ristorantiButton.setOnClickListener{
+            val manager=requireActivity().supportFragmentManager
             requireActivity().intent.putExtra("idUtente",idUtente)
-            fragmentTransaction.replace(R.id.frameNewHomeLayout, childFragment)
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()
-        })
+            manager.beginTransaction().replace(R.id.frameNewHomeLayout, RistorantiFragment())
+                .addToBackStack(null)
+                .commit()
+            isHomeOpen=false
+            requireActivity().intent.putExtra("isHomeOpen",isHomeOpen.toString())
+            Log.e("OPEN:",isHomeOpen.toString())
+        }
 
         hotelButton.setOnClickListener{
-            val childFragment = HotelFragment()
+          /*  val childFragment = HotelFragment()
             val fragmentTransaction = childFragmentManager.beginTransaction()
             requireActivity().intent.putExtra("idUtente",idUtente)
             fragmentTransaction.replace(R.id.frameNewHomeLayout, childFragment)
             fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()
+            fragmentTransaction.commit()*/
+            val manager=requireActivity().supportFragmentManager
+            requireActivity().intent.putExtra("idUtente",idUtente)
+            manager.beginTransaction().replace(R.id.frameNewHomeLayout, HotelFragment())
+                .addToBackStack(null)
+                .commit()
         }
 
         attrazioniButton.setOnClickListener{
-            val childFragment = AttrazioniFragment()
+           /* val childFragment = AttrazioniFragment()
             val fragmentTransaction = childFragmentManager.beginTransaction()
             requireActivity().intent.putExtra("idUtente",idUtente)
             fragmentTransaction.replace(R.id.frameNewHomeLayout, childFragment)
             fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()
+            fragmentTransaction.commit()*/
+            val manager=requireActivity().supportFragmentManager
+            requireActivity().intent.putExtra("idUtente",idUtente)
+            manager.beginTransaction().replace(R.id.frameNewHomeLayout, AttrazioniFragment())
+                .addToBackStack(null)
+                .commit()
         }
 
         binding.ideaButton.setOnClickListener{
-            val childFragment = ConsigliatiFragment()
+          /*  val childFragment = ConsigliatiFragment()
             requireActivity().intent.putExtra("idUtente",idUtente)
             val fragmentTransaction = childFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.frameNewHomeLayout, childFragment)
             fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()
+            fragmentTransaction.commit()*/
+            val manager=requireActivity().supportFragmentManager
+            requireActivity().intent.putExtra("idUtente",idUtente)
+            manager.beginTransaction().replace(R.id.frameNewHomeLayout, ConsigliatiFragment())
+                .commit()
 
         }
 
@@ -159,10 +179,9 @@ class HomeFragmentNew : Fragment() {
             //fragmentTransaction.replace(R.id.frameNewHomeLayout, childFragment)
             //fragmentTransaction.addToBackStack(null)
             //fragmentTransaction.commit()
-            val managaer=requireActivity().supportFragmentManager
+            val manager=requireActivity().supportFragmentManager
             requireActivity().intent.putExtra("idUtente",idUtente)
-            managaer.beginTransaction().replace(R.id.frameNewHomeLayout, PacchettiFragment())
-                .addToBackStack(null)
+            manager.beginTransaction().replace(R.id.frameNewHomeLayout, PacchettiFragment())
                 .commit()
         }
         return binding.root
@@ -186,11 +205,10 @@ class HomeFragmentNew : Fragment() {
                         val jsonObject = response.body()
                         // Verifica se il JSON object è stato ottenuto correttamente come queryset
                         if (jsonObject != null && jsonObject.has("queryset") ) {
-                            Log.e("Ciao", "HO OTTENUTO IL JSONOBJECT come queryset per la popolazione" )
+
                             //salvo l'array e verifico che contenga almeno un elemento
                             val querySetArray = jsonObject.getAsJsonArray("queryset")
                             if (querySetArray != null && querySetArray.size()>0){
-                                Log.e("Ciao", "sto per entrare nel for")
                                 for(i in querySetArray){
                                     var bitmap : Bitmap
                                     val elemento= i as JsonObject
@@ -217,13 +235,13 @@ class HomeFragmentNew : Fragment() {
                                                 }
                                                 homeAdapter.setOnItemClickListener { homeItemModel ->
                                                     val id = homeItemModel.id
-                                                    val childFragment = AnteprimaPostoFragment()
                                                     requireActivity().intent.putExtra("idPosto",id.toString())
                                                     requireActivity().intent.putExtra("idUtente",idUtente.toString())
-                                                    val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-                                                    fragmentTransaction.replace(R.id.frameNewHomeLayout, childFragment)
-                                                    fragmentTransaction.addToBackStack(null)
-                                                    fragmentTransaction.commit()
+                                                    val manager=requireActivity().supportFragmentManager
+                                                    requireActivity().intent.putExtra("idUtente",idUtente)
+                                                    manager.beginTransaction().replace(R.id.frameNewHomeLayout, AnteprimaPostoFragment())
+                                                        .addToBackStack(null)
+                                                        .commit()
                                                 }
 
                                                 homeAdapter.setOnToggleClickListener { homeItemModel, isChecked ->
@@ -374,9 +392,12 @@ class HomeFragmentNew : Fragment() {
 
     }
 
-
-
-
+    override fun onResume() {
+        super.onResume()
+        isHomeOpen = true
+        requireActivity().intent.putExtra("isHomeOpen", isHomeOpen.toString())
+        Log.e("OPEN DOPO BACK:", isHomeOpen.toString())
+    }
 }
 
 

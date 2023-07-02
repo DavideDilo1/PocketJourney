@@ -64,6 +64,7 @@ class AttrazioniFragment : Fragment() {
         binding = FragmentAttrazioniBinding.inflate(inflater)
         val idUtente = requireActivity().intent.getStringExtra("idUtente")
         Log.e("ATTENZIONEEEEE","HA APERTO LA ristoranti fragment " + idUtente)
+        requireActivity().intent.putExtra("frame","frameAttrazioni")
 
         if (idUtente != null) {
             setRecyclerView(idUtente.toInt())
@@ -75,11 +76,11 @@ class AttrazioniFragment : Fragment() {
 
 
         binding.backArrowA.setOnClickListener(){
-            val childFragment = HomeFragmentNew()
-            val fragmentTransaction = childFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.frameAttrazioni, childFragment)
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()
+            val manager=requireActivity().supportFragmentManager
+            requireActivity().intent.putExtra("idUtente",idUtente)
+            manager.beginTransaction().replace(R.id.frameAttrazioni, HomeFragmentNew())
+                .addToBackStack(null)
+                .commit()
         }
 
         topImage = binding.imageBackground
@@ -173,24 +174,11 @@ class AttrazioniFragment : Fragment() {
                                             homeAdapter.setOnItemClickListener { homeItemModel ->
                                                 val id = homeItemModel.id
                                                 val childFragment = AnteprimaPostoFragment()
-                                                requireActivity().intent.putExtra(
-                                                    "idPosto",
-                                                    id.toString()
-                                                )
-                                                requireActivity().intent.putExtra(
-                                                    "idUtente",
-                                                    idUtente.toString()
-                                                )
-                                                requireActivity().intent.putExtra(
-                                                    "provenienza",
-                                                    "attrazioniFragment"
-                                                )
-                                                val fragmentTransaction =
-                                                    requireActivity().supportFragmentManager.beginTransaction()
-                                                fragmentTransaction.replace(
-                                                    R.id.frameNewHomeLayout,
-                                                    childFragment
-                                                )
+                                                requireActivity().intent.putExtra("idPosto", id.toString())
+                                                requireActivity().intent.putExtra("idUtente", idUtente.toString())
+                                                requireActivity().intent.putExtra("provenienza", "attrazioniFragment")
+                                                val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
+                                                fragmentTransaction.replace(R.id.frameNewHomeLayout, childFragment)
                                                 fragmentTransaction.addToBackStack(null)
                                                 fragmentTransaction.commit()
                                             }

@@ -24,14 +24,14 @@ class ConsigliatiFragment : Fragment() {
         binding = FragmentConsigliatiBinding.inflate(inflater)
         val idUtente = requireActivity().intent.getStringExtra("idUtente")
         Log.e("ATTENZIONEEEEE","HA APERTO i consigli" + idUtente)
-
+        requireActivity().intent.putExtra("frame","FrameConsigliati")
 
         binding.backArrowC.setOnClickListener(){
-            val childFragment = HomeFragmentNew()
-            val fragmentTransaction = childFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.FrameConsigliati, childFragment)
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()
+            val manager=requireActivity().supportFragmentManager
+            requireActivity().intent.putExtra("idUtente",idUtente)
+            manager.beginTransaction().replace(R.id.FrameConsigliati, HomeFragmentNew()).remove(this)
+                .addToBackStack(null)
+                .commit()
         }
 
 
@@ -83,18 +83,18 @@ class ConsigliatiFragment : Fragment() {
             val paese = binding.spnPaese.selectedItem.toString()
             val citta = binding.spnCitta.selectedItem.toString()
             val idUtente = requireActivity().intent.getStringExtra("idUtente")
+            val manager=requireActivity().supportFragmentManager
             Log.d("hai scelto", categoria + tipologia + paese + citta)
             val childFragment = PaginaConsigliatiFragment()
-            val fragmentTransaction = childFragmentManager.beginTransaction()
             requireActivity().intent.putExtra("idUtente",idUtente)
             requireActivity().intent.putExtra("categoria",categoria)
             requireActivity().intent.putExtra("tipologia",tipologia)
             requireActivity().intent.putExtra("paese",paese)
             requireActivity().intent.putExtra("citta",citta)
 
-            fragmentTransaction.replace(R.id.FrameConsigliati, childFragment)
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()
+            manager.beginTransaction().replace(R.id.FrameConsigliati, childFragment)
+            .addToBackStack(null)
+            .commit()
         }
 
     }

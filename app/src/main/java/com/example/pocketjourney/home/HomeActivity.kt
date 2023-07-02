@@ -14,6 +14,7 @@ class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -53,6 +54,8 @@ class HomeActivity : AppCompatActivity() {
         fragmentTransaction.replace(R.id.frameHomeLayout, fragment)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
+        Log.e("IMPORTANTISSIMO: ",supportFragmentManager.backStackEntryCount.toString())
+
     }
 
     private fun replaceFragmentProfile(fragment: Fragment,userId: String?,emailOff:String?){
@@ -64,15 +67,29 @@ class HomeActivity : AppCompatActivity() {
         fragmentTransaction.replace(R.id.frameHomeLayout, fragment)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
-
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
-        finishAffinity()
-        return
+        val currentFragment = supportFragmentManager.findFragmentById(R.id.frameHomeLayout)
+        val isOpen = intent.getStringExtra("isHomeOpen")
+        Log.e("ho letto", isOpen.toString())
+        Log.e("BACK:", currentFragment.toString())
+        if (currentFragment is HomeFragmentNew && isOpen == "true") {
+            super.onBackPressed()
+            finishAffinity()
+        } else {
+            Log.e("SONO ELSE","ON BACK PRESSED")
+            val manager = supportFragmentManager
+            val idUtente = intent.getStringExtra("frame").toString()
+            val address = resources.getIdentifier(idUtente, "id", packageName)
+            manager.beginTransaction()
+                .replace(address, HomeFragmentNew())
+                .addToBackStack(null)
+                .commit()
     }
 
 
 
+
+}
 }

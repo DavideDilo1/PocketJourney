@@ -40,6 +40,7 @@ class RecensioniFragment : Fragment() {
         binding = FragmentRecensioniBinding.inflate(inflater)
         val idUtente = requireActivity().intent.getStringExtra("idUtente")
         provenienza= requireActivity().intent.getStringExtra("provenienzaRec").toString()
+        requireActivity().intent.putExtra("frame","frameRecensioni")
 
         if(provenienza=="pacchetto"){
             idPosto = requireActivity().intent.getStringExtra("idPack").toString()
@@ -152,7 +153,7 @@ class RecensioniFragment : Fragment() {
             } else {
                 val childFragment = PaginaPostoFragment()
                 val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-                fragmentTransaction.replace(R.id.frameRecensioni, childFragment) // R.id.fragment_container rappresenta l'ID del contenitore del frammento nel layout dell'attività
+                fragmentTransaction.replace(R.id.frameRecensioni, childFragment).remove(this) // R.id.fragment_container rappresenta l'ID del contenitore del frammento nel layout dell'attività
                 fragmentTransaction.addToBackStack(null) // Aggiunge il frammento alla pila retrostante per poter tornare indietro se necessario
                 fragmentTransaction.commit()
             }

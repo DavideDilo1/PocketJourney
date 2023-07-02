@@ -41,6 +41,7 @@ class PaginaConsigliatiFragment : Fragment() {
         binding = FragmentPaginaConsigliatiBinding.inflate(inflater)
         val idUtente = requireActivity().intent.getStringExtra("idUtente")
         Log.e("ATTENZIONEEEEE","HA APERTO LA pagina consigliati fragment " + idUtente)
+        requireActivity().intent.putExtra("frame","framePaginaConsigliati")
 
         if (idUtente != null) {
             setRecyclerView(idUtente.toInt())
@@ -49,8 +50,10 @@ class PaginaConsigliatiFragment : Fragment() {
         binding.RecyclerViewConsigliati.layoutManager = LinearLayoutManager(requireContext())
 
         binding.backArrowC.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction()
-                .remove(this@PaginaConsigliatiFragment)
+            val manager=requireActivity().supportFragmentManager
+            requireActivity().intent.putExtra("idUtente",idUtente)
+            manager.beginTransaction().replace(R.id.framePaginaConsigliati, HomeFragmentNew()).remove(this)
+                .addToBackStack(null)
                 .commit()
         }
 
@@ -131,17 +134,9 @@ class PaginaConsigliatiFragment : Fragment() {
                                                 homeAdapter.setOnItemClickListener { homeItemModel ->
                                                     val id = homeItemModel.id
                                                     val childFragment = AnteprimaPostoFragment()
-                                                    requireActivity().intent.putExtra(
-                                                        "idPosto",
-                                                        id.toString()
-                                                    )
-                                                    requireActivity().intent.putExtra(
-                                                        "idUtente",
-                                                        idUtente.toString()
-                                                    )
-                                                    requireActivity().intent.putExtra(
-                                                        "provenienza",
-                                                        "consigliati"
+                                                    requireActivity().intent.putExtra("idPosto", id.toString())
+                                                    requireActivity().intent.putExtra("idUtente", idUtente.toString())
+                                                    requireActivity().intent.putExtra("provenienza", "consigliati"
                                                     )
                                                     val fragmentTransaction =
                                                         requireActivity().supportFragmentManager.beginTransaction()

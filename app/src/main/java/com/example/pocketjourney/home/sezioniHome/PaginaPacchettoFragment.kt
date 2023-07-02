@@ -50,7 +50,7 @@ class PaginaPacchettoFragment : Fragment() {
         binding= FragmentPaginaPacchettoBinding.inflate(inflater)
         val idUtente = requireActivity().intent.getStringExtra("idUtente")
         val idPacchetto = requireActivity().intent.getStringExtra("idPacchetto")
-        //TODO: AGGIUNGERE IL CORRETTO CAMBIO DI FRAGMENT
+        requireActivity().intent.putExtra("frame","fragment_pagina_pacchetto")
 
         if (idUtente != null ){
             //sono connesso a internet avendo ricevuto userId ed interrogo il database remoto

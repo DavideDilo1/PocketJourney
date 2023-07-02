@@ -17,6 +17,9 @@ import com.example.pocketjourney.database.DBManager
 import com.example.pocketjourney.databinding.FragmentBookingBinding
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.gson.JsonObject
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -39,6 +42,7 @@ class BookingFragment : Fragment(){
         val idUtente = requireActivity().intent.getStringExtra("idUtente")
         val idPosto= requireActivity().intent.getStringExtra("idPosto")
         val categoria = requireActivity().intent.getStringExtra("categoria")
+        requireActivity().intent.putExtra("frame","booking_Layout")
 
         Log.d("sono prenotazione ho ricevuto",idUtente + " " + idPosto + "" + categoria)
         dataSelezionataText = binding.dataSelezionata
@@ -164,19 +168,22 @@ class BookingFragment : Fragment(){
 
     private fun inserisciPrenotazione(idUtente: String?, idPosto: String?, dataPrenotazione: String, numPersone: String, ora: String) {
         //dati utili per l'inserimetno in locale
-        val email= requireActivity().intent.getStringExtra("emailOnline")
-        val nomePosto=requireActivity().intent.getStringExtra("nomePosto")
-        Log.d("DATI OFFLINE=",email + " " + nomePosto)
+        val email = requireActivity().intent.getStringExtra("emailOnline")
+        val nomePosto = requireActivity().intent.getStringExtra("nomePosto")
+        val scope = CoroutineScope(Dispatchers.Default)
+        Log.d("DATI OFFLINE=", email + " " + nomePosto)
         val userAPI = ClientNetwork.retrofit
-        val queryinserisciPrenotazione = "INSERT INTO Prenotazioni (ref_utente, ref_posto, data, numPersone, orario) VALUES ('$idUtente','$idPosto','$dataPrenotazione','$numPersone','$ora')"
+        val queryinserisciPrenotazione =
+            "INSERT INTO Prenotazioni (ref_utente, ref_posto, data, numPersone, orario) VALUES ('$idUtente','$idPosto','$dataPrenotazione','$numPersone','$ora')"
         val call = userAPI.inserisci(queryinserisciPrenotazione)
+        scope.launch {
         call.enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if (response.isSuccessful) {
                     // L'inserimento della carta è avvenuto
-                    Log.e("ciao","Prenotazione INSERITA")
+                    Log.e("ciao", "Prenotazione INSERITA")
                     dbManager = context?.let { it2 -> DBManager(it2) }
-                    if(dbManager!=null) {
+                    if (dbManager != null) {
                         dbManager?.open()
                         if (email != null && nomePosto != null) {
                             dbManager?.insertPrenotazione(
@@ -187,21 +194,33 @@ class BookingFragment : Fragment(){
                                 ora,
                             )
                         }
-                        Log.d("NEL DB MANAGER HO INSERITO", email + nomePosto + dataPrenotazione + numPersone + ora)
+                        Log.d(
+                            "NEL DB MANAGER HO INSERITO",
+                            email + nomePosto + dataPrenotazione + numPersone + ora
+                        )
                         requireActivity().supportFragmentManager.popBackStack()
-                        Toast.makeText(requireContext(), "Registrazione avvenuta con successo!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            "Registrazione avvenuta con successo!",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                     requireActivity().supportFragmentManager.popBackStack()
-                    Toast.makeText(requireContext(), "Prenotazione avvenuta con successo!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        "Prenotazione avvenuta con successo!",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                 // Si è verificato un errore durante la chiamata di rete online
                 //Toast.makeText(requireContext(), t.toString() + " " + t.message.toString(), Toast.LENGTH_SHORT).show()
-                Log.e("ciao",t.toString() + " " + t.message.toString())
+                Log.e("ciao", t.toString() + " " + t.message.toString())
             }
         })
+    }
     }
 
 

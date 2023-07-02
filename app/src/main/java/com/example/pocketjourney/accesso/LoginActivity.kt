@@ -84,7 +84,7 @@ class LoginActivity : AppCompatActivity() {
                                     Log.e("HO SCRITTO LE SP", editor.toString())
                                     val intent = Intent(context, HomeActivity::class.java)
                                     intent.putExtra("idUtente",idUtente)
-                                    intent.putExtra("emailOnline",email)
+                                    intent.putExtra("email",email)
                                     startActivity(intent)
                                     finish()
                                 }

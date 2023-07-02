@@ -19,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pocketjourney.home.AnteprimaPostoFragment
 import com.example.pocketjourney.R
 import com.example.pocketjourney.adapter.HomeAdapter
-//import com.example.pocketjourney.adapter.MainRecyclerAdapter
 import com.example.pocketjourney.adapter.HorizontalItemAdapter
 import com.example.pocketjourney.database.ClientNetwork
 import com.example.pocketjourney.databinding.FragmentRistorantiBinding
@@ -48,7 +47,6 @@ class RistorantiFragment : Fragment() {
     private lateinit var testoTutti: TextView
     private lateinit var testoCategoria: TextView
     private lateinit var searchView: SearchView
-    private lateinit var back_arrowR: ImageView
 
     private lateinit var anim_from_bottom: Animation
     private lateinit var anim_from_top: Animation
@@ -63,7 +61,7 @@ class RistorantiFragment : Fragment() {
         binding = FragmentRistorantiBinding.inflate(inflater)
         val idUtente = requireActivity().intent.getStringExtra("idUtente")
         Log.e("ATTENZIONEEEEE","HA APERTO LA ristoranti fragment " + idUtente)
-
+        requireActivity().intent.putExtra("frame","frameRistoranti")
         if (idUtente != null) {
             setRecyclerView(idUtente.toInt())
             setRecyclerViewOrizzontale(idUtente.toInt())
@@ -72,49 +70,12 @@ class RistorantiFragment : Fragment() {
         binding.RecyclerViewOrizzontaleR.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.RecyclerViewVerticaleR.layoutManager = LinearLayoutManager(requireContext())
 
-        //prima categoria
-
-
-
-
-
-
-/*
-        val allRestaurant: MutableList<AllRestaurant> = ArrayList()
-        allRestaurant.add(AllRestaurant("I migliori ristoranti di sushi", restaurantItemList1))
-        allRestaurant.add(AllRestaurant("Le migliori pizzerie", restaurantItemList2))
-*/
-        //  setHorizontalRecycler(allRestaurant)
-
-
-        //  val ristorantiOrizzAdapter2 = RestaurantItemAdapter(requireContext(), restaurantItemList2)
-
-/*
-        ristorantiOrizzAdapter2.onItemClick = {
-
-            val bundle = Bundle()
-            bundle.putParcelable("ristoranti", it)
-
-            val childFragment = AnteprimaPostoFragment()
-            childFragment.arguments=bundle
-
-            val fragmentManager = requireActivity().supportFragmentManager
-
-            fragmentManager.beginTransaction()
-                .replace(R.id.frameRistoranti, childFragment)
+        binding.backArrowR.setOnClickListener() {
+            val manager=requireActivity().supportFragmentManager
+            requireActivity().intent.putExtra("idUtente",idUtente)
+            manager.beginTransaction().replace(R.id.frameRistoranti, HomeFragmentNew())
                 .addToBackStack(null)
                 .commit()
-
-        }*/
-
-        //QUESTA è LA RECYCLER VERTICALE CON TUTTI I RISTORANTI:
-
-        binding.backArrowR.setOnClickListener() {
-            val childFragment = HomeFragmentNew()
-            val fragmentTransaction = childFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.frameRistoranti, childFragment)
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()
         }
 
         topImage = binding.imageBackground
@@ -171,12 +132,7 @@ class RistorantiFragment : Fragment() {
                             )
                             //salvo l'array e verifico che contenga almeno un elemento
                             val querySetArray = jsonObject.getAsJsonArray("queryset")
-                            Log.d(
-                                "RISULTATO DELLA QUERY PER LA POPOLAZIONE",
-                                querySetArray.toString()
-                            )
                             if (querySetArray != null && querySetArray.size() > 0) {
-                                Log.e("Ciao", "sto per entrare nel for")
                                 for (i in querySetArray) {
                                     var bitmap: Bitmap
                                     val elemento = i as JsonObject
@@ -187,12 +143,7 @@ class RistorantiFragment : Fragment() {
                                             call: Call<ResponseBody>,
                                             response: Response<ResponseBody>
                                         ) {
-                                            Log.d("RESPONSE", response.isSuccessful.toString())
                                             if (response.isSuccessful) {
-                                                Log.e(
-                                                    "Ciao",
-                                                    "sono dentro il blocco della foto DENTRO IS SUCCESSFULL"
-                                                )
                                                 val responseBody = response.body()
                                                 if (responseBody != null) {
                                                     val inputStream = responseBody.byteStream()
@@ -251,10 +202,7 @@ class RistorantiFragment : Fragment() {
                                                 }
 
                                             }
-                                            Log.d(
-                                                "DIMENSIONE DELLA HOME ITEM",
-                                                homeItem.size.toString()
-                                            )
+
                                         }
 
                                         override fun onFailure(
@@ -307,19 +255,12 @@ class RistorantiFragment : Fragment() {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                     if (response.isSuccessful) {
                         val jsonObject = response.body()
-                        Log.d("JSON", response.body().toString())
                         // Verifica se il JSON object è stato ottenuto correttamente come queryset
                         if (jsonObject != null && jsonObject.has("queryset")) {
-                            Log.e(
-                                "Ciao",
-                                "HO OTTENUTO IL JSONOBJECT come queryset per la popolazione della recycler orizzontale"
-                            )
+
                             //salvo l'array e verifico che contenga almeno un elemento
                             val querySetArray = jsonObject.getAsJsonArray("queryset")
-                            Log.d(
-                                "RISULTATO DELLA QUERY PER LA POPOLAZIONE ORIZZONTALE",
-                                querySetArray.toString()
-                            )
+
                             if (querySetArray != null && querySetArray.size() > 0) {
                                 Log.e("Ciao", "sto per entrare nel for DELLA RECYCLER ORIZZONTALE")
                                 for (i in querySetArray) {
@@ -334,10 +275,7 @@ class RistorantiFragment : Fragment() {
                                         ) {
                                             Log.d("RESPONSE", response.isSuccessful.toString())
                                             if (response.isSuccessful) {
-                                                Log.e(
-                                                    "Ciao",
-                                                    "sono dentro il blocco della foto DENTRO IS SUCCESSFULL"
-                                                )
+
                                                 val responseBody = response.body()
                                                 if (responseBody != null) {
                                                     val inputStream = responseBody.byteStream()
@@ -382,10 +320,7 @@ class RistorantiFragment : Fragment() {
                                                 }
 
                                             }
-                                            Log.d(
-                                                "DIMENSIONE DELLA HOME ITEM",
-                                                horizontalItem.size.toString()
-                                            )
+
                                         }
 
                                         override fun onFailure(
@@ -496,6 +431,7 @@ class RistorantiFragment : Fragment() {
             })
         }
     }
+
 
 
 }

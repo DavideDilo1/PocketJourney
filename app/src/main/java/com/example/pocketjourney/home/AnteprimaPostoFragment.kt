@@ -27,6 +27,9 @@ import com.example.pocketjourney.home.sezioniHome.PaginaConsigliatiFragment
 import com.example.pocketjourney.home.sezioniHome.RistorantiFragment
 import com.example.pocketjourney.preferiti.ListaPreferitiFragment
 import com.google.gson.JsonObject
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -64,71 +67,95 @@ class AnteprimaPostoFragment : Fragment() {
 
         val idPosto = requireActivity().intent.getStringExtra("idPosto")
         val idUtente = requireActivity().intent.getStringExtra("idUtente")
+        val scope = CoroutineScope(Dispatchers.Default)
+        Log.d("Sono anteprima e ho ricevuto", idPosto.toString() + " e" + idUtente.toString())
+        requireActivity().intent.putExtra("frame","fragment_anteprima_posto")
 
-        Log.d("Sono anteprima e ho ricevuto" , idPosto.toString() + " e" + idUtente.toString() )
 
 
-        val userAPI= ClientNetwork.retrofit
+        val userAPI = ClientNetwork.retrofit
         val queryMostraAnteprima = "SELECT * FROM Posti WHERE idPosti = '$idPosto'"
         val call = userAPI.cerca(queryMostraAnteprima)
+        scope.launch{
         call.enqueue(object : Callback<JsonObject> {
-
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if (response.isSuccessful) {
-                    Log.e("Ciao","sto mostrando anteprima")
+                    Log.e("Ciao", "sto mostrando anteprima")
                     val jsonObject = response.body() // Ottieni il JSON come JsonObject
 
                     // Verifica se il JSON object è stato ottenuto correttamente come queryset
-                    if (jsonObject != null && jsonObject.has("queryset") ) {
-                        Log.e("Ciao", "HO OTTENUTO IL JSONOBJECT come queryset" )
+                    if (jsonObject != null && jsonObject.has("queryset")) {
+                        Log.e("Ciao", "HO OTTENUTO IL JSONOBJECT come queryset")
                         //salvo l'array e verifico che contenga almeno un elemento
                         val querySetArray = jsonObject.getAsJsonArray("queryset")
-                        if (querySetArray != null && querySetArray.size()>0){
-                            val primoPosto=querySetArray[0].asJsonObject //prendo la prima corrispondenza
+                        if (querySetArray != null && querySetArray.size() > 0) {
+                            val primoPosto =
+                                querySetArray[0].asJsonObject //prendo la prima corrispondenza
                             Log.d("JSON", primoPosto.toString())
 
                             //verifico che non sia null e che contenga i campi corretti
 
-                            if (primoPosto != null && primoPosto.has("nome") && primoPosto.has("citta") && primoPosto.has("paese") && primoPosto.has("categoria") && primoPosto.has("tipologia") && primoPosto.has("descrizione") && primoPosto.has("prezzo") && primoPosto.has("valutazione") && primoPosto.has("numRecensioni") && primoPosto.has("foto")) {
+                            if (primoPosto != null && primoPosto.has("nome") && primoPosto.has("citta") && primoPosto.has(
+                                    "paese"
+                                ) && primoPosto.has("categoria") && primoPosto.has("tipologia") && primoPosto.has(
+                                    "descrizione"
+                                ) && primoPosto.has("prezzo") && primoPosto.has("valutazione") && primoPosto.has(
+                                    "numRecensioni"
+                                ) && primoPosto.has("foto")
+                            ) {
                                 //prelevo i campi e li setto nel fragment
                                 queryResult = primoPosto
                                 Log.d("oggetto che passo al paginaposto", queryResult.toString())
-                                val nome=primoPosto.get("nome").asString
-                                val descrizione=primoPosto.get("descrizione").asString
-                                val valutazione=primoPosto.get("valutazione").asString
-                                val rec=primoPosto.get("numRecensioni").asString
-                                val foto=primoPosto.get("foto").asString
+                                val nome = primoPosto.get("nome").asString
+                                val descrizione = primoPosto.get("descrizione").asString
+                                val valutazione = primoPosto.get("valutazione").asString
+                                val rec = primoPosto.get("numRecensioni").asString
+                                val foto = primoPosto.get("foto").asString
 
                                 binding.secondSubtitle.text = "${descrizione}"
                                 binding.secondTitle.text = "${nome}"
-                                binding.secondRatingBar.rating=valutazione.toFloat()
-                                binding.secondRatingNumber.text="${valutazione}"
-                                binding.secondRatingNumber2.text="${rec}"
+                                binding.secondRatingBar.rating = valutazione.toFloat()
+                                binding.secondRatingNumber.text = "${valutazione}"
+                                binding.secondRatingNumber2.text = "${rec}"
 
-                                Log.e("Ciao", "HO CAMBIATO I DATI" )
+                                Log.e("Ciao", "HO CAMBIATO I DATI")
 
                                 //setto l'immagine del profilo
-                                val downloadFotoPosto=userAPI.getAvatar(foto)
+                                val downloadFotoPosto = userAPI.getAvatar(foto)
                                 downloadFotoPosto.enqueue(object : Callback<ResponseBody> {
-                                    override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                                        Log.e("Ciao", "sono dentro il blocco della foto dell'anteprima" )
-                                        Log.d("RESPONSE",response.isSuccessful.toString())
-                                        if (response.isSuccessful){
-                                            Log.e("Ciao", "sono dentro il blocco della foto  anteprima DENTRO IS SUCCESSFULL" )
-                                            val responseBody=response.body()
-                                            if(responseBody!=null){
-                                                val inputStream=responseBody.byteStream()
-                                                val bitmap= BitmapFactory.decodeStream(inputStream)
+                                    override fun onResponse(
+                                        call: Call<ResponseBody>,
+                                        response: Response<ResponseBody>
+                                    ) {
+                                        Log.e(
+                                            "Ciao",
+                                            "sono dentro il blocco della foto dell'anteprima"
+                                        )
+                                        Log.d("RESPONSE", response.isSuccessful.toString())
+                                        if (response.isSuccessful) {
+                                            Log.e(
+                                                "Ciao",
+                                                "sono dentro il blocco della foto  anteprima DENTRO IS SUCCESSFULL"
+                                            )
+                                            val responseBody = response.body()
+                                            if (responseBody != null) {
+                                                val inputStream = responseBody.byteStream()
+                                                val bitmap = BitmapFactory.decodeStream(inputStream)
                                                 //utilizza il Bitmap come immagine di profilo
-                                                binding.imageBackgroundAnteprima.setImageBitmap(bitmap)
+                                                binding.imageBackgroundAnteprima.setImageBitmap(
+                                                    bitmap
+                                                )
 
                                             }
                                         }
                                     }
 
                                     override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                                        Toast.makeText(requireContext(),"L'immagine non è stata trovaa correttamente",
-                                            Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(
+                                            requireContext(),
+                                            "L'immagine non è stata trovaa correttamente",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
                                     }
                                 })
 
@@ -141,15 +168,11 @@ class AnteprimaPostoFragment : Fragment() {
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                 // Si è verificato un errore durante la chiamata di rete online
                 //login in locale
-                Log.e("Ciao","posso cambiare i dati usando ONFAILURE")
+                Log.e("Ciao", "posso cambiare i dati usando ONFAILURE")
             }
         })
 
-        /*
-        else{
-            //TODO: SCHERMATA NESSUN DATO DISPONIBILE
-        }*/
-
+    }
 
 
 
@@ -166,6 +189,7 @@ class AnteprimaPostoFragment : Fragment() {
 
         second_back_arrow.setOnClickListener{
             val provenienza = requireActivity().intent.getStringExtra("provenienza")
+            Log.e("ho letto", provenienza.toString())
             val childFragment: Fragment = when (provenienza) {
                 "ristorantiFragment" -> RistorantiFragment()
                 "hotelFragment" -> HotelFragment()
