@@ -39,6 +39,7 @@ class ModificaDatiFragment : Fragment() {
         //ottengo l'id dell'utente col quale interrogherò il db e i dati che mi servono
         val idUtente = requireActivity().intent.getStringExtra("idUtente")
         val emailUtenteOnline=requireActivity().intent.getStringExtra("email")
+        requireActivity().intent.putExtra("frame","modificaDatiFragment")
         Log.d("Ciao",idUtente.toString())
         Log.d("Ciao",emailUtenteOnline.toString())
         Log.e("Ciao", "SEI NEL FRAGMENT MODIFICA")

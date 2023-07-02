@@ -42,6 +42,8 @@ class BookingFragment : Fragment(){
         val idUtente = requireActivity().intent.getStringExtra("idUtente")
         val idPosto= requireActivity().intent.getStringExtra("idPosto")
         val categoria = requireActivity().intent.getStringExtra("categoria")
+        val nomePosto=requireActivity().intent.getStringExtra("nomePosto")
+        binding.titoloHotelToBook.text=nomePosto
         requireActivity().intent.putExtra("frame","booking_Layout")
 
         Log.d("sono prenotazione ho ricevuto",idUtente + " " + idPosto + "" + categoria)
@@ -198,14 +200,7 @@ class BookingFragment : Fragment(){
                             "NEL DB MANAGER HO INSERITO",
                             email + nomePosto + dataPrenotazione + numPersone + ora
                         )
-                        requireActivity().supportFragmentManager.popBackStack()
-                        Toast.makeText(
-                            requireContext(),
-                            "Registrazione avvenuta con successo!",
-                            Toast.LENGTH_SHORT
-                        ).show()
                     }
-                    requireActivity().supportFragmentManager.popBackStack()
                     Toast.makeText(
                         requireContext(),
                         "Prenotazione avvenuta con successo!",

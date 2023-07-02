@@ -129,58 +129,43 @@ class HomeFragmentNew : Fragment() {
         }
 
         hotelButton.setOnClickListener{
-          /*  val childFragment = HotelFragment()
-            val fragmentTransaction = childFragmentManager.beginTransaction()
-            requireActivity().intent.putExtra("idUtente",idUtente)
-            fragmentTransaction.replace(R.id.frameNewHomeLayout, childFragment)
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()*/
             val manager=requireActivity().supportFragmentManager
             requireActivity().intent.putExtra("idUtente",idUtente)
             manager.beginTransaction().replace(R.id.frameNewHomeLayout, HotelFragment())
                 .addToBackStack(null)
                 .commit()
+            isHomeOpen=false
+            requireActivity().intent.putExtra("isHomeOpen",isHomeOpen.toString())
         }
 
         attrazioniButton.setOnClickListener{
-           /* val childFragment = AttrazioniFragment()
-            val fragmentTransaction = childFragmentManager.beginTransaction()
-            requireActivity().intent.putExtra("idUtente",idUtente)
-            fragmentTransaction.replace(R.id.frameNewHomeLayout, childFragment)
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()*/
+
             val manager=requireActivity().supportFragmentManager
             requireActivity().intent.putExtra("idUtente",idUtente)
             manager.beginTransaction().replace(R.id.frameNewHomeLayout, AttrazioniFragment())
                 .addToBackStack(null)
                 .commit()
+            isHomeOpen=false
+            requireActivity().intent.putExtra("isHomeOpen",isHomeOpen.toString())
         }
 
         binding.ideaButton.setOnClickListener{
-          /*  val childFragment = ConsigliatiFragment()
-            requireActivity().intent.putExtra("idUtente",idUtente)
-            val fragmentTransaction = childFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.frameNewHomeLayout, childFragment)
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()*/
             val manager=requireActivity().supportFragmentManager
             requireActivity().intent.putExtra("idUtente",idUtente)
             manager.beginTransaction().replace(R.id.frameNewHomeLayout, ConsigliatiFragment())
                 .commit()
+            isHomeOpen=false
+            requireActivity().intent.putExtra("isHomeOpen",isHomeOpen.toString())
 
         }
 
         binding.pacchettiButton.setOnClickListener {
-            //val childFragment = PacchettiFragment()
-           // val fragmentTransaction = childFragmentManager.beginTransaction()
-            //requireActivity().intent.putExtra("idUtente",idUtente)
-            //fragmentTransaction.replace(R.id.frameNewHomeLayout, childFragment)
-            //fragmentTransaction.addToBackStack(null)
-            //fragmentTransaction.commit()
             val manager=requireActivity().supportFragmentManager
             requireActivity().intent.putExtra("idUtente",idUtente)
             manager.beginTransaction().replace(R.id.frameNewHomeLayout, PacchettiFragment())
                 .commit()
+            isHomeOpen=false
+            requireActivity().intent.putExtra("isHomeOpen",isHomeOpen.toString())
         }
         return binding.root
     }
@@ -236,10 +221,11 @@ class HomeFragmentNew : Fragment() {
                                                     requireActivity().intent.putExtra("idPosto",id.toString())
                                                     requireActivity().intent.putExtra("idUtente",idUtente.toString())
                                                     val manager=requireActivity().supportFragmentManager
-                                                    requireActivity().intent.putExtra("idUtente",idUtente)
                                                     manager.beginTransaction().replace(R.id.frameNewHomeLayout, AnteprimaPostoFragment())
                                                         .addToBackStack(null)
                                                         .commit()
+                                                    isHomeOpen=false
+                                                    requireActivity().intent.putExtra("isHomeOpen",isHomeOpen.toString())
                                                 }
 
                                                 homeAdapter.setOnToggleClickListener { homeItemModel, isChecked ->

@@ -40,6 +40,7 @@ class ProfileFragment : Fragment() {
         val idUtente = requireActivity().intent.getStringExtra("idUtente")
         val emailUtenteOnline=requireActivity().intent.getStringExtra("email")
         val emailUtenteOffline = requireActivity().intent.getStringExtra("email")
+        requireActivity().intent.putExtra("frame","frameProfilo")
 
         if (idUtente != null ){
             //sono connesso a internet avendo ricevuto userId ed interrogo il database remoto

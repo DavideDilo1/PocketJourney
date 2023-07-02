@@ -29,6 +29,7 @@ class ListaPrenotazioniFragment : Fragment() {
         binding=FragmentListaPrenotazioniBinding.inflate(layoutInflater,container,false)
         val idUtente = requireActivity().intent.getStringExtra("idUtente")
         val emailUtente=requireActivity().intent.getStringExtra("emailUtenteOffline")
+        requireActivity().intent.putExtra("frame","FrameListaPrenotazioni")
         Log.d("dati ricevuti ", idUtente + emailUtente)
         // Inflate the layout for this fragment
 

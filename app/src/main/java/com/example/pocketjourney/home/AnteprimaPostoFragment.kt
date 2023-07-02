@@ -49,9 +49,6 @@ class AnteprimaPostoFragment : Fragment() {
     private lateinit var more_details: TextView
     private lateinit var second_ratingbar: RatingBar
 
-    private lateinit var from_left: Animation
-    private lateinit var from_right: Animation
-    private lateinit var from_bottom: Animation
     private lateinit var queryResult: JsonObject
 
 
@@ -203,23 +200,6 @@ class AnteprimaPostoFragment : Fragment() {
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
-
-
-
-
-        from_left = AnimationUtils.loadAnimation(requireContext(), R.anim.anim_from_left)
-        from_right = AnimationUtils.loadAnimation(requireContext(), R.anim.anim_from_right)
-        from_bottom = AnimationUtils.loadAnimation(requireContext(), R.anim.anim_from_bottom)
-
-        second_back_arrow.setAnimation(from_left)
-        second_title.setAnimation(from_right)
-        second_subtitle.setAnimation(from_right)
-        second_ratingbar.setAnimation(from_left)
-        second_rating_number.setAnimation(from_right)
-        second_rating_number2.setAnimation(from_left)
-        second_arrow_up.setAnimation(from_bottom)
-        more_details.setAnimation(from_bottom)
-
         second_arrow_up.setOnClickListener{
             Log.d("hai cliccato arrow up e passo",queryResult.toString() )
             val childFragment = PaginaPostoFragment()
@@ -230,12 +210,6 @@ class AnteprimaPostoFragment : Fragment() {
             fragmentTransaction.addToBackStack(null) // Aggiunge il frammento alla pila retrostante per poter tornare indietro se necessario
             fragmentTransaction.commit()
         }
-
-
-
-
-
-
         return binding.root;
     }
 

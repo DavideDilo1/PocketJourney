@@ -35,6 +35,7 @@ class LeMieRecensioniFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentLeMieRecensioniBinding.inflate(inflater)
         val idUtente = requireActivity().intent.getStringExtra("idUtente")
+        requireActivity().intent.putExtra("frame","frameLeMieRecensioni")
 
         binding.recyclerMieRecensioni.layoutManager = LinearLayoutManager(requireContext())
 

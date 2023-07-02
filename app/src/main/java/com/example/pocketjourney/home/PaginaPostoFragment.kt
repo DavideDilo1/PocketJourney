@@ -118,7 +118,7 @@ class PaginaPostoFragment : Fragment() {
         down_arrow.setOnClickListener{
             val childFragment = AnteprimaPostoFragment()
             val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.fragment_pagina_pacchetto, childFragment).remove(this)
+            fragmentTransaction.replace(R.id.fragment_pagina_posto, childFragment).remove(this)
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
 
@@ -149,7 +149,7 @@ class PaginaPostoFragment : Fragment() {
             requireActivity().intent.putExtra("provenienzaRec","postoSemplice")
             requireActivity().intent.putExtra("idUtente",idUtente)
             val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.fragment_pagina_pacchetto, childFragment)
+            fragmentTransaction.replace(R.id.fragment_pagina_posto, childFragment)
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }

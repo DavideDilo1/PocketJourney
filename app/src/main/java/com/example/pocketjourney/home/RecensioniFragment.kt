@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pocketjourney.R
 import com.example.pocketjourney.adapter.RecensioniAdapter
@@ -80,7 +81,7 @@ class RecensioniFragment : Fragment() {
                                 binding.mediaRating.text=valutazione.toString()
                                 binding.numeroRecensioni.text=recTotali.toString()
                                 binding.ratingBarRec.rating=valutazione
-                                if (valutazione==5.0f){
+                                if (valutazione<=5.0f && valutazione>=4.6f){
                                     val numRecensioniEccellenti = recTotali*4/10 // Numero di recensioni eccellenti
                                     val numRecensioniMoltoBuone = recTotali*3/10 // Numero di recensioni molto buone
                                     val numRecensioniNellaMedia = recTotali*2/10 // Numero di recensioni nella media
@@ -91,7 +92,7 @@ class RecensioniFragment : Fragment() {
                                     binding.averageProgressBar.progress = numRecensioniNellaMedia
                                     binding.poorProgressBar.progress = numRecensioniScarse
                                     binding.terribleProgressBar.progress = numRecensioniTerribili
-                                } else if (valutazione<=4.5f && valutazione>=3.5f){
+                                } else if (valutazione<=4.5f && valutazione>3.5f){
                                     val numRecensioniEccellenti = recTotali*3/10 // Numero di recensioni eccellenti
                                     val numRecensioniMoltoBuone = recTotali*4/10 // Numero di recensioni molto buone
                                     val numRecensioniNellaMedia = recTotali*2/10 // Numero di recensioni nella media
@@ -102,7 +103,7 @@ class RecensioniFragment : Fragment() {
                                     binding.averageProgressBar.progress = numRecensioniNellaMedia
                                     binding.poorProgressBar.progress = numRecensioniScarse
                                     binding.terribleProgressBar.progress = numRecensioniTerribili
-                                } else if (valutazione<=3.0f && valutazione>=2.0f) {
+                                } else if (valutazione<=3.5f && valutazione>=2.0f) {
                                     val numRecensioniEccellenti = recTotali*1/10 // Numero di recensioni eccellenti
                                     val numRecensioniMoltoBuone = recTotali*2/10 // Numero di recensioni molto buone
                                     val numRecensioniNellaMedia = recTotali*2/10 // Numero di recensioni nella media
@@ -265,8 +266,10 @@ class RecensioniFragment : Fragment() {
         call.enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if (response.isSuccessful) {
-                    // L'inserimento della carta è avvenuto
-                    Log.e("ciao","Recensione inserita")
+                    Toast.makeText(requireContext(),"Recensione inserita!",
+                        Toast.LENGTH_SHORT).show()
+                    binding.titleReviewEditText.text.clear()
+                    binding.reviewEditText.text.clear()
                 }
             }
 

@@ -36,7 +36,7 @@ class ListaPreferitiFragment : Fragment() {
         binding = FragmentListaPreferitiBinding.inflate(inflater)
         binding.recyclerMieiPreferiti.layoutManager = LinearLayoutManager(requireContext())
         val idUtente = requireActivity().intent.getStringExtra("idUtente")
-
+        requireActivity().intent.putExtra("frame","frameListaPreferiti")
         if (idUtente != null) {
             setRecyclerView(idUtente.toInt())
         }else{

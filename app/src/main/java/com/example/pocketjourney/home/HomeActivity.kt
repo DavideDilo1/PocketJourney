@@ -80,8 +80,8 @@ class HomeActivity : AppCompatActivity() {
         } else {
             Log.e("SONO ELSE","ON BACK PRESSED")
             val manager = supportFragmentManager
-            val idUtente = intent.getStringExtra("frame").toString()
-            val address = resources.getIdentifier(idUtente, "id", packageName)
+            val frame = intent.getStringExtra("frame").toString()
+            val address = resources.getIdentifier(frame, "id", packageName)
             manager.beginTransaction()
                 .replace(address, HomeFragmentNew())
                 .addToBackStack(null)

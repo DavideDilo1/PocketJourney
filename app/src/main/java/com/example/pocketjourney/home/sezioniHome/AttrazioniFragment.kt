@@ -63,7 +63,7 @@ class AttrazioniFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentAttrazioniBinding.inflate(inflater)
         val idUtente = requireActivity().intent.getStringExtra("idUtente")
-        Log.e("ATTENZIONEEEEE","HA APERTO LA ristoranti fragment " + idUtente)
+        Log.e("ATTENZIONEEEEE","HA APERTO LA attraz fragment " + idUtente)
         requireActivity().intent.putExtra("frame","frameAttrazioni")
 
         if (idUtente != null) {
