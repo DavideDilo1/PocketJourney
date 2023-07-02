@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!--
 
-    TODO: mettere il bottone per aggiungere ai preferiti
-    TODO: implementare la costruzione automatica del fragment tramite parcelable
-    TODO: implementare tutto ciò che riguarda la prenotazione e i pagamenti
 
--->
+
 
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
