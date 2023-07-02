@@ -38,8 +38,8 @@ class ProfileFragment : Fragment() {
         binding= FragmentProfileBinding.inflate(layoutInflater,container,false)
 
         val idUtente = requireActivity().intent.getStringExtra("idUtente")
-        val emailUtenteOnline=requireActivity().intent.getStringExtra("emailOnline")
-        val emailUtenteOffline = requireActivity().intent.getStringExtra("emailOff")
+        val emailUtenteOnline=requireActivity().intent.getStringExtra("email")
+        val emailUtenteOffline = requireActivity().intent.getStringExtra("email")
 
         if (idUtente != null ){
             //sono connesso a internet avendo ricevuto userId ed interrogo il database remoto
@@ -108,29 +108,25 @@ class ProfileFragment : Fragment() {
                 }
 
                 override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                    // Si è verificato un errore durante la chiamata di rete online
-                    //login in locale
-                    Log.e("Ciao","posso cambiare i dati usando ONFAILURE")
+                    //emailUtenteOnline è null quindi opero col db in locale sfruttando emailUtenteOffline
+                    Log.e("Ciao","CAMBIO I DATI CON L'ELSE ")
+                    databaseHelper= DbHelper(requireContext())
+
+                    //query al database locale per cercae l'utente
+                    userId= getUserIdByEmail(emailUtenteOffline)
+
+                    if(userId!=-1){
+                        val user=getUserById(userId)
+                        if(user!=null){
+                            binding.tvEmail.text = emailUtenteOffline
+                            binding.tvNomeCognomeProfilo.text = "${user?.nome} ${user?.cognome}"
+                        } else{
+                            Toast.makeText(requireContext(), "L'utente non risulta nel database locale", Toast.LENGTH_SHORT).show()
+                        }
+                    }
                 }
             })
 
-        } else {
-            //emailUtenteOnline è null quindi opero col db in locale sfruttando emailUtenteOffline
-            Log.e("Ciao","CAMBIO I DATI CON L'ELSE ")
-            databaseHelper= DbHelper(requireContext())
-
-            //query al database locale per cercae l'utente
-            userId= getUserIdByEmail(emailUtenteOffline)
-
-            if(userId!=-1){
-                val user=getUserById(userId)
-                if(user!=null){
-                    binding.tvEmail.text = emailUtenteOffline
-                    binding.tvNomeCognomeProfilo.text = "${user?.nome} ${user?.cognome}"
-                } else{
-                    Toast.makeText(requireContext(), "L'utente non risulta nel database locale", Toast.LENGTH_SHORT).show()
-                }
-            }
         }
 
        //torna alla pagina di login resettando i campi inseriti precedentemente

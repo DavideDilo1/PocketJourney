@@ -136,7 +136,7 @@ class PaginaPostoFragment : Fragment() {
             requireActivity().intent.putExtra("categoria",categoria)
             requireActivity().intent.putExtra("nomePosto",nomePosto)
             val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.fragment_pagina_pacchetto, childFragment)
+            fragmentTransaction.replace(R.id.fragment_pagina_posto, childFragment)
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
 

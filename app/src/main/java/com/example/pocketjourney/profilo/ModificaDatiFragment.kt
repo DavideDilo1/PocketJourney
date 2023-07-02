@@ -38,12 +38,13 @@ class ModificaDatiFragment : Fragment() {
 
         //ottengo l'id dell'utente col quale interrogherò il db e i dati che mi servono
         val idUtente = requireActivity().intent.getStringExtra("idUtente")
-        val emailUtenteOnline=requireActivity().intent.getStringExtra("emailOnline")
+        val emailUtenteOnline=requireActivity().intent.getStringExtra("email")
         Log.d("Ciao",idUtente.toString())
         Log.d("Ciao",emailUtenteOnline.toString())
         Log.e("Ciao", "SEI NEL FRAGMENT MODIFICA")
 
         binding.btnModifica.setOnClickListener {
+            Log.e("bottone","cliccato")
             val nuovaEmail=binding.etNuovaEmail.text.toString()
             val nuovaPassword=binding.etModificaPassword.text.toString()
             val confermaNuovaPassword=binding.etConfermaPasswordMod.text.toString()
@@ -83,14 +84,14 @@ class ModificaDatiFragment : Fragment() {
 
                                 } else {
                                     // Si è verificato un errore nella richiesta online
-                                    Log.e("Ciao", "ERRORE ")
+                                    Toast.makeText(context, "Si è verificato un errore di rete.", Toast.LENGTH_SHORT).show()
 
                                 }
                             }
 
                             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                                 // Si è verificato un errore durante la chiamata di rete online
-                                Log.e("Ciao", "ERRORE DI CONNESSIONE")
+                                Toast.makeText(context, "Si è verificato un errore di rete.", Toast.LENGTH_SHORT).show()
                             }
                         })
                     }
@@ -108,6 +109,7 @@ class ModificaDatiFragment : Fragment() {
                                     if (dbManager!=null){
                                         dbManager?.open()
                                         dbManager?.updatePasswordUtente(
+                                            emailUtenteOnline.toString(),
                                             nuovaPassword
                                         )
                                         Log.e("Ciao", "MODIFICATO PASSWORD ANCHE IN LOCALE")
@@ -116,14 +118,14 @@ class ModificaDatiFragment : Fragment() {
 
                                 } else {
                                     // Si è verificato un errore nella richiesta online
-                                    Log.e("Ciao", "ERRORE ")
+                                    Toast.makeText(context, "Si è verificato un errore di rete.", Toast.LENGTH_SHORT).show()
 
                                 }
                             }
 
                             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                                 // Si è verificato un errore durante la chiamata di rete online
-                                Log.e("Ciao", "ERRORE DI CONNESSIONE")
+                                Toast.makeText(context, "Si è verificato un errore di rete.", Toast.LENGTH_SHORT).show()
                             }
                         })
                     }
@@ -140,6 +142,7 @@ class ModificaDatiFragment : Fragment() {
                                     if (dbManager!=null){
                                         dbManager?.open()
                                         dbManager?.updateTelefonoUtente(
+                                            emailUtenteOnline.toString(),
                                             nuovoCellulare
                                         )
                                         Log.e("Ciao", "MODIFICATO CELLULARE ANCHE IN LOCALE")
@@ -148,21 +151,21 @@ class ModificaDatiFragment : Fragment() {
 
                                 } else {
                                     // Si è verificato un errore nella richiesta online
-                                    Log.e("Ciao", "ERRORE ")
+                                    Toast.makeText(context, "Si è verificato un errore di rete.", Toast.LENGTH_SHORT).show()
 
                                 }
                             }
 
                             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                                 // Si è verificato un errore durante la chiamata di rete online
-                                Log.e("Ciao", "ERRORE DI CONNESSIONE")
+                                Toast.makeText(context, "Si è verificato un errore di rete.", Toast.LENGTH_SHORT).show()
                             }
                         })
                     }
 
 
                 }else {
-                    Log.e("ciao","nessun valore inseritottttt")
+                    Toast.makeText(context, "Nessun valore inserito.", Toast.LENGTH_SHORT).show()
                 }
             }
         }

@@ -63,7 +63,7 @@ class HomeActivity : AppCompatActivity() {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         intent.putExtra("idUtente",idUtente)
-        intent.putExtra("emailOff",emailOff)
+        intent.putExtra("email",emailOff)
         fragmentTransaction.replace(R.id.frameHomeLayout, fragment)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()

@@ -58,61 +58,46 @@ class DBManager (val context: Context) {
     }
 
     @SuppressLint("Range")
-    fun updateEmailUtente(nuovaEmail:String, vecchiaEmail:String):Int{
-        val query = "SELECT id FROM Utenti WHERE email = ?"
+    fun updateEmailUtente(nuovaEmail: String, vecchiaEmail: String): Int {
+        val selezione = "${DbHelper.EMAIL}=?"
         val selectionArgs = arrayOf(vecchiaEmail)
-        val cursor = db.rawQuery(query, selectionArgs)
 
-        var idUtente: Int? = null
-
-        if (cursor.moveToFirst()) {
-            idUtente = cursor.getInt(cursor.getColumnIndex("idUtente"))
-
-
-            cursor.close()
-
-// Restituisci l'ID dell'utente corrispondente all'email specificata
-
-            /* val selezione = "${DbHelper.EMAIL}=?"
-         val selectionArgs = arrayOf(vecchiaEmail) // Vecchia email
-         Log.d("selezione:",selezione)
-         Log.d("vecchiaemali:",vecchiaEmail)
-         Log.d("nuovamail:",nuovaEmail)
-         val values = ContentValues().apply {
-             put(DbHelper.EMAIL, nuovaEmail) // Nuova email
-         }
-
-         val righeModificate = db.update(DbHelper.TABLE_NAME, values, selezione, selectionArgs)
-         Log.d("righe mod", righeModificate.toString())
-         db.close()
-
-         return righeModificate*/
-            val query2 = "UPDATE Utenti SET email='${nuovaEmail}' WHERE id='${idUtente}'"
-            Log.d("query", query2)
-            db.execSQL(query)
+        val values = ContentValues().apply {
+            put(DbHelper.EMAIL, nuovaEmail)
         }
-        return 1
-    }
-    fun updatePasswordUtente(password:String):Int{
-        val selezione= "${DbHelper.PASSWORD}=?"
-        val selectionArgs=arrayOf(password.toString())
 
-        val values=ContentValues().apply {
-            put(DbHelper.PASSWORD,password)
-        }
-        val rit=db.update(DbHelper.TABLE_NAME,values,selezione,selectionArgs)
+        val rit = db.update(DbHelper.TABLE_NAME, values, selezione, selectionArgs)
+
         return rit
     }
-    fun updateTelefonoUtente(cellulare:String):Int{
-        val selezione= "${DbHelper.NUMEROCELLULARE}=?"
-        val selectionArgs=arrayOf(cellulare.toString())
 
-        val values=ContentValues().apply {
-            put(DbHelper.NUMEROCELLULARE,cellulare)
+    fun updatePasswordUtente(email: String, newPassword: String): Int {
+        val selezione = "${DbHelper.EMAIL}=?"
+        val selectionArgs = arrayOf(email)
+
+        val values = ContentValues().apply {
+            put(DbHelper.PASSWORD, newPassword)
         }
-        val rit=db.update(DbHelper.TABLE_NAME,values,selezione,selectionArgs)
+
+        val rit = db.update(DbHelper.TABLE_NAME, values, selezione, selectionArgs)
+
         return rit
     }
+
+
+    fun updateTelefonoUtente(email: String, nuovoNumero: String): Int {
+        val selezione = "${DbHelper.EMAIL}=?"
+        val selectionArgs = arrayOf(email)
+
+        val values = ContentValues().apply {
+            put(DbHelper.NUMEROCELLULARE, nuovoNumero)
+        }
+
+        val rit = db.update(DbHelper.TABLE_NAME, values, selezione, selectionArgs)
+
+        return rit
+    }
+
 
     fun deleteUtente(_id: Long) {
         val selection = "${DbHelper._ID}=? "
