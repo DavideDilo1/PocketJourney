@@ -60,9 +60,7 @@ class DbHelper (context: Context): SQLiteOpenHelper (context, DB_NAME,null, DB_V
         const val EMAIL:String="email"
         const val PASSWORD:String="password"
         const val NUMEROCELLULARE = "`NumeroDiTelefono`"
-        const val REF_DATI_PAGAMENTO="DatiPagamento"
-        const val REF_RECENSISCE="Recensioni"
-        const val REF_PRENOTA="Prenotazioni"
+
 
 
 

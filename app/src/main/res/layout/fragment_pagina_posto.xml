@@ -48,7 +48,7 @@
             android:layout_marginRight="34dp"
             app:layout_constraintEnd_toEndOf="@+id/header_background"
             app:layout_constraintTop_toTopOf="@+id/header_background"
-            android:src="@drawable/ic_down_arrow" 
+            android:src="@drawable/ic_down_arrow"
             />
 
 
