@@ -81,11 +81,11 @@
             android:textSize="18sp"
             android:visibility="gone"
 
-            app:layout_constraintBottom_toBottomOf="@+id/nessunaRecImg"
+            app:layout_constraintBottom_toBottomOf="@+id/nessunConImg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/nessunaRecImg"
+            app:layout_constraintTop_toTopOf="@+id/nessunConImg"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
