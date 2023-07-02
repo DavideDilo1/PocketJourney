@@ -141,6 +141,17 @@
                     />
 
                 <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="32dp"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:text="Prezzo"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp"
+
+                    />
+
+                <TextView
                     android:id="@+id/venue_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -150,6 +161,17 @@
                     android:text="$$"
                     android:textColor="@color/colorPrimary"
                     android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="32dp"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:text="Giorno dell'esperienza"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp"
+
+                    />
 
                 <TextView
                     android:id="@+id/tvData"
