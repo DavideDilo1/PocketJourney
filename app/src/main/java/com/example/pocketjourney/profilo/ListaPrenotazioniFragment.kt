@@ -113,8 +113,6 @@ class ListaPrenotazioniFragment : Fragment() {
                 // Aggiungere gli elementi alla lista dell'adapter
                 bookItem.addAll(dataList)
 
-                //TODO VErificae grandezza datalist, se vuota immagine: GIUSTO?
-                //
                 if (dataList.isEmpty()){
 
                     binding.textNessunDato.visibility = View.VISIBLE

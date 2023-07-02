@@ -77,7 +77,6 @@ class HomeFragmentNew : Fragment() {
             binding.errorConstraint.visibility=View.VISIBLE
         }
 
-        //TODO: aggiungere le animazioni alla recycler view
 
         home_background = binding.imageBackground
         ristorantiButton = binding.resturantButton

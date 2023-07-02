@@ -135,7 +135,6 @@ class PaginaPostoFragment : Fragment() {
 
             }
 
-        //TODO: AGGIUNGERE IL CORRETTO CAMBIO DI FRAGMENT
         binding.scopriTutteLeRec.setOnClickListener {
             val childFragment = RecensioniFragment()
             requireActivity().intent.putExtra("idPosto",idPosto)

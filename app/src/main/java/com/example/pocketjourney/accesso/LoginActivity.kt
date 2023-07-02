@@ -83,12 +83,13 @@ class LoginActivity : AppCompatActivity() {
                                     finish()
                                 }
                             }
+                            else {
+                                //credenziali errate
+                                Toast.makeText(context,"Credenziali non valide",Toast.LENGTH_SHORT).show()
+                            }
                         }
 
 
-                    } else {
-                        //credenziali errate
-                        Toast.makeText(context,"Credenziali non valide",Toast.LENGTH_SHORT).show()
                     }
                 }
 
