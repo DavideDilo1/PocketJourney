@@ -3,12 +3,10 @@ package com.example.pocketjourney.home
 import java.text.SimpleDateFormat
 import java.util.Locale
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import com.example.pocketjourney.R
@@ -45,13 +43,10 @@ class BookingFragment : Fragment(){
         val nomePosto=requireActivity().intent.getStringExtra("nomePosto")
         binding.titoloHotelToBook.text=nomePosto
         requireActivity().intent.putExtra("frame","booking_Layout")
-
-        Log.d("sono prenotazione ho ricevuto",idUtente + " " + idPosto + "" + categoria)
         dataSelezionataText = binding.dataSelezionata
         dataSelezionataText.setOnClickListener {
             //CALENDARIO DATA RANGE:
             if(categoria=="Soggiorno") {
-                Log.e("MOSTRO IL CALENDARIO","PER HOTEL ")
                 val picker = MaterialDatePicker.Builder.dateRangePicker()
                     .setTheme(R.style.ThemeMaterialCalendar)
                     .setTitleText("Seleziona la data")
@@ -68,7 +63,6 @@ class BookingFragment : Fragment(){
 
             else if (categoria=="Ristorante" || categoria=="Attrazione"){
                 //CALENDARIO SINGOLO
-                Log.e("MOSTRO IL CALENDARIO","SINGOLO")
                 val picker = MaterialDatePicker.Builder.datePicker()
                     .setTheme(R.style.ThemeMaterialCalendar)
                     .setTitleText("Seleziona una data")
@@ -107,10 +101,8 @@ class BookingFragment : Fragment(){
             val idPosto= requireActivity().intent.getStringExtra("idPosto")
 
             val dataPrenotazione=dataSelezionataText.text.toString()
-            Log.d("data=", dataPrenotazione)
             val numPersone=binding.personSpinner.selectedItem.toString()
             val ora=binding.spinnerOrario.selectedItem.toString()
-            Log.d("data e ora=", numPersone + " " + ora)
 
             if (categoria=="Ristorante" || categoria=="Attrazione"){
                 //sto prenotando una data singola
@@ -171,10 +163,8 @@ class BookingFragment : Fragment(){
     private fun inserisciPrenotazione(idUtente: String?, idPosto: String?, dataPrenotazione: String, numPersone: String, ora: String) {
         //dati utili per l'inserimetno in locale
         val email = requireActivity().intent.getStringExtra("email")
-        Log.e("EMAIL",email.toString())
         val nomePosto = requireActivity().intent.getStringExtra("nomePosto")
         val scope = CoroutineScope(Dispatchers.Default)
-        Log.d("DATI OFFLINE=", email + " " + nomePosto)
         val userAPI = ClientNetwork.retrofit
         val queryinserisciPrenotazione =
             "INSERT INTO Prenotazioni (ref_utente, ref_posto, data, numPersone, orario) VALUES ('$idUtente','$idPosto','$dataPrenotazione','$numPersone','$ora')"
@@ -184,7 +174,6 @@ class BookingFragment : Fragment(){
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if (response.isSuccessful) {
                     // L'inserimento della carta è avvenuto
-                    Log.e("ciao", "Prenotazione INSERITA")
                     dbManager = context?.let { it2 -> DBManager(it2) }
                     if (dbManager != null) {
                         dbManager?.open()
@@ -197,10 +186,6 @@ class BookingFragment : Fragment(){
                                 ora
                             )
                         }
-                        Log.d(
-                            "NEL DB MANAGER HO INSERITO",
-                            email + nomePosto + dataPrenotazione + numPersone + ora
-                        )
                     }
                     Toast.makeText(
                         requireContext(),
@@ -212,8 +197,7 @@ class BookingFragment : Fragment(){
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                 // Si è verificato un errore durante la chiamata di rete online
-                //Toast.makeText(requireContext(), t.toString() + " " + t.message.toString(), Toast.LENGTH_SHORT).show()
-                Log.e("ciao", t.toString() + " " + t.message.toString())
+
             }
         })
     }
@@ -241,7 +225,6 @@ class BookingFragment : Fragment(){
     fun verificaDataDoppia(data: String):Boolean{
         val primoGiorno=data.take(10)
         val dataCorrente = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
-        Log.e("ho ricevuto", primoGiorno)
         val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
         val date1 = sdf.parse(primoGiorno)
         val date2 = sdf.parse(dataCorrente)
@@ -258,17 +241,12 @@ class BookingFragment : Fragment(){
         call.enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if (response.isSuccessful) {
-                    Log.e("Ciao","ho effettuato la query correttamente per cercare se utente ha gia una carta per poter pagare")
                     val jsonObject = response.body()
                     if (jsonObject != null && jsonObject.has("queryset")) {
-                        Log.e("Ciao", "HO OTTENUTO IL JSONOBJECT come queryset" )
-                        Log.d("ritorno dalla query: " , jsonObject.toString())
                         val querySetArray = jsonObject.getAsJsonArray("queryset")
                         if (querySetArray != null && querySetArray.size() > 0) {
-                            Log.e("CIAO ", "UTENTE HA GIA UNA CARTA INSERITA")
                             callback(true) // Chiamata al callback con il valore true
                         } else {
-                            Log.e("ciao","utente non ha carta non può pagare")
                             callback(false) // Chiamata al callback con il valore false
                         }
                     }
@@ -276,7 +254,6 @@ class BookingFragment : Fragment(){
             }
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                Log.e("Ciao"," ONFAILURE sulla ricerca della carta")
                 callback(false) // Chiamata al callback con il valore false in caso di errore
             }
         })

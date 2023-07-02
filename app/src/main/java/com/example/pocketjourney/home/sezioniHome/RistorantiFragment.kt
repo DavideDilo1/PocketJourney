@@ -3,13 +3,10 @@ package com.example.pocketjourney.home.sezioniHome
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.TextView
@@ -61,7 +58,6 @@ class RistorantiFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentRistorantiBinding.inflate(inflater)
         val idUtente = requireActivity().intent.getStringExtra("idUtente")
-        Log.e("ATTENZIONEEEEE","HA APERTO LA ristoranti fragment " + idUtente)
         requireActivity().intent.putExtra("frame","frameRistoranti")
         if (idUtente != null) {
             setRecyclerView(idUtente.toInt())
@@ -125,13 +121,9 @@ class RistorantiFragment : Fragment() {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                     if (response.isSuccessful) {
                         val jsonObject = response.body()
-                        Log.d("JSON", response.body().toString())
                         // Verifica se il JSON object è stato ottenuto correttamente come queryset
                         if (jsonObject != null && jsonObject.has("queryset")) {
-                            Log.e(
-                                "Ciao",
-                                "HO OTTENUTO IL JSONOBJECT come queryset per la popolazione"
-                            )
+
                             //salvo l'array e verifico che contenga almeno un elemento
                             val querySetArray = jsonObject.getAsJsonArray("queryset")
                             if (querySetArray != null && querySetArray.size() > 0) {
@@ -192,13 +184,11 @@ class RistorantiFragment : Fragment() {
                                                     if (isChecked) {
                                                         // Il toggle è stato selezionato
                                                         val idPosto = homeItemModel.id
-                                                        Log.e("ho checkato",idPosto.toString())
                                                         setPreferiti(idPosto,idUtente)
                                                         // ... altre azioni da eseguire
                                                     } else {
                                                         // Il toggle è stato deselezionato
                                                         val idPosto = homeItemModel.id
-                                                        Log.e("ho decheckato", idPosto.toString())
                                                         rimuoviPreferiti(idPosto,idUtente)
                                                     }
                                                 }
@@ -234,7 +224,6 @@ class RistorantiFragment : Fragment() {
 
                 override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                     // Si è verificato un errore durante la chiamata di rete online
-                    Log.e("ciao", t.toString() + " " + t.message.toString())
                 }
             })
         }
@@ -264,7 +253,6 @@ class RistorantiFragment : Fragment() {
                             val querySetArray = jsonObject.getAsJsonArray("queryset")
 
                             if (querySetArray != null && querySetArray.size() > 0) {
-                                Log.e("Ciao", "sto per entrare nel for DELLA RECYCLER ORIZZONTALE")
                                 for (i in querySetArray) {
                                     var bitmap: Bitmap
                                     val elemento = i as JsonObject
@@ -275,7 +263,6 @@ class RistorantiFragment : Fragment() {
                                             call: Call<ResponseBody>,
                                             response: Response<ResponseBody>
                                         ) {
-                                            Log.d("RESPONSE", response.isSuccessful.toString())
                                             if (response.isSuccessful) {
 
                                                 val responseBody = response.body()
@@ -352,14 +339,12 @@ class RistorantiFragment : Fragment() {
 
                 override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                     // Si è verificato un errore durante la chiamata di rete online
-                    Log.e("ciao", t.toString() + " " + t.message.toString())
                 }
             })
         }
     }
 
     private fun rimuoviPreferiti(idPosto: Int, idUtente: Int) {
-        Log.e("sono etrato nel remove","1")
         val scope = CoroutineScope(Dispatchers.Default)
         val queryRimuoviFav= "DELETE FROM Preferiti WHERE ref_utente = '${idUtente}' AND ref_posto = '${idPosto}'"
         val userAPI= ClientNetwork.retrofit
@@ -375,7 +360,6 @@ class RistorantiFragment : Fragment() {
 
                 override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                     // Si è verificato un errore durante la chiamata di rete online
-                    Log.e("sono","nel secondo on failure")
                 }
             })
         }
@@ -397,8 +381,6 @@ class RistorantiFragment : Fragment() {
                             val querySetArray = jsonObject.getAsJsonArray("queryset")
                             if (querySetArray != null && querySetArray.size()>0){
                                 //ho gia il posto nei pref
-                                Log.e("ERRORE","POSTO GIA NEI PREFERITI")
-                                Log.d("res:",querySetArray.toString())
                                 Toast.makeText(requireContext(), "Hai già inserito questo luogo tra i preferiti!", Toast.LENGTH_SHORT).show()
                             } else {
                                 //il posto non c'è posso fare query
@@ -408,12 +390,10 @@ class RistorantiFragment : Fragment() {
                                     override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                                         if (response.isSuccessful) {
                                             // L'inserimento dell'utente online è avvenuto con successo e lo inserisco in locale
-                                            Log.d("NEL D HO INSERITO", idUtente.toString() + idPosto.toString())
                                             Toast.makeText(requireContext(), "Inserimento nei preferiti avvenuto!", Toast.LENGTH_SHORT).show()
                                         }
                                     }
                                     override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                                        Log.e("ciao",t.toString() + " " + t.message.toString())
                                     }
                                 })
 
@@ -428,7 +408,6 @@ class RistorantiFragment : Fragment() {
 
                 override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                     // Si è verificato un errore durante la chiamata di rete online
-                    Log.e("sono","nel secondo on failure")
                 }
             })
         }

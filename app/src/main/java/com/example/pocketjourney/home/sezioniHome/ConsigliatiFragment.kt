@@ -1,7 +1,6 @@
 package com.example.pocketjourney.home.sezioniHome
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +22,6 @@ class ConsigliatiFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentConsigliatiBinding.inflate(inflater)
         val idUtente = requireActivity().intent.getStringExtra("idUtente")
-        Log.e("ATTENZIONEEEEE","HA APERTO i consigli" + idUtente)
         requireActivity().intent.putExtra("frame","FrameConsigliati")
 
         binding.backArrowC.setOnClickListener(){
@@ -84,7 +82,6 @@ class ConsigliatiFragment : Fragment() {
             val citta = binding.spnCitta.selectedItem.toString()
             val idUtente = requireActivity().intent.getStringExtra("idUtente")
             val manager=requireActivity().supportFragmentManager
-            Log.d("hai scelto", categoria + tipologia + paese + citta)
             val childFragment = PaginaConsigliatiFragment()
             requireActivity().intent.putExtra("idUtente",idUtente)
             requireActivity().intent.putExtra("categoria",categoria)

@@ -14,7 +14,6 @@ import com.example.pocketjourney.R
 import com.example.pocketjourney.adapter.HomeAdapter
 import com.example.pocketjourney.database.ClientNetwork
 import com.example.pocketjourney.databinding.FragmentPacchettiBinding
-import com.example.pocketjourney.home.AnteprimaPostoFragment
 import com.example.pocketjourney.home.HomeFragmentNew
 import com.example.pocketjourney.model.HomeItemModel
 import com.google.gson.JsonObject
@@ -38,7 +37,6 @@ class PacchettiFragment : Fragment() {
         binding = FragmentPacchettiBinding.inflate(inflater)
         val idUtente = requireActivity().intent.getStringExtra("idUtente")
         binding.recyclerPacchetti.layoutManager = LinearLayoutManager(requireContext())
-        Log.e("ATTENZIONEEEEE","HA APERTO Li pack" + idUtente)
         requireActivity().intent.putExtra("frame","framePacchetti")
         if (idUtente != null) {
             setRecyclerView(idUtente.toInt())
@@ -72,15 +70,11 @@ class PacchettiFragment : Fragment() {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                     if (response.isSuccessful) {
                         val jsonObject = response.body()
-                        Log.d("JSON", response.body().toString())
                         // Verifica se il JSON object è stato ottenuto correttamente come queryset
                         if (jsonObject != null && jsonObject.has("queryset") ) {
-                            Log.e("Ciao", "HO OTTENUTO IL JSONOBJECT come queryset per la popolazione" )
                             //salvo l'array e verifico che contenga almeno un elemento
                             val querySetArray = jsonObject.getAsJsonArray("queryset")
-                            Log.d("RISULTATO DELLA QUERY PER LA POPOLAZIONE", querySetArray.toString())
                             if (querySetArray != null && querySetArray.size()>0){
-                                Log.e("Ciao", "sto per entrare nel for")
                                 for(i in querySetArray){
                                     var bitmap : Bitmap
                                     val elemento= i as JsonObject
@@ -88,9 +82,7 @@ class PacchettiFragment : Fragment() {
                                     val downloadFotoPosto=userAPI.getAvatar(foto)
                                     downloadFotoPosto.enqueue(object : Callback<ResponseBody> {
                                         override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                                            Log.d("RESPONSE", response.isSuccessful.toString())
                                             if (response.isSuccessful) {
-                                                Log.e("Ciao", "sono dentro il blocco della foto DENTRO IS SUCCESSFULL")
                                                 val responseBody = response.body()
                                                 if (responseBody != null) {
                                                     val inputStream = responseBody.byteStream()
@@ -112,7 +104,6 @@ class PacchettiFragment : Fragment() {
                                                     val childFragment = PaginaPacchettoFragment()
                                                     requireActivity().intent.putExtra("idPacchetto",id.toString())
                                                     requireActivity().intent.putExtra("idUtente",idUtente.toString())
-                                                    Log.d("CIAO SONO IL CLICK LISTENER STO PASSANDO", id.toString() + idUtente.toString())
                                                     val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
                                                     fragmentTransaction.replace(R.id.framePacchetti, childFragment)
                                                     fragmentTransaction.addToBackStack(null)
@@ -120,7 +111,6 @@ class PacchettiFragment : Fragment() {
                                                 }
 
                                             }
-                                            Log.d("DIMENSIONE DELLA HOME ITEM", homeItem.size.toString())
                                         }
 
                                         override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
@@ -143,7 +133,6 @@ class PacchettiFragment : Fragment() {
 
                 override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                     // Si è verificato un errore durante la chiamata di rete online
-                    Log.e("ciao", t.toString() + " " + t.message.toString())
                 }
             })
         }

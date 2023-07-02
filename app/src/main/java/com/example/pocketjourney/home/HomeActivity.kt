@@ -2,7 +2,6 @@ package com.example.pocketjourney.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Window
 import androidx.fragment.app.Fragment
 import com.example.pocketjourney.ProfileFragment
@@ -21,9 +20,7 @@ class HomeActivity : AppCompatActivity() {
         supportActionBar?.hide()
         //questo valore bundle ottiene l'id dell'utente nel caso in cui sia connesso al server, l'email viceversa.
         val emailOff= intent.getStringExtra("email")
-        val emailOn= intent.getStringExtra("emailOnline")
         val userId= intent.getStringExtra("idUtente")
-        Log.e("SONO H ACT:","${emailOff} ${userId}")
 
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -54,7 +51,6 @@ class HomeActivity : AppCompatActivity() {
         fragmentTransaction.replace(R.id.frameHomeLayout, fragment)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
-        Log.e("IMPORTANTISSIMO: ",supportFragmentManager.backStackEntryCount.toString())
 
     }
 
@@ -72,13 +68,10 @@ class HomeActivity : AppCompatActivity() {
     override fun onBackPressed() {
         val currentFragment = supportFragmentManager.findFragmentById(R.id.frameHomeLayout)
         val isOpen = intent.getStringExtra("isHomeOpen")
-        Log.e("ho letto", isOpen.toString())
-        Log.e("BACK:", currentFragment.toString())
         if (currentFragment is HomeFragmentNew && isOpen == "true") {
             super.onBackPressed()
             finishAffinity()
         } else {
-            Log.e("SONO ELSE","ON BACK PRESSED")
             val manager = supportFragmentManager
             val frame = intent.getStringExtra("frame").toString()
             val address = resources.getIdentifier(frame, "id", packageName)

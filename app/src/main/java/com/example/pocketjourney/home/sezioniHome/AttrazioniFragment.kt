@@ -3,13 +3,10 @@ package com.example.pocketjourney.home.sezioniHome
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.TextView
@@ -63,7 +60,6 @@ class AttrazioniFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentAttrazioniBinding.inflate(inflater)
         val idUtente = requireActivity().intent.getStringExtra("idUtente")
-        Log.e("ATTENZIONEEEEE","HA APERTO LA ristoranti fragment " + idUtente)
         requireActivity().intent.putExtra("frame","frameAttrazioni")
 
         if (idUtente != null) {
@@ -132,15 +128,11 @@ class AttrazioniFragment : Fragment() {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if (response.isSuccessful) {
                     val jsonObject = response.body()
-                    Log.d("JSON", response.body().toString())
                     // Verifica se il JSON object è stato ottenuto correttamente come queryset
                     if (jsonObject != null && jsonObject.has("queryset")) {
-                        Log.e("Ciao", "HO OTTENUTO IL JSONOBJECT come queryset per la popolazione")
                         //salvo l'array e verifico che contenga almeno un elemento
                         val querySetArray = jsonObject.getAsJsonArray("queryset")
-                        Log.d("RISULTATO DELLA QUERY PER LA POPOLAZIONE", querySetArray.toString())
                         if (querySetArray != null && querySetArray.size() > 0) {
-                            Log.e("Ciao", "sto per entrare nel for")
                             for (i in querySetArray) {
                                 var bitmap: Bitmap
                                 val elemento = i as JsonObject
@@ -151,12 +143,7 @@ class AttrazioniFragment : Fragment() {
                                         call: Call<ResponseBody>,
                                         response: Response<ResponseBody>
                                     ) {
-                                        Log.d("RESPONSE", response.isSuccessful.toString())
                                         if (response.isSuccessful) {
-                                            Log.e(
-                                                "Ciao",
-                                                "sono dentro il blocco della foto DENTRO IS SUCCESSFULL"
-                                            )
                                             val responseBody = response.body()
                                             if (responseBody != null) {
                                                 val inputStream = responseBody.byteStream()
@@ -189,22 +176,17 @@ class AttrazioniFragment : Fragment() {
                                                 if (isChecked) {
                                                     // Il toggle è stato selezionato
                                                     val idPosto = homeItemModel.id
-                                                    Log.e("ho checkato", idPosto.toString())
                                                     setPreferiti(idPosto, idUtente)
                                                     // ... altre azioni da eseguire
                                                 } else {
                                                     // Il toggle è stato deselezionato
                                                     val idPosto = homeItemModel.id
-                                                    Log.e("ho decheckato", idPosto.toString())
                                                     rimuoviPreferiti(idPosto, idUtente)
                                                 }
                                             }
 
                                         }
-                                        Log.d(
-                                            "DIMENSIONE DELLA HOME ITEM",
-                                            homeItem.size.toString()
-                                        )
+
                                     }
 
                                     override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
@@ -231,7 +213,6 @@ class AttrazioniFragment : Fragment() {
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                 // Si è verificato un errore durante la chiamata di rete online
-                Log.e("ciao", t.toString() + " " + t.message.toString())
             }
         })
     }
@@ -254,21 +235,11 @@ class AttrazioniFragment : Fragment() {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                     if (response.isSuccessful) {
                         val jsonObject = response.body()
-                        Log.d("JSON", response.body().toString())
                         // Verifica se il JSON object è stato ottenuto correttamente come queryset
                         if (jsonObject != null && jsonObject.has("queryset")) {
-                            Log.e(
-                                "Ciao",
-                                "HO OTTENUTO IL JSONOBJECT come queryset per la popolazione della recycler orizzontale"
-                            )
                             //salvo l'array e verifico che contenga almeno un elemento
                             val querySetArray = jsonObject.getAsJsonArray("queryset")
-                            Log.d(
-                                "RISULTATO DELLA QUERY PER LA POPOLAZIONE ORIZZONTALE",
-                                querySetArray.toString()
-                            )
                             if (querySetArray != null && querySetArray.size() > 0) {
-                                Log.e("Ciao", "sto per entrare nel for DELLA RECYCLER ORIZZONTALE")
                                 for (i in querySetArray) {
                                     var bitmap: Bitmap
                                     val elemento = i as JsonObject
@@ -279,12 +250,7 @@ class AttrazioniFragment : Fragment() {
                                             call: Call<ResponseBody>,
                                             response: Response<ResponseBody>
                                         ) {
-                                            Log.d("RESPONSE", response.isSuccessful.toString())
                                             if (response.isSuccessful) {
-                                                Log.e(
-                                                    "Ciao",
-                                                    "sono dentro il blocco della foto DENTRO IS SUCCESSFULL"
-                                                )
                                                 val responseBody = response.body()
                                                 if (responseBody != null) {
                                                     val inputStream = responseBody.byteStream()
@@ -329,10 +295,7 @@ class AttrazioniFragment : Fragment() {
                                                 }
 
                                             }
-                                            Log.d(
-                                                "DIMENSIONE DELLA HOME ITEM",
-                                                horizontalItem.size.toString()
-                                            )
+
                                         }
 
                                         override fun onFailure(
@@ -362,13 +325,11 @@ class AttrazioniFragment : Fragment() {
 
                 override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                     // Si è verificato un errore durante la chiamata di rete online
-                    Log.e("ciao", t.toString() + " " + t.message.toString())
                 }
             })
         }
     }
     private fun rimuoviPreferiti(idPosto: Int, idUtente: Int) {
-        Log.e("sono etrato nel remove","1")
         val scope = CoroutineScope(Dispatchers.Default)
         val queryRimuoviFav= "DELETE FROM Preferiti WHERE ref_utente = '${idUtente}' AND ref_posto = '${idPosto}'"
         val userAPI= ClientNetwork.retrofit
@@ -384,7 +345,6 @@ class AttrazioniFragment : Fragment() {
 
                 override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                     // Si è verificato un errore durante la chiamata di rete online
-                    Log.e("sono","nel secondo on failure")
                 }
             })
         }
@@ -406,8 +366,6 @@ class AttrazioniFragment : Fragment() {
                             val querySetArray = jsonObject.getAsJsonArray("queryset")
                             if (querySetArray != null && querySetArray.size()>0){
                                 //ho gia il posto nei pref
-                                Log.e("ERRORE","POSTO GIA NEI PREFERITI")
-                                Log.d("res:",querySetArray.toString())
                                 Toast.makeText(requireContext(), "Hai già inserito questo luogo tra i preferiti!", Toast.LENGTH_SHORT).show()
                             } else {
                                 //il posto non c'è posso fare query
@@ -417,12 +375,10 @@ class AttrazioniFragment : Fragment() {
                                     override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                                         if (response.isSuccessful) {
                                             // L'inserimento dell'utente online è avvenuto con successo e lo inserisco in locale
-                                            Log.d("NEL D HO INSERITO", idUtente.toString() + idPosto.toString())
                                             Toast.makeText(requireContext(), "Inserimento nei preferiti avvenuto!", Toast.LENGTH_SHORT).show()
                                         }
                                     }
                                     override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                                        Log.e("ciao",t.toString() + " " + t.message.toString())
                                     }
                                 })
 
@@ -437,7 +393,6 @@ class AttrazioniFragment : Fragment() {
 
                 override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                     // Si è verificato un errore durante la chiamata di rete online
-                    Log.e("sono","nel secondo on failure")
                 }
             })
         }
@@ -453,7 +408,7 @@ class AttrazioniFragment : Fragment() {
 
             if(filteredList.isEmpty()){
                 //se la vista è vuota<<'
-                Toast.makeText(requireContext(), "Nessun dato trovato", Toast.LENGTH_SHORT)
+                Toast.makeText(requireContext(), "Nessun dato trovato", Toast.LENGTH_SHORT).show()
             }else{
                 homeAdapter.setFilteredList(filteredList)
             }

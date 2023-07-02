@@ -3,10 +3,8 @@ package com.example.pocketjourney.accesso
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
-import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.example.pocketjourney.database.ClientNetwork
@@ -39,7 +37,6 @@ class LoginActivity : AppCompatActivity() {
         val sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val isLoggedIn = sharedPreferences.getBoolean(KEY_IS_LOGGED_IN, false)
         if (isLoggedIn){
-            Log.e("ciao","l'utente è loggato")
             val idUtente = sharedPreferences.getString(KEY_IDUTENTE, null)
             val email = sharedPreferences.getString(KEY_EMAIL, null)
             if (idUtente != null && email != null) {
@@ -62,10 +59,8 @@ class LoginActivity : AppCompatActivity() {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                     if (response.isSuccessful) {
                         val jsonObject = response.body()
-                        Log.d("JSON", response.body().toString())
                         // Verifica se il JSON object è stato ottenuto correttamente come queryset
                         if (jsonObject != null && jsonObject.has("queryset") ) {
-                            Log.e("Ciao", "HO OTTENUTO IL JSONOBJECT come queryset login" )
                             //salvo l'array e verifico che contenga almeno un elemento
                             val querySetArray = jsonObject.getAsJsonArray("queryset")
                             if (querySetArray != null && querySetArray.size()>0){
@@ -81,7 +76,6 @@ class LoginActivity : AppCompatActivity() {
                                     editor.putString(KEY_IDUTENTE,idUtente)
                                     editor.putString(KEY_EMAIL,email)
                                     editor.apply()
-                                    Log.e("HO SCRITTO LE SP", editor.toString())
                                     val intent = Intent(context, HomeActivity::class.java)
                                     intent.putExtra("idUtente",idUtente)
                                     intent.putExtra("email",email)
@@ -102,16 +96,13 @@ class LoginActivity : AppCompatActivity() {
                     // Si è verificato un errore durante la chiamata di rete online
                     //login in locale
                     if(verificaCredenzialiLocale(email,password)) {
-                        Log.e("ciao","LOGIN OFFLINE")
                         val intent = Intent(context, HomeActivity::class.java)
                         intent.putExtra("email",email)
                         startActivity(intent)
                         finish()
                     } else {
-                        Log.e("ciao", "credenziali offline errate")
                         Toast.makeText(context,"Credenziali non valide",Toast.LENGTH_SHORT).show()
                     }
-                    Log.e("ciao", t.toString() + " " + t.message.toString())
                 }
             })
 

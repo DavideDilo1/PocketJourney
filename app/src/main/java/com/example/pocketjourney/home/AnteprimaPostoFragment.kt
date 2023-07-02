@@ -1,23 +1,16 @@
 package com.example.pocketjourney.home
 
-import android.annotation.TargetApi
+
 import android.graphics.BitmapFactory
-import androidx.core.util.Pair
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.app.ActivityOptionsCompat
 import com.example.pocketjourney.R
 import com.example.pocketjourney.database.ClientNetwork
 import com.example.pocketjourney.databinding.FragmentAnteprimaPostoBinding
@@ -36,7 +29,6 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class AnteprimaPostoFragment : Fragment() {
-    private var id: Int = 0
     private lateinit var binding: FragmentAnteprimaPostoBinding
 
 
@@ -63,9 +55,7 @@ class AnteprimaPostoFragment : Fragment() {
 
 
         val idPosto = requireActivity().intent.getStringExtra("idPosto")
-        val idUtente = requireActivity().intent.getStringExtra("idUtente")
         val scope = CoroutineScope(Dispatchers.Default)
-        Log.d("Sono anteprima e ho ricevuto", idPosto.toString() + " e" + idUtente.toString())
         requireActivity().intent.putExtra("frame","fragment_anteprima_posto")
 
 
@@ -77,18 +67,15 @@ class AnteprimaPostoFragment : Fragment() {
         call.enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if (response.isSuccessful) {
-                    Log.e("Ciao", "sto mostrando anteprima")
                     val jsonObject = response.body() // Ottieni il JSON come JsonObject
 
                     // Verifica se il JSON object è stato ottenuto correttamente come queryset
                     if (jsonObject != null && jsonObject.has("queryset")) {
-                        Log.e("Ciao", "HO OTTENUTO IL JSONOBJECT come queryset")
                         //salvo l'array e verifico che contenga almeno un elemento
                         val querySetArray = jsonObject.getAsJsonArray("queryset")
                         if (querySetArray != null && querySetArray.size() > 0) {
                             val primoPosto =
                                 querySetArray[0].asJsonObject //prendo la prima corrispondenza
-                            Log.d("JSON", primoPosto.toString())
 
                             //verifico che non sia null e che contenga i campi corretti
 
@@ -102,7 +89,6 @@ class AnteprimaPostoFragment : Fragment() {
                             ) {
                                 //prelevo i campi e li setto nel fragment
                                 queryResult = primoPosto
-                                Log.d("oggetto che passo al paginaposto", queryResult.toString())
                                 val nome = primoPosto.get("nome").asString
                                 val descrizione = primoPosto.get("descrizione").asString
                                 val valutazione = primoPosto.get("valutazione").asString
@@ -115,8 +101,6 @@ class AnteprimaPostoFragment : Fragment() {
                                 binding.secondRatingNumber.text = "${valutazione}"
                                 binding.secondRatingNumber2.text = "${rec}"
 
-                                Log.e("Ciao", "HO CAMBIATO I DATI")
-
                                 //setto l'immagine del profilo
                                 val downloadFotoPosto = userAPI.getAvatar(foto)
                                 downloadFotoPosto.enqueue(object : Callback<ResponseBody> {
@@ -124,16 +108,7 @@ class AnteprimaPostoFragment : Fragment() {
                                         call: Call<ResponseBody>,
                                         response: Response<ResponseBody>
                                     ) {
-                                        Log.e(
-                                            "Ciao",
-                                            "sono dentro il blocco della foto dell'anteprima"
-                                        )
-                                        Log.d("RESPONSE", response.isSuccessful.toString())
                                         if (response.isSuccessful) {
-                                            Log.e(
-                                                "Ciao",
-                                                "sono dentro il blocco della foto  anteprima DENTRO IS SUCCESSFULL"
-                                            )
                                             val responseBody = response.body()
                                             if (responseBody != null) {
                                                 val inputStream = responseBody.byteStream()
@@ -164,8 +139,6 @@ class AnteprimaPostoFragment : Fragment() {
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                 // Si è verificato un errore durante la chiamata di rete online
-                //login in locale
-                Log.e("Ciao", "posso cambiare i dati usando ONFAILURE")
             }
         })
 
@@ -186,7 +159,6 @@ class AnteprimaPostoFragment : Fragment() {
 
         second_back_arrow.setOnClickListener{
             val provenienza = requireActivity().intent.getStringExtra("provenienza")
-            Log.e("ho letto", provenienza.toString())
             val childFragment: Fragment = when (provenienza) {
                 "ristorantiFragment" -> RistorantiFragment()
                 "hotelFragment" -> HotelFragment()
@@ -201,7 +173,6 @@ class AnteprimaPostoFragment : Fragment() {
             fragmentTransaction.commit()
         }
         second_arrow_up.setOnClickListener{
-            Log.d("hai cliccato arrow up e passo",queryResult.toString() )
             val childFragment = PaginaPostoFragment()
             requireActivity().intent.putExtra("queryResult",queryResult.toString())
             // Assumi che tu stia eseguendo questo codice all'interno di un'attività

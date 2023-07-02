@@ -2,7 +2,6 @@ package com.example.pocketjourney.home.sezioniHome
 
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +11,6 @@ import com.example.pocketjourney.R
 import com.example.pocketjourney.database.ClientNetwork
 import com.example.pocketjourney.database.DBManager
 import com.example.pocketjourney.databinding.FragmentPaginaPacchettoBinding
-import com.example.pocketjourney.home.PaginaPostoFragment
 import com.example.pocketjourney.home.RecensioniFragment
 import com.google.gson.JsonObject
 import okhttp3.ResponseBody
@@ -54,7 +52,6 @@ class PaginaPacchettoFragment : Fragment() {
 
         if (idUtente != null ){
             //sono connesso a internet avendo ricevuto userId ed interrogo il database remoto
-            Log.e("Ciao","sei al pag pack fragment e sei connesso")
 
             val userAPI= ClientNetwork.retrofit
             val queryPopolaPacchetto = "SELECT * FROM Pacchetti WHERE idPacchetto = '$idPacchetto'"
@@ -62,17 +59,15 @@ class PaginaPacchettoFragment : Fragment() {
             call.enqueue(object : Callback<JsonObject> {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                     if (response.isSuccessful) {
-                        Log.e("Ciao","posso poplare il pack")
+
                         val jsonObject = response.body() // Ottieni il JSON come JsonObject
-                        Log.d("RISPOSTA QUERY:",jsonObject.toString())
+
                         // Verifica se il JSON object è stato ottenuto correttamente come queryset
                         if (jsonObject != null && jsonObject.has("queryset") ) {
-                            Log.e("Ciao", "HO OTTENUTO IL JSONOBJECT come queryset" )
                             //salvo l'array e verifico che contenga almeno un elemento
                             val querySetArray = jsonObject.getAsJsonArray("queryset")
                             if (querySetArray != null && querySetArray.size()>0){
                                 val primoPack=querySetArray[0].asJsonObject //prendo la prima corrispondenza
-                                Log.d("JSON", primoPack.toString())
 
                                 //verifico che non sia null e che contenga i campi corretti
 
@@ -105,16 +100,12 @@ class PaginaPacchettoFragment : Fragment() {
                                     binding.thirdRatingNumberP.setText(valutazione)
                                     binding.thirdRatingNumber2P.setText(numRec)
                                     binding.venueText.text="${prezzo}€"
-                                    Log.e("Ciao", "HO CAMBIATO I DATI" )
 
                                     //setto l'immagine del profilo
                                     val downloadFotoPack=userAPI.getAvatar(foto)
                                     downloadFotoPack.enqueue(object :Callback<ResponseBody> {
                                         override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                                            Log.e("Ciao", "sono dentro il blocco della foto" )
-                                            Log.d("RESPONSE",response.isSuccessful.toString())
                                             if (response.isSuccessful){
-                                                Log.e("Ciao", "sono dentro il blocco della foto DENTRO IS SUCCESSFULL" )
                                                 val responseBody=response.body()
                                                 if(responseBody!=null){
                                                     val inputStream=responseBody.byteStream()
@@ -141,7 +132,6 @@ class PaginaPacchettoFragment : Fragment() {
                 override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                     // Si è verificato un errore durante la chiamata di rete online
                     //login in locale
-                    Log.e("Ciao","posso cambiare i dati usando ONFAILURE")
                 }
             })
 
@@ -168,7 +158,6 @@ class PaginaPacchettoFragment : Fragment() {
         binding.ratingBarLasciaRecensione.apply {
             setOnRatingBarChangeListener{ _, rating, _ ->
                 selectedRating=rating
-                Log.e("ciao", selectedRating.toString())
             }
         }
 
@@ -181,7 +170,6 @@ class PaginaPacchettoFragment : Fragment() {
 
             if (selectedRating!=0f && idUtente!=null && idPacchetto!=null){
                 inserisciRecensione(idUtente,idPacchetto,titolo,testo,selectedRating,formattedDate)
-                Log.d("sto passando a inserisci recensione:",idUtente+idPacchetto+titolo+testo+selectedRating+formattedDate)
             }
         }
 
@@ -218,17 +206,12 @@ class PaginaPacchettoFragment : Fragment() {
         call.enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if (response.isSuccessful) {
-                    Log.e("Ciao","ho effettuato la query correttamente per cercare se utente ha gia una carta per poter pagare")
                     val jsonObject = response.body()
                     if (jsonObject != null && jsonObject.has("queryset")) {
-                        Log.e("Ciao", "HO OTTENUTO IL JSONOBJECT come queryset" )
-                        Log.d("ritorno dalla query: " , jsonObject.toString())
                         val querySetArray = jsonObject.getAsJsonArray("queryset")
                         if (querySetArray != null && querySetArray.size() > 0) {
-                            Log.e("CIAO ", "UTENTE HA GIA UNA CARTA INSERITA")
                             callback(true) // Chiamata al callback con il valore true
                         } else {
-                            Log.e("ciao","utente non ha carta non può pagare")
                             callback(false) // Chiamata al callback con il valore false
                         }
                     }
@@ -236,7 +219,6 @@ class PaginaPacchettoFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                Log.e("Ciao"," ONFAILURE sulla ricerca della carta")
                 callback(false) // Chiamata al callback con il valore false in caso di errore
             }
         })
@@ -248,7 +230,6 @@ class PaginaPacchettoFragment : Fragment() {
     private fun inserisciPrenotazione(idUtente: String?, idPosto: String?, dataPrenotazione: String, numPersone: String, ora: String,nome:String) {
         //dati utili per l'inserimetno in locale
         val email= requireActivity().intent.getStringExtra("emailOnline")
-        Log.d("DATI OFFLINE=",email + " " + nome)
         val userAPI = ClientNetwork.retrofit
         val queryinserisciPrenotazione = "INSERT INTO Prenotazioni (ref_utente, ref_posto, data, numPersone, orario) VALUES ('$idUtente','$idPosto','$dataPrenotazione','$numPersone','$ora')"
         val call = userAPI.inserisci(queryinserisciPrenotazione)
@@ -256,7 +237,6 @@ class PaginaPacchettoFragment : Fragment() {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if (response.isSuccessful) {
                     // L'inserimento della carta è avvenuto
-                    Log.e("ciao","Prenotazione INSERITA")
                     dbManager = context?.let { it2 -> DBManager(it2) }
                     if(dbManager!=null) {
                         dbManager?.open()
@@ -276,8 +256,7 @@ class PaginaPacchettoFragment : Fragment() {
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                 // Si è verificato un errore durante la chiamata di rete online
-                //Toast.makeText(requireContext(), t.toString() + " " + t.message.toString(), Toast.LENGTH_SHORT).show()
-                Log.e("ciao",t.toString() + " " + t.message.toString())
+                Toast.makeText(requireContext(), "Errore di rete", Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -290,16 +269,13 @@ class PaginaPacchettoFragment : Fragment() {
         rating: Float,
         formattedDate: String
     ) {
-        Log.d("DATI OFFLINE=",idPacchetto + " " + idUtente + " " + titolo + " " + rating.toString() + " "+ formattedDate + " " + testo + " "+ rating)
         val userAPI = ClientNetwork.retrofit
         val queryinserisciRecensione = "INSERT INTO RecensioniPacchetti (ref_utente, ref_pacchetto, titolo, testo, valutazione, data) VALUES ('$idUtente', '$idPacchetto', '$titolo','$testo','$rating','$formattedDate')"
         val call = userAPI.inserisci(queryinserisciRecensione)
-        Log.d("query:",queryinserisciRecensione)
         call.enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if (response.isSuccessful) {
                     // L'inserimento della carta è avvenuto
-                    Log.e("ciao","Recensione inserita")
                     Toast.makeText(requireContext(), "Recensione inserita con successo!", Toast.LENGTH_SHORT).show()
                     binding.titleReviewEditText.text.clear()
                     binding.reviewEditText.text.clear()
@@ -308,8 +284,7 @@ class PaginaPacchettoFragment : Fragment() {
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                 // Si è verificato un errore durante la chiamata di rete online
-                //Toast.makeText(requireContext(), t.toString() + " " + t.message.toString(), Toast.LENGTH_SHORT).show()
-                Log.e("ciao",t.toString() + " " + t.message.toString())
+                Toast.makeText(requireContext(), "Errore di rete", Toast.LENGTH_SHORT).show()
             }
         })
     }

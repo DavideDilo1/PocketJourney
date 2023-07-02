@@ -5,7 +5,6 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -67,15 +66,12 @@ class HomeFragmentNew : Fragment() {
 
         binding.homeRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        Log.e("ATTENZIONEEEEE","HA APERTO LA HOME" + idUtente + " " + email)
-        Log.e("OPEN:",isHomeOpen.toString())
         requireActivity().intent.putExtra("isHomeOpen",isHomeOpen.toString())
 
         requireActivity().intent.putExtra("isHomeOpen",isHomeOpen.toString())
         if (idUtente != null) {
                 setRecyclerView(idUtente.toInt())
                 val count =requireActivity().supportFragmentManager.backStackEntryCount.toString()
-            Log.e("IMPORTANTISSIMISSIMO",count)
         } else {
             binding.normalConstraintHome.visibility=View.GONE
             binding.errorConstraint.visibility=View.VISIBLE
@@ -125,7 +121,6 @@ class HomeFragmentNew : Fragment() {
                 .commit()
             isHomeOpen=false
             requireActivity().intent.putExtra("isHomeOpen",isHomeOpen.toString())
-            Log.e("OPEN:",isHomeOpen.toString())
         }
 
         hotelButton.setOnClickListener{
@@ -232,13 +227,11 @@ class HomeFragmentNew : Fragment() {
                                                     if (isChecked) {
                                                         // Il toggle è stato selezionato
                                                         val idPosto = homeItemModel.id
-                                                        Log.e("ho checkato",idPosto.toString())
                                                         setPreferiti(idPosto,idUtente)
                                                         // ... altre azioni da eseguire
                                                     } else {
                                                         // Il toggle è stato deselezionato
                                                         val idPosto = homeItemModel.id
-                                                        Log.e("ho decheckato", idPosto.toString())
                                                         rimuoviPreferiti(idPosto,idUtente)
                                                     }
                                                 }
@@ -248,7 +241,6 @@ class HomeFragmentNew : Fragment() {
                                         }
 
                                         override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                                            Log.e("sono","nel primo on failure")
                                             binding.normalConstraintHome.visibility=View.GONE
                                             binding.errorConstraint.visibility=View.VISIBLE
                                             Toast.makeText(requireContext(), "L'immagine non è stata trovata correttamente", Toast.LENGTH_SHORT).show()
@@ -270,7 +262,6 @@ class HomeFragmentNew : Fragment() {
 
                 override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                     // Si è verificato un errore durante la chiamata di rete online
-                    Log.e("sono","nel secondo on failure")
                     binding.normalConstraintHome.visibility=View.GONE
                     binding.errorConstraint.visibility=View.VISIBLE
                 }
@@ -279,7 +270,6 @@ class HomeFragmentNew : Fragment() {
     }
 
     private fun rimuoviPreferiti(idPosto: Int, idUtente: Int) {
-        Log.e("sono etrato nel remove","1")
         val scope = CoroutineScope(Dispatchers.Default)
         val queryRimuoviFav= "DELETE FROM Preferiti WHERE ref_utente = '${idUtente}' AND ref_posto = '${idPosto}'"
         val userAPI= ClientNetwork.retrofit
@@ -295,7 +285,6 @@ class HomeFragmentNew : Fragment() {
 
                 override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                     // Si è verificato un errore durante la chiamata di rete online
-                    Log.e("sono","nel secondo on failure")
                 }
             })
         }
@@ -317,8 +306,6 @@ class HomeFragmentNew : Fragment() {
                             val querySetArray = jsonObject.getAsJsonArray("queryset")
                             if (querySetArray != null && querySetArray.size()>0){
                                 //ho gia il posto nei pref
-                                Log.e("ERRORE","POSTO GIA NEI PREFERITI")
-                                Log.d("res:",querySetArray.toString())
                                 Toast.makeText(requireContext(), "Hai già inserito questo luogo tra i preferiti!", Toast.LENGTH_SHORT).show()
                                 } else {
                                     //il posto non c'è posso fare query
@@ -328,12 +315,10 @@ class HomeFragmentNew : Fragment() {
                                     override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                                         if (response.isSuccessful) {
                                             // L'inserimento dell'utente online è avvenuto con successo e lo inserisco in locale
-                                                Log.d("NEL D HO INSERITO", idUtente.toString() + idPosto.toString())
                                                 Toast.makeText(requireContext(), "Inserimento nei preferiti avvenuto!", Toast.LENGTH_SHORT).show()
                                         }
                                     }
                                     override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                                        Log.e("ciao",t.toString() + " " + t.message.toString())
                                     }
                                 })
 
@@ -348,7 +333,6 @@ class HomeFragmentNew : Fragment() {
 
                 override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                     // Si è verificato un errore durante la chiamata di rete online
-                    Log.e("sono","nel secondo on failure")
                 }
             })
         }
@@ -380,7 +364,6 @@ class HomeFragmentNew : Fragment() {
         super.onResume()
         isHomeOpen = true
         requireActivity().intent.putExtra("isHomeOpen", isHomeOpen.toString())
-        Log.e("OPEN DOPO BACK:", isHomeOpen.toString())
     }
 }
 

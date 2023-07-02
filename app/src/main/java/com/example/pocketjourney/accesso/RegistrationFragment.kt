@@ -1,7 +1,6 @@
 package com.example.pocketjourney.accesso
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -36,19 +35,19 @@ class RegistrationFragment : Fragment() {
             //Azione del pulsante di registrazione
             //prendo i valori degli edit text e li gestisco nella registrazione
 
-            val Nome=binding.etNome.text.toString()
-            val Cognome=binding.etCognome.text.toString()
+            val nome=binding.etNome.text.toString()
+            val cognome=binding.etCognome.text.toString()
             val email=binding.etEmailRegistrazione.text.toString()
             val password=binding.etPasswordRegistrazione.text.toString()
             val confermaPassword=binding.etConfermaPasswordReg.text.toString()
             val cellulare=binding.etCellulare.text.toString()
 
             //chiamo la funzione VerificaDatiRegistrazione
-            if(VerificaDatiRegistrazione(Nome,Cognome,email,password,confermaPassword,cellulare)) {
+            if(VerificaDatiRegistrazione(nome,cognome,email,password,confermaPassword,cellulare)) {
 
                 //REGISTRAZIONE ONLINE
                 val serverAPI= ClientNetwork.retrofit
-                val queryInserimento = "insert into Utente(nome,cognome,email,password,cellulare) values('$Nome','$Cognome','$email','$password','$cellulare')"
+                val queryInserimento = "insert into Utente(nome,cognome,email,password,cellulare) values('$nome','$cognome','$email','$password','$cellulare')"
                 val call = serverAPI.inserisci(queryInserimento)
                 call.enqueue(object : Callback<JsonObject> {
                     override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
@@ -58,13 +57,12 @@ class RegistrationFragment : Fragment() {
                             if(dbManager!=null) {
                                 dbManager?.open()
                                 dbManager?.insert_utente(
-                                    Nome,
-                                    Cognome,
+                                    nome,
+                                    cognome,
                                     email,
                                     password,
                                     cellulare,
                                 )
-                                Log.d("NEL DB MANAGER HO INSERITO", Nome.toString() + Cognome.toString()+ email.toString() + password.toString() + cellulare.toString())
                                 requireActivity().supportFragmentManager.popBackStack()
                                 Toast.makeText(requireContext(), "Registrazione avvenuta con successo!", Toast.LENGTH_SHORT).show()
                             }
@@ -76,8 +74,7 @@ class RegistrationFragment : Fragment() {
 
                     override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                         // Si è verificato un errore durante la chiamata di rete online
-                        //Toast.makeText(requireContext(), t.toString() + " " + t.message.toString(), Toast.LENGTH_SHORT).show()
-                        Log.e("ciao",t.toString() + " " + t.message.toString())
+                        Toast.makeText(requireContext(), "Si è verificato un errore", Toast.LENGTH_SHORT).show()
                     }
                 })
 
