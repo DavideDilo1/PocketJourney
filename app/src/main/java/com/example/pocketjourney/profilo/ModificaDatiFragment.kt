@@ -1,7 +1,6 @@
 package com.example.pocketjourney.profilo
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -40,12 +39,9 @@ class ModificaDatiFragment : Fragment() {
         val idUtente = requireActivity().intent.getStringExtra("idUtente")
         val emailUtenteOnline=requireActivity().intent.getStringExtra("email")
         requireActivity().intent.putExtra("frame","modificaDatiFragment")
-        Log.d("Ciao",idUtente.toString())
-        Log.d("Ciao",emailUtenteOnline.toString())
-        Log.e("Ciao", "SEI NEL FRAGMENT MODIFICA")
+
 
         binding.btnModifica.setOnClickListener {
-            Log.e("bottone","cliccato")
             val nuovaEmail=binding.etNuovaEmail.text.toString()
             val nuovaPassword=binding.etModificaPassword.text.toString()
             val confermaNuovaPassword=binding.etConfermaPasswordMod.text.toString()
@@ -57,20 +53,17 @@ class ModificaDatiFragment : Fragment() {
                 if (nuovaEmail.isNotEmpty() || nuovaPassword.isNotEmpty() || confermaNuovaPassword.isNotEmpty() || nuovoCellulare.isNotEmpty()) {
                     //è stato inserito almeno un nuovo dato e procedo a effettuare i vari controlli singolarmente
                     //creo il serverApi e il dbMa
-                    Log.e("Ciao", "HO VISTO CHE C'è UN ALMENO UN VALORE RIEMPITO")
-                    Log.d("emial nuova:", nuovaEmail.toString())
+
                     val serverAPI = ClientNetwork.retrofit
                     dbManager = context?.let { it1 -> DBManager(it1) }
                     //controllo la email
                     if (nuovaEmail.isNotEmpty() && verificaEmail(nuovaEmail)) {
                         //query per modificare la email sul server
-                        Log.e("Ciao", "MODIFICO EMAIL ")
                         val queryModificaEmail = "UPDATE Utente SET email='$nuovaEmail' WHERE idUtente='$idUtente'"
                         val call = serverAPI.modifica(queryModificaEmail)
                         call.enqueue(object : Callback<JsonObject> {
                             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                                 if (response.isSuccessful) {
-                                    Log.e("Ciao", "RISPOSTA AVVENUTA CON SUCCESSO")
                                         //posso modificare la email sia in locale che nel db remoto
                                         if (dbManager!=null){
                                             dbManager?.open()
@@ -78,7 +71,6 @@ class ModificaDatiFragment : Fragment() {
                                                 nuovaEmail,
                                                 emailUtenteOnline.toString()
                                             )
-                                            Log.e("Ciao", "MODIFICATO ANCHE IN LOCALE")
                                             dbManager?.close()
 
                                         }
@@ -98,14 +90,12 @@ class ModificaDatiFragment : Fragment() {
                     }
                     if ((nuovaPassword.isNotEmpty() || confermaNuovaPassword.isNotEmpty()) && verificaPassword(nuovaPassword) && passwordUguali(nuovaPassword,confermaNuovaPassword)) {
                         //query per modificare la email sul server
-                        Log.e("Ciao", "MODIFICO LA PASSWORD ")
-                        Log.d("HAI INSERITO : ",nuovaPassword.toString() + confermaNuovaPassword.toString())
+
                         val queryModificaPassword = "UPDATE Utente SET password='$nuovaPassword' WHERE idUtente='$idUtente'"
                         val call = serverAPI.modifica(queryModificaPassword)
                         call.enqueue(object : Callback<JsonObject> {
                             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                                 if (response.isSuccessful) {
-                                    Log.e("Ciao", "RISPOSTA PASSWORD AVVENUTA CON SUCCESSO")
                                     //posso modificare la email sia in locale che nel db remoto
                                     if (dbManager!=null){
                                         dbManager?.open()
@@ -113,7 +103,6 @@ class ModificaDatiFragment : Fragment() {
                                             emailUtenteOnline.toString(),
                                             nuovaPassword
                                         )
-                                        Log.e("Ciao", "MODIFICATO PASSWORD ANCHE IN LOCALE")
 
                                     }
 
@@ -132,13 +121,11 @@ class ModificaDatiFragment : Fragment() {
                     }
                     if (nuovoCellulare.isNotEmpty() && verificaNumeroTelefono(nuovoCellulare)) {
                         //query per modificare la email sul server
-                        Log.e("Ciao", "MODIFICO CELLULARE ")
                         val queryModificaCellulare = "UPDATE Utente SET cellulare='$nuovoCellulare' WHERE idUtente='$idUtente'"
                         val call = serverAPI.modifica(queryModificaCellulare)
                         call.enqueue(object : Callback<JsonObject> {
                             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                                 if (response.isSuccessful) {
-                                    Log.e("Ciao", "RISPOSTA CELLULARE AVVENUTA CON SUCCESSO")
                                     //posso modificare la email sia in locale che nel db remoto
                                     if (dbManager!=null){
                                         dbManager?.open()
@@ -146,7 +133,6 @@ class ModificaDatiFragment : Fragment() {
                                             emailUtenteOnline.toString(),
                                             nuovoCellulare
                                         )
-                                        Log.e("Ciao", "MODIFICATO CELLULARE ANCHE IN LOCALE")
 
                                     }
 

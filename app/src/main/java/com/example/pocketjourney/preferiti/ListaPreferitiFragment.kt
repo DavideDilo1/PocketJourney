@@ -3,7 +3,6 @@ package com.example.pocketjourney.preferiti
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,9 +11,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pocketjourney.R
 import com.example.pocketjourney.adapter.FavAdapter
-import com.example.pocketjourney.adapter.HomeAdapter
 import com.example.pocketjourney.database.ClientNetwork
-import com.example.pocketjourney.databinding.FragmentAttrazioniBinding
 import com.example.pocketjourney.databinding.FragmentListaPreferitiBinding
 import com.example.pocketjourney.home.AnteprimaPostoFragment
 import com.example.pocketjourney.model.HomeItemModel
@@ -55,8 +52,6 @@ class ListaPreferitiFragment : Fragment() {
 
 
 
-
-
     private fun setRecyclerView(idUtente: Int) {
         val scope = CoroutineScope(Dispatchers.Default)
         val favItem = ArrayList<HomeItemModel>()
@@ -72,21 +67,13 @@ class ListaPreferitiFragment : Fragment() {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                     if (response.isSuccessful) {
                         val jsonObject = response.body()
-                        Log.d("JSON", response.body().toString())
                         // Verifica se il JSON object è stato ottenuto correttamente come queryset
                         if (jsonObject != null && jsonObject.has("queryset")) {
-                            Log.e(
-                                "Ciao",
-                                "HO OTTENUTO IL JSONOBJECT come queryset per la popolazione"
-                            )
+
                             //salvo l'array e verifico che contenga almeno un elemento
                             val querySetArray = jsonObject.getAsJsonArray("queryset")
-                            Log.d(
-                                "RISULTATO DELLA QUERY PER LA POPOLAZIONE",
-                                querySetArray.toString()
-                            )
+
                             if (querySetArray != null && querySetArray.size() > 0) {
-                                Log.e("Ciao", "sto per entrare nel for")
                                 for (i in querySetArray) {
                                     var bitmap: Bitmap
                                     val elemento = i as JsonObject
@@ -97,12 +84,8 @@ class ListaPreferitiFragment : Fragment() {
                                             call: Call<ResponseBody>,
                                             response: Response<ResponseBody>
                                         ) {
-                                            Log.d("RESPONSE", response.isSuccessful.toString())
                                             if (response.isSuccessful) {
-                                                Log.e(
-                                                    "Ciao",
-                                                    "sono dentro il blocco della foto DENTRO IS SUCCESSFULL"
-                                                )
+
                                                 val responseBody = response.body()
                                                 if (responseBody != null) {
                                                     val inputStream = responseBody.byteStream()
@@ -136,7 +119,6 @@ class ListaPreferitiFragment : Fragment() {
                                                     if (isChecked) {
                                                         // Il toggle è stato selezionato
                                                         val idPosto = homeItemModel.id
-                                                        Log.e("ho checkato",idPosto.toString())
                                                         rimuoviPreferiti(idPosto,idUtente)
                                                         // ... altre azioni da eseguire
                                                         favItem.removeAll { it.id == idPosto }
@@ -145,7 +127,6 @@ class ListaPreferitiFragment : Fragment() {
                                                 }
 
                                             }
-                                            Log.d("DIMENSIONE DELLA HOME ITEM", favItem.size.toString())
                                         }
 
                                         override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
@@ -181,14 +162,12 @@ class ListaPreferitiFragment : Fragment() {
                     binding.imageNoPreferiti.visibility = View.VISIBLE
                     binding.preferitiLinearL.visibility = View.GONE
                     binding.scrollPreferiti.visibility = View.GONE
-                    Log.e("ciao", t.toString() + " " + t.message.toString())
                 }
             })
         }
     }
 
     private fun rimuoviPreferiti(idPosto: Int, idUtente: Int) {
-        Log.e("sono etrato nel remove","1")
         val scope = CoroutineScope(Dispatchers.Default)
         val queryRimuoviFav= "DELETE FROM Preferiti WHERE ref_utente = '${idUtente}' AND ref_posto = '${idPosto}'"
         val userAPI= ClientNetwork.retrofit
@@ -204,7 +183,6 @@ class ListaPreferitiFragment : Fragment() {
 
                 override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                     // Si è verificato un errore durante la chiamata di rete online
-                    Log.e("sono","nel secondo on failure")
                 }
             })
         }

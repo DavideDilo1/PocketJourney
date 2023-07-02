@@ -23,21 +23,6 @@ class FavAdapter (private val mList: List<HomeItemModel>) : RecyclerView.Adapter
 
 
 
-    // private lateinit var mListener: onItemClickListener
-    /*
-    interface onItemClickListener{
-        fun onItemClick(position: Int){
-
-        }
-    }
-
-    fun setOnItemClickListener(listener: onItemClickListener){
-
-        mListener = listener
-
-    }*/
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
         val view = FavouriteCardViewDesignBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
@@ -65,11 +50,6 @@ class FavAdapter (private val mList: List<HomeItemModel>) : RecyclerView.Adapter
 
         holder.valutazione.text = HomeItemModel.valutazione
 
-        /* Finally add an onclickListener to the item.
-        holder.itemView.setOnClickListener {
-            onClickListener?.onClick(position, HomeItemModel)
-        }
-*/
         holder.itemView.setOnClickListener {
             onItemClick?.invoke(HomeItemModel)
         }

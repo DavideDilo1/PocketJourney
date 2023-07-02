@@ -1,9 +1,6 @@
 package com.example.pocketjourney.profilo
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -67,18 +64,14 @@ class CreditCardFragment : Fragment() {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if (response.isSuccessful) {
                     //il collegamento è avvenuto correttamente
-                    Log.e("Ciao","ho effettuato la query correttamente ")
                     val jsonObject = response.body() // Ottieni il JSON come JsonObject
 
                     // Verifica se il JSON object è stato ottenuto correttamente come queryset
                     if (jsonObject != null && jsonObject.has("queryset") ) {
-                        Log.e("Ciao", "HO OTTENUTO IL JSONOBJECT come queryset" )
-                        Log.d("ritorno dalla query: " , jsonObject.toString())
                         //salvo l'array e verifico che contenga almeno un elemento
                         val querySetArray = jsonObject.getAsJsonArray("queryset")
                         if (querySetArray != null && querySetArray.size()>0){
                             val primaCarta=querySetArray[0].asJsonObject //prendo la prima corrispondenza
-                            Log.d("JSON", primaCarta.toString())
 
                             //verifico che non sia null e che contenga i campi corretti
 
@@ -90,12 +83,10 @@ class CreditCardFragment : Fragment() {
 
                                 binding.creditCardNumber.text = formatCreditCardNumber("${numCarta}")
                                 binding.expireCreditCard.text= "${meseScadenza}/${annoScadenza}"
-                                Log.e("Ciao", "HO mostrato I DATI della tua carta" )
                             }
                         }
                         else {
                             //l'interrogazione ha dato un risultato nullo quindi non faccio niente
-                            Log.e("ciao ", "LA QUERY è VUOTA PORCODDIOOOOOOO")
                         }
                     }
                 }
@@ -103,7 +94,6 @@ class CreditCardFragment : Fragment() {
 
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                 // Si è verificato un errore durante la chiamata di rete online
-                Log.e("Ciao"," ONFAILURE dentro onCreate ")
             }
         })
 
@@ -113,7 +103,6 @@ class CreditCardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val idUtente = requireActivity().intent.getStringExtra("idUtente")
-        Log.d("ciao sono on view created ho ottenuto ",idUtente.toString())
 
         binding.btnInserisciCarta.setOnClickListener{
 
@@ -130,31 +119,24 @@ class CreditCardFragment : Fragment() {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                     if (response.isSuccessful) {
                         //il collegamento è avvenuto correttamente
-                        Log.e("Ciao","ho effettuato la query correttamente per cercare se utente ha gia una carta ")
                         val jsonObject = response.body() // Ottieni il JSON come JsonObject
 
                         // Verifica se il JSON object è stato ottenuto correttamente come queryset
                         if (jsonObject != null && jsonObject.has("queryset") ) {
-                            Log.e("Ciao", "HO OTTENUTO IL JSONOBJECT come queryset" )
-                            Log.d("ritorno dalla query: " , jsonObject.toString())
                             //salvo l'array e verifico che contenga almeno un elemento
                             val querySetArray = jsonObject.getAsJsonArray("queryset")
                             if (querySetArray != null && querySetArray.size()>0){
                                 Toast.makeText(requireContext(), "Elimina la carta corrente prima di inserirne una nuova.", Toast.LENGTH_SHORT).show()
-                                Log.e("ERRORE ", "UTENTE HA GIA UNA CARTA INSERITA")
                             }
                             else {
                                 //l'interrogazione ha dato un risultato nullo
-                                Log.e("ciao ", "LA QUERY è VUOTA POSSO INSERIRE CARTA MA VERIFICO I CAMPI")
                                 if(verificaDatiInseriti(numeroCarta,meseScadenza,annoScadenza,CVV)){
-                                    Log.e("ciao ", "CAMPI ok")
                                     val queryInserisciCarta = "insert into DatiPagamento(ref_IdUtente,numeroCarta,codiceSicurezza,meseScadenza,annoScadenza) values('$idUtente','$numeroCarta','$CVV','$meseScadenza','$annoScadenza')"
                                     val call = userAPI.inserisci(queryInserisciCarta)
                                     call.enqueue(object : Callback<JsonObject> {
                                         override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                                             if (response.isSuccessful) {
                                                 // L'inserimento della carta è avvenuto
-                                                Log.e("ciao","CARTA INSERITA")
                                                 Toast.makeText(requireContext(), "Registrazione CARTA avvenuta con successo!", Toast.LENGTH_SHORT).show()
                                             }
                                         }
@@ -162,7 +144,6 @@ class CreditCardFragment : Fragment() {
                                         override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                                             // Si è verificato un errore durante la chiamata di rete online
                                             //Toast.makeText(requireContext(), t.toString() + " " + t.message.toString(), Toast.LENGTH_SHORT).show()
-                                            Log.e("ciao",t.toString() + " " + t.message.toString())
                                         }
                                     })
                                 }
@@ -176,7 +157,6 @@ class CreditCardFragment : Fragment() {
                 override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                     // Si è verificato un errore durante la chiamata di rete online
                     //login in locale
-                    Log.e("Ciao"," ONFAILURE sulla ricerca della carta ")
                 }
             })
 
@@ -192,19 +172,14 @@ class CreditCardFragment : Fragment() {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                     if (response.isSuccessful) {
                         //il collegamento è avvenuto correttamente
-                        Log.e("Ciao","ho effettuato la query correttamente per cercare se utente ha gia una carta DA ELIMINARE")
                         val jsonObject = response.body() // Ottieni il JSON come JsonObject
 
                         // Verifica se il JSON object è stato ottenuto correttamente come queryset
                         if (jsonObject != null && jsonObject.has("queryset") ) {
-                            Log.e("Ciao", "HO OTTENUTO IL JSONOBJECT come queryset" )
-                            Log.d("ritorno dalla query: " , jsonObject.toString())
                             //salvo l'array e verifico che contenga almeno un elemento
                             val querySetArray = jsonObject.getAsJsonArray("queryset")
                             if (querySetArray != null && querySetArray.size()>0){
-                                Log.e("CIAO ", "UTENTE HA GIA UNA CARTA INSERITA")
                                 //l'interrogazione ha dato un risultato nullo
-                                Log.e("ciao ", "eseguo query per eliminare carta")
 
                                 val queryEliminaCarta = "DELETE FROM DatiPagamento WHERE ref_IdUtente = '$idUtente'"
                                 val call = userAPI.remove(queryEliminaCarta)
@@ -212,7 +187,6 @@ class CreditCardFragment : Fragment() {
                                         override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                                             if (response.isSuccessful) {
                                                 // L'inserimento della carta è avvenuto
-                                                Log.e("ciao","CARTA RIMOSSA")
                                                 binding.creditCardNumber.text = "XXXX XXXX XXXX XXXX"
                                                 binding.expireCreditCard.text= " --/-- "
                                                 Toast.makeText(context, "Hai rimosso la tua carta con successo e puoi inserirne una nuova", Toast.LENGTH_SHORT).show()
@@ -222,14 +196,12 @@ class CreditCardFragment : Fragment() {
                                         override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                                             // Si è verificato un errore durante la chiamata di rete online
                                             //Toast.makeText(requireContext(), t.toString() + " " + t.message.toString(), Toast.LENGTH_SHORT).show()
-                                            Log.e("ciao",t.toString() + " " + t.message.toString())
                                         }
                                     })
 
                             }
                             else {
                                 Toast.makeText(requireContext(), "Nessuna carta da rimuovere trovata. ", Toast.LENGTH_SHORT).show()
-                                Log.e("ciao","utente non ha carta non ho cosa rimuovere")
                             }
                         }
                     }
@@ -238,7 +210,7 @@ class CreditCardFragment : Fragment() {
                 override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                     // Si è verificato un errore durante la chiamata di rete online
                     //login in locale
-                    Log.e("Ciao"," ONFAILURE sulla ricerca della carta DA RIMUOVERE ")
+
                 }
             })
 

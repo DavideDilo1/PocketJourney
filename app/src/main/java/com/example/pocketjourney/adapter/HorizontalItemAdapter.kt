@@ -24,10 +24,7 @@ class HorizontalItemAdapter(private val horizontalRecyclerItem: List<HorizontalR
         val ratingBarRist = binding.ratingBarItem
         val testoVario = binding.testo
 
-    /*
-        init {
-            itemImage = itemView.findViewById(R.id.item_restaurant_Image)
-        }*/
+
     }
 
 

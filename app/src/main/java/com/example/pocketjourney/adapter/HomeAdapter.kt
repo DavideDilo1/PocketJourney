@@ -27,20 +27,6 @@ class HomeAdapter(private var mList: List<HomeItemModel>) : RecyclerView.Adapter
         this.mList = mList
         notifyDataSetChanged()
     }
-   // private lateinit var mListener: onItemClickListener
-    /*
-    interface onItemClickListener{
-        fun onItemClick(position: Int){
-
-        }
-    }
-
-    fun setOnItemClickListener(listener: onItemClickListener){
-
-        mListener = listener
-
-    }*/
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
         val view = CardViewDesignBinding.inflate(

@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,7 +43,6 @@ class ProfileFragment : Fragment() {
 
         if (idUtente != null ){
             //sono connesso a internet avendo ricevuto userId ed interrogo il database remoto
-            Log.e("Ciao","sei al profile fragment e sei connesso")
 
             val userAPI= ClientNetwork.retrofit
             val queryNomeCognome = "SELECT Nome, Cognome, email, fotoProfilo FROM Utente WHERE idUtente = '$idUtente'"
@@ -53,17 +51,14 @@ class ProfileFragment : Fragment() {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                     if (response.isSuccessful) {
                         //posso effettuare il login online
-                        Log.e("Ciao","posso cambiare i dati con dbonline")
                         val jsonObject = response.body() // Ottieni il JSON come JsonObject
 
                         // Verifica se il JSON object è stato ottenuto correttamente come queryset
                         if (jsonObject != null && jsonObject.has("queryset") ) {
-                            Log.e("Ciao", "HO OTTENUTO IL JSONOBJECT come queryset" )
                             //salvo l'array e verifico che contenga almeno un elemento
                             val querySetArray = jsonObject.getAsJsonArray("queryset")
                             if (querySetArray != null && querySetArray.size()>0){
                                 val primoUtente=querySetArray[0].asJsonObject //prendo la prima corrispondenza
-                                Log.d("JSON", primoUtente.toString())
 
                                 //verifico che non sia null e che contenga i campi corretti
 
@@ -76,16 +71,13 @@ class ProfileFragment : Fragment() {
 
                                     binding.tvEmail.text = "${email}"
                                     binding.tvNomeCognomeProfilo.text = "${nome} ${cognome}"
-                                    Log.e("Ciao", "HO CAMBIATO I DATI" )
 
                                     //setto l'immagine del profilo
                                     val downloadFotoProfilo=userAPI.getAvatar(foto)
                                     downloadFotoProfilo.enqueue(object :Callback<ResponseBody> {
                                         override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                                            Log.e("Ciao", "sono dentro il blocco della foto" )
-                                            Log.d("RESPONSE",response.isSuccessful.toString())
+
                                             if (response.isSuccessful){
-                                                Log.e("Ciao", "sono dentro il blocco della foto DENTRO IS SUCCESSFULL" )
                                                 val responseBody=response.body()
                                                 if(responseBody!=null){
                                                     val inputStream=responseBody.byteStream()
@@ -115,7 +107,6 @@ class ProfileFragment : Fragment() {
 
         } else {
             //emailUtenteOnline è null quindi opero col db in locale sfruttando emailUtenteOffline
-            Log.e("Ciao","CAMBIO I DATI CON L'ELSE ")
             databaseHelper= DbHelper(requireContext())
 
             //query al database locale per cercae l'utente

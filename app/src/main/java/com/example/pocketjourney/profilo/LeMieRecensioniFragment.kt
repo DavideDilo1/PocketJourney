@@ -1,7 +1,6 @@
 package com.example.pocketjourney.profilo
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,12 +8,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pocketjourney.ProfileFragment
 import com.example.pocketjourney.R
-import com.example.pocketjourney.adapter.PrenotazioniAdapter
 import com.example.pocketjourney.adapter.RecensioniAdapter
 import com.example.pocketjourney.database.ClientNetwork
-import com.example.pocketjourney.database.DbHelper
 import com.example.pocketjourney.databinding.FragmentLeMieRecensioniBinding
-import com.example.pocketjourney.model.PrenotazioniModel
 import com.example.pocketjourney.model.RecensioniModel
 import com.google.gson.JsonObject
 import kotlinx.coroutines.CoroutineScope
@@ -87,14 +83,11 @@ class LeMieRecensioniFragment : Fragment() {
                         val jsonObject = response.body()
                         // Verifica se il JSON object è stato ottenuto correttamente come queryset
                         if (jsonObject != null && jsonObject.has("queryset") ) {
-                            Log.e("Ciao", "HO OTTENUTO IL JSONOBJECT come queryset per la popolazione" )
                             //salvo l'array e verifico che contenga almeno un elemento
                             val querySetArray = jsonObject.getAsJsonArray("queryset")
                             if (querySetArray != null && querySetArray.size()>0){
-                                Log.e("Ciao", "sto per entrare nel for")
                                 for(i in querySetArray){
                                     val elemento= i as JsonObject
-                                    Log.e("Ciao", "sono dentro il blocco della foto DENTRO IS SUCCESSFULL")
                                     reviewItem.add(
                                         RecensioniModel(
                                             elemento.get("nome").asString,

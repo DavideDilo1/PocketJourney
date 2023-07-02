@@ -1,13 +1,11 @@
 package com.example.pocketjourney.profilo
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.pocketjourney.ProfileFragment
 import com.example.pocketjourney.R
 import com.example.pocketjourney.adapter.PrenotazioniAdapter
@@ -30,7 +28,6 @@ class ListaPrenotazioniFragment : Fragment() {
         val idUtente = requireActivity().intent.getStringExtra("idUtente")
         val emailUtente=requireActivity().intent.getStringExtra("email")
         requireActivity().intent.putExtra("frame","FrameListaPrenotazioni")
-        Log.d("dati ricevuti ", idUtente + emailUtente)
         // Inflate the layout for this fragment
 
         binding.recyclerPrenotazioni.layoutManager = LinearLayoutManager(requireContext())
@@ -69,16 +66,12 @@ class ListaPrenotazioniFragment : Fragment() {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if (response.isSuccessful) {
                     val jsonObject = response.body()
-                    Log.d("JSON", response.body().toString())
                     // Verifica se il JSON object è stato ottenuto correttamente come queryset
                     if (jsonObject != null && jsonObject.has("queryset") ) {
-                        Log.e("Ciao", "HO OTTENUTO IL JSONOBJECT come queryset per la popolazione delle prenotazioni" )
                         //salvo l'array e verifico che contenga almeno un elemento
                         val querySetArray = jsonObject.getAsJsonArray("queryset")
                         if (querySetArray != null && querySetArray.size()>0){
-                            Log.e("Ciao", "sto per entrare nel for")
                             for(i in querySetArray){
-                                Log.d("RISULTATO DELLA QUERY PER LA POPOLAZIONE", i.toString())
                                 val elemento= i as JsonObject
                                 bookItem.add(
                                     //inserisco id,nome,data,numpersone e orario
@@ -115,7 +108,6 @@ class ListaPrenotazioniFragment : Fragment() {
                 // Popolare dalla tabella Prenotazioni locale
                 val dbHelper = DbHelper(requireContext())
                 val emailUtente=requireActivity().intent.getStringExtra("emailUtenteOffline").toString()
-                Log.e("email",emailUtente)
                 val dataList = dbHelper.getAllPrenotazioni(emailUtente)
 
                 // Aggiungere gli elementi alla lista dell'adapter
@@ -124,7 +116,6 @@ class ListaPrenotazioniFragment : Fragment() {
                 //TODO VErificae grandezza datalist, se vuota immagine: GIUSTO?
                 //
                 if (dataList.isEmpty()){
-                    Log.e("ciao", "non ci sono elementi")
 
                     binding.textNessunDato.visibility = View.VISIBLE
                     binding.textNessunDato2.visibility = View.VISIBLE
@@ -136,7 +127,6 @@ class ListaPrenotazioniFragment : Fragment() {
                 // Notificare all'adapter che i dati sono cambiati
                 bookAdapter.notifyDataSetChanged()
 
-                Log.e("ciao", t.toString() + " " + t.message.toString())
             }
 
         })
