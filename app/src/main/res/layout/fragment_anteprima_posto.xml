@@ -19,7 +19,6 @@
         android:src="@drawable/background"
        />
 
-    <!--TODO: mettere il bottone per aggiungere ai preferiti -->
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
