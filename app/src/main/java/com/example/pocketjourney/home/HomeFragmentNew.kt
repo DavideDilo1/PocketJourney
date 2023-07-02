@@ -33,10 +33,7 @@ import androidx.appcompat.widget.SearchView
 
 class HomeFragmentNew : Fragment() {
     private lateinit var binding: FragmentHomeNewBinding
-    
-    private lateinit var textView: TextView
-    private lateinit var textView2: TextView
-    private lateinit var textView3: TextView
+
 
     private lateinit var homeRecycle: RecyclerView
 
@@ -44,8 +41,7 @@ class HomeFragmentNew : Fragment() {
     private lateinit var ristorantiButton: Button
     private lateinit var hotelButton: Button
     private lateinit var attrazioniButton: Button
-    private lateinit var home_background: ImageView
-    private lateinit var ideaButton: ImageButton
+
     private var homeItem = ArrayList<HomeItemModel>()
     private var homeAdapter = HomeAdapter(homeItem)
 
@@ -78,16 +74,7 @@ class HomeFragmentNew : Fragment() {
         }
 
 
-        home_background = binding.imageBackground
-        ristorantiButton = binding.resturantButton
-        attrazioniButton = binding.attractionButton
-        hotelButton = binding.hotelButton
 
-        textView = binding.testoCosaStaiCercando
-        textView2 = binding.testoHome
-        textView3 = binding.testoMiglioriMete
-
-        ideaButton = binding.ideaButton
 
         homeRecycle = binding.homeRecyclerView
         searchView = binding.searchViewHome
