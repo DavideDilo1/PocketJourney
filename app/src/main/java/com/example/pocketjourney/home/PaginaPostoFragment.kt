@@ -49,7 +49,7 @@ class PaginaPostoFragment : Fragment() {
         val idPosto= requireActivity().intent.getStringExtra("idPosto")
         Log.d("SONO PAGINA POSTO E HO RICEVUTO ", queryResultString.toString() + " " + idUtente)
         requireActivity().intent.putExtra("frame","fragment_pagina_posto")
-
+        val email = requireActivity().intent.getStringExtra("email")
         if (queryResultString != null) {
             val jsonParser = JsonParser()
             val queryResult = jsonParser.parse(queryResultString).asJsonObject
@@ -124,23 +124,23 @@ class PaginaPostoFragment : Fragment() {
 
         }
 
-        binding.prenotaAdessoButton.setOnClickListener{
+            binding.prenotaAdessoButton.setOnClickListener{
+                val childFragment = BookingFragment()
+                requireActivity().intent.putExtra("idPosto",idPosto)
+                requireActivity().intent.putExtra("idUtente",idUtente)
+                val jsonParser = JsonParser()
+                val queryResult = jsonParser.parse(queryResultString).asJsonObject
+                val categoria = queryResult.get("categoria")?.asString!!
+                val nomePosto= queryResult.get("nome").asString!!
+                requireActivity().intent.putExtra("categoria",categoria)
+                requireActivity().intent.putExtra("nomePosto",nomePosto)
+                requireActivity().intent.putExtra("emailOnline",email)
+                val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.fragment_pagina_posto, childFragment)
+                fragmentTransaction.addToBackStack(null)
+                fragmentTransaction.commit()
 
-            val childFragment = BookingFragment()
-            requireActivity().intent.putExtra("idPosto",idPosto)
-            requireActivity().intent.putExtra("idUtente",idUtente)
-            val jsonParser = JsonParser()
-            val queryResult = jsonParser.parse(queryResultString).asJsonObject
-            val categoria = queryResult.get("categoria")?.asString!!
-            val nomePosto= queryResult.get("nome").asString!!
-            requireActivity().intent.putExtra("categoria",categoria)
-            requireActivity().intent.putExtra("nomePosto",nomePosto)
-            val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.fragment_pagina_posto, childFragment)
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()
-
-        }
+            }
 
         //TODO: AGGIUNGERE IL CORRETTO CAMBIO DI FRAGMENT
         binding.scopriTutteLeRec.setOnClickListener {

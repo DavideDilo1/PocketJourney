@@ -52,7 +52,7 @@ class PaginaConsigliatiFragment : Fragment() {
         binding.backArrowC.setOnClickListener {
             val manager=requireActivity().supportFragmentManager
             requireActivity().intent.putExtra("idUtente",idUtente)
-            manager.beginTransaction().replace(R.id.framePaginaConsigliati, HomeFragmentNew()).remove(this)
+            manager.beginTransaction().replace(R.id.framePaginaConsigliati, ConsigliatiFragment())
                 .addToBackStack(null)
                 .commit()
         }

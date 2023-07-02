@@ -2,6 +2,7 @@ package com.example.pocketjourney.adapter
 
 import android.graphics.drawable.BitmapDrawable
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pocketjourney.databinding.CardViewDesignBinding
@@ -9,9 +10,10 @@ import com.example.pocketjourney.model.HomeItemModel
 
 class HomeAdapter(private var mList: List<HomeItemModel>) : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
 
-
+    var showFavoriteButton: Boolean = true
     private var onItemClick: ((HomeItemModel) -> Unit)? = null
     private var onToggleClickListener: ((HomeItemModel, Boolean) -> Unit)? = null
+
 
     fun setOnItemClickListener(listener: (HomeItemModel) -> Unit) {
         onItemClick = listener
@@ -67,11 +69,12 @@ class HomeAdapter(private var mList: List<HomeItemModel>) : RecyclerView.Adapter
 
         holder.valutazione.text = HomeItemModel.valutazione
 
-        /* Finally add an onclickListener to the item.
-        holder.itemView.setOnClickListener {
-            onClickListener?.onClick(position, HomeItemModel)
-        }
-*/
+         if (showFavoriteButton) {
+             holder.favButton.visibility = View.VISIBLE
+         } else {
+                holder.favButton.visibility = View.GONE
+         }
+
         holder.itemView.setOnClickListener {
             onItemClick?.invoke(HomeItemModel)
         }

@@ -28,7 +28,7 @@ class ListaPrenotazioniFragment : Fragment() {
     ): View? {
         binding=FragmentListaPrenotazioniBinding.inflate(layoutInflater,container,false)
         val idUtente = requireActivity().intent.getStringExtra("idUtente")
-        val emailUtente=requireActivity().intent.getStringExtra("emailUtenteOffline")
+        val emailUtente=requireActivity().intent.getStringExtra("email")
         requireActivity().intent.putExtra("frame","FrameListaPrenotazioni")
         Log.d("dati ricevuti ", idUtente + emailUtente)
         // Inflate the layout for this fragment
@@ -114,14 +114,16 @@ class ListaPrenotazioniFragment : Fragment() {
                 // Si è verificato un errore durante la chiamata di rete online
                 // Popolare dalla tabella Prenotazioni locale
                 val dbHelper = DbHelper(requireContext())
-                val dataList = dbHelper.getAllPrenotazioni(idUtente)
+                val emailUtente=requireActivity().intent.getStringExtra("emailUtenteOffline").toString()
+                Log.e("email",emailUtente)
+                val dataList = dbHelper.getAllPrenotazioni(emailUtente)
 
                 // Aggiungere gli elementi alla lista dell'adapter
                 bookItem.addAll(dataList)
 
                 //TODO VErificae grandezza datalist, se vuota immagine: GIUSTO?
                 //
-                if (dataList == null){
+                if (dataList.isEmpty()){
                     Log.e("ciao", "non ci sono elementi")
 
                     binding.textNessunDato.visibility = View.VISIBLE

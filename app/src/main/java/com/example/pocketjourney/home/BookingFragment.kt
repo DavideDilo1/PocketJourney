@@ -170,7 +170,8 @@ class BookingFragment : Fragment(){
 
     private fun inserisciPrenotazione(idUtente: String?, idPosto: String?, dataPrenotazione: String, numPersone: String, ora: String) {
         //dati utili per l'inserimetno in locale
-        val email = requireActivity().intent.getStringExtra("emailOnline")
+        val email = requireActivity().intent.getStringExtra("email")
+        Log.e("EMAIL",email.toString())
         val nomePosto = requireActivity().intent.getStringExtra("nomePosto")
         val scope = CoroutineScope(Dispatchers.Default)
         Log.d("DATI OFFLINE=", email + " " + nomePosto)
@@ -193,7 +194,7 @@ class BookingFragment : Fragment(){
                                 nomePosto,
                                 dataPrenotazione,
                                 numPersone,
-                                ora,
+                                ora
                             )
                         }
                         Log.d(

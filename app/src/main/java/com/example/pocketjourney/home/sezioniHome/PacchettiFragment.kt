@@ -39,17 +39,15 @@ class PacchettiFragment : Fragment() {
         val idUtente = requireActivity().intent.getStringExtra("idUtente")
         binding.recyclerPacchetti.layoutManager = LinearLayoutManager(requireContext())
         Log.e("ATTENZIONEEEEE","HA APERTO Li pack" + idUtente)
-
+        requireActivity().intent.putExtra("frame","framePacchetti")
         if (idUtente != null) {
             setRecyclerView(idUtente.toInt())
-        } else {
-           // binding.
         }
 
         binding.backArrowP.setOnClickListener {
             val manager=requireActivity().supportFragmentManager
             requireActivity().intent.putExtra("idUtente",idUtente)
-            manager.beginTransaction().replace(R.id.framePacchetti, HomeFragmentNew()).remove(this)
+            manager.beginTransaction().replace(R.id.framePacchetti, HomeFragmentNew())
                 .addToBackStack(null)
                 .commit()
         }
@@ -60,6 +58,8 @@ class PacchettiFragment : Fragment() {
         val scope = CoroutineScope(Dispatchers.Default)
         val homeItem = ArrayList<HomeItemModel>()
         val homeAdapter = HomeAdapter(homeItem)
+        homeAdapter.showFavoriteButton = false
+        homeAdapter.notifyDataSetChanged()
         //imposto adapter sulla recycler view
         binding.recyclerPacchetti.adapter=homeAdapter
 

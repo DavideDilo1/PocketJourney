@@ -39,7 +39,7 @@ class ProfileFragment : Fragment() {
 
         val idUtente = requireActivity().intent.getStringExtra("idUtente")
         val emailUtenteOnline=requireActivity().intent.getStringExtra("email")
-        val emailUtenteOffline = requireActivity().intent.getStringExtra("email")
+        val emailUtente=requireActivity().intent.getStringExtra("email")
         requireActivity().intent.putExtra("frame","frameProfilo")
 
         if (idUtente != null ){
@@ -98,7 +98,7 @@ class ProfileFragment : Fragment() {
                                         }
 
                                         override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                                            Toast.makeText(requireContext(),"L'immagine non è stata trovaa correttamente",Toast.LENGTH_SHORT).show()
+
                                         }
                                     })
 
@@ -109,25 +109,27 @@ class ProfileFragment : Fragment() {
                 }
 
                 override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                    //emailUtenteOnline è null quindi opero col db in locale sfruttando emailUtenteOffline
-                    Log.e("Ciao","CAMBIO I DATI CON L'ELSE ")
-                    databaseHelper= DbHelper(requireContext())
 
-                    //query al database locale per cercae l'utente
-                    userId= getUserIdByEmail(emailUtenteOffline)
-
-                    if(userId!=-1){
-                        val user=getUserById(userId)
-                        if(user!=null){
-                            binding.tvEmail.text = emailUtenteOffline
-                            binding.tvNomeCognomeProfilo.text = "${user?.nome} ${user?.cognome}"
-                        } else{
-                            Toast.makeText(requireContext(), "L'utente non risulta nel database locale", Toast.LENGTH_SHORT).show()
-                        }
-                    }
                 }
             })
 
+        } else {
+            //emailUtenteOnline è null quindi opero col db in locale sfruttando emailUtenteOffline
+            Log.e("Ciao","CAMBIO I DATI CON L'ELSE ")
+            databaseHelper= DbHelper(requireContext())
+
+            //query al database locale per cercae l'utente
+            userId= getUserIdByEmail(emailUtente)
+
+            if(userId!=-1){
+                val user=getUserById(userId)
+                if(user!=null){
+                    binding.tvEmail.text = emailUtente
+                    binding.tvNomeCognomeProfilo.text = "${user?.nome} ${user?.cognome}"
+                } else{
+                    Toast.makeText(requireContext(), "L'utente non risulta nel database locale", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
        //torna alla pagina di login resettando i campi inseriti precedentemente
@@ -158,7 +160,7 @@ class ProfileFragment : Fragment() {
         binding.prenotazioniButton.setOnClickListener{
             val childFragment = ListaPrenotazioniFragment()
             requireActivity().intent.putExtra("idUtente",idUtente)
-            requireActivity().intent.putExtra("emailUtenteOffline",emailUtenteOffline)
+            requireActivity().intent.putExtra("emailUtenteOffline",emailUtente)
             val fragmentTransaction = childFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.frameProfilo, childFragment)
             fragmentTransaction.addToBackStack(null)
