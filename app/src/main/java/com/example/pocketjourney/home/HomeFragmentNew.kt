@@ -75,6 +75,9 @@ class HomeFragmentNew : Fragment() {
 
 
 
+        ristorantiButton = binding.resturantButton
+        hotelButton = binding.hotelButton
+        attrazioniButton = binding.attractionButton
 
         homeRecycle = binding.homeRecyclerView
         searchView = binding.searchViewHome
